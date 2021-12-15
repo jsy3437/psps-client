@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../images/red-logo.png';
+import Logo from '../images/red-logo.svg';
 import Replace from '../images/replace.jpg';
 
 const MainGoods = () => {
@@ -55,7 +55,7 @@ const MainGoods = () => {
 			<MainGoodsBoundary />
 			<GoodsListWrap>
 				{arr.map((el, idx) => (
-					<GoodsList>
+					<GoodsList key={idx}>
 						<GoodsImg src={el.img} />
 						<GoodsTitle>{el.title}</GoodsTitle>
 						<GoodsDesc>{el.desc}</GoodsDesc>
@@ -70,7 +70,6 @@ export default MainGoods;
 
 const MainGoodsWrap = styled.div`
 	width: 192rem;
-	height: 156.8rem;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -81,7 +80,7 @@ const MainGoodsLogo = styled.img`
 	width: 6rem;
 	height: 6rem;
 	position: absolute;
-	top: -7.8rem;
+	top: -7.2rem;
 `;
 const BrownBackground = styled.div`
 	width: 100%;
@@ -100,7 +99,7 @@ const MainGoodsTitle = styled.h2`
 	height: 5.8rem;
 	line-height: 5.8rem;
 	font-size: 4rem;
-	font-family: 'cjk-b';
+	font-family: 'kr-b';
 	color: #fff;
 	${(props) => props.highLight && `color:red`}
 `;
@@ -135,7 +134,7 @@ const GoodsTitle = styled.h3`
 	height: 2.6rem;
 	line-height: 2.6rem;
 	font-size: 1.8rem;
-	font-family: 'cjk-b';
+	font-family: 'kr-b';
 	letter-spacing: -0.72px;
 	color: #221814;
 `;
@@ -143,7 +142,7 @@ const GoodsDesc = styled.p`
 	height: 2rem;
 	line-height: 2rem;
 	font-size: 1.6rem;
-	font-family: 'cjk-r';
+	font-family: 'kr-r';
 	letter-spacing: -0.32px;
 	color: #8e8e8e;
 `;

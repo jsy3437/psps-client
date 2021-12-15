@@ -18,7 +18,6 @@ const InduceContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 15.9rem;
 `;
 const InduceImg = styled.img`
 	width: 120rem;

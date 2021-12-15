@@ -21,7 +21,7 @@ export default MainBanner;
 const MainBannerWrap = styled.ul`
 	display: flex;
 	width: 192rem;
-	height: 108rem;
+	height: 85rem;
 	z-index: -5;
 	/* overflow-x: hidden; */
 `;

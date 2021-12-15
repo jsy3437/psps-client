@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../images/red-logo.png';
+import Logo from '../images/red-logo.svg';
 import * as Info from '../config';
 
 const Footer = () => {
@@ -82,11 +82,11 @@ const FooterHeadLeft = styled.div`
 `;
 const HeadLeftText = styled.p`
 	font-size: 1.4rem;
-	font-family: 'cjk-r';
+	font-family: 'kr-r';
 	color: #8e8e8e;
 	padding: 0 1rem;
 	${(props) =>
-		props.effect && 'border-left:1px solid #8e8e8e; font-family:"cjk-b";'}
+		props.effect && 'border-left:1px solid #8e8e8e; font-family:"kr-b";'}
 `;
 
 const FooterHeadRight = styled.div`
@@ -97,7 +97,7 @@ const HeadRightButton = styled.button`
 	width: 10rem;
 	height: 3.2rem;
 	font-size: 1.4rem;
-	font-family: 'cjk-b';
+	font-family: 'kr-b';
 	color: #8e8e8e;
 	background: #ffffff 0% 0% no-repeat padding-box;
 	border: 1px solid #8e8e8e;
@@ -127,7 +127,7 @@ const BodyLeftImg = styled.img`
 `;
 const BodyLeftText = styled.p`
 	font-size: 1.4rem;
-	font-family: 'cjk-r';
+	font-family: 'kr-r';
 	color: #6b6462;
 	letter-spacing: -0.28px;
 `;
@@ -137,7 +137,7 @@ const FooterBodyRight = styled.div`
 const BodyRightTitle = styled.h3`
 	text-align: right;
 	font-size: 2.4rem;
-	font-family: 'cjk-b';
+	font-family: 'kr-b';
 	color: #6b6462;
 `;
 const BodyRightContact = styled.div`
@@ -148,14 +148,14 @@ const BodyRightContact = styled.div`
 `;
 const RightContactText = styled.p`
 	font-size: 2rem;
-	font-family: 'cjk-b';
+	font-family: 'kr-b';
 	color: #221814;
 	text-align: right;
 	${(props) => props.effect && `color:#E50011;`}
 `;
 const BodyRightText = styled.p`
 	font-size: 1.4rem;
-	font-family: 'cjk-r';
+	font-family: 'kr-r';
 	color: #6b6462;
 	text-align: right;
 `;

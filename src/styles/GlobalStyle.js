@@ -12,7 +12,7 @@ body {
 }
 #root {
 	width: 100vw;
-	height: 100vh;
+	/* height: 100vh; */
 }
 #App {
 	width:100%;
@@ -28,6 +28,7 @@ body {
 	flex-direction: column;
 	align-items: center;
 	overflow-x:hidden;
+	position:relative;
 }
 h1,
 h2,
