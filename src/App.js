@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ProductPage from './pages/ProductPage';
 import IntroPage from './pages/IntroPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 const App = () => {
 	return (
@@ -19,6 +20,11 @@ const App = () => {
 						exact
 						path='/product'
 						component={Auth(ProductPage, null)}
+					/>
+					<Route
+						exact
+						path='/detail/:productId'
+						component={Auth(ProductDetailPage, null)}
 					/>
 					<Route exact path='/intro' component={Auth(IntroPage, null)} />
 				</Switch>

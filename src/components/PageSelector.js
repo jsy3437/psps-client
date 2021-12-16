@@ -73,7 +73,7 @@ const PageSelector = ({ page, total, onClickPage, style }) => {
 export default PageSelector;
 
 const PageList = styled.ul`
-	margin-bottom: 17.4rem;
+	margin-bottom: 6rem;
 	width: 30%;
 	display: grid;
 	grid-template-columns: repeat(9, 1fr);

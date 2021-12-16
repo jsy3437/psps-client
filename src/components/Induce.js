@@ -14,12 +14,12 @@ export default Induce;
 
 const InduceContainer = styled.div`
 	width: 192rem;
-	height: 54.8rem;
+	height: 39rem;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 `;
 const InduceImg = styled.img`
 	width: 120rem;
 	height: 25rem;
+	margin-top: 4rem;
 `;

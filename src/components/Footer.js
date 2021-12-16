@@ -151,7 +151,7 @@ const RightContactText = styled.p`
 	font-family: 'kr-b';
 	color: #221814;
 	text-align: right;
-	${(props) => props.effect && `color:#E50011;`}
+	${(props) => props.effect && `color:#E50011; margin-right:0.2rem`}
 `;
 const BodyRightText = styled.p`
 	font-size: 1.4rem;

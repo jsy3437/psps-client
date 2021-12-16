@@ -74,7 +74,6 @@ const MainGoodsWrap = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-bottom: 8rem;
 `;
 const MainGoodsLogo = styled.img`
 	width: 6rem;
@@ -93,6 +92,7 @@ const BrownBackground = styled.div`
 `;
 const MainGoodsTitles = styled.div`
 	height: 5.8rem;
+	margin-top: 0.2rem;
 	display: flex;
 `;
 const MainGoodsTitle = styled.h2`
