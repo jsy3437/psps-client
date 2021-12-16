@@ -1,18 +1,16 @@
 import React from 'react';
-import Footer from '../components/Footer';
-import Induce from '../components/Induce';
 import OrderBox from '../components/OrderBox';
+import ProductDetail from '../components/ProductDetail';
+import ProductInfoTable from '../components/ProductInfoTable';
+import Induce from '../components/Induce';
+import Footer from '../components/Footer';
 
 const ProductDetailPage = () => {
 	return (
 		<div id='container'>
 			<OrderBox />
-			<div
-				style={{
-					backgroundColor: '#aaa',
-					width: '100%',
-					height: '300px',
-				}}></div>
+			<ProductDetail />
+			<ProductInfoTable />
 			<Induce />
 			<Footer />
 		</div>

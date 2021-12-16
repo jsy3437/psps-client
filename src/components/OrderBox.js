@@ -6,11 +6,16 @@ import Plus from '../images/count-plus.svg';
 import Minus from '../images/count-minus.svg';
 
 const OrderBox = () => {
+	const [option, setOption] = useState('옵션선택');
 	const [openOption, setOpenOption] = useState(false);
+	const optionController = (e) => {
+		setOption(e.target.innerText);
+		setOpenOption(false);
+	};
 	const openOptionController = () => {
 		setOpenOption(!openOption);
 	};
-	const optionArr = useState(['2봉지', '3봉지', '4봉지', '5봉지']);
+	const optionArr = ['2봉지', '3봉지', '4봉지', '5봉지'];
 
 	const [count, setCount] = useState(1);
 	const increaseCount = () => {
@@ -22,6 +27,8 @@ const OrderBox = () => {
 			setCount(count - 1);
 		}
 	};
+
+	console.log('option', option);
 
 	const [price, setPrice] = useState(3000);
 
@@ -39,7 +46,7 @@ const OrderBox = () => {
 						<RightPrice>{`${price * count}원`}</RightPrice>
 						{!openOption ? (
 							<RightOptionBox option>
-								옵션이름
+								{option}
 								<RightOptionTitle>옵션</RightOptionTitle>
 								<RightButton option onClick={openOptionController}>
 									<RightButtonImg src={AngleDown} />
@@ -48,7 +55,11 @@ const OrderBox = () => {
 						) : (
 							<RightOptionListBox>
 								{optionArr.map((el, idx) => (
-									<RightOptionList key={idx}>{el}</RightOptionList>
+									<RightOptionList
+										key={idx}
+										onClick={optionController}>
+										{el}
+									</RightOptionList>
 								))}
 							</RightOptionListBox>
 						)}
@@ -138,11 +149,13 @@ const RightOptionListBox = styled.ul`
 	height: 18.6rem;
 	display: flex;
 	flex-direction: column;
-	background: #ffffff 0% 0% no-repeat padding-box;
+	background: #ffffff;
 	box-shadow: 2px 6px 10px #00000029;
 	border: 1px solid #c6c6c6;
 	border-radius: 4px;
+	overflow-y: scroll;
 	z-index: 10;
+	/* border: 1px solid blue; */
 	/* 리스트 갯수에 따라 */
 `;
 const RightOptionList = styled.li`
@@ -172,11 +185,9 @@ const RightOptionBox = styled.div`
 	border: 1px solid #c6c6c6;
 	border-radius: 4px;
 	text-align: center;
-	${(props) => props.option && `position:absolute; top:15.3rem; `}
-	${(props) => props.option && `margin-top:2rem;`}
-	${(props) =>
-		props.count &&
-		`margin-top:2.2rem; margin-top:10.4rem;`} /* 리스트 갯수에 따라  */
+	${(props) => props.option && `position:absolute; top:15.3rem;  `}
+	${(props) => props.option && `margin-top:2rem;`} 
+	${(props) => props.count && `margin-top:10.4rem;`}
 `;
 const RightOptionTitle = styled.p`
 	width: 3.2rem;
@@ -208,12 +219,12 @@ const RightButtonImg = styled.img`
 `;
 const UnitPriceBox = styled.div`
 	margin-top: 0.8rem;
-	margin-bottom:2rem;
+	margin-bottom: 2rem;
 	width: 100%;
 	height: 2.6rem;
 	line-height: 2.6rem;
 	display: flex;
-	justify-content: space-between;\
+	justify-content: space-between;
 `;
 const UnitPriceLeft = styled.p`
 	font-size: 1.8rem;
