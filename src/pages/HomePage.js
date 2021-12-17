@@ -1,7 +1,7 @@
 import React from 'react';
-import MainBanner from '../components/MainBanner';
-import SubBanner from '../components/SubBanner';
-import MainGoods from '../components/MainGoods';
+import MainBanner from '../components/HomePage/MainBanner';
+import SubBanner from '../components/HomePage/SubBanner';
+import MainGoods from '../components/HomePage/MainGoods';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
 

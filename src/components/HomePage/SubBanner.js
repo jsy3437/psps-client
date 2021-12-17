@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Image1 from '../images/sub-banner1.png';
+import Image1 from '../../images/sub-banner1.png';
 
 const SubBanner = () => {
 	const Images = [Image1];

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Ex1 from '../images/ex1.png';
-import AngleDown from '../images/angle-down.svg';
-import Plus from '../images/count-plus.svg';
-import Minus from '../images/count-minus.svg';
+import Ex1 from '../../images/ex1.png';
+import AngleDown from '../../images/angle-down.svg';
+import Plus from '../../images/count-plus.svg';
+import Minus from '../../images/count-minus.svg';
 
 const OrderBox = () => {
 	const [option, setOption] = useState('옵션선택');

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../images/red-logo.svg';
-import Replace from '../images/replace.jpg';
+import Logo from '../../images/red-logo.svg';
+import Replace from '../../images/replace.jpg';
 
 const MainGoods = () => {
 	const titles = ['품생품사', '추천', '상품'];

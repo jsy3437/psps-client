@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Background1 from '../images/main-banner1.png';
+import Background1 from '../../images/main-banner1.png';
 
 const MainBanner = () => {
 	const Backgrounds = [Background1];

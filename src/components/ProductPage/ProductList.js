@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import Ex1 from '../images/ex1.png';
-import Ex2 from '../images/ex2.png';
-import Ex3 from '../images/ex3.png';
-import Ex4 from '../images/ex4.png';
+import Ex1 from '../../images/ex1.png';
+import Ex2 from '../../images/ex2.png';
+import Ex3 from '../../images/ex3.png';
+import Ex4 from '../../images/ex4.png';
 
 const ProductList = () => {
 	const history = useHistory();

@@ -1,7 +1,7 @@
 import React from 'react';
-import OrderBox from '../components/OrderBox';
-import ProductDetail from '../components/ProductDetail';
-import ProductInfoTable from '../components/ProductInfoTable';
+import OrderBox from '../components/ProductDetailPage/OrderBox';
+import ProductDetail from '../components/ProductDetailPage/ProductDetail';
+import ProductInfoTable from '../components/ProductDetailPage/ProductInfoTable';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
 

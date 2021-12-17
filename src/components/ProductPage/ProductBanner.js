@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import BannerImg from '../images/product_banner1.png';
+import BannerImg from '../../images/product_banner1.png';
 
 const ProductBanner = () => {
 	const history = useHistory();
