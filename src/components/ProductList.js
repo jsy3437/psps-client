@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Ex1 from '../images/ex1.png';
 import Ex2 from '../images/ex2.png';
@@ -6,6 +7,7 @@ import Ex3 from '../images/ex3.png';
 import Ex4 from '../images/ex4.png';
 
 const ProductList = () => {
+	const history = useHistory();
 	const arr = [
 		{
 			title: '횡성한우 등심 구이용(1+등급)',
@@ -68,6 +70,9 @@ const ProductList = () => {
 			img: Ex4,
 		},
 	];
+	const goDetail = () => {
+		history.push('/detail/1');
+	};
 
 	return (
 		<ProductContainer>
@@ -75,7 +80,7 @@ const ProductList = () => {
 				{arr.map((el, idx) => (
 					<Product key={idx}>
 						<ProductImg alt='' src={el.img} />
-						<ProductTitle>{el.title}</ProductTitle>
+						<ProductTitle onClick={goDetail}>{el.title}</ProductTitle>
 						<ProductDesc>{el.desc}</ProductDesc>
 					</Product>
 				))}
@@ -118,6 +123,9 @@ const ProductTitle = styled.h3`
 	font-size: 1.8rem;
 	font-family: 'kr-b';
 	color: #221814;
+	&:hover {
+		text-decoration: underline;
+	}
 `;
 const ProductDesc = styled.p`
 	height: 2rem;

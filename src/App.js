@@ -4,6 +4,7 @@ import Auth from './hoc/auth';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import ProductPage from './pages/ProductPage';
 import IntroPage from './pages/IntroPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -16,6 +17,11 @@ const App = () => {
 				<Switch>
 					<Route exact path='/' component={Auth(HomePage, null)} />
 					<Route exact path='/login' component={Auth(LoginPage, false)} />
+					<Route
+						exact
+						path='/register'
+						component={Auth(RegisterPage, false)}
+					/>
 					<Route
 						exact
 						path='/product'
