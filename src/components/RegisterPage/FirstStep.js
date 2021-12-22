@@ -48,16 +48,14 @@ const FirstStep = (props) => {
 			<RegisterInside>
 				<LogoImg alt='로고이미지' src={Logo} />
 				<Title>품생품사 회원가입</Title>
-				<InputListWrap>
-					{arr.map((el, idx) => (
-						<InputList key={idx} last={idx === 2}>
-							<InputTitle>{el.name}</InputTitle>
-							<Input placeholder={el.placeholder} />
-							{/* 제출을 한 상태이고 잘못된 항목이 있는 경우에만 출력 */}
-							{/* <InputError>{el.errorMessage}</InputError> */}
-						</InputList>
-					))}
-				</InputListWrap>
+				{arr.map((el, idx) => (
+					<Items key={idx} last={idx === 2}>
+						<ItemTitle>{el.title}</ItemTitle>
+						<ItemInput placeholder={el.placeholder} />
+						{/* 제출을 한 상태이고 잘못된 항목이 있는 경우에만 출력 */}
+						{/* <InputError>{el.errorMessage}</InputError> */}
+					</Items>
+				))}
 				<AgreeBox>
 					<AgreeLeft>
 						<AgreeCheck
@@ -123,12 +121,13 @@ const Title = styled.h2`
 	color: #000000;
 	margin-bottom: 4rem;
 `;
-const InputListWrap = styled.ul``;
-const InputList = styled.li`
+const Items = styled.li`
 	position: relative;
 	${(props) => (props.last ? `margin-bottom:1.6rem;` : `margin-bottom:2rem`)}
 `;
-const InputTitle = styled.p`
+const ItemTitle = styled.p`
+	height: 2rem;
+	line-height: 2rem;
 	position: absolute;
 	top: -0.8rem;
 	left: 1rem;
@@ -138,7 +137,7 @@ const InputTitle = styled.p`
 	color: #221814;
 	background-color: #fff;
 `;
-const Input = styled.input`
+const ItemInput = styled.input`
 	width: 34.6rem;
 	height: 6.4rem;
 	font-size: 1.4rem;
