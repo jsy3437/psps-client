@@ -1,47 +1,103 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { regexp } from '../../data/regexp';
 import * as request from '../../controller/user';
 import styled from 'styled-components';
 import Logo from '../../images/red-logo.svg';
 
 const ThirdStep = (props) => {
 	const history = useHistory();
+	const nameInput = useRef();
+	const phoneNumberInput = useRef();
+	const confirmNumberInput = useRef();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [name, setName] = useState('');
 	const [phone_number, setPhone_number] = useState('');
-	const [certification, setCertification] = useState('');
+	const [confirmActive, setConfirmActive] = useState(false);
+	const [confirmSend, setConfirmSend] = useState(false);
+	const [confirmNumber, setConfirmNumber] = useState('');
+	const [check, setCheck] = useState({
+		name: true,
+		phone_number: true,
+		// confirm_number: true,
+	});
+	const [isSubmit, setIsSubmit] = useState(false);
 
 	useEffect(() => {
 		if (history.location.state) {
 			setEmail(history.location.state.email);
 			setPassword(history.location.state.password);
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	const goBack = () => {
 		props.getStep(1);
 	};
 	const nameController = (e) => {
-		setName(e.target.value);
+		regexp.name.test(e.target.value)
+			? setCheck({ ...check, name: true })
+			: setCheck({ ...check, name: false });
+		return setName(e.target.value);
 	};
-	const phone_numberController = (e) => {
-		setPhone_number(e.target.value);
+	const phoneNumberController = (e) => {
+		if (e.target.value.length === 11) {
+			setConfirmActive(true);
+		} else {
+			setConfirmActive(false);
+		}
+		regexp.phone_number.test(e.target.value)
+			? setCheck({ ...check, phone_number: true })
+			: setCheck({ ...check, phone_number: false });
+		return setPhone_number(e.target.value);
 	};
-	const certificationController = (e) => {
-		setCertification(e.target.value);
+	const confirmController = (e) => {
+		// regexp.confirm_number.test.test(e.target.value)
+		// 	? setCheck({ ...check, confirm_number: true })
+		// 	: setCheck({ ...check, confirm_number: false });
+		return setConfirmNumber(e.target.value);
+	};
+
+	const getConfirmNumber = () => {
+		if (confirmActive) {
+			// 인증하기
+			alert('인증번호 1234');
+			setConfirmSend(true);
+		} else {
+			return alert('휴대폰 번호를 정확하게 입력해주세요.');
+		}
+	};
+	const checkConfirmNumber = () => {
+		// 인증번호와 입력된 값이 같을 경우
+		return alert('인증 확인되었습니다.');
+		// 아닐 경우
+		// return alert('인증번호를 확인해주세요.');
 	};
 
 	const onSubmit = () => {
-		const Data = { email, password, name, phone_number };
-		console.log(Data);
-		request.register(Data).then((res) => {
-			console.log(res.data);
-			if (res.data.success) {
-				props.getStep(4);
-				history.push({ state: name });
-			}
-		});
+		setIsSubmit(true);
+		if (!regexp.name.test(name)) {
+			setCheck({ ...check, name: false });
+			alert('이름을 확인해주세요');
+			nameInput.current.focus();
+		} else if (!regexp.phone_number.test(phone_number)) {
+			setCheck({ ...check, phone_number: false });
+			alert('휴대폰번호를 확인해주세요');
+			phoneNumberInput.current.focus();
+		}
+		// if(인증번호가 안맞으면){}
+		else {
+			const Data = { email, password, name, phone_number };
+			console.log(Data);
+			request.register(Data).then((res) => {
+				console.log(res.data);
+				if (res.data.success) {
+					props.getStep(4);
+					history.push({ state: name });
+				}
+			});
+		}
 	};
 
 	return (
@@ -52,23 +108,46 @@ const ThirdStep = (props) => {
 				<Items>
 					<ItemTitle>이름</ItemTitle>
 					<ItemInput
+						ref={nameInput}
 						onChange={nameController}
 						placeholder='이름을 입력해주세요'
 					/>
+					{isSubmit && !check.name && (
+						<InputError>{'이름을 확인해주세요'}</InputError>
+					)}
 				</Items>
 				<Items>
 					<ItemTitle>휴대폰번호</ItemTitle>
 					<ItemInput
-						onChange={phone_numberController}
+						type='number'
+						ref={phoneNumberInput}
+						onChange={phoneNumberController}
 						placeholder='휴대폰번호를 입력해주세요'
 					/>
+					{isSubmit && !check.phone_number && (
+						<InputError>{'휴대폰번호를 확인해주세요'}</InputError>
+					)}
+					<CheckButton active={confirmActive} onClick={getConfirmNumber}>
+						인증하기
+					</CheckButton>
 				</Items>
 				<Items>
 					<ItemTitle>인증번호</ItemTitle>
 					<ItemInput
-						onChange={certificationController}
+						ref={confirmNumberInput}
+						onChange={confirmController}
 						placeholder='인증번호를 입력해주세요'
 					/>
+					{/* {isSubmit && !check.confirm_number && (
+						<InputError>{'인증번호를 확인해주세요'}</InputError>
+					)} */}
+					<CheckButton
+						send={confirmSend}
+						onClick={() => {
+							checkConfirmNumber(confirmNumber);
+						}}>
+						인증확인
+					</CheckButton>
 				</Items>
 
 				<SubmitButton
@@ -113,8 +192,10 @@ const Title = styled.h2`
 `;
 const Items = styled.div`
 	width: 34.6rem;
-	height: 6.2rem;
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	margin-bottom: 2rem;
 `;
 const ItemTitle = styled.p`
@@ -145,6 +226,29 @@ const ItemInput = styled.input`
 	&:focus {
 		box-shadow: 2px 6px 15px #00000029;
 	}
+`;
+const InputError = styled.p`
+	height: 1.5rem;
+	font-size: 1rem;
+	font-family: 'kr-r';
+	color: #e50011;
+`;
+const CheckButton = styled.button`
+	width: 6.7rem;
+	height: 2.8rem;
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	color: #c6c6c6;
+	letter-spacing: -0.56px;
+	position: absolute;
+	top: 1.7rem;
+	right: 12px;
+	border-radius: 4px;
+	border: 1px solid #c6c6c6;
+	background-color: unset;
+	${(props) =>
+		(props.active || props.send) &&
+		`border: 2px solid #111a31;color:#111a31; cursor:pointer`}
 `;
 const SubmitButton = styled.button`
 	width: 34.6rem;

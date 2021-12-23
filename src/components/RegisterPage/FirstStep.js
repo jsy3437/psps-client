@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
+import { regexp } from '../../data/regexp';
 import styled from 'styled-components';
 import Logo from '../../images/red-logo.svg';
 import Check from '../../images/check-box.svg';
@@ -9,15 +10,19 @@ import KLogo from '../../images/k-logo.svg';
 
 const FirstStep = (props) => {
 	const history = useHistory();
+	const emailInput = useRef();
+	const passwordInput = useRef();
+	const passwordConfirmInput = useRef();
 	const [agreeCheck, setAgreeCheck] = useState(false);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 	const [check, setCheck] = useState({
-		email: false,
-		password: false,
-		confirm: false,
+		email: true,
+		password: true,
+		passwordConfirm: true,
 	});
+	const [isSubmit, setIsSubmit] = useState(false);
 
 	useEffect(() => {
 		const state = history.location.state;
@@ -31,6 +36,7 @@ const FirstStep = (props) => {
 				setAgreeCheck(false);
 			}
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	const agreeCheckController = () => {
@@ -43,23 +49,46 @@ const FirstStep = (props) => {
 		props.getStep(2);
 		history.push({ state: { email, password, passwordConfirm } });
 	};
-	const goNext = () => {
-		if (agreeCheck) {
-			props.getStep(3);
-			history.push({ state: { email, password } });
-		} else {
-			return alert('이용 약관에 동의해주세요.');
-		}
-	};
 
 	const emailController = (e) => {
-		setEmail(e.target.value);
+		regexp.email.test(e.target.value)
+			? setCheck({ ...check, email: true })
+			: setCheck({ ...check, email: false });
+		return setEmail(e.target.value);
 	};
 	const passwordController = (e) => {
-		setPassword(e.target.value);
+		regexp.password.test(e.target.value)
+			? setCheck({ ...check, password: true })
+			: setCheck({ ...check, password: false });
+		return setPassword(e.target.value);
 	};
 	const passwordConfirmController = (e) => {
-		setPasswordConfirm(e.target.value);
+		password === e.target.value
+			? setCheck({ ...check, passwordConfirm: true })
+			: setCheck({ ...check, passwordConfirm: false });
+		return setPasswordConfirm(e.target.value);
+	};
+
+	const goNext = () => {
+		setIsSubmit(true);
+		if (!regexp.email.test(email)) {
+			alert('이메일을 확인해주세요');
+			emailInput.current.focus();
+			return setCheck({ ...check, email: false });
+		} else if (!regexp.password.test(password)) {
+			alert('비밀번호를 확인해주세요');
+			passwordInput.current.focus();
+			return setCheck({ ...check, password: false });
+		} else if (password !== passwordConfirm) {
+			alert('비밀번호가 일치하지 않습니다');
+			passwordConfirmInput.current.focus();
+			return setCheck({ ...check, passwordConfirm: false });
+		} else if (!agreeCheck) {
+			return alert('이용 약관에 동의해주세요.');
+		} else {
+			props.getStep(3);
+			history.push({ state: { email, password, passwordConfirm } });
+		}
 	};
 
 	return (
@@ -71,31 +100,39 @@ const FirstStep = (props) => {
 					<ItemTitle>이메일</ItemTitle>
 					<ItemInput
 						value={email}
+						ref={emailInput}
 						onChange={emailController}
 						placeholder={'이메일 주소를 입력해주세요'}
 					/>
-					{/* 제출을 한 상태이고 잘못된 항목이 있는 경우에만 출력 */}
-					{/* <InputError>{el.errorMessage}</InputError> */}
+					{isSubmit && !check.email && (
+						<InputError>{`ex) email@email.com`}</InputError>
+					)}
 				</Items>
 				<Items>
 					<ItemTitle>비밀번호</ItemTitle>
 					<ItemInput
 						type='password'
 						value={password}
+						ref={passwordInput}
 						onChange={passwordController}
 						placeholder={'비밀번호를 입력해주세요'}
 					/>
-					{/* <InputError>{el.errorMessage}</InputError> */}
+					{isSubmit && !check.password && (
+						<InputError>{`비밀번호는 숫자,문자,특수문자를 모두 포함한 8~20글자로 입력해주세요`}</InputError>
+					)}
 				</Items>
 				<Items>
 					<ItemTitle>비밀번호 확인</ItemTitle>
 					<ItemInput
 						type='password'
 						value={passwordConfirm}
+						ref={passwordConfirmInput}
 						onChange={passwordConfirmController}
 						placeholder={'비밀번호를 확인해주세요'}
 					/>
-					{/* <InputError>{el.errorMessage}</InputError> */}
+					{isSubmit && !check.passwordConfirm && (
+						<InputError>{`비밀번호와 비밀번호 확인이 일치하지 않습니다`}</InputError>
+					)}
 				</Items>
 
 				<AgreeBox>
@@ -170,13 +207,13 @@ const Items = styled.li`
 const ItemTitle = styled.p`
 	height: 2rem;
 	line-height: 2rem;
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	color: #221814;
 	position: absolute;
 	top: -0.8rem;
 	left: 1rem;
 	padding: 0 0.5rem;
-	font-size: 1.4rem;
-	font-family: 'kr-r';
-	color: #221814;
 	background-color: #fff;
 `;
 const ItemInput = styled.input`
@@ -202,7 +239,6 @@ const InputError = styled.p`
 	font-family: 'kr-r';
 	color: #e50011;
 `;
-
 const AgreeBox = styled.div`
 	width: 34.6rem;
 	height: 2rem;

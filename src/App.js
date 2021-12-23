@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { user_logout } from './modules/user';
 import Auth from './hoc/auth';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
@@ -12,6 +14,11 @@ import IntroPage from './pages/IntroPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 
 const App = () => {
+	const dispatch = useDispatch();
+	window.addEventListener('unload', () => {
+		dispatch(user_logout());
+	});
+
 	return (
 		<Router>
 			<div id='App'>

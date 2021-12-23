@@ -90,7 +90,7 @@ const ProductList = () => {
 	);
 };
 
-export default ProductList;
+export default withRouter(ProductList);
 
 const ProductContainer = styled.div`
 	width: 192rem;

@@ -1,19 +1,16 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { user_login } from '../modules/user';
 import * as request from '../controller/user';
 import styled from 'styled-components';
 import Logo from '../images/red-logo.svg';
-import Check from '../images/check-box.svg';
-import UnCheck from '../images/uncheck-box.svg';
 import NLogo from '../images/n-logo.svg';
 import KLogo from '../images/k-logo.svg';
 
 const LoginPage = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const showButton = useRef();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 

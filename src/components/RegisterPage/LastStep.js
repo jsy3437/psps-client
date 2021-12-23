@@ -16,6 +16,7 @@ const LastStep = () => {
 		if (history.location.state) {
 			setName(history.location.state);
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	return (

@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import ProductBanner from '../components/ProductPage/ProductBanner';
 import ProductCategory from '../components/ProductPage/ProductCategory';
 import ProductList from '../components/ProductPage/ProductList';
@@ -10,6 +9,7 @@ import Footer from '../components/Footer';
 const ProductPage = () => {
 	const page = 1;
 	const total = 24;
+
 	return (
 		<div id='container'>
 			<ProductBanner />

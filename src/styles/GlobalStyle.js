@@ -60,13 +60,19 @@ input:focus,
 textarea:focus {
 	outline: none;
 	background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-	border: 2px solid var(--unnamed-color-111a31);
 	background: #ffffff 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 6px #00000029;
 	border: 2px solid #111a31;
 }
 input:focus::placeholder {
 	color: #111a31;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance:none;
+}
+input[type='number']{
+	-moz-appearance: textfield;
 }
 button:hover {
 	cursor: pointer;

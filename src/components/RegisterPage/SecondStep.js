@@ -13,11 +13,13 @@ const SecondStep = (props) => {
 
 	useEffect(() => {
 		const state = history.location.state;
+		console.log(state);
 		if (state) {
 			setEmail(state.email);
 			setPassword(state.password);
 			setPasswordConfirm(state.passwordConfirm);
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	const goNext = () => {
