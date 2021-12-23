@@ -9,3 +9,5 @@ export const REPORT_NUMBER = process.env.REACT_APP_REPORT_NUMBER;
 export const COMPANY_CONTACT = process.env.REACT_APP_COMPANY_CONTACT;
 export const OWNER_CONTACT = process.env.REACT_APP_OWNER_CONTACT;
 export const PRIVACY_PERSON = process.env.REACT_APP_PRIVACY_PERSON;
+export const PRIVACY_EMAIL = process.env.REACT_APP_PRIVACY_EMAIL;
+export const PRIVACY_CONTACT = process.env.REACT_APP_PRIVACY_CONTACT;

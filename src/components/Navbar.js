@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { user_logout } from '../modules/user';
+import { logout } from '../controller/user';
 import styled from 'styled-components';
 import Logo from '../images/red-logo.svg';
 
 const Navbar = () => {
+	const dispatch = useDispatch();
 	const history = useHistory();
-	const firstArr = ['카테고리', '품생품사란', '고객센터'];
-	const secondArr = ['로그인', '회원가입', '장바구니'];
+	const user = useSelector((state) => state.user);
 
 	const goHome = () => {
 		history.push('/');
@@ -17,12 +20,22 @@ const Navbar = () => {
 	const goIntro = () => {
 		history.push('/intro');
 	};
+	const goService = () => {
+		history.push('/service');
+	};
 	const goLogin = () => {
 		history.push('/login');
+	};
+	const goLogout = () => {
+		logout().then((res) => console.log(res.data));
+		dispatch(user_logout());
+		alert('로그아웃 되었습니다.');
+		history.push('/');
 	};
 	const goRegister = () => {
 		history.push('/register');
 	};
+	const goMyPage = () => {};
 	const goCart = () => {
 		history.push('/cart');
 	};
@@ -35,26 +48,19 @@ const Navbar = () => {
 				</NavbarLeft>
 				<NavbarRight>
 					<RightFirst>
-						{firstArr.map((el, idx) => (
-							<RightFirstList
-								key={idx}
-								onClick={
-									idx === 0 ? goProduct : idx === 1 ? goIntro : null
-								}>
-								{el}
-							</RightFirstList>
-						))}
+						<RightFirstList onClick={goProduct}>카테고리</RightFirstList>
+						<RightFirstList onClick={goIntro}>품생품사란</RightFirstList>
+						<RightFirstList onClick={goService}>고객센터</RightFirstList>
 					</RightFirst>
 					<RightSecond>
-						{secondArr.map((el, idx) => (
-							<RightSecondList
-								key={idx}
-								onClick={
-									idx === 0 ? goLogin : idx === 1 ? goRegister : goCart
-								}>
-								{el}
-							</RightSecondList>
-						))}
+						<RightSecondList onClick={!user.login ? goLogin : goLogout}>
+							{!user.login ? '로그인' : '로그아웃'}
+						</RightSecondList>
+						<RightSecondList
+							onClick={!user.login ? goRegister : goMyPage}>
+							{!user.login ? '회원가입' : '마이페이지'}
+						</RightSecondList>
+						<RightSecondList onClick={goCart}>장바구니</RightSecondList>
 					</RightSecond>
 				</NavbarRight>
 			</NavbarInside>

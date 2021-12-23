@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../../images/red-logo.svg';
@@ -11,13 +11,19 @@ const LastStep = () => {
 	const goShopping = () => {
 		history.push('/product');
 	};
+	const [name, setName] = useState('');
+	useEffect(() => {
+		if (history.location.state) {
+			setName(history.location.state);
+		}
+	}, []);
 
 	return (
 		<Container>
 			<RegisterInside>
 				<LogoImg alt='로고이미지' src={Logo} />
 				<Title>품생품사 회원가입 완료</Title>
-				<Text>{`감사합니다. (이름)님!\n더 좋은 품질로 보답하겠습니다.`}</Text>
+				<Text>{`감사합니다. ${name}님!\n더 좋은 품질로 보답하겠습니다.`}</Text>
 				<SubmitButton shopping onClick={goShopping}>
 					쇼핑하기
 				</SubmitButton>
@@ -29,7 +35,7 @@ const LastStep = () => {
 	);
 };
 
-export default LastStep;
+export default withRouter(LastStep);
 
 const Container = styled.div`
 	width: 192rem;

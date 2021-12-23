@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FirstStep from '../components/RegisterPage/FirstStep';
 import SecondStep from '../components/RegisterPage/SecondStep';
 import ThirdStep from '../components/RegisterPage/ThirdStep';
@@ -10,8 +10,6 @@ const RegisterPage = () => {
 	const getStep = (step) => {
 		setStep(step);
 	};
-
-	console.log(step);
 
 	return (
 		<div id='container'>

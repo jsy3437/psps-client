@@ -2,50 +2,47 @@ import React, { useRef, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { user_login } from '../modules/user';
-import { login } from '../controller/user';
+import * as request from '../controller/user';
 import styled from 'styled-components';
 import Logo from '../images/red-logo.svg';
+import Check from '../images/check-box.svg';
+import UnCheck from '../images/uncheck-box.svg';
+import NLogo from '../images/n-logo.svg';
+import KLogo from '../images/k-logo.svg';
 
 const LoginPage = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const showButton = useRef();
-	const arr = ['ID', 'Password'];
-	const [id, setId] = useState('');
+	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [show, setShow] = useState(false);
 
-	const idController = (e) => {
-		return setId(e.target.value);
+	const emailController = (e) => {
+		setEmail(e.target.value);
 	};
 	const passwordController = (e) => {
-		return setPassword(e.target.value);
+		setPassword(e.target.value);
 	};
-	const showController = () => {
-		return setShow(!show);
+	const goFindInfo = () => {
+		history.push('/find-info');
 	};
-	const onShow = () => {
-		if (showButton.current) {
-			showButton.current.style.color = '#5887ff';
-		}
-	};
-	const onNotShow = () => {
-		if (showButton.current) {
-			showButton.current.style.color = '#e5e6ed';
-		}
+	const goRegister = () => {
+		history.push('/register');
 	};
 
 	const onSubmit = () => {
-		if (id.length === 0) {
+		if (email.length === 0) {
 			return alert('아이디를 입력해주세요.');
 		} else if (password.length === 0) {
 			return alert('비밀번호를 입력해주세요.');
 		} else {
-			const Data = { id, password };
-			login(Data).then((res) => {
+			const Data = { email, password };
+			request.login(Data).then((res) => {
+				console.log(res.data);
 				if (res.data.success) {
 					dispatch(user_login(true));
 					alert('로그인 되었습니다.');
+					history.push('/');
 				} else {
 					alert('아이디 또는 비밀번호를 확인해주세요.');
 				}
@@ -55,77 +52,201 @@ const LoginPage = () => {
 
 	return (
 		<div id='container'>
-			<Login>
-				<LogoImg alt='로고' src={Logo} />
-				{arr.map((el, idx) => (
-					<Input
-						key={idx}
-						type={idx === 1 && !show ? 'password' : 'text'}
-						active={idx === 1}
-						placeholder={el}
-						onChange={idx === 0 ? idController : passwordController}
-						onFocus={idx === 1 ? onShow : onNotShow}
-					/>
-				))}
-				<Button onClick={onSubmit}>Log in</Button>
-				<Text ref={showButton} onClick={showController}>
-					Show
-				</Text>
-			</Login>
+			<Container>
+				<RegisterInside>
+					<LogoImg alt='로고이미지' src={Logo} />
+					<Title>품생품사 로그인</Title>
+					<Items>
+						<ItemTitle>이메일</ItemTitle>
+						<ItemInput
+							value={email}
+							onChange={emailController}
+							placeholder={'이메일 주소를 입력해주세요'}
+						/>
+						{/* 제출을 한 상태이고 잘못된 항목이 있는 경우에만 출력 */}
+						{/* <InputError>{el.errorMessage}</InputError> */}
+					</Items>
+					<Items last>
+						<ItemTitle>비밀번호</ItemTitle>
+						<ItemInput
+							type='password'
+							value={password}
+							onChange={passwordController}
+							placeholder={'비밀번호를 입력해주세요'}
+						/>
+						{/* <InputError>{el.errorMessage}</InputError> */}
+					</Items>
+
+					<AgreeBox>
+						<AgreeRight onClick={goFindInfo}>아이디/비밀번호</AgreeRight>
+					</AgreeBox>
+					<SubmitButton onClick={onSubmit}>로그인</SubmitButton>
+					<EasyBox>
+						<EasyLeft>
+							<EasyLeftText>SNS계정으로 간편하게 로그인</EasyLeftText>
+							<GoLoginBox>
+								<EasyLeftText>회원이 아니신가요?</EasyLeftText>
+								<GoRegister onClick={goRegister}>회원가입</GoRegister>
+							</GoLoginBox>
+						</EasyLeft>
+						<EasyRight>
+							<SocialLogoBox NLogo>
+								<SocialLogo alt='아이콘' src={NLogo} />
+							</SocialLogoBox>
+							<SocialLogoBox KLogo>
+								<SocialLogo alt='아이콘' src={KLogo} />
+							</SocialLogoBox>
+						</EasyRight>
+					</EasyBox>
+				</RegisterInside>
+			</Container>
 		</div>
 	);
 };
 
 export default withRouter(LoginPage);
 
-const Login = styled.div`
-	width: 83.9rem;
-	height: 53.2rem;
-	margin-top: 27.9rem;
-	background: #fcfcfc 0% 0% no-repeat padding-box;
-	box-shadow: 2px 6px 30px #00000033;
-	border-radius: 4px;
-	opacity: 1;
+const Container = styled.div`
+	width: 192rem;
+	padding: 10rem 0 10.3rem 0;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	position: relative;
+`;
+const RegisterInside = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 `;
 const LogoImg = styled.img`
-	width: 38.3rem;
-	height: 9.6rem;
-	margin-bottom: 4.9rem;
+	width: 6.4rem;
+	height: 6.4rem;
+	margin-bottom: 0.8rem;
 `;
-const Input = styled.input`
-	width: 46rem;
-	height: 5.6rem;
-	font-family: 'kr-r';
-	font-size: 2rem;
-	margin-bottom: 1.6rem;
-	padding: 0 1.5rem;
-	${(props) => props.active && `margin-bottom:4.6rem`}
+const Title = styled.h2`
+	height: 4.4rem;
+	font-size: 3rem;
+	font-family: 'kr-b';
+	color: #000000;
+	margin-bottom: 4rem;
 `;
-const Button = styled.button`
-	width: 46rem;
-	height: 5.6rem;
-	font-family: 'kr-r';
-	font-size: 2.5rem;
-	color: #fff;
-	background: var(--unnamed-color-111a31) 0% 0% no-repeat padding-box;
-	background: #111a31 0% 0% no-repeat padding-box;
-	border-radius: 4px;
-	border: none;
-	opacity: 1;
+const Items = styled.li`
+	position: relative;
+	${(props) => (props.last ? `margin-bottom:0.8rem;` : `margin-bottom:2rem`)}
 `;
-const Text = styled.p`
-	font-size: 2rem;
-	font-family: 'kr-r';
-	color: #e5e6ed;
+const ItemTitle = styled.p`
+	height: 2rem;
+	line-height: 2rem;
 	position: absolute;
-	top: 31rem;
-	left: 58.3rem;
-	&:hover {
-		cursor: pointer;
+	top: -0.8rem;
+	left: 1rem;
+	padding: 0 0.5rem;
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	color: #221814;
+	background-color: #fff;
+`;
+const ItemInput = styled.input`
+	width: 34.6rem;
+	height: 6.4rem;
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	color: #221814;
+	padding-left: 1.2rem;
+	border: 1px solid #c6c6c6;
+	border-radius: 4px;
+	background-color: #fff;
+	&::placeholder {
+		color: #c6c6c6;
 	}
+	&:focus {
+		box-shadow: 2px 6px 15px #00000029;
+	}
+`;
+const InputError = styled.p`
+	height: 1.5rem;
+	font-size: 1rem;
+	font-family: 'kr-r';
+	color: #e50011;
+`;
+const AgreeBox = styled.div`
+	width: 34.6rem;
+	height: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: right;
+`;
+
+const AgreeRight = styled.div`
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	color: #6b6462;
+	text-decoration: underline;
+	&:hover {
+		color: #e50011;
+	}
+`;
+const SubmitButton = styled.button`
+	width: 34.6rem;
+	height: 6.2rem;
+	line-height: 6.2rem;
+	margin-top: 3.9rem;
+	margin-bottom: 4rem;
+	font-size: 2.4rem;
+	font-family: 'kr-r';
+	color: #e50011;
+	background-color: #fff;
+	border: 1px solid #e50011;
+	border-radius: 4px;
+	&:hover {
+		background-color: #e50011;
+		color: #fff;
+	}
+`;
+const EasyBox = styled.div`
+	width: 100%;
+	height: 5.2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`;
+const EasyLeft = styled.div``;
+const EasyLeftText = styled.p`
+	font-size: 1.6rem;
+	font-family: 'kr-b';
+	color: #221814;
+`;
+const GoLoginBox = styled.div`
+	display: flex;
+	align-items: center;
+`;
+const GoRegister = styled.p`
+	font-size: 1.6rem;
+	font-family: 'kr-r';
+	color: #6b6462;
+	margin-left: 0.7rem;
+	text-decoration: underline;
+	&:hover {
+		color: #e50011;
+	}
+`;
+const EasyRight = styled.div`
+	display: flex;
+	align-items: center;
+`;
+const SocialLogoBox = styled.div`
+	width: 5.2rem;
+	height: 5.2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 4px;
+	${(props) =>
+		props.NLogo
+			? `background-color:#50AA34`
+			: `background-color: #FFE733; margin-left:0.8rem;`}
+`;
+const SocialLogo = styled.img`
+	width: 3.6rem;
+	height: 3.6rem;
 `;

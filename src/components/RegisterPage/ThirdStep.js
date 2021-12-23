@@ -1,19 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import * as request from '../../controller/user';
 import styled from 'styled-components';
 import Logo from '../../images/red-logo.svg';
 
 const ThirdStep = (props) => {
-	const arr = [
-		{ title: '이름', placeholder: '이름을 입력해주세요.' },
-		{ title: '휴대폰번호', placeholder: '휴대폰번호를 입력해주세요.' },
-		{ title: '인증번호', placeholder: '인증번호를 입력해주세요.' },
-	];
+	const history = useHistory();
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [name, setName] = useState('');
+	const [phone_number, setPhone_number] = useState('');
+	const [certification, setCertification] = useState('');
 
-	const goNext = () => {
-		props.getStep(4);
-	};
+	useEffect(() => {
+		if (history.location.state) {
+			setEmail(history.location.state.email);
+			setPassword(history.location.state.password);
+		}
+	}, []);
+
 	const goBack = () => {
-		props.getStep(2);
+		props.getStep(1);
+	};
+	const nameController = (e) => {
+		setName(e.target.value);
+	};
+	const phone_numberController = (e) => {
+		setPhone_number(e.target.value);
+	};
+	const certificationController = (e) => {
+		setCertification(e.target.value);
+	};
+
+	const onSubmit = () => {
+		const Data = { email, password, name, phone_number };
+		console.log(Data);
+		request.register(Data).then((res) => {
+			console.log(res.data);
+			if (res.data.success) {
+				props.getStep(4);
+				history.push({ state: name });
+			}
+		});
 	};
 
 	return (
@@ -21,13 +49,32 @@ const ThirdStep = (props) => {
 			<RegisterInside>
 				<LogoImg alt='로고이미지' src={Logo} />
 				<Title>품생품사 회원가입-정보입력</Title>
-				{arr.map((el, idx) => (
-					<Items key={idx}>
-						<ItemTitle>{el.title}</ItemTitle>
-						<ItemInput placeholder={el.placeholder} />
-					</Items>
-				))}
-				<SubmitButton enter onClick={goNext}>
+				<Items>
+					<ItemTitle>이름</ItemTitle>
+					<ItemInput
+						onChange={nameController}
+						placeholder='이름을 입력해주세요'
+					/>
+				</Items>
+				<Items>
+					<ItemTitle>휴대폰번호</ItemTitle>
+					<ItemInput
+						onChange={phone_numberController}
+						placeholder='휴대폰번호를 입력해주세요'
+					/>
+				</Items>
+				<Items>
+					<ItemTitle>인증번호</ItemTitle>
+					<ItemInput
+						onChange={certificationController}
+						placeholder='인증번호를 입력해주세요'
+					/>
+				</Items>
+
+				<SubmitButton
+					enter
+					// onClick={goNext}
+					onClick={onSubmit}>
 					가입하기
 				</SubmitButton>
 				<SubmitButton back onClick={goBack}>

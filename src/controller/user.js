@@ -2,9 +2,9 @@ import axios from 'axios';
 import { ADDRESS } from '../config';
 
 const instance = axios.create({
-	proxy: `${ADDRESS}`,
-	baseURL: '/user',
-	// baseURL: `${ADDRESS}/user`,
+	// proxy: `${ADDRESS}`,
+	// baseURL: '/user',
+	baseURL: `${ADDRESS}/user`,
 	withCredentials: true,
 });
 
@@ -13,12 +13,15 @@ const errorMessage = () => {
 	return new Error('Server Error');
 };
 
-export const authCheck = async () => {};
-
+export const authCheck = async () => {
+	return await instance.get('/').catch(errorMessage);
+};
 export const login = async (userData) => {
 	return await instance.post('/login', userData).catch(errorMessage);
 };
-
 export const logout = async () => {
 	return await instance.get('/logout').catch(errorMessage);
+};
+export const register = async (userData) => {
+	return await instance.post('/register', userData).catch(errorMessage);
 };

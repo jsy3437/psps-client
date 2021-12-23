@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../../images/red-logo.svg';
@@ -10,37 +10,56 @@ import KLogo from '../../images/k-logo.svg';
 const FirstStep = (props) => {
 	const history = useHistory();
 	const [agreeCheck, setAgreeCheck] = useState(false);
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [passwordConfirm, setPasswordConfirm] = useState('');
 	const [check, setCheck] = useState({
 		email: false,
 		password: false,
 		confirm: false,
 	});
-	const arr = [
-		{
-			title: '이메일',
-			placeholder: '이메일 주소를 입력해주세요.',
-			errorMessage: '이메일 주소 형식이 틀렸습니다.',
-		},
-		{
-			title: '비밀번호',
-			placeholder: '비밀번호를 입력해주세요.',
-			errorMessage:
-				'비밀번호는 10자리 이상으로 숫자,알파벳,특수문자를 포함해야 합니다.',
-		},
-		{
-			title: '비밀번호 확인',
-			placeholder: '비밀번호를 확인해주세요.',
-			errorMessage: '비밀번호가 일치하지 않습니다.',
-		},
-	];
+
+	useEffect(() => {
+		const state = history.location.state;
+		if (state) {
+			setEmail(state.email);
+			setPassword(state.password);
+			setPasswordConfirm(state.passwordConfirm);
+			if (state.agree) {
+				setAgreeCheck(true);
+			} else {
+				setAgreeCheck(false);
+			}
+		}
+	}, []);
+
 	const agreeCheckController = () => {
 		setAgreeCheck(!agreeCheck);
 	};
 	const goLogin = () => {
 		history.push('/login');
 	};
-	const goNext = () => {
+	const goAgree = () => {
 		props.getStep(2);
+		history.push({ state: { email, password, passwordConfirm } });
+	};
+	const goNext = () => {
+		if (agreeCheck) {
+			props.getStep(3);
+			history.push({ state: { email, password } });
+		} else {
+			return alert('이용 약관에 동의해주세요.');
+		}
+	};
+
+	const emailController = (e) => {
+		setEmail(e.target.value);
+	};
+	const passwordController = (e) => {
+		setPassword(e.target.value);
+	};
+	const passwordConfirmController = (e) => {
+		setPasswordConfirm(e.target.value);
 	};
 
 	return (
@@ -48,14 +67,37 @@ const FirstStep = (props) => {
 			<RegisterInside>
 				<LogoImg alt='로고이미지' src={Logo} />
 				<Title>품생품사 회원가입</Title>
-				{arr.map((el, idx) => (
-					<Items key={idx} last={idx === 2}>
-						<ItemTitle>{el.title}</ItemTitle>
-						<ItemInput placeholder={el.placeholder} />
-						{/* 제출을 한 상태이고 잘못된 항목이 있는 경우에만 출력 */}
-						{/* <InputError>{el.errorMessage}</InputError> */}
-					</Items>
-				))}
+				<Items>
+					<ItemTitle>이메일</ItemTitle>
+					<ItemInput
+						value={email}
+						onChange={emailController}
+						placeholder={'이메일 주소를 입력해주세요'}
+					/>
+					{/* 제출을 한 상태이고 잘못된 항목이 있는 경우에만 출력 */}
+					{/* <InputError>{el.errorMessage}</InputError> */}
+				</Items>
+				<Items>
+					<ItemTitle>비밀번호</ItemTitle>
+					<ItemInput
+						type='password'
+						value={password}
+						onChange={passwordController}
+						placeholder={'비밀번호를 입력해주세요'}
+					/>
+					{/* <InputError>{el.errorMessage}</InputError> */}
+				</Items>
+				<Items>
+					<ItemTitle>비밀번호 확인</ItemTitle>
+					<ItemInput
+						type='password'
+						value={passwordConfirm}
+						onChange={passwordConfirmController}
+						placeholder={'비밀번호를 확인해주세요'}
+					/>
+					{/* <InputError>{el.errorMessage}</InputError> */}
+				</Items>
+
 				<AgreeBox>
 					<AgreeLeft>
 						<AgreeCheck
@@ -67,7 +109,7 @@ const FirstStep = (props) => {
 							품생품사 가입 약관에 모두 동의합니다.
 						</AgreeAllText>
 					</AgreeLeft>
-					<AgreeRight>확인하기</AgreeRight>
+					<AgreeRight onClick={goAgree}>확인하기</AgreeRight>
 				</AgreeBox>
 				<AgreeContents>
 					품생품사 이용약관(필수), 개인정보취급방침(필수)

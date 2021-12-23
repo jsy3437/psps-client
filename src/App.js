@@ -5,6 +5,8 @@ import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import FindInfoPage from './pages/FindInfoPage';
+import ServicePage from './pages/ServicePage';
 import ProductPage from './pages/ProductPage';
 import IntroPage from './pages/IntroPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -21,6 +23,16 @@ const App = () => {
 						exact
 						path='/register'
 						component={Auth(RegisterPage, false)}
+					/>
+					<Route
+						exact
+						path='/find-info'
+						component={Auth(FindInfoPage, false)}
+					/>
+					<Route
+						exact
+						path='/service'
+						component={Auth(ServicePage, null)}
 					/>
 					<Route
 						exact
