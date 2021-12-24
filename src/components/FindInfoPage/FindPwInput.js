@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const FindPwInput = () => {
-	const [phone_number, setPhone_number] = useState('');
 	const [email, setEmail] = useState('');
+	const [phone_number, setPhone_number] = useState('');
 	const [confirmSend, setConfirmSend] = useState(false);
 	const [confirm_number, setConfirm_number] = useState('');
 
-	const phoneNumberController = (e) => {
-		console.log('phoneNumber', phone_number);
-		setPhone_number(e.target.value);
-	};
 	const emailController = (e) => {
 		console.log('email', email);
 		setEmail(e.target.value);
+	};
+	const phoneNumberController = (e) => {
+		console.log('phoneNumber', phone_number);
+		setPhone_number(e.target.value);
 	};
 	const getConfirmNumber = () => {
 		if (phone_number.length === 11) {

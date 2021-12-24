@@ -1,38 +1,35 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import * as category from '../../data/category';
 
-const ProductCategory = () => {
-	const [main, setMain] = useState('농산');
-	const [sub, setSub] = useState('전체보기');
-
-	const mainArr = [
-		'농산',
-		'수산',
-		'축산',
-		'건강/음료',
-		'생활/주방',
-		'간식',
-		'반찬',
-		'가정 간편식',
-	];
-	const subArr = [
-		'전체보기',
-		'과일/수입청과',
-		'샐러드/기본채소',
-		'즙용/특수채소',
-		'버섯/건나물류',
-		'쌀/잡곡',
-	];
+const ProductCategory = (props) => {
+	console.log(props.mainCategory);
+	const mainCategoryController = (e) => {
+		props.getMainCategory(e.target.innerText);
+	};
+	const subCategoryController = (e) => {
+		props.getSubCategory(e.target.innerText);
+	};
 	return (
 		<ProductCategoryWrap>
 			<MainCategoryWrap>
-				{mainArr.map((el, idx) => (
-					<MainCategoryList key={idx}>{el}</MainCategoryList>
+				{category.mainCategories.map((el, idx) => (
+					<MainCategoryList
+						key={idx}
+						active={props.mainCategory === el}
+						onClick={mainCategoryController}>
+						{el}
+					</MainCategoryList>
 				))}
 			</MainCategoryWrap>
 			<SubCategoryWrap>
-				{subArr.map((el, idx) => (
-					<SubCategoryList key={idx}>{el}</SubCategoryList>
+				{category.subCategories.map((el, idx) => (
+					<SubCategoryList
+						key={idx}
+						active={props.subCategory === el}
+						onClick={subCategoryController}>
+						{el}
+					</SubCategoryList>
 				))}
 			</SubCategoryWrap>
 		</ProductCategoryWrap>
@@ -50,6 +47,7 @@ const ProductCategoryWrap = styled.div`
 	align-items: center;
 	position: absolute;
 	top: 50.5rem;
+	z-index: 3;
 `;
 const MainCategoryWrap = styled.ul`
 	width: 100%;
@@ -69,6 +67,9 @@ const MainCategoryList = styled.li`
 	font-family: 'kr-r';
 	color: #221814;
 	letter-spacing: -0.72px;
+	${(props) =>
+		props.active &&
+		`font-family:'kr-b'; border:3px solid #E50011; border-radius:4px;`}
 `;
 const SubCategoryWrap = styled.ul`
 	height: 2.6rem;
@@ -86,4 +87,6 @@ const SubCategoryList = styled.li`
 	&:nth-last-child(1) {
 		border: none;
 	}
+	${(props) =>
+		props.active && `font-family:'kr-b' ; border-bottom:2px solid #E50011`}
 `;

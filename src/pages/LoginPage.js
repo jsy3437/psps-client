@@ -59,8 +59,6 @@ const LoginPage = () => {
 							onChange={emailController}
 							placeholder={'이메일 주소를 입력해주세요'}
 						/>
-						{/* 제출을 한 상태이고 잘못된 항목이 있는 경우에만 출력 */}
-						{/* <InputError>{el.errorMessage}</InputError> */}
 					</Items>
 					<Items last>
 						<ItemTitle>비밀번호</ItemTitle>
@@ -70,7 +68,6 @@ const LoginPage = () => {
 							onChange={passwordController}
 							placeholder={'비밀번호를 입력해주세요'}
 						/>
-						{/* <InputError>{el.errorMessage}</InputError> */}
 					</Items>
 
 					<AgreeBox>

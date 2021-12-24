@@ -22,7 +22,7 @@ const FindIdResultPage = () => {
 	const goLogin = () => {
 		history.push('/login');
 	};
-	const goFindingPassword = () => {
+	const goChangingPassword = () => {
 		alert('비밀번호 변경 페이지로 이동');
 	};
 
@@ -40,7 +40,7 @@ const FindIdResultPage = () => {
 					<SubmitButton login onClick={goLogin}>
 						로그인
 					</SubmitButton>
-					<SubmitButton password onClick={goFindingPassword}>
+					<SubmitButton password onClick={goChangingPassword}>
 						비밀번호 찾기
 					</SubmitButton>
 				</FindIdInside>
@@ -50,7 +50,7 @@ const FindIdResultPage = () => {
 	);
 };
 
-export default FindIdResultPage;
+export default withRouter(FindIdResultPage);
 
 const Container = styled.div`
 	width: 192rem;

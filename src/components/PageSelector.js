@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import next_btn from '../images/next_btn.svg';
-import final_btn from '../images/final_btn.svg';
+import Left from '../images/page_left.svg';
+import Right from '../images/page_right.svg';
 
 const PageSelector = ({ page, total, onClickPage, style }) => {
 	const [pages, setPages] = useState([]);
+	const totalPage = Math.ceil(total / 12);
 	useEffect(() => {
-		const _total = Math.ceil(total / 12);
 		const update = [];
-		for (let i = 1; i <= _total; i++) {
+		for (let i = 1; i <= totalPage; i++) {
 			if (page <= 3) {
 				if (1 <= i && i <= 5) {
 					update.push(i);
 				}
-			} else if (_total - 2 <= page) {
-				if (_total - 4 <= i && i <= _total) {
+			} else if (totalPage - 2 <= page) {
+				if (totalPage - 4 <= i && i <= totalPage) {
 					update.push(i);
 				}
 			} else {
@@ -27,46 +27,23 @@ const PageSelector = ({ page, total, onClickPage, style }) => {
 	}, [total, page]);
 
 	return (
-		<>
-			<PageList style={style}>
-				{5 < page && (
-					<PageItem onClick={() => onClickPage(1)}>
-						<img
-							style={imgRotateStyle}
-							alt='final button'
-							src={final_btn}
-						/>
-					</PageItem>
-				)}
-				{1 < page && (
-					<PageItem onClick={() => onClickPage(page - 1)}>
-						<img
-							style={imgRotateStyle}
-							alt='next button'
-							src={next_btn}
-						/>
-					</PageItem>
-				)}
-				{pages.map((el, idx) => (
-					<PageItem
-						selected={el === page}
-						key={idx}
-						onClick={() => onClickPage(el)}>
-						{el}
-					</PageItem>
-				))}
-				{page < Math.ceil(total / 12) && (
-					<PageItem onClick={() => onClickPage(page + 1)}>
-						<img alt='next button' src={next_btn} />
-					</PageItem>
-				)}
-				{page < Math.ceil(total / 12) && (
-					<PageItem onClick={() => onClickPage(Math.ceil(total / 9))}>
-						<img alt='final button' src={final_btn} />
-					</PageItem>
-				)}
-			</PageList>
-		</>
+		<PageList style={style}>
+			<PageItem onClick={page === 1 ? null : () => onClickPage(page - 1)}>
+				<MoveButton alt='prev button' src={Left} />
+			</PageItem>
+			{pages.map((el, idx) => (
+				<PageItem
+					key={idx}
+					selected={el === page}
+					onClick={() => onClickPage(el)}>
+					{el}
+				</PageItem>
+			))}
+			<PageItem
+				onClick={page === totalPage ? null : () => onClickPage(page + 1)}>
+				<MoveButton alt='next button' src={Right} />
+			</PageItem>
+		</PageList>
 	);
 };
 
@@ -74,24 +51,26 @@ export default PageSelector;
 
 const PageList = styled.ul`
 	margin-bottom: 6rem;
-	width: 30%;
-	display: grid;
-	grid-template-columns: repeat(9, 1fr);
-	column-gap: 0.8rem;
-	justify-content: end;
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 const PageItem = styled.li`
 	cursor: pointer;
-	width: 2.7rem;
-	height: 2.7rem;
-	border-radius: 50%;
-	font-size: 1.5rem;
-	font-family: 'kr-r';
-	${(props) =>
-		props.selected
-			? ' color: white; background-color: #5887FF;'
-			: 'color: #585757; background-color: #F4F4F4;'}
+	width: 3.4rem;
+	height: 1.8rem;
+	line-height: 1.8rem;
+	font-size: 1.8rem;
+	font-family: 'kr-b';
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	${(props) => (props.selected ? ' color: #E50011;' : 'color:#221814; ')}
 	text-align: center;
 `;
-
-const imgRotateStyle = { transform: 'rotate(180deg)' };
+const MoveButton = styled.img`
+	width: 1.1rem;
+	height: 1.8rem;
+`;

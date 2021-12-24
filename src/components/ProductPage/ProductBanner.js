@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import BannerImg from '../../images/product_banner1.png';
 
-const ProductBanner = () => {
+const ProductBanner = (props) => {
 	return (
 		<ProductBannerWrap>
 			<ProductBannerImg alt='배너' src={BannerImg} />
-			<ProductBannerTitle>{`품질 좋은`}</ProductBannerTitle>
+			<ProductBannerTitle>{`품질 좋은 ${props.mainCategory}`}</ProductBannerTitle>
 		</ProductBannerWrap>
 	);
 };

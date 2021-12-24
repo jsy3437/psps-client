@@ -67,61 +67,6 @@ const Title = styled.h2`
 	color: #000000;
 	margin-bottom: 4rem;
 `;
-const ItemsWrap = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
-const Items = styled.li`
-	position: relative;
-	${(props) => (props.last ? `margin-bottom:0.8rem;` : `margin-bottom:2rem`)}
-`;
-const ItemTitle = styled.p`
-	height: 2rem;
-	line-height: 2rem;
-	position: absolute;
-	top: -0.8rem;
-	left: 1rem;
-	padding: 0 0.5rem;
-	font-size: 1.4rem;
-	font-family: 'kr-r';
-	color: #221814;
-	background-color: #fff;
-`;
-const ItemInput = styled.input`
-	width: 34.6rem;
-	height: 6.4rem;
-	font-size: 1.4rem;
-	font-family: 'kr-r';
-	color: #221814;
-	padding-left: 1.2rem;
-	border: 1px solid #c6c6c6;
-	border-radius: 4px;
-	background-color: #fff;
-	&::placeholder {
-		color: #c6c6c6;
-	}
-	&:focus {
-		box-shadow: 2px 6px 15px #00000029;
-	}
-`;
-const CheckButton = styled.button`
-	width: 6.7rem;
-	height: 2.8rem;
-	font-size: 1.4rem;
-	font-family: 'kr-r';
-	color: #c6c6c6;
-	letter-spacing: -0.56px;
-	position: absolute;
-	top: 1.7rem;
-	right: 12px;
-	border-radius: 4px;
-	border: 1px solid #c6c6c6;
-	background-color: unset;
-	${(props) =>
-		(props.active || props.send) &&
-		`border: 2px solid #111a31;color:#111a31; cursor:pointer`}
-`;
 const SubmitButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;
