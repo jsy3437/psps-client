@@ -35,7 +35,6 @@ const LoginPage = () => {
 		} else {
 			const Data = { email, password };
 			request.login(Data).then((res) => {
-				console.log(res.data);
 				if (res.data.success) {
 					dispatch(user_login(true));
 					alert('로그인 되었습니다.');

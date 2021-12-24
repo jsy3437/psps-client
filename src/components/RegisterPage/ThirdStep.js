@@ -14,9 +14,8 @@ const ThirdStep = (props) => {
 	const [password, setPassword] = useState('');
 	const [name, setName] = useState('');
 	const [phone_number, setPhone_number] = useState('');
-	const [confirmActive, setConfirmActive] = useState(false);
 	const [confirmSend, setConfirmSend] = useState(false);
-	const [confirmNumber, setConfirmNumber] = useState('');
+	const [confirm_number, setConfirm_number] = useState('');
 	const [check, setCheck] = useState({
 		name: true,
 		phone_number: true,
@@ -42,11 +41,6 @@ const ThirdStep = (props) => {
 		return setName(e.target.value);
 	};
 	const phoneNumberController = (e) => {
-		if (e.target.value.length === 11) {
-			setConfirmActive(true);
-		} else {
-			setConfirmActive(false);
-		}
 		regexp.phone_number.test(e.target.value)
 			? setCheck({ ...check, phone_number: true })
 			: setCheck({ ...check, phone_number: false });
@@ -56,11 +50,11 @@ const ThirdStep = (props) => {
 		// regexp.confirm_number.test.test(e.target.value)
 		// 	? setCheck({ ...check, confirm_number: true })
 		// 	: setCheck({ ...check, confirm_number: false });
-		return setConfirmNumber(e.target.value);
+		return setConfirm_number(e.target.value);
 	};
 
 	const getConfirmNumber = () => {
-		if (confirmActive) {
+		if (phone_number.length === 11) {
 			// 인증하기
 			alert('인증번호 1234');
 			setConfirmSend(true);
@@ -69,14 +63,17 @@ const ThirdStep = (props) => {
 		}
 	};
 	const checkConfirmNumber = () => {
-		// 인증번호와 입력된 값이 같을 경우
-		return alert('인증 확인되었습니다.');
-		// 아닐 경우
-		// return alert('인증번호를 확인해주세요.');
+		if (confirmSend) {
+			// 인증번호와 입력된 값이 같을 경우
+			return alert('인증 확인되었습니다.');
+			// 아닐 경우
+			// return alert('인증번호를 확인해주세요.');
+		}
 	};
 
 	const onSubmit = () => {
 		setIsSubmit(true);
+
 		if (!regexp.name.test(name)) {
 			setCheck({ ...check, name: false });
 			alert('이름을 확인해주세요');
@@ -85,13 +82,13 @@ const ThirdStep = (props) => {
 			setCheck({ ...check, phone_number: false });
 			alert('휴대폰번호를 확인해주세요');
 			phoneNumberInput.current.focus();
+		} else if (!confirmSend) {
+			alert('휴대전화 인증을 해주세요');
 		}
 		// if(인증번호가 안맞으면){}
 		else {
 			const Data = { email, password, name, phone_number };
-			console.log(Data);
 			request.register(Data).then((res) => {
-				console.log(res.data);
 				if (res.data.success) {
 					props.getStep(4);
 					history.push({ state: name });
@@ -127,7 +124,9 @@ const ThirdStep = (props) => {
 					{isSubmit && !check.phone_number && (
 						<InputError>{'휴대폰번호를 확인해주세요'}</InputError>
 					)}
-					<CheckButton active={confirmActive} onClick={getConfirmNumber}>
+					<CheckButton
+						active={phone_number.length === 11}
+						onClick={getConfirmNumber}>
 						인증하기
 					</CheckButton>
 				</Items>
@@ -144,7 +143,7 @@ const ThirdStep = (props) => {
 					<CheckButton
 						send={confirmSend}
 						onClick={() => {
-							checkConfirmNumber(confirmNumber);
+							checkConfirmNumber(confirm_number);
 						}}>
 						인증확인
 					</CheckButton>

@@ -28,8 +28,6 @@ const OrderBox = () => {
 		}
 	};
 
-	console.log('option', option);
-
 	const [price, setPrice] = useState(3000);
 
 	return (

@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import FindInfoPage from './pages/FindInfoPage';
+import FindIdResultPage from './pages/FindIdResultPage';
 import ServicePage from './pages/ServicePage';
 import ProductPage from './pages/ProductPage';
 import IntroPage from './pages/IntroPage';
@@ -35,6 +36,11 @@ const App = () => {
 						exact
 						path='/find-info'
 						component={Auth(FindInfoPage, false)}
+					/>
+					<Route
+						exact
+						path='/find-result'
+						component={Auth(FindIdResultPage)}
 					/>
 					<Route
 						exact
