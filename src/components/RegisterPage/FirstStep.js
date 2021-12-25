@@ -94,7 +94,7 @@ const FirstStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='로고이미지' src={Logo} />
+				<LogoImg alt='logo' src={Logo} />
 				<Title>품생품사 회원가입</Title>
 				<Items>
 					<ItemTitle>이메일</ItemTitle>

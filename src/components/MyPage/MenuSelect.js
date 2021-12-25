@@ -1,30 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const FindItemSelect = (props) => {
-	const items = ['아이디', '비밀번호'];
-	const itemController = (e) => {
-		props.getItem(e.target.innerText);
+const MenuSelect = (props) => {
+	const menus = ['주문내역', '개인정보관리'];
+	const menuController = (e) => {
+		props.getMenu(e.target.innerText);
 	};
 
 	return (
-		<MainCategoryWrap>
-			{items.map((el, idx) => (
-				<MainCategoryList
+		<MenuWrap>
+			{menus.map((el, idx) => (
+				<MenuList
 					key={idx}
-					active={props.item === el}
-					onClick={itemController}>
+					active={props.menu === el}
+					onClick={menuController}>
 					{el}
-				</MainCategoryList>
+				</MenuList>
 			))}
-		</MainCategoryWrap>
+		</MenuWrap>
 	);
 };
 
-export default FindItemSelect;
+export default MenuSelect;
 
-const MainCategoryWrap = styled.ul`
-	width: 24rem;
+const MenuWrap = styled.ul`
+	width: 30.4rem;
 	height: 7rem;
 	display: flex;
 	align-items: center;
@@ -32,9 +32,9 @@ const MainCategoryWrap = styled.ul`
 	box-shadow: 0px 3px 18px #00000029;
 	border-radius: 4px;
 	margin-top: 0;
-	margin-bottom: 6rem;
+	margin-bottom: 2.8rem;
 `;
-const MainCategoryList = styled.li`
+const MenuList = styled.li`
 	width: 50%;
 	height: 7rem;
 	line-height: 7rem;

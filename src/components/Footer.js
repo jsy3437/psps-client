@@ -34,7 +34,7 @@ const Footer = () => {
 			<FooterBody>
 				<FooterBodyInside>
 					<FooterBodyLeft>
-						<BodyLeftImg alt='로고' src={Logo} />
+						<BodyLeftImg alt='logo' src={Logo} />
 						<BodyLeftText>{`${Info.COMPANY_NAME} 대표이사 : ${Info.COMPANY_OWNER} | 주소 : ${Info.COMPANY_PLACE}\n사업자등록번호 : ${Info.BUSINESS_NUMBER} | 통신판매신고번호 : ${Info.REPORT_NUMBER}\n개인정보관리책임자 : ${Info.PRIVACY_PERSON} (${Info.PRIVACY_EMAIL})\n\n©2021 CetusStudio Inc.All rights reserved.`}</BodyLeftText>
 					</FooterBodyLeft>
 					<FooterBodyRight>

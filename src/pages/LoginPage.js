@@ -50,7 +50,7 @@ const LoginPage = () => {
 		<div id='container'>
 			<Container>
 				<RegisterInside>
-					<LogoImg alt='로고이미지' src={Logo} />
+					<LogoImg alt='logo' src={Logo} />
 					<Title>품생품사 로그인</Title>
 					<Items>
 						<ItemTitle>이메일</ItemTitle>

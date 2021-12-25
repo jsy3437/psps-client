@@ -30,7 +30,7 @@ const FindIdResultPage = () => {
 		<div id='container'>
 			<Container>
 				<FindIdInside>
-					<LogoImg alt='로고이미지' src={Logo} />
+					<LogoImg alt='logo' src={Logo} />
 					<Title>품생품사 아이디 찾기</Title>
 					<FindResult>
 						{name && email

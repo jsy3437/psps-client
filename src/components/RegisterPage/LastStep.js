@@ -22,7 +22,7 @@ const LastStep = () => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='로고이미지' src={Logo} />
+				<LogoImg alt='logo' src={Logo} />
 				<Title>품생품사 회원가입 완료</Title>
 				<Text>{`감사합니다. ${name}님!\n더 좋은 품질로 보답하겠습니다.`}</Text>
 				<SubmitButton shopping onClick={goShopping}>

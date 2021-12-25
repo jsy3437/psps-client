@@ -5,6 +5,7 @@ import Logo from '../images/red-logo.svg';
 import FindItemSelect from '../components/FindInfoPage/FindItemSelect';
 import FindId from '../components/FindInfoPage/FindIdInput';
 import FindPw from '../components/FindInfoPage/FindPwInput';
+import Footer from '../components/Footer';
 
 const FindInfoPage = () => {
 	const history = useHistory();
@@ -24,7 +25,7 @@ const FindInfoPage = () => {
 		<div id='container'>
 			<Container>
 				<FindInfoInside>
-					<LogoImg alt='로고이미지' src={Logo} />
+					<LogoImg alt='logo img' src={Logo} />
 					<Title>품생품사 아이디/비밀번호 찾기</Title>
 					<FindItemSelect getItem={getItem} item={item} />
 					{item === '아이디' && <FindId />}
@@ -36,6 +37,7 @@ const FindInfoPage = () => {
 						<SubmitButton onClick={goFindPW}>비밀번호 찾기</SubmitButton>
 					)}
 				</FindInfoInside>
+				<Footer />
 			</Container>
 		</div>
 	);

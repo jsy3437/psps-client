@@ -35,7 +35,9 @@ const Navbar = () => {
 	const goRegister = () => {
 		history.push('/register');
 	};
-	const goMyPage = () => {};
+	const goMyPage = () => {
+		history.push('/members');
+	};
 	const goCart = () => {
 		history.push('/cart');
 	};
@@ -44,7 +46,7 @@ const Navbar = () => {
 		<NavbarWrap>
 			<NavbarInside>
 				<NavbarLeft>
-					<NavbarLogo onClick={goHome} alt='로고' src={Logo} />
+					<NavbarLogo onClick={goHome} alt='logo' src={Logo} />
 				</NavbarLeft>
 				<NavbarRight>
 					<RightFirst>

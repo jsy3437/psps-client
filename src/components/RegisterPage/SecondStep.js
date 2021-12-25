@@ -37,7 +37,7 @@ const SecondStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='로고이미지' src={Logo} />
+				<LogoImg alt='logo' src={Logo} />
 				<Title>품생품사 가입약관</Title>
 				{arr.map((el, idx) => (
 					<Items key={idx}>

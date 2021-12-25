@@ -100,7 +100,7 @@ const ThirdStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='로고이미지' src={Logo} />
+				<LogoImg alt='logo' src={Logo} />
 				<Title>품생품사 회원가입-정보입력</Title>
 				<Items>
 					<ItemTitle>이름</ItemTitle>
