@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import * as category from '../../data/category';
 
 const ProductCategory = (props) => {
-	console.log(props.mainCategory);
 	const mainCategoryController = (e) => {
 		props.getMainCategory(e.target.innerText);
 	};

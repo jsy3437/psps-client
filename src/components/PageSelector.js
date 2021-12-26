@@ -50,7 +50,6 @@ const PageSelector = ({ page, total, onClickPage, style }) => {
 export default PageSelector;
 
 const PageList = styled.ul`
-	margin-bottom: 6rem;
 	width: 50%;
 	display: flex;
 	justify-content: center;

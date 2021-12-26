@@ -6,11 +6,9 @@ const FindIdInput = () => {
 	const [phone_number, setPhone_number] = useState('');
 
 	const nameController = (e) => {
-		console.log('name', name);
 		setName(e.target.value);
 	};
 	const phoneNumberController = (e) => {
-		console.log('phoneNumber', phone_number);
 		setPhone_number(e.target.value);
 	};
 

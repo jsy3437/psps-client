@@ -32,7 +32,12 @@ const ProductPage = () => {
 				subCategory={subCategory}
 			/>
 			<ProductList />
-			<PageSelector page={page} total={total} onClickPage={onClickPage} />
+			<PageSelector
+				style={{ marginBottom: '6rem' }}
+				page={page}
+				total={total}
+				onClickPage={onClickPage}
+			/>
 			<Induce />
 			<Footer />
 		</div>

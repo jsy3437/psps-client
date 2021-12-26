@@ -8,11 +8,9 @@ const FindPwInput = () => {
 	const [confirm_number, setConfirm_number] = useState('');
 
 	const emailController = (e) => {
-		console.log('email', email);
 		setEmail(e.target.value);
 	};
 	const phoneNumberController = (e) => {
-		console.log('phoneNumber', phone_number);
 		setPhone_number(e.target.value);
 	};
 	const getConfirmNumber = () => {
@@ -25,7 +23,6 @@ const FindPwInput = () => {
 		}
 	};
 	const confirmNumberController = (e) => {
-		console.log('confirmNumber', confirm_number);
 		setConfirm_number(e.target.value);
 	};
 	const checkConfirmNumber = () => {
