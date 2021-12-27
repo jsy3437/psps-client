@@ -4,6 +4,9 @@ import { regexp } from '../../data/regexp';
 import * as request from '../../controller/user';
 import styled from 'styled-components';
 import Logo from '../../images/red-logo.svg';
+import axios from 'axios';
+import { ADDRESS } from '../../config';
+import { PORT } from '../../config';
 
 const ThirdStep = (props) => {
 	const history = useHistory();
@@ -22,6 +25,59 @@ const ThirdStep = (props) => {
 		// confirm_number: true,
 	});
 	const [isSubmit, setIsSubmit] = useState(false);
+
+	const getAuthentication = () => {
+		const IMP = window.IMP;
+		IMP.init('iamport');
+
+		IMP.certification(
+			{
+				merchant_uid: 'merchant_' + new Date().getTime(), //본인인증과 연관된 가맹점 내부 주문번호가 있다면 넘겨주세요
+			},
+			function (rsp) {
+				if (rsp.success) {
+					// 인증성공
+					console.log(rsp.imp_uid);
+					console.log(rsp.merchant_uid);
+
+					// $.ajax({
+					// 	type: 'POST',
+					// 	url: '/certifications/confirm',
+					// 	dataType: 'json',
+					// 	data: {
+					// 		imp_uid: rsp.imp_uid,
+					// 	},
+					// });
+					axios
+						.post(`/${ADDRESS}:${PORT}/client/user`, {
+							data: { imp_uid: rsp.imp_uid },
+						})
+						.done(function () {
+							takeResponseAndHandle(rsp);
+						});
+				} else {
+					// 인증취소 또는 인증실패
+					var msg = '인증에 실패하였습니다.';
+					msg += '에러내용 : ' + rsp.error_msg;
+
+					alert(msg);
+				}
+			}
+		);
+	};
+	function takeResponseAndHandle(rsp) {
+		if (rsp.success) {
+			// 인증성공
+			console.log(rsp.imp_uid);
+			console.log(rsp.merchant_uid);
+		} else {
+			// 인증취소 또는 인증실패
+			var msg = '인증에 실패하였습니다.';
+			msg += '에러내용 : ' + rsp.error_msg;
+
+			alert(msg);
+		}
+	}
 
 	useEffect(() => {
 		if (history.location.state) {
@@ -126,7 +182,7 @@ const ThirdStep = (props) => {
 					)}
 					<CheckButton
 						active={phone_number.length === 11}
-						onClick={getConfirmNumber}>
+						onClick={getAuthentication}>
 						인증하기
 					</CheckButton>
 				</Items>

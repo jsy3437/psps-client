@@ -4,7 +4,7 @@ import { PORT } from '../config';
 
 const instance = axios.create({
 	// proxy: `${ADDRESS}:${PORT}`,
-	// baseURL: '/user',
+	// baseURL: '/client/user',
 	baseURL: `${ADDRESS}:${PORT}/user`,
 	withCredentials: true,
 });

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
+import OrderDetail from './OrderDetail';
 import PageSelector from '../PageSelector';
 
 const OrderHistory = () => {
@@ -15,51 +16,90 @@ const OrderHistory = () => {
 	});
 	const [page, setPage] = useState(1);
 	const [total, setTotal] = useState(list.length);
+	const [viewDetail, setViewDetail] = useState(true);
+	const [detail, setDetail] = useState({});
 
 	const onClickPage = (e) => {
 		setPage(e);
 	};
 
 	return (
-		<OrderHistoryWrap>
-			{list.map((el, idx) => (
-				<OrderHistoryList key={idx}>
-					<ListImg alt='product img' src={ex1} />
-					<ListContents>
-						<OrderTop>
-							<OrderTopText date>{`${el.date} 주문`}</OrderTopText>
-							<OrderTopText state>{el.state}</OrderTopText>
-						</OrderTop>
-						<ProductName>{el.name}</ProductName>
-						<ProductOption>{el.option}</ProductOption>
-						<ProductCount>{`${el.price}원 / ${el.count}개`}</ProductCount>
-					</ListContents>
-					<ListButtons>
-						<ListButton>배송조회</ListButton>
-						<ListButton>주문 상세보기</ListButton>
-						<ListButton last>교환, 반품 신청</ListButton>
-					</ListButtons>
-				</OrderHistoryList>
-			))}
-			<PageSelector
-				style={{ margin: '5.2rem 0 5.5rem 0' }}
-				page={page}
-				total={total}
-				onClickPage={onClickPage}
-			/>
-			<GrayBackground />
-		</OrderHistoryWrap>
+		<MyPageInside>
+			{list.length === 0 && (
+				<OrderHistoryWrap>
+					<NothingText>현재 주문하신 내역이 없습니다.</NothingText>
+					<GoShoppingButton>쇼핑하기</GoShoppingButton>
+					<GrayBackground />
+				</OrderHistoryWrap>
+			)}
+			{list.length > 0 && !viewDetail && (
+				<OrderHistoryWrap>
+					{list.map((el, idx) => (
+						<OrderHistoryList key={idx}>
+							<ListImg alt='product img' src={ex1} />
+							<ListContents>
+								<OrderTop>
+									<OrderTopText date>{`${el.date} 주문`}</OrderTopText>
+									<OrderTopText state>{el.state}</OrderTopText>
+								</OrderTop>
+								<ProductName>{el.name}</ProductName>
+								<ProductOption>{el.option}</ProductOption>
+								<ProductCount>{`${el.price}원 / ${el.count}개`}</ProductCount>
+							</ListContents>
+							<ListButtons>
+								<ListButton>배송조회</ListButton>
+								<ListButton>주문 상세보기</ListButton>
+								<ListButton last>교환, 반품 신청</ListButton>
+							</ListButtons>
+						</OrderHistoryList>
+					))}
+					<PageSelector
+						style={{ margin: '5.2rem 0 5.5rem 0' }}
+						page={page}
+						total={total}
+						onClickPage={onClickPage}
+					/>
+					<GrayBackground />
+				</OrderHistoryWrap>
+			)}
+			{list.length > 0 && viewDetail && <OrderDetail detail={detail} />}
+		</MyPageInside>
 	);
 };
 
 export default OrderHistory;
 
-const OrderHistoryWrap = styled.ul`
-	margin-bottom: 7.7rem;
+const MyPageInside = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	position: relative;
+	margin-bottom: 7.7rem;
+`;
+const OrderHistoryWrap = styled.ul`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+const NothingText = styled.p`
+	height: 4.4rem;
+	line-height: 4.4rem;
+	font-size: 3rem;
+	font-family: 'kr-b';
+	color: #000;
+	margin-top: 9.2rem;
+	margin-bottom: 6rem;
+`;
+const GoShoppingButton = styled.button`
+	width: 34.6rem;
+	height: 6.2rem;
+	margin-bottom: 27rem;
+	font-size: 2.4rem;
+	font-family: 'kr-r';
+	color: #fff;
+	letter-spacing: -0.96px;
+	border: none;
+	background-color: #221814;
 `;
 const OrderHistoryList = styled.li`
 	margin-bottom: 2rem;
