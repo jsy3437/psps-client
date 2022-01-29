@@ -3,9 +3,25 @@ import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
 
 const OrderDetail = () => {
+	const receiverInfo = [
+		{ title: '받는분', contents: '최준영' },
+		{ title: '연락처', contents: '01050074116' },
+		{
+			title: '받는주소',
+			contents: '(15461)경기도 안산시 단원구 광덕서로 102 406-7호(고잔동)',
+		},
+		{ title: '배송요청사항', contents: '문 앞에 두고 문자 주세요.' },
+	];
+	const paymentInfo = [
+		{ title: '결제수단', contents: '비씨카드' },
+		{ title: '총 상품가격', contents: '7130원' },
+		{ title: '배송비', contents: '0원' },
+		{ title: '총 결제금액', contents: '7130원' },
+	];
+
 	return (
 		<OrderDetailWrap>
-			<Item>
+			<Item first>
 				<TitleBox>
 					<Title>주문내역</Title>
 					<OrderNumber>{`주문번호 1300123123`}</OrderNumber>
@@ -21,16 +37,53 @@ const OrderDetail = () => {
 						<ProductOption>{`무농약`}</ProductOption>
 						<ProductCount>{`7130원 / 5개`}</ProductCount>
 					</OrderContents>
-					<ListButtons>
-						<ListButton>배송조회</ListButton>
-						<ListButton last>목록으로</ListButton>
-						<ListButton last>교환, 반품 신청</ListButton>
-					</ListButtons>
+					<Buttons>
+						<Button>배송조회</Button>
+						<Button red>목록으로</Button>
+						<Button red>교환, 반품 신청</Button>
+					</Buttons>
 				</OrderInfo>
 			</Item>
 			<Item>
 				<Title>받는 분</Title>
+				<InfoWrap>
+					{receiverInfo.map((el, idx) => (
+						<InfoList key={idx}>
+							<InfoItem>{el.title}</InfoItem>
+							<InfoContents>{el.contents}</InfoContents>
+						</InfoList>
+					))}
+				</InfoWrap>
 			</Item>
+			<Item>
+				<Title>결제 정보</Title>
+				<InfoWrap>
+					{paymentInfo.map((el, idx) => (
+						<InfoList key={idx}>
+							<InfoItem>{el.title}</InfoItem>
+							<InfoContents>{el.contents}</InfoContents>
+						</InfoList>
+					))}
+				</InfoWrap>
+			</Item>
+			<Item>
+				<Title>결제영수증 정보</Title>
+				<InfoWrap>
+					<InfoReceiptList>
+						<InfoReceiptText>
+							해당 주문건에 대해 구매 카드영수증 확인이 가능합니다.
+						</InfoReceiptText>
+						<InfoReceiptButton>카드영수증</InfoReceiptButton>
+					</InfoReceiptList>
+					<InfoReceiptList>
+						<InfoReceiptText>
+							해당 주문건에 대해 거래명세서 확인이 가능합니다.
+						</InfoReceiptText>
+						<InfoReceiptButton>거래명세서</InfoReceiptButton>
+					</InfoReceiptList>
+				</InfoWrap>
+			</Item>
+			<Button red>주문내역 삭제</Button>
 		</OrderDetailWrap>
 	);
 };
@@ -42,10 +95,12 @@ const OrderDetailWrap = styled.div`
 	height: 100rem;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 `;
 const Item = styled.div`
 	display: flex;
 	flex-direction: column;
+	${(props) => (props.first ? `margin-bottom:4rem;` : `margin-bottom:3rem;`)}
 `;
 const TitleBox = styled.div`
 	margin-bottom: 1.2rem;
@@ -132,7 +187,7 @@ const ProductCount = styled.p`
 	font-family: 'kr-r';
 	color: #221814;
 `;
-const ListButtons = styled.div`
+const Buttons = styled.div`
 	width: 25%;
 	height: 100%;
 	display: flex;
@@ -140,7 +195,7 @@ const ListButtons = styled.div`
 	justify-content: center;
 	align-items: center;
 `;
-const ListButton = styled.button`
+const Button = styled.button`
 	width: 13.5rem;
 	height: 4rem;
 	line-height: 4rem;
@@ -152,8 +207,56 @@ const ListButton = styled.button`
 	border: none;
 	background-color: unset;
 	${(props) =>
-		props.last
+		props.red
 			? `color:#E50011; border:1px solid #E50011;`
 			: `margin-top:0; color:#fff; background-color:#221814`}
 `;
-// const
+const InfoWrap = styled.ul`
+	width: 100%;
+	height: 13.7rem;
+	margin: 0;
+	padding: 0.85rem 0;
+	border-top: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+`;
+const InfoList = styled.li`
+	width: 100%;
+	height: 2.8rem;
+	line-height: 2.8rem;
+	display: flex;
+	align-items: center;
+`;
+const InfoItem = styled.p`
+	width: 10rem;
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	color: #6b6462;
+`;
+const InfoContents = styled.p`
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	color: #221814;
+`;
+const InfoReceiptList = styled.li`
+	height: 5.6rem;
+	line-height: 5.6rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`;
+const InfoReceiptText = styled.p`
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	color: #6b6462;
+`;
+const InfoReceiptButton = styled.button`
+	width: 8rem;
+	height: 2.7rem;
+	line-height: 2.7rem;
+	font-size: 1.2rem;
+	font-family: 'kr-r';
+	color: #8e8e8e;
+	background-color: unset;
+	border: 1px solid #8e8e8e;
+	border-radius: 4px;
+`;

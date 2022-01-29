@@ -3,34 +3,34 @@ import styled from 'styled-components';
 import * as category from '../../data/category';
 
 const ProductCategory = (props) => {
-	const mainCategoryController = (e) => {
-		props.getMainCategory(e.target.innerText);
+	const onChangePart = (e) => {
+		props.getPart(e.target.innerText);
 	};
-	const subCategoryController = (e) => {
-		props.getSubCategory(e.target.innerText);
+	const onChangeSubPart = (e) => {
+		props.getSubPart(e.target.innerText);
 	};
 	return (
 		<ProductCategoryWrap>
-			<MainCategoryWrap>
+			<PartWrap>
 				{category.mainCategories.map((el, idx) => (
-					<MainCategoryList
+					<PartList
 						key={idx}
-						active={props.mainCategory === el}
-						onClick={mainCategoryController}>
+						active={props.part === el}
+						onClick={onChangePart}>
 						{el}
-					</MainCategoryList>
+					</PartList>
 				))}
-			</MainCategoryWrap>
-			<SubCategoryWrap>
+			</PartWrap>
+			<SubPartWrap>
 				{category.subCategories.map((el, idx) => (
-					<SubCategoryList
+					<SubPartList
 						key={idx}
-						active={props.subCategory === el}
-						onClick={subCategoryController}>
+						active={props.subPart === el}
+						onClick={onChangeSubPart}>
 						{el}
-					</SubCategoryList>
+					</SubPartList>
 				))}
-			</SubCategoryWrap>
+			</SubPartWrap>
 		</ProductCategoryWrap>
 	);
 };
@@ -48,7 +48,7 @@ const ProductCategoryWrap = styled.div`
 	top: 50.5rem;
 	z-index: 3;
 `;
-const MainCategoryWrap = styled.ul`
+const PartWrap = styled.ul`
 	width: 100%;
 	height: 7rem;
 	display: flex;
@@ -56,8 +56,9 @@ const MainCategoryWrap = styled.ul`
 	background: #ffffff 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 18px #00000029;
 	border-radius: 4px;
+	cursor: pointer;
 `;
-const MainCategoryList = styled.li`
+const PartList = styled.li`
 	width: 12rem;
 	height: 7rem;
 	line-height: 7rem;
@@ -70,19 +71,20 @@ const MainCategoryList = styled.li`
 		props.active &&
 		`font-family:'kr-b'; border:3px solid #E50011; border-radius:4px;`}
 `;
-const SubCategoryWrap = styled.ul`
+const SubPartWrap = styled.ul`
 	height: 2.6rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 `;
-const SubCategoryList = styled.li`
+const SubPartList = styled.li`
 	height: 2.6rem;
 	font-size: 1.8rem;
 	font-family: 'kr-r';
 	color: #000000;
 	padding: 0 0.5rem;
 	border-right: 1px solid #000;
+	cursor: pointer;
 	&:nth-last-child(1) {
 		border: none;
 	}

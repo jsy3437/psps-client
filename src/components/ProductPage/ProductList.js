@@ -115,6 +115,7 @@ const Product = styled.li`
 const ProductImg = styled.img`
 	width: 38rem;
 	height: 35rem;
+	cursor: pointer;
 `;
 const ProductTitle = styled.h3`
 	margin-top: 0.3rem;
@@ -123,6 +124,7 @@ const ProductTitle = styled.h3`
 	font-size: 1.8rem;
 	font-family: 'kr-b';
 	color: #221814;
+	cursor: pointer;
 	&:hover {
 		text-decoration: underline;
 	}

@@ -6,7 +6,7 @@ const ProductBanner = (props) => {
 	return (
 		<ProductBannerWrap>
 			<ProductBannerImg alt='배너' src={BannerImg} />
-			<ProductBannerTitle>{`품질 좋은 ${props.mainCategory}`}</ProductBannerTitle>
+			<ProductBannerTitle>{`품질 좋은 ${props.part}`}</ProductBannerTitle>
 		</ProductBannerWrap>
 	);
 };
@@ -31,3 +31,4 @@ const ProductBannerTitle = styled.h1`
 	color: #fff;
 	position: absolute;
 `;
+  

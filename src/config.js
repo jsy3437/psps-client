@@ -1,5 +1,4 @@
 export const ADDRESS = process.env.REACT_APP_ADDRESS;
-export const PORT = process.env.REACT_APP_PORT;
 export const COMPANY_NAME = process.env.REACT_APP_COMPANY_NAME;
 export const COMPANY_OWNER = process.env.REACT_APP_COMPANY_OWNER;
 export const COMPANY_PLACE = process.env.REACT_APP_COMPANY_PLACE;

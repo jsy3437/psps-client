@@ -62,7 +62,10 @@ const Navbar = () => {
 							onClick={!user.login ? goRegister : goMyPage}>
 							{!user.login ? '회원가입' : '마이페이지'}
 						</RightSecondList>
-						<RightSecondList onClick={goCart}>장바구니</RightSecondList>
+						<RightSecondList onClick={goCart}>
+							장바구니
+							<CartCount>3</CartCount>
+						</RightSecondList>
 					</RightSecond>
 				</NavbarRight>
 			</NavbarInside>
@@ -74,13 +77,11 @@ export default withRouter(Navbar);
 
 const NavbarWrap = styled.div`
 	width: 100%;
-	height: 80px;
+	height: 8rem;
 	display: flex;
 	justify-content: center;
-	background: var(--unnamed-color-221814) 0% 0% no-repeat padding-box;
-	background: #221814 0% 0% no-repeat padding-box;
-	box-shadow: 0px 3px 30px #00000066;
-	opacity: 1;
+	background-color: #fff;
+	border-bottom: 1px solid #a0a0a0;
 `;
 const NavbarInside = styled.div`
 	width: 120rem;
@@ -88,7 +89,7 @@ const NavbarInside = styled.div`
 	justify-content: space-between;
 `;
 const NavbarLeft = styled.div`
-	height: 80px;
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -96,34 +97,46 @@ const NavbarLeft = styled.div`
 const NavbarLogo = styled.img`
 	width: 5.8rem;
 	height: 5.8rem;
+	cursor: pointer;
 `;
 const NavbarRight = styled.div`
-	height: 80px;
+	height: 100%;
 	display: flex;
 	align-items: center;
 `;
 const RightFirst = styled.ul`
 	display: flex;
-	border-right: 2px solid #fff;
+	border-right: 3px solid #000;
+	padding-right: 1rem;
 `;
 const RightFirstList = styled.li`
 	height: 1.9rem;
 	line-height: 1.9rem;
 	font-size: 1.6rem;
 	font-family: 'kr-b';
-	color: #fff;
+	color: #000000;
 	letter-spacing: -0.64px;
-	margin-right: 2rem;
+	padding: 0 0.8rem;
+	cursor: pointer;
 `;
 const RightSecond = styled.ul`
 	display: flex;
+	padding-left: 1rem;
 `;
-const RightSecondList = styled.li`
-	height: 1.9rem;
-	line-height: 1.9rem;
-	font-size: 1.6rem;
+const RightSecondList = styled(RightFirstList)`
+	display: flex;
+	align-items: center;
+`;
+const CartCount = styled.p`
+	padding: 0 0.5rem;
+	/* width: 1.8rem; */
+	height: 1.8rem;
+	line-height: 1.8rem;
+	font-size: 1.2rem;
 	font-family: 'kr-b';
 	color: #fff;
-	letter-spacing: -0.64px;
-	margin-left: 2rem;
+	text-align: center;
+	margin-left: 0.5rem;
+	background-color: #e50011;
+	border-radius: 4px;
 `;

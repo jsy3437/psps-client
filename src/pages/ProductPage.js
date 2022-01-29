@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import * as _product from '../controller/product';
 import ProductBanner from '../components/ProductPage/ProductBanner';
 import ProductCategory from '../components/ProductPage/ProductCategory';
 import ProductList from '../components/ProductPage/ProductList';
@@ -7,31 +8,42 @@ import Induce from '../components/Induce';
 import Footer from '../components/Footer';
 
 const ProductPage = () => {
-	const [mainCategory, setMainCategory] = useState('농산');
-	const [subCategory, setSubCategory] = useState('전체보기');
+	const [part, setPart] = useState('농산');
+	const [subPart, setSubPart] = useState('전체보기');
 	const [page, setPage] = useState(1);
 	const [total, setTotal] = useState(37);
+
+	useEffect(() => {
+		_product.get_list(part, subPart).then((res) => {
+			console.log(res.data);
+		});
+	}, [part, subPart]);
 
 	const onClickPage = (e) => {
 		setPage(e);
 	};
-	const getMainCategory = (mainCategory) => {
-		setMainCategory(mainCategory);
+	const getPart = (part) => {
+		setPart(part);
 	};
-	const getSubCategory = (subCategory) => {
-		setSubCategory(subCategory);
+	const getSubPart = (subPart) => {
+		setSubPart(subPart);
 	};
 
 	return (
 		<div id='container'>
-			<ProductBanner mainCategory={mainCategory} />
+			<ProductBanner part={part} />
 			<ProductCategory
-				getMainCategory={getMainCategory}
-				getSubCategory={getSubCategory}
-				mainCategory={mainCategory}
-				subCategory={subCategory}
+				part={part}
+				subPart={subPart}
+				getPart={getPart}
+				getSubPart={getSubPart}
 			/>
-			<ProductList />
+			<ProductList
+				part={part}
+				subPart={subPart}
+				getPart={getPart}
+				getSubPart={getSubPart}
+			/>
 			<PageSelector
 				style={{ marginBottom: '6rem' }}
 				page={page}
