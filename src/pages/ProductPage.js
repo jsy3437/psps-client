@@ -14,10 +14,13 @@ const ProductPage = () => {
 	const [total, setTotal] = useState(37);
 
 	useEffect(() => {
-		_product.get_list(part, subPart).then((res) => {
+		console.log('part', part);
+		console.log('subPart', subPart);
+		console.log('page', page);
+		_product.get_list(part, subPart, page).then((res) => {
 			console.log(res.data);
 		});
-	}, [part, subPart]);
+	}, [part, subPart, page]);
 
 	const onClickPage = (e) => {
 		setPage(e);

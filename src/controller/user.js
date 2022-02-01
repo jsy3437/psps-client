@@ -3,7 +3,7 @@ import { ADDRESS } from '../config';
 
 const instance = axios.create({
 	proxy: `${ADDRESS}`,
-	baseURL: '/client/user',
+	baseURL: '/user',
 	// baseURL: `${ADDRESS}/user`,
 	withCredentials: true,
 });

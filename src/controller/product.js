@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { ADDRESS } from '../config';
-import { PORT } from '../config';
 
 const instance = axios.create({
 	proxy: `${ADDRESS}`,
-	baseURL: '/client/product',
+	baseURL: '/product',
 	// baseURL: `${ADDRESS}/product`,
 	withCredentials: true,
 });
@@ -14,8 +13,10 @@ const errorMessage = () => {
 	return new Error('Server Error');
 };
 
-export const get_list = async (part, subPart) => {
-	return await instance.get(`/${part}/${subPart}`).catch(errorMessage);
+export const get_list = async (part, subPart, page) => {
+	return await instance
+		.get(`/list/${part}/${subPart}/?page=${page}`)
+		.catch(errorMessage);
 };
 
 export const get_detail = async (product_id) => {
