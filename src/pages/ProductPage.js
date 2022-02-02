@@ -12,13 +12,16 @@ const ProductPage = () => {
 	const [subPart, setSubPart] = useState('전체보기');
 	const [page, setPage] = useState(1);
 	const [total, setTotal] = useState(37);
+	const [list, setList] = useState();
 
 	useEffect(() => {
-		console.log('part', part);
-		console.log('subPart', subPart);
-		console.log('page', page);
+		let isSubscribed = true;
 		_product.get_list(part, subPart, page).then((res) => {
-			console.log(res.data);
+			// 전체보기 list, total 갯수
+			if (isSubscribed && res.data.success) {
+				setList(res.data.product_list);
+				// setTotal()
+			}
 		});
 	}, [part, subPart, page]);
 
