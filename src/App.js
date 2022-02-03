@@ -60,7 +60,7 @@ const App = () => {
 					/>
 					<Route
 						exact
-						path='/detail/:productId'
+						path='/detail/:product_id'
 						component={Auth(ProductDetailPage, null)}
 					/>
 					<Route exact path='/intro' component={Auth(IntroPage, null)} />

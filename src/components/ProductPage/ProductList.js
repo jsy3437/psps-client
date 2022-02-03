@@ -6,8 +6,8 @@ import styled from 'styled-components';
 const ProductList = (props) => {
 	const history = useHistory();
 
-	const goDetail = () => {
-		history.push('/detail/1');
+	const goDetail = (product_id) => {
+		history.push(`/detail/${product_id}`);
 	};
 
 	return (
@@ -15,8 +15,19 @@ const ProductList = (props) => {
 			<ProductWrap>
 				{props.list.map((el, idx) => (
 					<Product key={idx}>
-						<ProductImg alt='' src={`${IMG_ADDRESS}/${el.image}`} />
-						<ProductTitle onClick={goDetail}>{el.title}</ProductTitle>
+						<ProductImg
+							alt='product img'
+							src={`${IMG_ADDRESS}/${el.image}`}
+							onClick={() => {
+								goDetail(el.product_id);
+							}}
+						/>
+						<ProductTitle
+							onClick={() => {
+								goDetail(el.product_id);
+							}}>
+							{el.title}
+						</ProductTitle>
 						<ProductDesc>{el.desc}</ProductDesc>
 					</Product>
 				))}

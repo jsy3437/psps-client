@@ -1,62 +1,63 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
-import Ex1 from '../../images/ex1.png';
-import AngleDown from '../../images/angle-down.svg';
-import Plus from '../../images/count-plus.svg';
-import Minus from '../../images/count-minus.svg';
+import angle_down from '../../images/angle-down.svg';
+import increase from '../../images/count-plus.svg';
+import decrease from '../../images/count-minus.svg';
 
-const OrderBox = () => {
-	const [option, setOption] = useState('옵션선택');
+const OrderBox = (props) => {
 	const [openOption, setOpenOption] = useState(false);
-	const optionController = (e) => {
-		setOption(e.target.innerText);
+	const [option, setOption] = useState(props.optionList[0]);
+	const [count, setCount] = useState(1);
+
+	const onChangeOption = (option) => {
+		setOption(option);
 		setOpenOption(false);
 	};
-	const openOptionController = () => {
-		setOpenOption(!openOption);
+	const decreaseCount = () => {
+		count !== 1 && setCount(count - 1);
 	};
-	const optionArr = ['2봉지', '3봉지', '4봉지', '5봉지'];
-
-	const [count, setCount] = useState(1);
 	const increaseCount = () => {
 		// 재고량과 비교
 		setCount(count + 1);
 	};
-	const decreaseCount = () => {
-		if (count !== 1) {
-			setCount(count - 1);
-		}
-	};
-
-	const [price, setPrice] = useState(3000);
 
 	return (
 		<BoxContainer>
 			<Box>
 				<BoxLeft>
-					<BoxLeftImg alt='상품이미지' src={Ex1} />
+					<BoxLeftImg
+						alt='product img'
+						src={`${IMG_ADDRESS}/${props.detail.temp_image}`}
+					/>
 				</BoxLeft>
 				<BoxRight>
 					<RightInside>
-						<RightTitle>
-							맛있고 품질 좋은 양배추같이 생긴 풀이파리 풀이파리 풀이파리
-						</RightTitle>
-						<RightPrice>{`${price * count}원`}</RightPrice>
+						<RightTitle>{props.detail && props.detail.title}</RightTitle>
+						<RightPrice>
+							{option && `${(option.price - option.discount) * count}원`}
+						</RightPrice>
 						{!openOption ? (
 							<RightOptionBox option>
-								{option}
+								{option && option.title}
 								<RightOptionTitle>옵션</RightOptionTitle>
-								<RightButton option onClick={openOptionController}>
-									<RightButtonImg src={AngleDown} />
+								<RightButton
+									option
+									onClick={() => {
+										setOpenOption(!openOption);
+									}}>
+									<RightButtonImg src={angle_down} />
 								</RightButton>
 							</RightOptionBox>
 						) : (
 							<RightOptionListBox>
-								{optionArr.map((el, idx) => (
+								{props.optionList.map((el, idx) => (
 									<RightOptionList
 										key={idx}
-										onClick={optionController}>
-										{el}
+										onClick={() => {
+											onChangeOption(el);
+										}}>
+										{el.title}
 									</RightOptionList>
 								))}
 							</RightOptionListBox>
@@ -64,16 +65,19 @@ const OrderBox = () => {
 
 						<RightOptionBox count>
 							<RightButton minus onClick={decreaseCount}>
-								<RightButtonImg src={Minus} />
+								<RightButtonImg alt='button' src={decrease} />
 							</RightButton>
 							{count}
 							<RightOptionTitle>수량</RightOptionTitle>
 							<RightButton plus onClick={increaseCount}>
-								<RightButtonImg src={Plus} />
+								<RightButtonImg alt='button' src={increase} />
 							</RightButton>
 						</RightOptionBox>
 						<UnitPriceBox>
-							<UnitPriceLeft>{`기준가 ${price}원 (수량)`}</UnitPriceLeft>
+							<UnitPriceLeft>
+								{option &&
+									`기준가 ${option.price - option.discount}원 (수량)`}
+							</UnitPriceLeft>
 							<UnitPriceRight>수량 당 단가</UnitPriceRight>
 						</UnitPriceBox>
 						<OrderButton>주문하기</OrderButton>
