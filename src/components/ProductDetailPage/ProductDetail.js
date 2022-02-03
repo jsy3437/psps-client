@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Guide from '../../images/detail_guide.png';
+import guide from '../../images/detail_guide.png';
 
 const ProductDetail = () => {
 	const arr = ['상품선택', '상세설명', '상품정보'];
@@ -18,7 +18,7 @@ const ProductDetail = () => {
 				</Controller>
 			</ProductDetailHead>
 			<ProductDetailBody>
-				<DetailImg src={Guide} />
+				<DetailImg src={guide} alt='' />
 				<GrayBackground />
 			</ProductDetailBody>
 		</ProductDetailWrap>

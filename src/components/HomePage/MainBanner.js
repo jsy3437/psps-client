@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Background1 from '../../images/main-banner1.png';
 
 const MainBanner = () => {
 	const Backgrounds = [Background1];
+	const [bannerList, setBannerList] = useState([]);
+
+	useEffect(() => {}, []);
 
 	return (
 		<MainBannerWrap>
 			{Backgrounds.map((el, idx) => (
 				<MainBannerList key={idx}>
-					<MainBannerImg src={el} />
+					<MainBannerImg alt='banner img' src={el} />
 				</MainBannerList>
 			))}
 		</MainBannerWrap>

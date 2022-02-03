@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import Logo from '../../images/red-logo.svg';
+import logo from '../../images/red-logo.svg';
 import { termsArr } from '../../data/terms';
 
 const SecondStep = (props) => {
@@ -22,13 +22,13 @@ const SecondStep = (props) => {
 	}, []);
 
 	const goNext = () => {
-		props.getStep(1);
+		props.setStep(1);
 		history.push({
 			state: { agree: true, email, password, passwordConfirm },
 		});
 	};
 	const goBack = () => {
-		props.getStep(1);
+		props.setStep(1);
 		history.push({
 			state: { agree: false, email, password, passwordConfirm },
 		});
@@ -37,7 +37,7 @@ const SecondStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='logo' src={Logo} />
+				<LogoImg alt='logo' src={logo} />
 				<Title>품생품사 가입약관</Title>
 				{arr.map((el, idx) => (
 					<Items key={idx}>

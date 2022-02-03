@@ -19,10 +19,6 @@ const OrderHistory = () => {
 	const [viewDetail, setViewDetail] = useState(true);
 	const [detail, setDetail] = useState({});
 
-	const onClickPage = (e) => {
-		setPage(e);
-	};
-
 	return (
 		<MyPageInside>
 			{list.length === 0 && (
@@ -55,9 +51,9 @@ const OrderHistory = () => {
 					))}
 					<PageSelector
 						style={{ margin: '5.2rem 0 5.5rem 0' }}
-						page={page}
 						total={total}
-						onClickPage={onClickPage}
+						page={page}
+						setPage={setPage}
 					/>
 					<GrayBackground />
 				</OrderHistoryWrap>

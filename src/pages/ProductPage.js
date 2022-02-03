@@ -1,61 +1,78 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import * as _product from '../controller/product';
+import * as _category from '../data/category';
 import ProductBanner from '../components/ProductPage/ProductBanner';
 import ProductCategory from '../components/ProductPage/ProductCategory';
 import ProductList from '../components/ProductPage/ProductList';
 import PageSelector from '../components/PageSelector';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
+import Spinner from '../components/Spinner';
 
 const ProductPage = () => {
 	const [part, setPart] = useState('농산');
-	const [subPart, setSubPart] = useState('전체보기');
+	const [subPart, setSubPart] = useState(null);
 	const [page, setPage] = useState(1);
-	const [total, setTotal] = useState(37);
-	const [list, setList] = useState();
+	const [total, setTotal] = useState(0);
+	const [list, setList] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
+		setIsLoading(true);
 		let isSubscribed = true;
 		_product.get_list(part, subPart, page).then((res) => {
-			// 전체보기 list, total 갯수
 			if (isSubscribed && res.data.success) {
+				console.log('acacac', res.data);
 				setList(res.data.product_list);
-				// setTotal()
+				setTotal(res.data.total);
 			}
 		});
+		setIsLoading(false);
+		return () => {
+			isSubscribed = false;
+		};
 	}, [part, subPart, page]);
 
-	const onClickPage = (e) => {
-		setPage(e);
-	};
-	const getPart = (part) => {
-		setPart(part);
-	};
-	const getSubPart = (subPart) => {
-		setSubPart(subPart);
-	};
+	const subPartArr = useMemo(() => {
+		const _part = _category.part;
+		for (let i = 0; i < _part.length; i++) {
+			if (_part[i].title === part) {
+				setSubPart(null);
+				return _part[i].arr;
+			}
+		}
+	}, [part]);
 
-	return (
+	return isLoading ? (
+		<Spinner />
+	) : (
 		<div id='container'>
 			<ProductBanner part={part} />
 			<ProductCategory
 				part={part}
 				subPart={subPart}
-				getPart={getPart}
-				getSubPart={getSubPart}
+				setPart={setPart}
+				setSubPart={setSubPart}
+				subPartArr={subPartArr}
 			/>
 			<ProductList
 				part={part}
 				subPart={subPart}
-				getPart={getPart}
-				getSubPart={getSubPart}
+				setPart={setPart}
+				setSubPart={setSubPart}
+				list={list}
 			/>
-			<PageSelector
-				style={{ marginBottom: '6rem' }}
-				page={page}
-				total={total}
-				onClickPage={onClickPage}
-			/>
+			{list.length > 0 ? (
+				<PageSelector
+					style={{ marginBottom: '6rem' }}
+					total={total}
+					page={page}
+					setPage={setPage}
+				/>
+			) : (
+				<p>상품이 없습니다.</p>
+			)}
+
 			<Induce />
 			<Footer />
 		</div>

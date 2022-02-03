@@ -10,7 +10,7 @@ const SubBanner = () => {
 			<SubBannerWrap>
 				{Images.map((el, idx) => (
 					<SubBannerList key={idx}>
-						<SubBannerImg src={el} />
+						<SubBannerImg alt='sub_banner img' src={el} />
 					</SubBannerList>
 				))}
 			</SubBannerWrap>

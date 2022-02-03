@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Left from '../images/page_left.svg';
-import Right from '../images/page_right.svg';
+import left from '../images/page_left.svg';
+import right from '../images/page_right.svg';
 
-const PageSelector = ({ page, total, onClickPage, style }) => {
+const PageSelector = ({ style, total, page, setPage }) => {
 	const [pages, setPages] = useState([]);
 	const totalPage = Math.ceil(total / 12);
+
 	useEffect(() => {
 		const update = [];
 		for (let i = 1; i <= totalPage; i++) {
@@ -24,24 +25,30 @@ const PageSelector = ({ page, total, onClickPage, style }) => {
 			}
 		}
 		setPages(update);
-	}, [total, page]);
+	}, [page, total]);
+
+	const prevPage = () => {
+		page !== 1 && setPage(page - 1);
+	};
+	const nextPage = () => {
+		page !== totalPage && setPage(page + 1);
+	};
 
 	return (
 		<PageList style={style}>
-			<PageItem onClick={page === 1 ? null : () => onClickPage(page - 1)}>
-				<MoveButton alt='prev button' src={Left} />
+			<PageItem onClick={prevPage}>
+				<MoveButton alt='prev button' src={left} />
 			</PageItem>
 			{pages.map((el, idx) => (
 				<PageItem
 					key={idx}
 					selected={el === page}
-					onClick={() => onClickPage(el)}>
+					onClick={() => setPage(el)}>
 					{el}
 				</PageItem>
 			))}
-			<PageItem
-				onClick={page === totalPage ? null : () => onClickPage(page + 1)}>
-				<MoveButton alt='next button' src={Right} />
+			<PageItem onClick={nextPage}>
+				<MoveButton alt='next button' src={right} />
 			</PageItem>
 		</PageList>
 	);

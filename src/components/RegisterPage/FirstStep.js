@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { regexp } from '../../data/regexp';
 import styled from 'styled-components';
-import Logo from '../../images/red-logo.svg';
-import Check from '../../images/check-box.svg';
-import UnCheck from '../../images/uncheck-box.svg';
+import logo from '../../images/red-logo.svg';
+import check_box from '../../images/check-box.svg';
+import uncheck_box from '../../images/uncheck-box.svg';
 import NLogo from '../../images/n-logo.svg';
 import KLogo from '../../images/k-logo.svg';
 
@@ -30,11 +30,7 @@ const FirstStep = (props) => {
 			setEmail(state.email);
 			setPassword(state.password);
 			setPasswordConfirm(state.passwordConfirm);
-			if (state.agree) {
-				setAgreeCheck(true);
-			} else {
-				setAgreeCheck(false);
-			}
+			state.agree ? setAgreeCheck(true) : setAgreeCheck(false);
 		}
 		// eslint-disable-next-line
 	}, []);
@@ -46,7 +42,7 @@ const FirstStep = (props) => {
 		history.push('/login');
 	};
 	const goAgree = () => {
-		props.getStep(2);
+		props.setStep(2);
 		history.push({ state: { email, password, passwordConfirm } });
 	};
 
@@ -70,6 +66,9 @@ const FirstStep = (props) => {
 	};
 
 	const goNext = () => {
+		//
+		// 다음으로 누를 때 이메일 중복확인 하고 넘어가기 !!!
+		//
 		setIsSubmit(true);
 		if (!regexp.email.test(email)) {
 			alert('이메일을 확인해주세요');
@@ -83,10 +82,15 @@ const FirstStep = (props) => {
 			alert('비밀번호가 일치하지 않습니다');
 			passwordConfirmInput.current.focus();
 			return setCheck({ ...check, passwordConfirm: false });
-		} else if (!agreeCheck) {
+		}
+		// else if (
+		// 	이메일 중복확인 처리
+		// ) {
+		// }
+		else if (!agreeCheck) {
 			return alert('이용 약관에 동의해주세요.');
 		} else {
-			props.getStep(3);
+			props.setStep(3);
 			history.push({ state: { email, password, passwordConfirm } });
 		}
 	};
@@ -94,13 +98,13 @@ const FirstStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='logo' src={Logo} />
+				<LogoImg alt='logo' src={logo} />
 				<Title>품생품사 회원가입</Title>
 				<Items>
 					<ItemTitle>이메일</ItemTitle>
 					<ItemInput
-						value={email}
 						ref={emailInput}
+						value={email ? email : ''}
 						onChange={emailController}
 						placeholder={'이메일 주소를 입력해주세요'}
 					/>
@@ -111,9 +115,9 @@ const FirstStep = (props) => {
 				<Items>
 					<ItemTitle>비밀번호</ItemTitle>
 					<ItemInput
-						type='password'
-						value={password}
 						ref={passwordInput}
+						type='password'
+						value={password ? password : ''}
 						onChange={passwordController}
 						placeholder={'비밀번호를 입력해주세요'}
 					/>
@@ -124,9 +128,9 @@ const FirstStep = (props) => {
 				<Items>
 					<ItemTitle>비밀번호 확인</ItemTitle>
 					<ItemInput
-						type='password'
-						value={passwordConfirm}
 						ref={passwordConfirmInput}
+						type='password'
+						value={passwordConfirm ? passwordConfirm : ''}
 						onChange={passwordConfirmController}
 						placeholder={'비밀번호를 확인해주세요'}
 					/>
@@ -139,7 +143,7 @@ const FirstStep = (props) => {
 					<AgreeLeft>
 						<AgreeCheck
 							alt=''
-							src={agreeCheck ? Check : UnCheck}
+							src={agreeCheck ? check_box : uncheck_box}
 							onClick={agreeCheckController}
 						/>
 						<AgreeAllText onClick={agreeCheckController}>
@@ -162,10 +166,10 @@ const FirstStep = (props) => {
 					</EasyLeft>
 					<EasyRight>
 						<SocialLogoBox NLogo>
-							<SocialLogo alt='아이콘' src={NLogo} />
+							<SocialLogo alt='icon' src={NLogo} />
 						</SocialLogoBox>
 						<SocialLogoBox KLogo>
-							<SocialLogo alt='아이콘' src={KLogo} />
+							<SocialLogo alt='icon' src={KLogo} />
 						</SocialLogoBox>
 					</EasyRight>
 				</EasyBox>

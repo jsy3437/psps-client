@@ -2,14 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MenuSelect = (props) => {
-	const menus = ['주문내역', '개인정보관리'];
 	const menuController = (e) => {
-		props.getMenu(e.target.innerText);
+		props.setMenu(e.target.innerText);
 	};
 
 	return (
 		<MenuWrap>
-			{menus.map((el, idx) => (
+			{['주문내역', '개인정보관리'].map((el, idx) => (
 				<MenuList
 					key={idx}
 					active={props.menu === el}

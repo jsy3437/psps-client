@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Img from '../images/induce.png';
+import img from '../images/induce.png';
 
 const Induce = () => {
 	return (
 		<InduceContainer>
-			<InduceImg src={Img} />
+			<InduceImg alt='' src={img} />
 		</InduceContainer>
 	);
 };

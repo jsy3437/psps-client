@@ -3,8 +3,9 @@ import styled from 'styled-components';
 
 const FindItemSelect = (props) => {
 	const items = ['아이디', '비밀번호'];
-	const itemController = (e) => {
-		props.getItem(e.target.innerText);
+
+	const onChangeItem = (e) => {
+		props.setItem(e.target.innerText);
 	};
 
 	return (
@@ -13,7 +14,7 @@ const FindItemSelect = (props) => {
 				<MainCategoryList
 					key={idx}
 					active={props.item === el}
-					onClick={itemController}>
+					onClick={onChangeItem}>
 					{el}
 				</MainCategoryList>
 			))}

@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { regexp } from '../../data/regexp';
-import * as request from '../../controller/user';
+import * as _user from '../../controller/user';
 import styled from 'styled-components';
-import Logo from '../../images/red-logo.svg';
-import axios from 'axios';
-import { ADDRESS } from '../../config';
-import { PORT } from '../../config';
+import logo from '../../images/red-logo.svg';
+// import axios from 'axios';
 
 const ThirdStep = (props) => {
 	const history = useHistory();
@@ -28,14 +26,15 @@ const ThirdStep = (props) => {
 
 	useEffect(() => {
 		if (history.location.state) {
-			setEmail(history.location.state.email);
-			setPassword(history.location.state.password);
+			const input = history.location.state;
+			setEmail(input.email);
+			setPassword(input.password);
 		}
 		// eslint-disable-next-line
 	}, []);
 
 	const goBack = () => {
-		props.getStep(1);
+		props.setStep(1);
 	};
 	const nameController = (e) => {
 		regexp.name.test(e.target.value)
@@ -87,13 +86,14 @@ const ThirdStep = (props) => {
 		} else if (!confirmSend) {
 			alert('휴대전화 인증을 해주세요');
 		}
-		// if(인증번호가 안맞으면){}
+		// else if(인증번호가 안맞으면){
+		// }
 		else {
-			const Data = { email, password, name, phone_number };
-			request.register(Data).then((res) => {
+			const data = { email, password, name, phone_number };
+			_user.register(data).then((res) => {
 				console.log(res.data);
 				if (res.data.success) {
-					props.getStep(4);
+					props.setStep(4);
 					history.push({ state: name });
 				}
 			});
@@ -103,7 +103,7 @@ const ThirdStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='logo' src={Logo} />
+				<LogoImg alt='logo' src={logo} />
 				<Title>품생품사 회원가입-정보입력</Title>
 				<Items>
 					<ItemTitle>이름</ItemTitle>
@@ -122,7 +122,7 @@ const ThirdStep = (props) => {
 						type='number'
 						ref={phoneNumberInput}
 						onChange={phoneNumberController}
-						placeholder='휴대폰번호를 입력해주세요'
+						placeholder="'-'을 제외한 휴대폰 번호를 입력해주세요."
 					/>
 					{isSubmit && !check.phone_number && (
 						<InputError>{'휴대폰번호를 확인해주세요'}</InputError>

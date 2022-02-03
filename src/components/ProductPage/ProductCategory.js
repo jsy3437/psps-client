@@ -4,11 +4,15 @@ import * as category from '../../data/category';
 
 const ProductCategory = (props) => {
 	const onChangePart = (e) => {
-		props.getPart(e.target.innerText);
+		props.setPart(e.target.innerText);
 	};
 	const onChangeSubPart = (e) => {
-		props.getSubPart(e.target.innerText);
+		const innerText = e.target.innerText;
+		innerText === '전체보기'
+			? props.setSubPart(null)
+			: props.setSubPart(innerText);
 	};
+
 	return (
 		<ProductCategoryWrap>
 			<PartWrap>
@@ -22,10 +26,13 @@ const ProductCategory = (props) => {
 				))}
 			</PartWrap>
 			<SubPartWrap>
-				{category.subCategories.map((el, idx) => (
+				{props.subPartArr.map((el, idx) => (
 					<SubPartList
 						key={idx}
-						active={props.subPart === el}
+						active={
+							(idx === 0 && props.subPart === null) ||
+							(idx > 0 && props.subPart === el)
+						}
 						onClick={onChangeSubPart}>
 						{el}
 					</SubPartList>

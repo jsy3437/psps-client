@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../images/red-logo.svg';
-import * as Info from '../config';
+import logo from '../images/red-logo.svg';
+import * as info from '../config';
 
 const Footer = () => {
 	const headLeft = ['이용약관', '개인정보처리방침'];
 	const headRight = ['자주묻는질문', '문의하기'];
 	const bodyRight = [
-		['T', Info.COMPANY_CONTACT],
-		['M', Info.OWNER_CONTACT],
+		['T', info.COMPANY_CONTACT],
+		['M', info.OWNER_CONTACT],
 	];
+	const infoLeft = `${info.COMPANY_NAME} 대표이사 : ${info.COMPANY_OWNER} | 주소 : ${info.COMPANY_PLACE}\n사업자등록번호 : ${info.BUSINESS_NUMBER} | 통신판매신고번호 : ${info.REPORT_NUMBER}\n개인정보관리책임자 : ${info.PRIVACY_PERSON} (${info.PRIVACY_EMAIL})\n\n©2021 CetusStudio Inc.All rights reserved.`;
+	const infoRight = `평일:08:30~17:30\n점심:12:00~13:30\n(토,일 및 공휴일 휴일)`;
 
 	return (
 		<FooterWrap>
@@ -34,8 +36,8 @@ const Footer = () => {
 			<FooterBody>
 				<FooterBodyInside>
 					<FooterBodyLeft>
-						<BodyLeftImg alt='logo' src={Logo} />
-						<BodyLeftText>{`${Info.COMPANY_NAME} 대표이사 : ${Info.COMPANY_OWNER} | 주소 : ${Info.COMPANY_PLACE}\n사업자등록번호 : ${Info.BUSINESS_NUMBER} | 통신판매신고번호 : ${Info.REPORT_NUMBER}\n개인정보관리책임자 : ${Info.PRIVACY_PERSON} (${Info.PRIVACY_EMAIL})\n\n©2021 CetusStudio Inc.All rights reserved.`}</BodyLeftText>
+						<BodyLeftImg alt='logo' src={logo} />
+						<BodyLeftText>{infoLeft}</BodyLeftText>
 					</FooterBodyLeft>
 					<FooterBodyRight>
 						<BodyRightTitle>고객센터</BodyRightTitle>
@@ -45,7 +47,7 @@ const Footer = () => {
 								<RightContactText>{el[1]}</RightContactText>
 							</BodyRightContact>
 						))}
-						<BodyRightText>{`평일:08:30~17:30\n점심:12:00~13:30\n(토,일 및 공휴일 휴일)`}</BodyRightText>
+						<BodyRightText>{infoRight}</BodyRightText>
 					</FooterBodyRight>
 				</FooterBodyInside>
 			</FooterBody>

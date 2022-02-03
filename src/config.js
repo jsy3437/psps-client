@@ -1,4 +1,5 @@
 export const ADDRESS = process.env.REACT_APP_ADDRESS;
+export const IMG_ADDRESS = process.env.REACT_APP_IMG_ADDRESS;
 export const COMPANY_NAME = process.env.REACT_APP_COMPANY_NAME;
 export const COMPANY_OWNER = process.env.REACT_APP_COMPANY_OWNER;
 export const COMPANY_PLACE = process.env.REACT_APP_COMPANY_PLACE;

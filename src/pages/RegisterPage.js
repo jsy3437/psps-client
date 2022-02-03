@@ -7,16 +7,13 @@ import Footer from '../components/Footer';
 
 const RegisterPage = () => {
 	const [step, setStep] = useState(1);
-	const getStep = (step) => {
-		setStep(step);
-	};
 
 	return (
 		<div id='container'>
-			{step === 1 && <FirstStep getStep={getStep} />}
-			{step === 2 && <SecondStep getStep={getStep} />}
-			{step === 3 && <ThirdStep getStep={getStep} />}
-			{step === 4 && <LastStep getStep={getStep} />}
+			{step === 1 && <FirstStep setStep={setStep} />}
+			{step === 2 && <SecondStep setStep={setStep} />}
+			{step === 3 && <ThirdStep setStep={setStep} />}
+			{step === 4 && <LastStep setStep={setStep} />}
 			<Footer />
 		</div>
 	);

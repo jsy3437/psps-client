@@ -5,10 +5,10 @@ const FindIdInput = () => {
 	const [name, setName] = useState('');
 	const [phone_number, setPhone_number] = useState('');
 
-	const nameController = (e) => {
+	const onChangeName = (e) => {
 		setName(e.target.value);
 	};
-	const phoneNumberController = (e) => {
+	const onChangePhoneNumber = (e) => {
 		setPhone_number(e.target.value);
 	};
 
@@ -17,18 +17,18 @@ const FindIdInput = () => {
 			<Items>
 				<ItemTitle>이름</ItemTitle>
 				<ItemInput
-					value={name}
+					value={name ? name : ''}
 					placeholder={'이름을 입력해주세요.'}
-					onChange={nameController}
+					onChange={onChangeName}
 				/>
 			</Items>
 			<Items>
 				<ItemTitle>휴대폰번호</ItemTitle>
 				<ItemInput
 					type='number'
-					value={phone_number}
+					value={phone_number ? phone_number : ''}
 					placeholder={`'-'을 제외한 휴대폰 번호를 입력해주세요.`}
-					onChange={phoneNumberController}
+					onChange={onChangePhoneNumber}
 				/>
 			</Items>
 		</ItemsWrap>

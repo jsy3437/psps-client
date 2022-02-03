@@ -1,7 +1,7 @@
 import React from 'react';
 import MainBanner from '../components/HomePage/MainBanner';
 import SubBanner from '../components/HomePage/SubBanner';
-import MainGoods from '../components/HomePage/MainGoods';
+import RecommendList from '../components/HomePage/RecommendList';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
 
@@ -10,7 +10,7 @@ const HomePage = () => {
 		<div id='container'>
 			<MainBanner />
 			<SubBanner />
-			<MainGoods />
+			<RecommendList />
 			<Induce />
 			<Footer />
 		</div>

@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
-import Logo from '../images/red-logo.svg';
-import Ex1 from '../images/ex1.png';
+import logo from '../images/red-logo.svg';
+import ex1 from '../images/ex1.png';
 
 const IntroPage = () => {
 	return (
 		<div id='container'>
 			<WhiteBackground style={{ height: '62.4rem' }} />
 			<ShadowUpBackground>
-				<TopImg alt='' src={Ex1} />
+				<TopImg alt='' src={ex1} />
 			</ShadowUpBackground>
 			<BlackBackground />
 			<ShadowDownBackground />
@@ -18,7 +18,7 @@ const IntroPage = () => {
 				<BottomText first>이를 위한 해결책이 되겠습니다.</BottomText>
 				<BottomText second>저희는 품질에 살고, 품질에 죽는</BottomText>
 				<BottomBox>
-					<BottomLogo src={Logo} />
+					<BottomLogo alt='logo' src={logo} />
 					<BottomBigText>입니다</BottomBigText>
 				</BottomBox>
 			</WhiteBackground>

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { user_login } from '../modules/user';
-import * as request from '../controller/user';
+import * as _user from '../controller/user';
 import styled from 'styled-components';
-import Logo from '../images/red-logo.svg';
+import logo from '../images/red-logo.svg';
 import NLogo from '../images/n-logo.svg';
 import KLogo from '../images/k-logo.svg';
 
@@ -14,10 +14,10 @@ const LoginPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const emailController = (e) => {
+	const onChangeEmail = (e) => {
 		setEmail(e.target.value);
 	};
-	const passwordController = (e) => {
+	const onChangePassword = (e) => {
 		setPassword(e.target.value);
 	};
 	const goFindInfo = () => {
@@ -33,8 +33,8 @@ const LoginPage = () => {
 		} else if (password.length === 0) {
 			return alert('비밀번호를 입력해주세요.');
 		} else {
-			const Data = { email, password };
-			request.login(Data).then((res) => {
+			const data = { email, password };
+			_user.login(data).then((res) => {
 				if (res.data.success) {
 					dispatch(user_login(true));
 					alert('로그인 되었습니다.');
@@ -50,13 +50,13 @@ const LoginPage = () => {
 		<div id='container'>
 			<Container>
 				<RegisterInside>
-					<LogoImg alt='logo' src={Logo} />
+					<LogoImg alt='logo' src={logo} />
 					<Title>품생품사 로그인</Title>
 					<Items>
 						<ItemTitle>이메일</ItemTitle>
 						<ItemInput
-							value={email}
-							onChange={emailController}
+							value={email ? email : ''}
+							onChange={onChangeEmail}
 							placeholder={'이메일 주소를 입력해주세요'}
 						/>
 					</Items>
@@ -64,8 +64,8 @@ const LoginPage = () => {
 						<ItemTitle>비밀번호</ItemTitle>
 						<ItemInput
 							type='password'
-							value={password}
-							onChange={passwordController}
+							value={password ? password : ''}
+							onChange={onChangePassword}
 							placeholder={'비밀번호를 입력해주세요'}
 						/>
 					</Items>
@@ -84,10 +84,10 @@ const LoginPage = () => {
 						</EasyLeft>
 						<EasyRight>
 							<SocialLogoBox NLogo>
-								<SocialLogo alt='아이콘' src={NLogo} />
+								<SocialLogo alt='icon' src={NLogo} />
 							</SocialLogoBox>
 							<SocialLogoBox KLogo>
-								<SocialLogo alt='아이콘' src={KLogo} />
+								<SocialLogo alt='icon' src={KLogo} />
 							</SocialLogoBox>
 						</EasyRight>
 					</EasyBox>
@@ -155,12 +155,6 @@ const ItemInput = styled.input`
 	&:focus {
 		box-shadow: 2px 6px 15px #00000029;
 	}
-`;
-const InputError = styled.p`
-	height: 1.5rem;
-	font-size: 1rem;
-	font-family: 'kr-r';
-	color: #e50011;
 `;
 const AgreeBox = styled.div`
 	width: 34.6rem;

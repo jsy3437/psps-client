@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import Logo from '../images/red-logo.svg';
+import logo from '../images/red-logo.svg';
 import FindItemSelect from '../components/FindInfoPage/FindItemSelect';
 import FindId from '../components/FindInfoPage/FindIdInput';
 import FindPw from '../components/FindInfoPage/FindPwInput';
@@ -10,9 +10,6 @@ import Footer from '../components/Footer';
 const FindInfoPage = () => {
 	const history = useHistory();
 	const [item, setItem] = useState('아이디');
-	const getItem = (item) => {
-		setItem(item);
-	};
 
 	const goFindID = () => {
 		history.push('/find-result');
@@ -25,15 +22,13 @@ const FindInfoPage = () => {
 		<div id='container'>
 			<Container>
 				<FindInfoInside>
-					<LogoImg alt='logo img' src={Logo} />
+					<LogoImg alt='logo' src={logo} />
 					<Title>품생품사 아이디/비밀번호 찾기</Title>
-					<FindItemSelect getItem={getItem} item={item} />
-					{item === '아이디' && <FindId />}
-					{item === '아이디' && (
+					<FindItemSelect item={item} setItem={setItem} />
+					{item === '아이디' ? <FindId /> : <FindPw />}
+					{item === '아이디' ? (
 						<SubmitButton onClick={goFindID}>아이디 찾기</SubmitButton>
-					)}
-					{item === '비밀번호' && <FindPw />}
-					{item === '비밀번호' && (
+					) : (
 						<SubmitButton onClick={goFindPW}>비밀번호 찾기</SubmitButton>
 					)}
 				</FindInfoInside>

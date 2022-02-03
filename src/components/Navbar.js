@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { user_logout } from '../modules/user';
 import { logout } from '../controller/user';
 import styled from 'styled-components';
-import Logo from '../images/red-logo.svg';
+import logo from '../images/red-logo.svg';
 
 const Navbar = () => {
 	const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const Navbar = () => {
 		<NavbarWrap>
 			<NavbarInside>
 				<NavbarLeft>
-					<NavbarLogo onClick={goHome} alt='logo' src={Logo} />
+					<NavbarLogo alt='logo' src={logo} onClick={goHome} />
 				</NavbarLeft>
 				<NavbarRight>
 					<RightFirst>

@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import Logo from '../images/red-logo.svg';
+import logo from '../images/red-logo.svg';
 import MenuSelect from '../components/MyPage/MenuSelect';
 import OrderHistory from '../components/MyPage/OrderHistory';
 import Footer from '../components/Footer';
 
 const MyPagePage = () => {
 	const [menu, setMenu] = useState('주문내역');
-	const getMenu = (menu) => {
-		setMenu(menu);
-	};
 
 	return (
 		<div id='container'>
 			<Container>
 				<MyPageInside>
-					<LogoImg alt='logo' src={Logo} />
-					<Title>{`마이페이지`}</Title>
-					<MenuSelect getMenu={getMenu} menu={menu} />
+					<LogoImg alt='logo' src={logo} />
+					<Title>마이페이지</Title>
+					<MenuSelect menu={menu} setMenu={setMenu} />
 					{menu === '주문내역' && <OrderHistory />}
 				</MyPageInside>
 				<Footer />

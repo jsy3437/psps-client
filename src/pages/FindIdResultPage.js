@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import Logo from '../images/red-logo.svg';
+import logo from '../images/red-logo.svg';
 import Footer from '../components/Footer';
 
 const FindIdResultPage = () => {
 	const history = useHistory();
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
-	const [phone_number, setPhone_number] = useState('');
+	// const [phone_number, setPhone_number] = useState('');
 
 	useEffect(() => {
 		// history state로 요청 보내기
 		// 있을 경우
 		// setName()
 		// setEmail()
-		// 없을 경우
-		// 없다고 띄워주기
+		// 없을 경우 없다고 띄워주기
 	}, []);
 
 	const goLogin = () => {
 		history.push('/login');
 	};
-	const goChangingPassword = () => {
+	const goChangePassword = () => {
 		alert('비밀번호 변경 페이지로 이동');
 	};
 
@@ -30,7 +29,7 @@ const FindIdResultPage = () => {
 		<div id='container'>
 			<Container>
 				<FindIdInside>
-					<LogoImg alt='logo' src={Logo} />
+					<LogoImg alt='logo' src={logo} />
 					<Title>품생품사 아이디 찾기</Title>
 					<FindResult>
 						{name && email
@@ -40,7 +39,7 @@ const FindIdResultPage = () => {
 					<SubmitButton login onClick={goLogin}>
 						로그인
 					</SubmitButton>
-					<SubmitButton password onClick={goChangingPassword}>
+					<SubmitButton password onClick={goChangePassword}>
 						비밀번호 찾기
 					</SubmitButton>
 				</FindIdInside>

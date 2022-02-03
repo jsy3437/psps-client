@@ -22,3 +22,7 @@ export const get_list = async (part, subPart, page) => {
 export const get_detail = async (product_id) => {
 	return await instance.get(`/detail/${product_id}`).catch(errorMessage);
 };
+
+export const get_recommend_list = async () => {
+	return await instance.get(`/recommend`).catch(errorMessage);
+};
