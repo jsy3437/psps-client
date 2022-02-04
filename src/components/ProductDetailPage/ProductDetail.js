@@ -1,24 +1,32 @@
 import React, { useState } from 'react';
+import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
 import guide from '../../images/detail_guide.png';
 
-const ProductDetail = () => {
+const ProductDetail = (props) => {
 	const arr = ['상품선택', '상세설명', '상품정보'];
-	const [currentView, setCurrentView] = useState('상품선택');
+	const [view, setView] = useState('상품선택');
+
+	// const onChangeView = (e) => {};
 
 	return (
 		<ProductDetailWrap>
 			<ProductDetailHead>
 				<Controller>
 					{arr.map((el, idx) => (
-						<Switch key={idx} active={currentView === el}>
+						<Switch key={idx} active={view === el}>
 							{el}
 						</Switch>
 					))}
 				</Controller>
 			</ProductDetailHead>
 			<ProductDetailBody>
-				<DetailImg src={guide} alt='' />
+				<DetailImg
+					alt='detail img'
+					src={
+						props.detail && `${IMG_ADDRESS}/${props.detail.detail_image}`
+					}
+				/>
 				<GrayBackground />
 			</ProductDetailBody>
 		</ProductDetailWrap>

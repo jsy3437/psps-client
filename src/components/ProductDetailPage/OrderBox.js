@@ -46,7 +46,7 @@ const OrderBox = (props) => {
 									onClick={() => {
 										setOpenOption(!openOption);
 									}}>
-									<RightButtonImg src={angle_down} />
+									<RightButtonImg alt='' src={angle_down} />
 								</RightButton>
 							</RightOptionBox>
 						) : (

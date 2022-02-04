@@ -25,6 +25,7 @@ const PageSelector = ({ style, total, page, setPage }) => {
 			}
 		}
 		setPages(update);
+		// eslint-disable-next-line
 	}, [page, total]);
 
 	const prevPage = () => {

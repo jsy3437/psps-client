@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ProductInfoTable = () => {
+	// 항목 수정 필요함. 협의 후 진행하기
 	const productInfoArr = [
 		'품목명',
 		'초신선 돼지 삼겹살',
