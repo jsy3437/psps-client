@@ -1,5 +1,11 @@
 ## Progress & Update
 
+> 2022.02.05
+
+-  프론트 역할 분배
+
+---
+
 > 2022.02.04
 
 -  상품상세페이지 상세이미지, 상품정보
@@ -111,4 +117,4 @@
 
 ## Member & Role
 
--  방병도(Front), 최도영(Server, DataBase), 최준영(Design)
+-  방병도(Front), 조서윤(Front), 최도영(Server, DataBase), 최준영(Design)

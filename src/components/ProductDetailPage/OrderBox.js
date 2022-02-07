@@ -7,7 +7,7 @@ import decrease from '../../images/count-minus.svg';
 
 const OrderBox = (props) => {
 	const [openOption, setOpenOption] = useState(false);
-	const [option, setOption] = useState(props.optionList[0]);
+	const [option, setOption] = useState(false);
 	const [count, setCount] = useState(1);
 
 	const onChangeOption = (option) => {
@@ -21,6 +21,11 @@ const OrderBox = (props) => {
 		// 재고량과 비교
 		setCount(count + 1);
 	};
+	useEffect(() => {
+		if (props.optionList) {
+			setOption(props.optionList[0]);
+		}
+	}, [props.optionList]);
 
 	return (
 		<BoxContainer>
@@ -28,7 +33,10 @@ const OrderBox = (props) => {
 				<BoxLeft>
 					<BoxLeftImg
 						alt='product img'
-						src={`${IMG_ADDRESS}/${props.detail.temp_image}`}
+						src={
+							props.detail.temp_image &&
+							`${IMG_ADDRESS}/${props.detail.temp_image}`
+						}
 					/>
 				</BoxLeft>
 				<BoxRight>

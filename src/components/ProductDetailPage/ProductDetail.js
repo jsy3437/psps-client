@@ -24,7 +24,8 @@ const ProductDetail = (props) => {
 				<DetailImg
 					alt='detail img'
 					src={
-						props.detail && `${IMG_ADDRESS}/${props.detail.detail_image}`
+						props.detail.detail_image &&
+						`${IMG_ADDRESS}/${props.detail.detail_image}`
 					}
 				/>
 				<GrayBackground />

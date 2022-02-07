@@ -37,7 +37,7 @@ const RecommendList = () => {
 					</Title>
 				))}
 			</Titles>
-			<Desc>품생품사에서 선별한\n특별한 상품들을 지금 바로 만나보세요!</Desc>
+			<Desc>{`품생품사에서 선별한\n특별한 상품들을 지금 바로 만나보세요!`}</Desc>
 			<Boundary />
 			<ListWrap>
 				{list.map((el, idx) => (

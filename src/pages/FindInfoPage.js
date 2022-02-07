@@ -18,6 +18,8 @@ const FindInfoPage = () => {
 		alert('비밀번호 찾기로 이동');
 	};
 
+	// 기능 아직 없음
+
 	return (
 		<div id='container'>
 			<Container>
@@ -26,6 +28,7 @@ const FindInfoPage = () => {
 					<Title>품생품사 아이디/비밀번호 찾기</Title>
 					<FindItemSelect item={item} setItem={setItem} />
 					{item === '아이디' ? <FindId /> : <FindPw />}
+
 					{item === '아이디' ? (
 						<SubmitButton onClick={goFindID}>아이디 찾기</SubmitButton>
 					) : (

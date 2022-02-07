@@ -8,14 +8,6 @@ export const mainCategories = [
 	'반찬',
 	'가정 간편식',
 ];
-export const subCategories = [
-	'전체보기',
-	'과일·수입청과',
-	'샐러드·기본채소',
-	'즙용·특수채소',
-	'버섯·건나물류',
-	'쌀·잡곡',
-];
 
 export const page = [
 	'메인페이지',

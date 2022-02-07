@@ -70,6 +70,7 @@ const LoginPage = () => {
 						/>
 					</Items>
 
+					{/* 이메일, 비번 입력인데 아이디/비번찾기 괜찮은지 확인 후 수정 */}
 					<AgreeBox>
 						<AgreeRight onClick={goFindInfo}>아이디/비밀번호</AgreeRight>
 					</AgreeBox>

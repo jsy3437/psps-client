@@ -6,8 +6,6 @@ const MainBanner = () => {
 	const Backgrounds = [Background1];
 	const [bannerList, setBannerList] = useState([]);
 
-	useEffect(() => {}, []);
-
 	return (
 		<MainBannerWrap>
 			{Backgrounds.map((el, idx) => (

@@ -36,19 +36,19 @@ const ThirdStep = (props) => {
 	const goBack = () => {
 		props.setStep(1);
 	};
-	const nameController = (e) => {
+	const onChangeName = (e) => {
 		regexp.name.test(e.target.value)
 			? setCheck({ ...check, name: true })
 			: setCheck({ ...check, name: false });
 		return setName(e.target.value);
 	};
-	const phoneNumberController = (e) => {
+	const onChangePhoneNumber = (e) => {
 		regexp.phone_number.test(e.target.value)
 			? setCheck({ ...check, phone_number: true })
 			: setCheck({ ...check, phone_number: false });
 		return setPhone_number(e.target.value);
 	};
-	const confirmController = (e) => {
+	const onChangeConfirm = (e) => {
 		// regexp.confirm_number.test.test(e.target.value)
 		// 	? setCheck({ ...check, confirm_number: true })
 		// 	: setCheck({ ...check, confirm_number: false });
@@ -109,7 +109,7 @@ const ThirdStep = (props) => {
 					<ItemTitle>이름</ItemTitle>
 					<ItemInput
 						ref={nameInput}
-						onChange={nameController}
+						onChange={onChangeName}
 						placeholder='이름을 입력해주세요'
 					/>
 					{isSubmit && !check.name && (
@@ -121,7 +121,7 @@ const ThirdStep = (props) => {
 					<ItemInput
 						type='number'
 						ref={phoneNumberInput}
-						onChange={phoneNumberController}
+						onChange={onChangePhoneNumber}
 						placeholder="'-'을 제외한 휴대폰 번호를 입력해주세요."
 					/>
 					{isSubmit && !check.phone_number && (
@@ -137,7 +137,7 @@ const ThirdStep = (props) => {
 					<ItemTitle>인증번호</ItemTitle>
 					<ItemInput
 						ref={confirmNumberInput}
-						onChange={confirmController}
+						onChange={onChangeConfirm}
 						placeholder='인증번호를 입력해주세요'
 					/>
 					{/* {isSubmit && !check.confirm_number && (

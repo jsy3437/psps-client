@@ -22,7 +22,6 @@ const ProductPage = () => {
 		let isSubscribed = true;
 		_product.get_list(part, subPart, page).then((res) => {
 			if (isSubscribed && res.data.success) {
-				console.log('acacac', res.data);
 				setList(res.data.product_list);
 				setTotal(res.data.total);
 			}

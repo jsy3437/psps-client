@@ -12,14 +12,19 @@ const ProductDetailPage = () => {
 	const [detail, setDetail] = useState({});
 	const [optionList, setOptionList] = useState([]);
 
+	console.log('detail', detail);
+
 	useEffect(() => {
 		let isSubscribed = true;
-		_product.get_detail(product_id).then((res) => {
-			if (isSubscribed && res.data.success) {
-				setDetail(res.data.product);
-				setOptionList(res.data.product_option_list);
-			}
-		});
+		if (product_id) {
+			_product.get_detail(product_id).then((res) => {
+				console.log(res.data);
+				if (isSubscribed && res.data.success) {
+					setDetail(res.data.product);
+					setOptionList(res.data.product_option_list);
+				}
+			});
+		}
 		return () => {
 			isSubscribed = false;
 		};
