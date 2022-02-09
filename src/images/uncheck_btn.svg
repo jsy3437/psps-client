@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <filter id="사각형_212">
+      <feOffset dx="1" dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161" result="color"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur"/>
+      <feComposite operator="in" in="color"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g data-type="innerShadowGroup">
+    <rect id="사각형_212-2" data-name="사각형 212" width="14" height="14" rx="4" fill="#fff"/>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_212)">
+      <rect id="사각형_212-3" data-name="사각형 212" width="14" height="14" rx="4" fill="#fff"/>
+    </g>
+    <g id="사각형_212-4" data-name="사각형 212" fill="none" stroke="#e0e0e0" stroke-width="1">
+      <rect width="14" height="14" rx="4" stroke="none"/>
+      <rect x="0.5" y="0.5" width="13" height="13" rx="3.5" fill="none"/>
+    </g>
+  </g>
+</svg>
