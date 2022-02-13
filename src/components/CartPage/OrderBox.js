@@ -1,18 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { payment_request } from '../../payments';
+import * as _user from '../../controller/user';
 
 const OrderBox = (props) => {
 	const history = useHistory();
 	const orderCalc = props.orderCalc;
+	const [me, setMe] = useState('');
+	const [deliveryPrice, setDeliveryPrice] = useState(3000);
+
+	useEffect(() => {
+		_user.me().then((res) => {
+			const { success, user } = res.data;
+			if (success) {
+				setMe(user);
+			}
+		});
+	}, []);
 
 	const goShopping = () => {
 		history.push('/product');
 	};
 
+	const goPayment = () => {
+		history.push('/payment');
+	};
+
+	console.log(props.cartList);
+	// console.log(props.orderCalc);
+
 	const onOrder = () => {
-		payment_request();
+		const paymentProducts = [];
+		let productName;
+		props.checked.map((el, idx) => {
+			if (el) {
+				paymentProducts.push({
+					product_option_id: props.cartList[idx].product_option_id,
+					quantity: props.cartList[idx].quantity,
+				});
+				productName = props.cartList[idx].product_title;
+			}
+		});
+
+		const name =
+			paymentProducts.length === 1
+				? productName
+				: `${productName} 외 ${paymentProducts.length - 1}건`;
+
+		const impData = {
+			buyer_name: me.name,
+			buyer_email: me.email,
+			buyer_tel: me.phone_number,
+			buyer_addr: me.address,
+			name,
+			// TODO 테스트 끝나고 나면 금액 바꿔주기
+			// amount: props.orderCalc.total_price + deliveryPrice,
+			amount: 100,
+		};
+
+		payment_request(impData, paymentProducts);
 	};
 	return (
 		<OrderWrap>
@@ -41,7 +88,7 @@ const OrderBox = (props) => {
 				{(orderCalc && orderCalc.total_price + 3000).toLocaleString()}
 				<PredictionPriceWon>원</PredictionPriceWon>
 			</PredictionPrice>
-			<SubmitButton productOrder onClick={onOrder}>
+			<SubmitButton productOrder onClick={goPayment}>
 				선택상품 주문하기
 			</SubmitButton>
 			<SubmitButton shopping onClick={goShopping}>

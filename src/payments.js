@@ -1,29 +1,35 @@
-export const payment_request = () => {
+import * as _payment from './controller/payment';
+export const payment_request = (impData, paymentProduct) => {
 	const IMP = window.IMP;
 	IMP.init('iamport'); // 가맹점 식별코드자리
+
 	IMP.request_pay(
 		{
+			...impData,
 			pay_method: 'card',
 			merchant_uid: 'merchant_' + new Date().getTime(),
-			name: '결제테스트',
-			amount: 100,
-			buyer_email: 'iamport@siot.do',
-			buyer_name: '구매자',
-			buyer_tel: '010-5007-4116',
-			buyer_addr: '경기도 안산시',
 		},
 		function (rsp) {
 			if (rsp.success) {
-				let msg = '결제가 완료되었습니다';
-				msg += '고유ID : ' + rsp.imp_uid;
-				msg += '상점 거래ID : ' + rsp.merchant_uid;
-				msg += '결제 금액 : ' + rsp.paid_amount;
-				msg += '카드 승인번호 : ' + rsp.apply_num;
+				_payment
+					.payment({
+						imp_result: rsp,
+						payment_products: paymentProduct,
+						delivery_price: 3000,
+					})
+					.then((res) => {
+						const { success } = res.data;
+						if (success) {
+							console.log(res);
+						} else {
+							console.error('결제 완료, 서버 전달 실패');
+						}
+					});
 			} else {
 				let msg = '결제에 실패하였습니다.';
-				msg += '에러내용 : ' + rsp.error_msg;
+				msg += '실패사유 : ' + rsp.error_msg;
+				alert(msg);
 			}
-			console.log(rsp);
 		}
 	);
 };

@@ -16,6 +16,7 @@ import ProductPage from './pages/ProductPage';
 import IntroPage from './pages/IntroPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
+import PaymentPage from './pages/PaymentPage';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -51,6 +52,7 @@ const App = () => {
 					/>
 					<Route exact path="/intro" component={Auth(IntroPage, null)} />
 					<Route exact path="/cart" component={Auth(CartPage, null)} />
+					<Route exact path="/payment" component={Auth(PaymentPage, true)} />
 				</Switch>
 			</div>
 		</Router>

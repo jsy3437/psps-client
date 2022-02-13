@@ -129,7 +129,12 @@ const CartPage = () => {
 							setAllChecked={setAllChecked}
 						/>
 						<OrderBoxBox>
-							<OrderBox orderCalc={orderCalc} />
+							<OrderBox
+								orderCalc={orderCalc}
+								user={user}
+								cartList={cartList}
+								checked={checked}
+							/>
 						</OrderBoxBox>
 					</CartContentWrap>
 				) : (

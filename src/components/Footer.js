@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
+
 import * as info from '../config';
 
 const Footer = () => {
@@ -10,8 +11,14 @@ const Footer = () => {
 		['T', info.COMPANY_CONTACT],
 		['M', info.OWNER_CONTACT],
 	];
-	const infoLeft = `${info.COMPANY_NAME} 대표이사 : ${info.COMPANY_OWNER} | 주소 : ${info.COMPANY_PLACE}\n사업자등록번호 : ${info.BUSINESS_NUMBER} | 통신판매신고번호 : ${info.REPORT_NUMBER}\n개인정보관리책임자 : ${info.PRIVACY_PERSON} (${info.PRIVACY_EMAIL})\n\n©2021 CetusStudio Inc.All rights reserved.`;
+	const infoLeft1 = `${info.COMPANY_NAME} 대표이사 : ${info.COMPANY_OWNER} | 주소 : ${info.COMPANY_PLACE}\n사업자등록번호 : `;
+	const infoLeft2 = ` | 통신판매신고번호 : ${info.REPORT_NUMBER}\n개인정보관리책임자 : ${info.PRIVACY_PERSON} (${info.PRIVACY_EMAIL})\n\n©2021 CetusStudio Inc.All rights reserved.`;
+
 	const infoRight = `평일:08:30~17:30\n점심:12:00~13:30\n(토,일 및 공휴일 휴일)`;
+
+	const onBusinessNumber = () => {
+		window.open('https://api.makinet.kr/uploads/사업자등록증.jpg', '_blank');
+	};
 
 	return (
 		<FooterWrap>
@@ -36,8 +43,14 @@ const Footer = () => {
 			<FooterBody>
 				<FooterBodyInside>
 					<FooterBodyLeft>
-						<BodyLeftImg alt='logo' src={logo} />
-						<BodyLeftText>{infoLeft}</BodyLeftText>
+						<BodyLeftImg alt="logo" src={logo} />
+						<BodyLeftText>
+							{infoLeft1}
+							<BodyLeftTextSpan onClick={onBusinessNumber}>
+								{info.BUSINESS_NUMBER}
+							</BodyLeftTextSpan>
+							{infoLeft2}
+						</BodyLeftText>
 					</FooterBodyLeft>
 					<FooterBodyRight>
 						<BodyRightTitle>고객센터</BodyRightTitle>
@@ -132,6 +145,10 @@ const BodyLeftText = styled.p`
 	font-family: 'kr-r';
 	color: #6b6462;
 	letter-spacing: -0.28px;
+`;
+const BodyLeftTextSpan = styled.span`
+	text-decoration: underline;
+	cursor: pointer;
 `;
 const FooterBodyRight = styled.div`
 	width: 30%;
