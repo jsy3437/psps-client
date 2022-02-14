@@ -36,9 +36,9 @@ const ProductData = () => {
 	return (
 		<ProductDataWrap>
 			<Title>주문 상품</Title>
-			{productList.map((el) => (
-				<BorderBox>
-					<ProductText title>{el.product_title}</ProductText>
+			{productList.map((el, idx) => (
+				<BorderBox key={idx}>
+					<ProductText title="true">{el.product_title}</ProductText>
 					<ProductText option>{el.product_option_title}</ProductText>
 					<ProductText quantity>{el.quantity}개</ProductText>
 					<ProductText price>{el.total.toLocaleString()}원</ProductText>

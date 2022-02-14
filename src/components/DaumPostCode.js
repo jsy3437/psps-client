@@ -1,7 +1,13 @@
 import REACT, { useState } from 'react';
 import DaumPostCode from 'react-daum-postcode';
 
-const DaumPost = ({}) => {
+const DaumPost = (props, {}) => {
+	console.log(props.inputDetailAddr);
+	const style = {
+		width: '100%',
+		height: '100%',
+		padding: '1rem',
+	};
 	const handleComplete = (data) => {
 		let fullAddress = data.address;
 		let extraAddress = '';
@@ -16,8 +22,18 @@ const DaumPost = ({}) => {
 			}
 			fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
 		}
-		//fullAddress -> 전체 주소반환
+
+		props.setPostAddr(fullAddress);
+		props.setPostZoneCode(data.zonecode);
+		props.setPostcodeOpen(false);
+		props.inputDetailAddr.current.focus();
 	};
-	return <DaumPostCode onComplete={handleComplete} className="post-code" />;
+	return (
+		<DaumPostCode
+			onComplete={handleComplete}
+			className="post-code"
+			style={style}
+		/>
+	);
 };
 export default DaumPost;

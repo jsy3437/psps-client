@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { withRouter, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
 
 const LastStep = () => {
+	const user = useSelector((state) => state.user);
 	const history = useHistory();
-	const [name, setName] = useState('');
 
 	const goHome = () => {
 		history.push('/');
@@ -14,19 +15,12 @@ const LastStep = () => {
 		history.push('/product');
 	};
 
-	useEffect(() => {
-		if (history.location.state) {
-			setName(history.location.state);
-		}
-		// eslint-disable-next-line
-	}, []);
-
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='logo' src={logo} />
+				<LogoImg alt="logo" src={logo} />
 				<Title>품생품사 회원가입 완료</Title>
-				<Text>{`감사합니다. ${name}님!\n더 좋은 품질로 보답하겠습니다.`}</Text>
+				<Text>{`감사합니다. ${user.name}님!\n더 좋은 품질로 보답하겠습니다.`}</Text>
 				<SubmitButton shopping onClick={goShopping}>
 					쇼핑하기
 				</SubmitButton>
@@ -84,8 +78,7 @@ const SubmitButton = styled.button`
 	font-family: 'kr-r';
 	border: none;
 	${(props) =>
-		props.shopping &&
-		`background-color:#E50011; color:#fff ; margin-top:2rem`}
+		props.shopping && `background-color:#E50011; color:#fff ; margin-top:2rem`}
 	${(props) =>
 		props.home &&
 		`background-color:#fff; color: #E50011; border: 1px solid #E50011; margin-top:1.2rem`};

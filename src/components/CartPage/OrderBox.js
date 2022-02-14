@@ -11,7 +11,7 @@ const OrderBox = (props) => {
 	const [deliveryPrice, setDeliveryPrice] = useState(3000);
 
 	useEffect(() => {
-		_user.me().then((res) => {
+		_user.get_me().then((res) => {
 			const { success, user } = res.data;
 			if (success) {
 				setMe(user);

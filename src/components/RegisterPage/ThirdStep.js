@@ -6,7 +6,6 @@ import { user_login } from '../../modules/user';
 import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
 import { useDispatch } from 'react-redux';
-// import axios from 'axios';
 
 const ThirdStep = (props) => {
 	const dispatch = useDispatch();
@@ -97,15 +96,13 @@ const ThirdStep = (props) => {
 				password,
 				name,
 				phone_number,
-				// TODO 주소input넣기
-				address: '경기도 안산시 블라블라',
 			};
-			console.log(data);
+			// console.log(data);
 			_user.register(data).then((res) => {
-				console.log(res.data);
+				// console.log(res.data);
 				if (res.data.success) {
 					props.setStep(4);
-					console.log(res.data);
+					// console.log(res.data);
 					dispatch(user_login(res.data.name));
 					history.push({ state: name });
 				} else {

@@ -2,9 +2,9 @@ import axios from 'axios';
 import { ADDRESS } from '../config';
 
 const instance = axios.create({
-	// proxy: `${ADDRESS}`,
-	// baseURL: '/user',
-	baseURL: `${ADDRESS}/user`,
+	proxy: `${ADDRESS}`,
+	baseURL: '/user',
+	// baseURL: `${ADDRESS}/user`,
 	withCredentials: true,
 });
 
@@ -25,6 +25,6 @@ export const logout = async () => {
 export const register = async (userData) => {
 	return await instance.post('/register', userData).catch(errorMessage);
 };
-export const me = async () => {
+export const get_me = async () => {
 	return await instance.get('/me').catch(errorMessage);
 };
