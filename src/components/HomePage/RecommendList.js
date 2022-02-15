@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { IMG_ADDRESS } from '../../config';
 import * as _product from '../../controller/product';
+import * as _banner from '../../controller/banner';
+
 import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
 
@@ -26,6 +28,7 @@ const RecommendList = () => {
 		history.push(`/detail/${product_id}`);
 	};
 
+	console.log(list);
 	return (
 		<RecommendWrap>
 			<Logo alt="logo" src={logo} />
@@ -37,7 +40,7 @@ const RecommendList = () => {
 					</Title>
 				))}
 			</Titles>
-			<Desc>품생품사에서 선별한\n특별한 상품들을 지금 바로 만나보세요!</Desc>
+			<Desc>{`품생품사에서 선별한\n특별한 상품들을 지금 바로 만나보세요!`}</Desc>
 			<Boundary />
 			<ListWrap>
 				{list.map((el, idx) => (

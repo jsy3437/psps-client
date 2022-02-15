@@ -21,6 +21,7 @@ export const payment_request = (impData, paymentProduct) => {
 						const { success } = res.data;
 						if (success) {
 							console.log(res);
+							window.location.href = `http://localhost:3000/payment/result/${res.data.payment_id}`;
 						} else {
 							console.error('결제 완료, 서버 전달 실패');
 						}

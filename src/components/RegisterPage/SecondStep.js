@@ -37,11 +37,11 @@ const SecondStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='logo' src={logo} />
+				<LogoImg alt="logo" src={logo} />
 				<Title>품생품사 가입약관</Title>
 				{arr.map((el, idx) => (
 					<Items key={idx}>
-						<ItemTitle>{el.title}</ItemTitle>
+						<ItemTitle>{el.title} (필수)</ItemTitle>
 						<ItemTextBox>{el.contents}</ItemTextBox>
 					</Items>
 				))}
@@ -104,6 +104,7 @@ const ItemTextBox = styled.div`
 	overflow-y: scroll;
 	border: 1px solid #e0e0e0;
 	border-radius: 4px;
+	white-space: pre-line;
 `;
 const SubmitButton = styled.button`
 	width: 34.6rem;

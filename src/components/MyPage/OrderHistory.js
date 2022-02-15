@@ -16,8 +16,13 @@ const OrderHistory = () => {
 	});
 	const [page, setPage] = useState(1);
 	const [total, setTotal] = useState(list.length);
-	const [viewDetail, setViewDetail] = useState(true);
+	const [viewDetail, setViewDetail] = useState(false);
 	const [detail, setDetail] = useState({});
+
+	const goDetail = (e) => {
+		console.log(e.target);
+		// setViewDetail()
+	};
 
 	return (
 		<MyPageInside>
@@ -44,7 +49,7 @@ const OrderHistory = () => {
 							</ListContents>
 							<ListButtons>
 								<ListButton>배송조회</ListButton>
-								<ListButton>주문 상세보기</ListButton>
+								<ListButton onClick={goDetail}>주문 상세보기</ListButton>
 								<ListButton last>교환, 반품 신청</ListButton>
 							</ListButtons>
 						</OrderHistoryList>

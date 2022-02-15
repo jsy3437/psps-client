@@ -10,8 +10,6 @@ const ProductList = (props) => {
 		history.push(`/detail/${product_id}`);
 	};
 
-	console.log(IMG_ADDRESS);
-
 	return (
 		<ProductContainer>
 			<ProductWrap>

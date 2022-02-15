@@ -4,11 +4,13 @@ import SubBanner from '../components/HomePage/SubBanner';
 import RecommendList from '../components/HomePage/RecommendList';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
+import Category from '../components/HomePage/Category';
 
 const HomePage = () => {
 	return (
-		<div id='container'>
+		<div id="container">
 			<MainBanner />
+			<Category />
 			<SubBanner />
 			<RecommendList />
 			<Induce />

@@ -56,8 +56,8 @@ const App = () => {
 					<Route exact path="/payment" component={Auth(PaymentPage, true)} />
 					<Route
 						exact
-						path="/payment/result"
-						component={(Auth(PaymentResultPage), null)}
+						path="/payment/result/:payment_id"
+						component={Auth(PaymentResultPage, null)}
 					/>
 				</Switch>
 			</div>

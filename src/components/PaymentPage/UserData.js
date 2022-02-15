@@ -47,7 +47,11 @@ const UserData = (props) => {
 	};
 
 	const ChangePhNumber = (e) => {
-		props.setReceiveUserPhNumber(e.target.value);
+		if (isNaN(e.target.value)) {
+			return;
+		} else {
+			props.setReceiveUserPhNumber(e.target.value);
+		}
 	};
 
 	const ChangeRequest = (e) => {
@@ -99,6 +103,8 @@ const UserData = (props) => {
 					<DataBox>
 						<DataTitle>연락처</DataTitle>
 						<ReceiveUserInput
+							type="text"
+							maxLength="11"
 							placeholder={receiveUserPlaceholder[1]}
 							onChange={ChangePhNumber}
 							value={props.receiveUserPhNumber}

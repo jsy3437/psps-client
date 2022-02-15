@@ -9,8 +9,10 @@ import Induce from '../components/Induce';
 import Footer from '../components/Footer';
 import Spinner from '../components/Spinner';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
 const ProductPage = () => {
+	const location = useLocation();
 	const [part, setPart] = useState('농산');
 	const [subPart, setSubPart] = useState(null);
 	const [page, setPage] = useState(1);
@@ -32,6 +34,12 @@ const ProductPage = () => {
 			isSubscribed = false;
 		};
 	}, [part, subPart, page]);
+
+	useEffect(() => {
+		if (location) {
+			setPart(location.state);
+		}
+	}, []);
 
 	const subPartArr = useMemo(() => {
 		const _part = _category.part;

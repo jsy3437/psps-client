@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import logo from '../images/red-logo.svg';
-
-import * as info from '../config';
 import { useHistory } from 'react-router-dom';
+
+import logo from '../images/red-logo.svg';
+import * as info from '../config';
+import { termsArr } from '../data/terms';
 
 const Footer = () => {
 	const history = useHistory();
+	const arr = termsArr;
+	const [openHeadLeft, setOpenHeadLeft] = useState(false);
 	const headLeft = ['이용약관', '개인정보처리방침'];
 	const headRight = ['자주묻는질문'];
 	const bodyRight = [
@@ -26,13 +29,27 @@ const Footer = () => {
 		history.push('/service');
 	};
 
+	const onInfoModalOpen = (idx) => {
+		setOpenHeadLeft(idx);
+	};
+
+	const onInfoModalClose = () => {
+		setOpenHeadLeft(false);
+	};
+
 	return (
 		<FooterWrap>
 			<FooterHead>
 				<FooterHeadInside>
 					<FooterHeadLeft>
 						{headLeft.map((el, idx) => (
-							<HeadLeftText key={idx} effect={idx === 1}>
+							<HeadLeftText
+								key={idx}
+								effect={idx === 1}
+								onClick={() => {
+									onInfoModalOpen(idx);
+								}}
+							>
 								{el}
 							</HeadLeftText>
 						))}
@@ -70,6 +87,21 @@ const Footer = () => {
 					</FooterBodyRight>
 				</FooterBodyInside>
 			</FooterBody>
+
+			{openHeadLeft !== false && (
+				<InfoModalWrap onClick={onInfoModalClose}>
+					{arr.map((el, idx) => {
+						if (idx === openHeadLeft) {
+							return (
+								<InfoBox key={idx}>
+									<InfoTitle>{el.title}</InfoTitle>
+									<InfoText>{el.contents}</InfoText>
+								</InfoBox>
+							);
+						}
+					})}
+				</InfoModalWrap>
+			)}
 		</FooterWrap>
 	);
 };
@@ -106,6 +138,7 @@ const HeadLeftText = styled.p`
 	font-family: 'kr-r';
 	color: #8e8e8e;
 	padding: 0 1rem;
+	cursor: pointer;
 	${(props) =>
 		props.effect && 'border-left:1px solid #8e8e8e; font-family:"kr-b";'}
 `;
@@ -183,4 +216,40 @@ const BodyRightText = styled.p`
 	font-family: 'kr-r';
 	color: #6b6462;
 	text-align: right;
+`;
+const InfoModalWrap = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background-color: #0000005a;
+	position: fixed;
+	top: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+const InfoBox = styled.div`
+	width: 60rem;
+	max-height: 60vh;
+	background-color: #fff;
+	padding: 3rem 4rem;
+	overflow-y: auto;
+	margin-bottom: 10rem;
+	box-shadow: 3px 10px 18px #0000001a;
+	border-radius: 5px;
+`;
+const InfoTitle = styled.h2`
+	font-size: 3rem;
+	font-family: 'kr-b';
+	letter-spacing: -1.2px;
+	margin-bottom: 3rem;
+`;
+const InfoText = styled.p`
+	font-size: 1.7rem;
+	font-family: 'kr-r';
+	letter-spacing: -0.56px;
+	color: #221814;
+	white-space: pre-line;
+`;
+const InfoCloseBtn = styled.button`
+	width: 10rem;
 `;
