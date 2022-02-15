@@ -53,10 +53,10 @@ const UserData = (props) => {
 	const ChangeRequest = (e) => {
 		props.setReceiveUserRequest(e.target.value);
 	};
-	console.log(props.checked);
+	// console.log(props.checked);
 
-	console.log('props.user.name', props.user.name);
-	console.log('props.receiveUserName', props.receiveUserName);
+	// console.log('props.user.name', props.user.name);
+	// console.log('props.receiveUserName', props.receiveUserName);
 
 	return (
 		<UserDataWrap>

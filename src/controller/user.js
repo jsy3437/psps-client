@@ -28,3 +28,9 @@ export const register = async (userData) => {
 export const get_me = async () => {
 	return await instance.get('/me').catch(errorMessage);
 };
+export const send_sms = async (smsData) => {
+	return await instance.post('/sms/send', smsData).catch(errorMessage);
+};
+export const check_sms = async (smsData) => {
+	return await instance.post('/sms/check', smsData).catch(errorMessage);
+};

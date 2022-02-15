@@ -9,10 +9,7 @@ const MenuSelect = (props) => {
 	return (
 		<MenuWrap>
 			{['주문내역', '개인정보관리'].map((el, idx) => (
-				<MenuList
-					key={idx}
-					active={props.menu === el}
-					onClick={menuController}>
+				<MenuList key={idx} active={props.menu === el} onClick={menuController}>
 					{el}
 				</MenuList>
 			))}
@@ -42,6 +39,7 @@ const MenuList = styled.li`
 	font-family: 'kr-r';
 	color: #221814;
 	letter-spacing: -0.72px;
+	cursor: pointer;
 	${(props) =>
 		props.active &&
 		`font-family:'kr-b'; border:3px solid #E50011;border-radius: 4px;`}

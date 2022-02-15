@@ -10,22 +10,28 @@ const ProductList = (props) => {
 		history.push(`/detail/${product_id}`);
 	};
 
+	console.log(IMG_ADDRESS);
+
 	return (
 		<ProductContainer>
 			<ProductWrap>
 				{props.list.map((el, idx) => (
 					<Product key={idx}>
-						<ProductImg
-							alt='product img'
-							src={`${IMG_ADDRESS}/${el.image}`}
-							onClick={() => {
-								goDetail(el.product_id);
-							}}
-						/>
+						{el.image && (
+							<ProductImg
+								alt="product img"
+								src={`${IMG_ADDRESS}/${el.image}`}
+								onClick={() => {
+									goDetail(el.product_id);
+								}}
+							/>
+						)}
+
 						<ProductTitle
 							onClick={() => {
 								goDetail(el.product_id);
-							}}>
+							}}
+						>
 							{el.title}
 						</ProductTitle>
 						<ProductDesc>{el.desc}</ProductDesc>

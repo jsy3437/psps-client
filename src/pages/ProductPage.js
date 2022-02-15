@@ -8,6 +8,7 @@ import PageSelector from '../components/PageSelector';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
 import Spinner from '../components/Spinner';
+import styled from 'styled-components';
 
 const ProductPage = () => {
 	const [part, setPart] = useState('농산');
@@ -22,7 +23,6 @@ const ProductPage = () => {
 		let isSubscribed = true;
 		_product.get_list(part, subPart, page).then((res) => {
 			if (isSubscribed && res.data.success) {
-				// console.log('acacac', res.data);
 				setList(res.data.product_list);
 				setTotal(res.data.total);
 			}
@@ -70,7 +70,7 @@ const ProductPage = () => {
 					setPage={setPage}
 				/>
 			) : (
-				<p>상품이 없습니다.</p>
+				<ListInfoText>상품이 없습니다.</ListInfoText>
 			)}
 
 			<Induce />
@@ -80,3 +80,10 @@ const ProductPage = () => {
 };
 
 export default ProductPage;
+
+const ListInfoText = styled.p`
+	font-size: 2.4rem;
+	font-family: 'kr-b';
+	letter-spacing: -0.072rem;
+	margin: 10rem auto 15rem;
+`;

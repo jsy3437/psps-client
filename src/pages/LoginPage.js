@@ -27,6 +27,10 @@ const LoginPage = () => {
 		history.push('/register');
 	};
 
+	const goNonMember = () => {
+		//
+	};
+
 	const onSubmit = () => {
 		if (email.length === 0) {
 			return alert('아이디를 입력해주세요.');
@@ -47,10 +51,10 @@ const LoginPage = () => {
 	};
 
 	return (
-		<div id='container'>
+		<div id="container">
 			<Container>
 				<RegisterInside>
-					<LogoImg alt='logo' src={logo} />
+					<LogoImg alt="logo" src={logo} />
 					<Title>품생품사 로그인</Title>
 					<Items>
 						<ItemTitle>이메일</ItemTitle>
@@ -63,13 +67,12 @@ const LoginPage = () => {
 					<Items last>
 						<ItemTitle>비밀번호</ItemTitle>
 						<ItemInput
-							type='password'
+							type="password"
 							value={password ? password : ''}
 							onChange={onChangePassword}
 							placeholder={'비밀번호를 입력해주세요'}
 						/>
 					</Items>
-
 					<AgreeBox>
 						<AgreeRight onClick={goFindInfo}>아이디/비밀번호</AgreeRight>
 					</AgreeBox>
@@ -84,13 +87,14 @@ const LoginPage = () => {
 						</EasyLeft>
 						<EasyRight>
 							<SocialLogoBox NLogo>
-								<SocialLogo alt='icon' src={NLogo} />
+								<SocialLogo alt="icon" src={NLogo} />
 							</SocialLogoBox>
 							<SocialLogoBox KLogo>
-								<SocialLogo alt='icon' src={KLogo} />
+								<SocialLogo alt="icon" src={KLogo} />
 							</SocialLogoBox>
 						</EasyRight>
 					</EasyBox>
+					<NonMemberInfo onClick={goNonMember}>비회원 주문조회</NonMemberInfo>
 				</RegisterInside>
 			</Container>
 		</div>
@@ -169,6 +173,7 @@ const AgreeRight = styled.div`
 	font-family: 'kr-r';
 	color: #6b6462;
 	text-decoration: underline;
+	cursor: pointer;
 	&:hover {
 		color: #e50011;
 	}
@@ -185,6 +190,7 @@ const SubmitButton = styled.button`
 	background-color: #fff;
 	border: 1px solid #e50011;
 	border-radius: 4px;
+	transition: all 200ms ease;
 	&:hover {
 		background-color: #e50011;
 		color: #fff;
@@ -213,6 +219,7 @@ const GoRegister = styled.p`
 	color: #6b6462;
 	margin-left: 0.7rem;
 	text-decoration: underline;
+	cursor: pointer;
 	&:hover {
 		color: #e50011;
 	}
@@ -236,4 +243,19 @@ const SocialLogoBox = styled.div`
 const SocialLogo = styled.img`
 	width: 3.6rem;
 	height: 3.6rem;
+	cursor: pointer;
+`;
+const NonMemberInfo = styled.p`
+	width: 100%;
+	text-decoration: underline;
+	text-align: end;
+	letter-spacing: -0.56px;
+	color: #6b6462;
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	margin-top: 2rem;
+	cursor: pointer;
+	&:hover {
+		color: #e50011;
+	}
 `;

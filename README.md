@@ -4,12 +4,15 @@
 
 - 결제페이지 : psps 서버에서 현재 로그인 한 유저 정보 받고 UserData 컴포넌트에 전달
 - 결제페이지 : 주문자 정보 가져와서 받는사람 input의 value로 채워줌
+- 고객센터페이지 : 레이아웃, 스타일링 및 Navbar, Footer 버튼 주소연결
+- cursor: pointer로 변경 (로그인, 회원가입)
+- 회원가입페이지 : 본인인증 서버로 요청, 응답 처리완료
 
 ---
 
 > 2022.02.13
 
-- 결제(payment)페이지 : ProductData, UserData 컴포넌트 레이아웃, 스타일링
+- 결제페이지 : ProductData, UserData 컴포넌트 레이아웃, 스타일링
 - Daum Postcode API 컴포넌트 레이아웃, 스타일링 및 데이터 받고 띄우는 로직 완성
 
 ---

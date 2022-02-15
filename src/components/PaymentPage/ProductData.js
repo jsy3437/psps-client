@@ -4,64 +4,37 @@ import * as info from '../../config';
 import equalImg from '../../images/equal-ico.svg';
 import plusImg from '../../images/plus-ico.svg';
 
-const ProductData = () => {
+const ProductData = (props) => {
 	const PaymentAndDeliveryInfo = `- 신선식품이기 때문에 단순 소비자 단순 변심으로 인한 개인적인 사유로는 교환 및 환불이 불가합니다.\n- 상품의 변질, 이물질 발견, 아이스박스 및 아이스팩이 파손되어 배송될 경우 고객센터(${info.COMPANY_CONTACT})로 전화주시면 \b\b바로 교환/환불 해드리겠습니다.\n- 고객센터 운영시간은 평일 오전 9시부터 오후 6시까지 입니다. (점심시간 : 오전 12시부터 오후 1시)`;
-	const productList = [
-		{
-			product_title: '소고기소고기소고기소고기소고기소고기소고기',
-			product_option_title: '국거리용국거리용국거리용국거리용',
-			quantity: 3,
-			total: 57000,
-		},
-		{
-			product_title: '소고기',
-			product_option_title: '국거리용',
-			quantity: 3,
-			total: 57000,
-		},
-		{
-			product_title: '소고기',
-			product_option_title: '국거리용',
-			quantity: 3,
-			total: 57000,
-		},
-		{
-			product_title: '소고기',
-			product_option_title: '국거리용',
-			quantity: 30,
-			total: 1570000,
-		},
-	];
 
 	return (
 		<ProductDataWrap>
 			<Title>주문 상품</Title>
-			{productList.map((el, idx) => (
+			{props.paymentProducts.map((el, idx) => (
 				<BorderBox key={idx}>
 					<ProductText title="true">{el.product_title}</ProductText>
 					<ProductText option>{el.product_option_title}</ProductText>
 					<ProductText quantity>{el.quantity}개</ProductText>
-					<ProductText price>{el.total.toLocaleString()}원</ProductText>
+					<ProductText price>{el.total_price.toLocaleString()}원</ProductText>
 				</BorderBox>
 			))}
 			<TotalPriceBox>
 				<PriceTitle>총 상품 금액</PriceTitle>
-				<PriceText>21,000원</PriceText>
+				<PriceText>{props.total_amount.toLocaleString()}원</PriceText>
 				<PlusImg alt="plus sign" src={plusImg} />
 				<PriceTitle>배송비</PriceTitle>
+				{/* TODO 배송비 기준 정해서 구현하기 */}
 				<PriceText>3,000원</PriceText>
 				<PlusImg alt="equal sign" src={equalImg} />
 				<PaymentPrice>
-					24,000<PaymentWon>원</PaymentWon>
+					{(props.total_amount + 3000).toLocaleString()}
+					<PaymentWon>원</PaymentWon>
 				</PaymentPrice>
 			</TotalPriceBox>
 			<Title>결제 및 배송 관련 안내</Title>
 			<PaymentAndDeliveryInfoBox>
 				{PaymentAndDeliveryInfo}
 			</PaymentAndDeliveryInfoBox>
-			<BtnBox>
-				<SubmitButton>주문하기</SubmitButton>
-			</BtnBox>
 		</ProductDataWrap>
 	);
 };
@@ -154,26 +127,4 @@ const PaymentAndDeliveryInfoBox = styled.div`
 	color: #6b6462;
 	word-break: break-all;
 	white-space: pre-wrap;
-`;
-const BtnBox = styled.div`
-	width: fit-content;
-	margin: auto;
-`;
-const SubmitButton = styled.button`
-	width: 34.6rem;
-	height: 6.2rem;
-	border-radius: 4px;
-	font-size: 2.1rem;
-	font-family: 'kr-r';
-	letter-spacing: -0.84px;
-	border: none;
-	transition: all 200ms ease;
-	background-color: #221814;
-	color: #fff;
-	margin: 6.05rem auto 0;
-
-	&:hover {
-		background-color: #e50011;
-		color: #fff;
-	}
 `;

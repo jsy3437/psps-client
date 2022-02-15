@@ -98,7 +98,7 @@ const FirstStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='logo' src={logo} />
+				<LogoImg alt="logo" src={logo} />
 				<Title>품생품사 회원가입</Title>
 				<Items>
 					<ItemTitle>이메일</ItemTitle>
@@ -116,7 +116,7 @@ const FirstStep = (props) => {
 					<ItemTitle>비밀번호</ItemTitle>
 					<ItemInput
 						ref={passwordInput}
-						type='password'
+						type="password"
 						value={password ? password : ''}
 						onChange={passwordController}
 						placeholder={'비밀번호를 입력해주세요'}
@@ -129,7 +129,7 @@ const FirstStep = (props) => {
 					<ItemTitle>비밀번호 확인</ItemTitle>
 					<ItemInput
 						ref={passwordConfirmInput}
-						type='password'
+						type="password"
 						value={passwordConfirm ? passwordConfirm : ''}
 						onChange={passwordConfirmController}
 						placeholder={'비밀번호를 확인해주세요'}
@@ -142,7 +142,7 @@ const FirstStep = (props) => {
 				<AgreeBox>
 					<AgreeLeft>
 						<AgreeCheck
-							alt=''
+							alt=""
 							src={agreeCheck ? check_box : uncheck_box}
 							onClick={agreeCheckController}
 						/>
@@ -166,10 +166,10 @@ const FirstStep = (props) => {
 					</EasyLeft>
 					<EasyRight>
 						<SocialLogoBox NLogo>
-							<SocialLogo alt='icon' src={NLogo} />
+							<SocialLogo alt="icon" src={NLogo} />
 						</SocialLogoBox>
 						<SocialLogoBox KLogo>
-							<SocialLogo alt='icon' src={KLogo} />
+							<SocialLogo alt="icon" src={KLogo} />
 						</SocialLogoBox>
 					</EasyRight>
 				</EasyBox>
@@ -257,6 +257,7 @@ const AgreeLeft = styled.div`
 const AgreeCheck = styled.img`
 	width: 1.6rem;
 	height: 1.6rem;
+	cursor: pointer;
 `;
 const AgreeAllText = styled.p`
 	font-size: 1.4rem;
@@ -269,6 +270,7 @@ const AgreeRight = styled.div`
 	font-family: 'kr-r';
 	color: #6b6462;
 	text-decoration: underline;
+	cursor: pointer;
 	&:hover {
 		color: #e50011;
 	}
@@ -321,6 +323,7 @@ const GoLogin = styled.p`
 	color: #6b6462;
 	margin-left: 0.7rem;
 	text-decoration: underline;
+	cursor: pointer;
 	&:hover {
 		color: #e50011;
 	}
@@ -344,4 +347,5 @@ const SocialLogoBox = styled.div`
 const SocialLogo = styled.img`
 	width: 3.6rem;
 	height: 3.6rem;
+	cursor: pointer;
 `;

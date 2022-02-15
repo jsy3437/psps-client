@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
 import * as _user from '../controller/user';
 import UserData from '../components/PaymentPage/UserData';
-import ProductData from '../components/PaymentPage/productData';
+import ProductData from '../components/PaymentPage/ProductData';
 import logo from '../images/red-logo.svg';
 import Footer from '../components/Footer';
 
+import { payment_request } from '../payments';
+import { useHistory } from 'react-router-dom';
+
 const PaymentPage = () => {
+	const history = useHistory();
+	const location = useLocation();
 	const [user, setUser] = useState('');
 	const [checked, setChecked] = useState(false);
 	const [receiveUserName, setReceiveUserName] = useState('');
@@ -17,6 +23,9 @@ const PaymentPage = () => {
 	const [detailAddr, setDetailAddr] = useState('');
 	const [receiveUserRequest, setReceiveUserRequest] = useState('');
 	const [postcodeOpen, setPostcodeOpen] = useState(false);
+	const paymentProducts = location.state.paymentProducts;
+	const productName = location.state.productName;
+	const total_amount = location.state.total_amount;
 
 	useEffect(() => {
 		if (!!!user) {
@@ -28,7 +37,26 @@ const PaymentPage = () => {
 			});
 		}
 	}, []);
-	console.log('dd', user);
+
+	const onOrder = () => {
+		const name =
+			paymentProducts.length === 1
+				? productName
+				: `${productName} 외 ${paymentProducts.length - 1}건`;
+
+		const impData = {
+			buyer_name: user.name,
+			buyer_email: user.email,
+			buyer_tel: user.phone_number,
+			buyer_addr: user.address,
+			name,
+			// TODO 테스트 끝나고 나면 금액 바꿔주기
+			// amount: total_price + deliveryPrice,
+			amount: 100,
+		};
+
+		payment_request(impData, paymentProducts);
+	};
 
 	return (
 		<div id="container">
@@ -52,7 +80,13 @@ const PaymentPage = () => {
 					setReceiveUserPhNumber={setReceiveUserPhNumber}
 					setReceiveUserRequest={setReceiveUserRequest}
 				/>
-				<ProductData />
+				<ProductData
+					paymentProducts={paymentProducts}
+					total_amount={total_amount}
+				/>
+				<BtnBox>
+					<SubmitButton onClick={onOrder}> 주문하기</SubmitButton>
+				</BtnBox>
 			</Container>
 			<Footer />
 		</div>
@@ -78,4 +112,26 @@ const Title = styled.h2`
 	font-family: 'kr-b';
 	letter-spacing: -1.2px;
 	margin: 1rem auto;
+`;
+const BtnBox = styled.div`
+	width: fit-content;
+	margin: auto;
+`;
+const SubmitButton = styled.button`
+	width: 34.6rem;
+	height: 6.2rem;
+	border-radius: 4px;
+	font-size: 2.1rem;
+	font-family: 'kr-r';
+	letter-spacing: -0.84px;
+	border: none;
+	transition: all 200ms ease;
+	background-color: #221814;
+	color: #fff;
+	margin: 6.05rem auto 0;
+
+	&:hover {
+		background-color: #e50011;
+		color: #fff;
+	}
 `;

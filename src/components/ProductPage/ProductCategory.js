@@ -17,10 +17,7 @@ const ProductCategory = (props) => {
 		<ProductCategoryWrap>
 			<PartWrap>
 				{category.mainCategories.map((el, idx) => (
-					<PartList
-						key={idx}
-						active={props.part === el}
-						onClick={onChangePart}>
+					<PartList key={idx} active={props.part === el} onClick={onChangePart}>
 						{el}
 					</PartList>
 				))}
@@ -33,7 +30,8 @@ const ProductCategory = (props) => {
 							(idx === 0 && props.subPart === null) ||
 							(idx > 0 && props.subPart === el)
 						}
-						onClick={onChangeSubPart}>
+						onClick={onChangeSubPart}
+					>
 						{el}
 					</SubPartList>
 				))}
@@ -68,15 +66,16 @@ const PartWrap = styled.ul`
 const PartList = styled.li`
 	width: 12rem;
 	height: 7rem;
-	line-height: 7rem;
+	line-height: 6.5rem;
 	text-align: center;
 	font-size: 1.8rem;
 	font-family: 'kr-r';
 	color: #221814;
+	padding: 0.3rem;
 	letter-spacing: -0.72px;
 	${(props) =>
 		props.active &&
-		`font-family:'kr-b'; border:3px solid #E50011; border-radius:4px;`}
+		`font-family:'kr-b'; border:3px solid #E50011; border-radius:4px; padding:0`}
 `;
 const SubPartWrap = styled.ul`
 	height: 2.6rem;

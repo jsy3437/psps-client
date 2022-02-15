@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { regexp } from '../../data/regexp';
 import * as _user from '../../controller/user';
 import { user_login } from '../../modules/user';
-import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
-import { useDispatch } from 'react-redux';
 
 const ThirdStep = (props) => {
 	const dispatch = useDispatch();
@@ -20,9 +20,9 @@ const ThirdStep = (props) => {
 	const [confirmSend, setConfirmSend] = useState(false);
 	const [confirm_number, setConfirm_number] = useState('');
 	const [check, setCheck] = useState({
-		name: true,
-		phone_number: true,
-		// confirm_number: true,
+		name: false,
+		phone_number: false,
+		confirm_number: false,
 	});
 	const [isSubmit, setIsSubmit] = useState(false);
 
@@ -38,6 +38,7 @@ const ThirdStep = (props) => {
 	const goBack = () => {
 		props.setStep(1);
 	};
+
 	const nameController = (e) => {
 		regexp.name.test(e.target.value)
 			? setCheck({ ...check, name: true })
@@ -45,33 +46,47 @@ const ThirdStep = (props) => {
 		return setName(e.target.value);
 	};
 	const phoneNumberController = (e) => {
-		regexp.phone_number.test(e.target.value)
-			? setCheck({ ...check, phone_number: true })
-			: setCheck({ ...check, phone_number: false });
-		return setPhone_number(e.target.value);
+		if (phone_number.length === 11) {
+			return;
+		} else {
+			regexp.phone_number.test(e.target.value)
+				? setCheck({ ...check, phone_number: true })
+				: setCheck({ ...check, phone_number: false });
+			return setPhone_number(e.target.value);
+		}
 	};
 	const confirmController = (e) => {
-		// regexp.confirm_number.test.test(e.target.value)
-		// 	? setCheck({ ...check, confirm_number: true })
-		// 	: setCheck({ ...check, confirm_number: false });
 		return setConfirm_number(e.target.value);
 	};
 
 	const getConfirmNumber = () => {
+		console.log({ phone_number });
 		if (phone_number.length === 11) {
-			// 인증하기
-			alert('인증번호 1234');
+			_user.send_sms({ phone_number }).then((res) => {
+				if (res.data.success) {
+					alert('인증번호가 발송되었습니다.');
+					confirmNumberInput.current.focus();
+				} else {
+					alert('인증번호 발송에 실패했습니다. 다시 시도해주세요.');
+				}
+			});
 			setConfirmSend(true);
-		} else {
-			return alert('휴대폰 번호를 정확하게 입력해주세요.');
 		}
 	};
 	const checkConfirmNumber = () => {
 		if (confirmSend) {
-			// 인증번호와 입력된 값이 같을 경우
-			return alert('인증 확인되었습니다.');
-			// 아닐 경우
-			// return alert('인증번호를 확인해주세요.');
+			const data = {
+				phone_number,
+				code: confirm_number,
+			};
+			_user.check_sms(data).then((res) => {
+				if (res.data.success) {
+					setCheck({ ...check, confirm_number: true });
+					return alert('인증 확인되었습니다.');
+				} else {
+					return alert('인증번호를 확인해주세요.');
+				}
+			});
 		}
 	};
 
@@ -85,12 +100,10 @@ const ThirdStep = (props) => {
 			setCheck({ ...check, phone_number: false });
 			alert('휴대폰번호를 확인해주세요');
 			phoneNumberInput.current.focus();
-		} else if (!confirmSend) {
-			alert('휴대전화 인증을 해주세요');
-		}
-		// else if(인증번호가 안맞으면){
-		// }
-		else {
+		} else if (!check.confirm_number) {
+			alert('휴대폰번호 인증을 확인해주세요');
+			confirmNumberInput.current.focus();
+		} else {
 			const data = {
 				email,
 				password,
@@ -134,6 +147,7 @@ const ThirdStep = (props) => {
 						type="number"
 						ref={phoneNumberInput}
 						onChange={phoneNumberController}
+						value={phone_number}
 						placeholder="'-'을 제외한 휴대폰 번호를 입력해주세요."
 					/>
 					{isSubmit && !check.phone_number && (
@@ -149,6 +163,7 @@ const ThirdStep = (props) => {
 				<Items>
 					<ItemTitle>인증번호</ItemTitle>
 					<ItemInput
+						type="number"
 						ref={confirmNumberInput}
 						onChange={confirmController}
 						placeholder="인증번호를 입력해주세요"
@@ -166,11 +181,7 @@ const ThirdStep = (props) => {
 					</CheckButton>
 				</Items>
 
-				<SubmitButton
-					enter
-					// onClick={goNext}
-					onClick={onSubmit}
-				>
+				<SubmitButton enter onClick={onSubmit}>
 					가입하기
 				</SubmitButton>
 				<SubmitButton back onClick={goBack}>
@@ -263,9 +274,10 @@ const CheckButton = styled.button`
 	border-radius: 4px;
 	border: 1px solid #c6c6c6;
 	background-color: unset;
+	cursor: default !important;
 	${(props) =>
 		(props.active || props.send) &&
-		`border: 2px solid #111a31;color:#111a31; cursor:pointer`}
+		`border: 2px solid #111a31;color:#111a31; cursor:pointer !important;`}
 `;
 const SubmitButton = styled.button`
 	width: 34.6rem;

@@ -74,7 +74,9 @@ const Navbar = () => {
 						</RightSecondList>
 						<RightSecondList onClick={goCart}>
 							장바구니
-							<CartCount>{cartCount && cartCount}</CartCount>
+							{cartCount && cartCount.length !== 0 ? (
+								<CartCount>{cartCount && cartCount}</CartCount>
+							) : null}
 						</RightSecondList>
 					</RightSecond>
 				</NavbarRight>

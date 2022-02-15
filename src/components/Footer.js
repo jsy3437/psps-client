@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 
 import * as info from '../config';
+import { useHistory } from 'react-router-dom';
 
 const Footer = () => {
+	const history = useHistory();
 	const headLeft = ['이용약관', '개인정보처리방침'];
-	const headRight = ['자주묻는질문', '문의하기'];
+	const headRight = ['자주묻는질문'];
 	const bodyRight = [
 		['T', info.COMPANY_CONTACT],
 		['M', info.OWNER_CONTACT],
@@ -18,6 +20,10 @@ const Footer = () => {
 
 	const onBusinessNumber = () => {
 		window.open('https://api.makinet.kr/uploads/사업자등록증.jpg', '_blank');
+	};
+
+	const goService = () => {
+		history.push('/service');
 	};
 
 	return (
@@ -33,7 +39,7 @@ const Footer = () => {
 					</FooterHeadLeft>
 					<FooterHeadRight>
 						{headRight.map((el, idx) => (
-							<HeadRightButton key={idx} effect={idx === 1}>
+							<HeadRightButton key={idx} effect={idx === 1} onClick={goService}>
 								{el}
 							</HeadRightButton>
 						))}
