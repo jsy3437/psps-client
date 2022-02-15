@@ -46,7 +46,7 @@ const ThirdStep = (props) => {
 		return setName(e.target.value);
 	};
 	const phoneNumberController = (e) => {
-		if (phone_number.length === 11) {
+		if (isNaN(e.target.value)) {
 			return;
 		} else {
 			regexp.phone_number.test(e.target.value)
@@ -56,7 +56,11 @@ const ThirdStep = (props) => {
 		}
 	};
 	const confirmController = (e) => {
-		return setConfirm_number(e.target.value);
+		if (isNaN(e.target.value)) {
+			return;
+		} else {
+			return setConfirm_number(e.target.value);
+		}
 	};
 
 	const getConfirmNumber = () => {
@@ -144,8 +148,9 @@ const ThirdStep = (props) => {
 				<Items>
 					<ItemTitle>휴대폰번호</ItemTitle>
 					<ItemInput
-						type="number"
+						type="text"
 						ref={phoneNumberInput}
+						maxLength="11"
 						onChange={phoneNumberController}
 						value={phone_number}
 						placeholder="'-'을 제외한 휴대폰 번호를 입력해주세요."
@@ -163,8 +168,10 @@ const ThirdStep = (props) => {
 				<Items>
 					<ItemTitle>인증번호</ItemTitle>
 					<ItemInput
-						type="number"
+						type="text"
+						maxLength="6"
 						ref={confirmNumberInput}
+						value={confirm_number}
 						onChange={confirmController}
 						placeholder="인증번호를 입력해주세요"
 					/>
