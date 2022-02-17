@@ -21,11 +21,11 @@ export const homeCategories = [
 		src: meat,
 	},
 	{
-		title: '건강/음료',
+		title: '건강·음료',
 		src: tea,
 	},
 	{
-		title: '생활/주방',
+		title: '생활·주방',
 		src: dish,
 	},
 	{

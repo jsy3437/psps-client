@@ -133,7 +133,7 @@ const ThirdStep = (props) => {
 		<Container>
 			<RegisterInside>
 				<LogoImg alt="logo" src={logo} />
-				<Title>품생품사 회원가입-정보입력</Title>
+				<Title>품생품사 회원가입 - 정보입력</Title>
 				<Items>
 					<ItemTitle>이름</ItemTitle>
 					<ItemInput

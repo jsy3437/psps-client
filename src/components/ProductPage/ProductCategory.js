@@ -23,18 +23,19 @@ const ProductCategory = (props) => {
 				))}
 			</PartWrap>
 			<SubPartWrap>
-				{props.subPartArr.map((el, idx) => (
-					<SubPartList
-						key={idx}
-						active={
-							(idx === 0 && props.subPart === null) ||
-							(idx > 0 && props.subPart === el)
-						}
-						onClick={onChangeSubPart}
-					>
-						{el}
-					</SubPartList>
-				))}
+				{props.subPartArr &&
+					props.subPartArr.map((el, idx) => (
+						<SubPartList
+							key={idx}
+							active={
+								(idx === 0 && props.subPart === null) ||
+								(idx > 0 && props.subPart === el)
+							}
+							onClick={onChangeSubPart}
+						>
+							{el}
+						</SubPartList>
+					))}
 			</SubPartWrap>
 		</ProductCategoryWrap>
 	);

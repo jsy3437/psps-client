@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import * as _product from '../controller/product';
 import * as _category from '../data/category';
 import ProductBanner from '../components/ProductPage/ProductBanner';
@@ -9,7 +10,6 @@ import Induce from '../components/Induce';
 import Footer from '../components/Footer';
 import Spinner from '../components/Spinner';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
 
 const ProductPage = () => {
 	const location = useLocation();
@@ -21,6 +21,12 @@ const ProductPage = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
+		if (location.state) {
+			setPart(location.state);
+		}
+	}, []);
+
+	useEffect(() => {
 		setIsLoading(true);
 		let isSubscribed = true;
 		_product.get_list(part, subPart, page).then((res) => {
@@ -29,17 +35,12 @@ const ProductPage = () => {
 				setTotal(res.data.total);
 			}
 		});
+
 		setIsLoading(false);
 		return () => {
 			isSubscribed = false;
 		};
 	}, [part, subPart, page]);
-
-	useEffect(() => {
-		if (location) {
-			setPart(location.state);
-		}
-	}, []);
 
 	const subPartArr = useMemo(() => {
 		const _part = _category.part;
