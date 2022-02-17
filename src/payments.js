@@ -1,5 +1,5 @@
 import * as _payment from './controller/payment';
-export const payment_request = (impData, paymentProduct) => {
+export const payment_request = (impData, paymentProduct, pasteAddrChecked) => {
 	const IMP = window.IMP;
 	IMP.init('iamport'); // 가맹점 식별코드자리
 
@@ -16,6 +16,7 @@ export const payment_request = (impData, paymentProduct) => {
 						imp_result: rsp,
 						payment_products: paymentProduct,
 						delivery_price: 3000,
+						paste_add: pasteAddrChecked,
 					})
 					.then((res) => {
 						const { success } = res.data;

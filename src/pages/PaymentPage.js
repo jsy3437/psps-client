@@ -16,6 +16,7 @@ const PaymentPage = () => {
 	const location = useLocation();
 	const [user, setUser] = useState('');
 	const [checked, setChecked] = useState(false);
+	const [pasteAddrChecked, setPasteAddrChecked] = useState(true);
 	const [receiveUserName, setReceiveUserName] = useState('');
 	const [receiveUserPhNumber, setReceiveUserPhNumber] = useState('');
 	const [postAddr, setPostAddr] = useState('');
@@ -48,14 +49,15 @@ const PaymentPage = () => {
 			buyer_name: user.name,
 			buyer_email: user.email,
 			buyer_tel: user.phone_number,
-			buyer_addr: user.address,
+			buyer_addr: postAddr + '/' + detailAddr,
+			buyer_postcode: postZoneCode,
 			name,
 			// TODO 테스트 끝나고 나면 금액 바꿔주기
 			// amount: total_price + deliveryPrice,
 			amount: 100,
 		};
 
-		payment_request(impData, paymentProducts);
+		payment_request(impData, paymentProducts, pasteAddrChecked);
 	};
 
 	return (
@@ -67,12 +69,15 @@ const PaymentPage = () => {
 					user={user}
 					checked={checked}
 					setChecked={setChecked}
+					pasteAddrChecked={pasteAddrChecked}
+					setPasteAddrChecked={setPasteAddrChecked}
 					postcodeOpen={postcodeOpen}
 					setPostcodeOpen={setPostcodeOpen}
 					postAddr={postAddr}
 					setPostAddr={setPostAddr}
 					postZoneCode={postZoneCode}
 					setPostZoneCode={setPostZoneCode}
+					detailAddr={detailAddr}
 					setDetailAddr={setDetailAddr}
 					receiveUserName={receiveUserName}
 					setReceiveUserName={setReceiveUserName}

@@ -30,7 +30,7 @@ const ProductPage = () => {
 		setIsLoading(true);
 		let isSubscribed = true;
 		_product.get_list(part, subPart, page).then((res) => {
-			console.log(res.data);
+			console.log('res.data', res.data);
 			if (isSubscribed && res.data.success) {
 				setList(res.data.product_list);
 				setTotal(res.data.total);

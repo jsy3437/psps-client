@@ -12,22 +12,32 @@ const UserData = (props) => {
 		'연락처를 입력해주세요.',
 		'내용을 입력해주세요.',
 	];
+	// const
 
 	const onCheck = () => {
 		props.setChecked(!props.checked);
 		if (props.checked) {
 			props.setReceiveUserName('');
 			props.setReceiveUserPhNumber('');
-			{
-				props.user.address && props.setPostAddr('');
+			if (props.user.postcode) {
+				props.setPostAddr('');
+				props.setDetailAddr('');
+				props.setPostZoneCode('');
 			}
 		} else {
 			props.setReceiveUserName(props.user.name);
 			props.setReceiveUserPhNumber(props.user.phone_number);
-			{
-				props.user.address && props.setPostAddr(props.user.address);
+			if (props.user.postcode) {
+				const addrArr = props.user.address.split('/');
+				props.setPostAddr(addrArr[0]);
+				props.setDetailAddr(addrArr[1]);
+				props.setPostZoneCode(props.user.postcode);
 			}
 		}
+	};
+
+	const onPasteAddrCheck = () => {
+		props.setPasteAddrChecked(!props.pasteAddrChecked);
 	};
 
 	const onPostcodeClose = () => {
@@ -122,7 +132,6 @@ const UserData = (props) => {
 									우편번호 찾기
 								</InputPostcodeBtn>
 							</InputAndPostcode>
-
 							<ReceiveUserInput
 								value={props.postAddr && props.postAddr}
 								long
@@ -133,9 +142,18 @@ const UserData = (props) => {
 								long
 								destination
 								ref={inputDetailAddr}
+								value={props.detailAddr}
 								placeholder={props.postAddr && '상세주소를 입력해주세요'}
 								onChange={changeDetailAddr}
 							></ReceiveUserInput>
+							<PasteAddrCheckBox>
+								<CheckImg
+									alt="check button"
+									src={props.pasteAddrChecked ? checkImg : uncheckImg}
+									onClick={onPasteAddrCheck}
+								/>
+								<CheckInfo addr>기본 배송지로 저장</CheckInfo>
+							</PasteAddrCheckBox>
 						</InputBox>
 					</DataBox>
 
@@ -299,4 +317,10 @@ const PostcodeCloseBtn = styled.button`
 	padding: 0.2rem 0.4rem;
 	border-radius: 5px;
 	border: 1px solid #fff;
+`;
+const PasteAddrCheckBox = styled.div`
+	text-align: start;
+	margin-top: -1rem;
+	display: flex;
+	align-items: center;
 `;
