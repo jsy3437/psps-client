@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import BannerImg from '../../images/product_banner1.png';
 
 const ProductBanner = (props) => {
 	return (
 		<ProductBannerWrap>
-			<ProductBannerImg alt='배너' src={BannerImg} />
+			<ProductBannerImg alt="배너" src={props.subPartArr.bnnImg} />
 			<ProductBannerTitle>{`품질 좋은 ${props.part}`}</ProductBannerTitle>
 		</ProductBannerWrap>
 	);
@@ -31,4 +30,3 @@ const ProductBannerTitle = styled.h1`
 	color: #fff;
 	position: absolute;
 `;
-  

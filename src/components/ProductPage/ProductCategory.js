@@ -24,7 +24,7 @@ const ProductCategory = (props) => {
 			</PartWrap>
 			<SubPartWrap>
 				{props.subPartArr &&
-					props.subPartArr.map((el, idx) => (
+					props.subPartArr.arr.map((el, idx) => (
 						<SubPartList
 							key={idx}
 							active={

@@ -12,7 +12,6 @@ const UserData = (props) => {
 		'연락처를 입력해주세요.',
 		'내용을 입력해주세요.',
 	];
-	// const
 
 	const onCheck = () => {
 		props.setChecked(!props.checked);
@@ -67,10 +66,6 @@ const UserData = (props) => {
 	const ChangeRequest = (e) => {
 		props.setReceiveUserRequest(e.target.value);
 	};
-	// console.log(props.checked);
-
-	// console.log('props.user.name', props.user.name);
-	// console.log('props.receiveUserName', props.receiveUserName);
 
 	return (
 		<UserDataWrap>

@@ -48,7 +48,7 @@ const ProductPage = () => {
 		for (let i = 0; i < _part.length; i++) {
 			if (_part[i].title === part) {
 				setSubPart(null);
-				return _part[i].arr;
+				return _part[i];
 			}
 		}
 	}, [part]);
@@ -57,7 +57,7 @@ const ProductPage = () => {
 		<Spinner />
 	) : (
 		<div id="container">
-			<ProductBanner part={part} />
+			<ProductBanner part={part} subPartArr={subPartArr} />
 			<ProductCategory
 				part={part}
 				subPart={subPart}
