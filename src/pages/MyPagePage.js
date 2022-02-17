@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import MenuSelect from '../components/MyPage/MenuSelect';
 import OrderHistory from '../components/MyPage/OrderHistory';
 import Footer from '../components/Footer';
+import * as _payment from '../controller/payment';
 
 const MyPagePage = () => {
 	const [menu, setMenu] = useState('주문내역');
+	const [paymentList, setPaymentList] = useState('');
+
+	useEffect(() => {
+		_payment.get_list().then((res) => {
+			console.log(res.data);
+			const { success, payment_list } = res.data;
+			if (success) {
+				setPaymentList(payment_list);
+			}
+		});
+	}, []);
 
 	return (
-		<div id='container'>
+		<div id="container">
 			<Container>
 				<MyPageInside>
-					<LogoImg alt='logo' src={logo} />
+					<LogoImg alt="logo" src={logo} />
 					<Title>마이페이지</Title>
 					<MenuSelect menu={menu} setMenu={setMenu} />
 					{menu === '주문내역' && <OrderHistory />}

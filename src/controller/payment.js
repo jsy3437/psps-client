@@ -2,9 +2,9 @@ import axios from 'axios';
 import { ADDRESS } from '../config';
 
 const instance = axios.create({
-	proxy: `${ADDRESS}`,
-	baseURL: '/payment',
-	// baseURL: `${ADDRESS}/payment`,
+	// proxy: `${ADDRESS}`,
+	// baseURL: '/payment',
+	baseURL: `${ADDRESS}/payment`,
 	withCredentials: true,
 });
 
@@ -16,4 +16,8 @@ const errorMessage = () => {
 export const payment = async (paymentData) => {
 	console.log('dd', paymentData);
 	return await instance.post('/', paymentData).catch(errorMessage);
+};
+
+export const get_list = async () => {
+	return await instance.get('/list').catch(errorMessage);
 };
