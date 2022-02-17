@@ -9,6 +9,13 @@ const ProductList = (props) => {
 	const goDetail = (product_id) => {
 		history.push(`/detail/${product_id}`);
 	};
+	console.log('img_addr', IMG_ADDRESS);
+	console.log('list', props.list);
+	// IMG ADDRESS
+	//  https://api.makinet.kr
+	// el.image
+	// uploads/product/img.jpg
+	// https://api.makinet.kr/uploads/product/img.jpg
 
 	return (
 		<ProductContainer>
