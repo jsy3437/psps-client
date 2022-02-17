@@ -229,6 +229,7 @@ const InfoModalWrap = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 999;
 `;
 const InfoBox = styled.div`
 	width: 60rem;
@@ -252,7 +253,4 @@ const InfoText = styled.p`
 	letter-spacing: -0.56px;
 	color: #221814;
 	white-space: pre-line;
-`;
-const InfoCloseBtn = styled.button`
-	width: 10rem;
 `;

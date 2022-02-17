@@ -27,7 +27,7 @@ const MyPagePage = () => {
 					<LogoImg alt="logo" src={logo} />
 					<Title>마이페이지</Title>
 					<MenuSelect menu={menu} setMenu={setMenu} />
-					{menu === '주문내역' && <OrderHistory />}
+					{menu === '주문내역' && <OrderHistory paymentList={paymentList} />}
 				</MyPageInside>
 				<Footer />
 			</Container>

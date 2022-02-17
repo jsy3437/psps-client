@@ -4,7 +4,7 @@ import ex1 from '../../images/ex1.png';
 import OrderDetail from './OrderDetail';
 import PageSelector from '../PageSelector';
 
-const OrderHistory = () => {
+const OrderHistory = (props) => {
 	const list = Array(5).fill({
 		date: '2021.12.24',
 		name: '맛있고 품질 좋은 양배추같이 생긴 풀이파리 맛있고 품질 좋은 양배추같이 생긴 풀이파리 맛있고 품질 좋은 양배추같이 생긴 풀이파리 ',
@@ -35,25 +35,28 @@ const OrderHistory = () => {
 			)}
 			{list.length > 0 && !viewDetail && (
 				<OrderHistoryWrap>
-					{list.map((el, idx) => (
-						<OrderHistoryList key={idx}>
-							<ListImg alt="product img" src={ex1} />
-							<ListContents>
-								<OrderTop>
-									<OrderTopText date>{`${el.date} 주문`}</OrderTopText>
-									<OrderTopText state>{el.state}</OrderTopText>
-								</OrderTop>
-								<ProductName>{el.name}</ProductName>
-								<ProductOption>{el.option}</ProductOption>
-								<ProductCount>{`${el.price}원 / ${el.count}개`}</ProductCount>
-							</ListContents>
-							<ListButtons>
-								<ListButton>배송조회</ListButton>
-								<ListButton onClick={goDetail}>주문 상세보기</ListButton>
-								<ListButton last>교환, 반품 신청</ListButton>
-							</ListButtons>
-						</OrderHistoryList>
-					))}
+					{props.paymentList &&
+						props.paymentList.map((el, idx) => (
+							<OrderHistoryList key={idx}>
+								<ListImg alt="product img" src={ex1} />
+								<ListContents>
+									<OrderTop>
+										<OrderTopText date>{`${
+											el.create_at.split('T')[0]
+										} 주문`}</OrderTopText>
+										<OrderTopText state>{el.process}</OrderTopText>
+									</OrderTop>
+									<ProductName>{el.name}</ProductName>
+									{/* <ProductOption>{el.option}</ProductOption> */}
+									<ProductCount>{`${el.amount}원`}</ProductCount>
+								</ListContents>
+								<ListButtons>
+									<ListButton>배송조회</ListButton>
+									<ListButton onClick={goDetail}>주문 상세보기</ListButton>
+									<ListButton last>교환, 반품 신청</ListButton>
+								</ListButtons>
+							</OrderHistoryList>
+						))}
 					<PageSelector
 						style={{ margin: '5.2rem 0 5.5rem 0' }}
 						total={total}
