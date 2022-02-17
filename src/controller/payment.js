@@ -21,3 +21,7 @@ export const payment = async (paymentData) => {
 export const get_list = async () => {
 	return await instance.get('/list').catch(errorMessage);
 };
+
+export const get_detail = async (payment_id) => {
+	return await instance.get(`/detail/${payment_id}`).catch(errorMessage);
+};

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
 import OrderDetail from './OrderDetail';
 import PageSelector from '../PageSelector';
+import * as _payment from '../../controller/payment';
 
 const OrderHistory = (props) => {
 	const list = Array(5).fill({
@@ -17,11 +18,9 @@ const OrderHistory = (props) => {
 	const [page, setPage] = useState(1);
 	const [total, setTotal] = useState(list.length);
 	const [viewDetail, setViewDetail] = useState(false);
-	const [detail, setDetail] = useState({});
 
-	const goDetail = (e) => {
-		console.log(e.target);
-		// setViewDetail()
+	const goDetail = (payment_id) => {
+		setViewDetail(payment_id);
 	};
 
 	return (
@@ -52,7 +51,13 @@ const OrderHistory = (props) => {
 								</ListContents>
 								<ListButtons>
 									<ListButton>배송조회</ListButton>
-									<ListButton onClick={goDetail}>주문 상세보기</ListButton>
+									<ListButton
+										onClick={() => {
+											goDetail(el.payment_id);
+										}}
+									>
+										주문 상세보기
+									</ListButton>
 									<ListButton last>교환, 반품 신청</ListButton>
 								</ListButtons>
 							</OrderHistoryList>
@@ -66,7 +71,9 @@ const OrderHistory = (props) => {
 					<GrayBackground />
 				</OrderHistoryWrap>
 			)}
-			{list.length > 0 && viewDetail && <OrderDetail detail={detail} />}
+			{list.length > 0 && viewDetail && (
+				<OrderDetail viewDetail={viewDetail} setViewDetail={setViewDetail} />
+			)}
 		</MyPageInside>
 	);
 };

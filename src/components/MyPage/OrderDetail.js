@@ -1,70 +1,133 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
+import * as _payment from '../../controller/payment';
 
-const OrderDetail = () => {
-	const receiverInfo = [
-		{ title: '받는분', contents: '최준영' },
-		{ title: '연락처', contents: '01050074116' },
-		{
-			title: '받는주소',
-			contents: '(15461)경기도 안산시 단원구 광덕서로 102 406-7호(고잔동)',
-		},
-		{ title: '배송요청사항', contents: '문 앞에 두고 문자 주세요.' },
-	];
-	const paymentInfo = [
-		{ title: '결제수단', contents: '비씨카드' },
-		{ title: '총 상품가격', contents: '7130원' },
-		{ title: '배송비', contents: '0원' },
-		{ title: '총 결제금액', contents: '7130원' },
-	];
+const OrderDetail = (props) => {
+	const receiverInfo = ['받는분', '연락처', '받는주소', '배송요청사항'];
+	const paymentInfo = ['결제수단', '총 상품가격', '배송비', '총 결제금액'];
+	const [detailPayment, setDetailPayment] = useState('');
+	const [detailProductList, setDetailProductList] = useState('');
+
+	useEffect(() => {
+		let isSubscribed = true;
+		if (props.viewDetail !== false) {
+			_payment.get_detail(props.viewDetail).then((res) => {
+				console.log(res.data);
+				const { success, payment, payment_product_list } = res.data;
+				if (isSubscribed && success) {
+					setDetailProductList(payment_product_list);
+					setDetailPayment(payment);
+				}
+			});
+		}
+		return () => {
+			isSubscribed = false;
+		};
+	}, [props.viewDetail]);
+
+	const goHistory = () => {
+		props.setViewDetail(false);
+	};
+
+	const goReceipt = () => {
+		window.open(detailPayment.receipt_url, '_blank');
+	};
 
 	return (
 		<OrderDetailWrap>
 			<Item first>
 				<TitleBox>
-					<Title>주문내역</Title>
+					<Title top>주문내역</Title>
 					<OrderNumber>{`주문번호 1300123123`}</OrderNumber>
 				</TitleBox>
-				<OrderInfo>
-					<ProductImg alt='product img' src={ex1} />
-					<OrderContents>
-						<OrderTop>
-							<OrderTopText date>{`2021.12.25 주문`}</OrderTopText>
-							<OrderTopText state>{`배송준비중`}</OrderTopText>
-						</OrderTop>
-						<ProductName>{`맛있고 품질 좋은 양배추같이 생긴 풀이파리`}</ProductName>
-						<ProductOption>{`무농약`}</ProductOption>
-						<ProductCount>{`7130원 / 5개`}</ProductCount>
-					</OrderContents>
-					<Buttons>
-						<Button>배송조회</Button>
-						<Button red>목록으로</Button>
-						<Button red>교환, 반품 신청</Button>
-					</Buttons>
-				</OrderInfo>
+
+				{detailProductList &&
+					detailProductList.map((el, idx) => (
+						<OrderInfo key={idx}>
+							<ProductImg alt="product img" src={ex1} />
+							<OrderContents>
+								<OrderTop>
+									<OrderTopText date>
+										{el.create_at.split('T')[0]} 주문
+									</OrderTopText>
+									<OrderTopText state>{`배송준비중`}</OrderTopText>
+								</OrderTop>
+								<ProductName>{el.name.split('|')[0]}</ProductName>
+								<ProductOption>{el.name.split('|')[1]}</ProductOption>
+								<ProductCount>{`${el.amount.toLocaleString()}원 / ${
+									el.quantity
+								}개`}</ProductCount>
+							</OrderContents>
+							<Buttons>
+								<Button>배송조회</Button>
+								<Button red onClick={goHistory}>
+									목록으로
+								</Button>
+								<Button red>교환, 반품 신청</Button>
+							</Buttons>
+						</OrderInfo>
+					))}
 			</Item>
 			<Item>
 				<Title>받는 분</Title>
-				<InfoWrap>
-					{receiverInfo.map((el, idx) => (
-						<InfoList key={idx}>
-							<InfoItem>{el.title}</InfoItem>
-							<InfoContents>{el.contents}</InfoContents>
+				{detailPayment && (
+					<InfoWrap>
+						<InfoList>
+							<InfoItem>{receiverInfo[0]}</InfoItem>
+							<InfoContents>{detailPayment.del_name}</InfoContents>
 						</InfoList>
-					))}
-				</InfoWrap>
+
+						<InfoList>
+							<InfoItem>{receiverInfo[1]}</InfoItem>
+							<InfoContents>{detailPayment.del_tel}</InfoContents>
+						</InfoList>
+
+						<InfoList>
+							<InfoItem>{receiverInfo[2]}</InfoItem>
+							<InfoContents>{detailPayment.del_addr}</InfoContents>
+						</InfoList>
+
+						<InfoList>
+							<InfoItem>{receiverInfo[3]}</InfoItem>
+							<InfoContents>{detailPayment.del_req}</InfoContents>
+						</InfoList>
+					</InfoWrap>
+				)}
 			</Item>
 			<Item>
 				<Title>결제 정보</Title>
-				<InfoWrap>
-					{paymentInfo.map((el, idx) => (
-						<InfoList key={idx}>
-							<InfoItem>{el.title}</InfoItem>
-							<InfoContents>{el.contents}</InfoContents>
+				{detailPayment && (
+					<InfoWrap>
+						<InfoList>
+							<InfoItem>{paymentInfo[0]}</InfoItem>
+							<InfoContents>{detailPayment.card_name}</InfoContents>
 						</InfoList>
-					))}
-				</InfoWrap>
+
+						<InfoList>
+							<InfoItem>{paymentInfo[1]}</InfoItem>
+							<InfoContents>
+								{detailPayment.amount.toLocaleString()}
+							</InfoContents>
+						</InfoList>
+
+						<InfoList>
+							<InfoItem>{paymentInfo[2]}</InfoItem>
+							<InfoContents>
+								{detailPayment.del_price.toLocaleString()}
+							</InfoContents>
+						</InfoList>
+
+						<InfoList>
+							<InfoItem>{paymentInfo[3]}</InfoItem>
+							<InfoContents>
+								{(
+									detailPayment.amount - detailPayment.del_price
+								).toLocaleString()}
+							</InfoContents>
+						</InfoList>
+					</InfoWrap>
+				)}
 			</Item>
 			<Item>
 				<Title>결제영수증 정보</Title>
@@ -73,14 +136,16 @@ const OrderDetail = () => {
 						<InfoReceiptText>
 							해당 주문건에 대해 구매 카드영수증 확인이 가능합니다.
 						</InfoReceiptText>
-						<InfoReceiptButton>카드영수증</InfoReceiptButton>
+						<InfoReceiptButton onClick={goReceipt}>
+							카드영수증
+						</InfoReceiptButton>
 					</InfoReceiptList>
-					<InfoReceiptList>
+					{/* <InfoReceiptList>
 						<InfoReceiptText>
 							해당 주문건에 대해 거래명세서 확인이 가능합니다.
 						</InfoReceiptText>
 						<InfoReceiptButton>거래명세서</InfoReceiptButton>
-					</InfoReceiptList>
+					</InfoReceiptList> */}
 				</InfoWrap>
 			</Item>
 			<Button red>주문내역 삭제</Button>
@@ -114,6 +179,8 @@ const Title = styled.p`
 	font-family: 'kr-b';
 	letter-spacing: -0.72px;
 	color: #000000;
+	margin-bottom: 1.25rem;
+	${(props) => props.top && `margin-bottom:0`}
 `;
 const OrderNumber = styled.p`
 	margin-left: 2rem;
@@ -213,9 +280,9 @@ const Button = styled.button`
 `;
 const InfoWrap = styled.ul`
 	width: 100%;
-	height: 13.7rem;
+	/* height: 13.7rem; */
 	margin: 0;
-	padding: 0.85rem 0;
+	padding: 1.65rem 0;
 	border-top: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 `;
@@ -252,7 +319,7 @@ const InfoReceiptText = styled.p`
 const InfoReceiptButton = styled.button`
 	width: 8rem;
 	height: 2.7rem;
-	line-height: 2.7rem;
+	line-height: 2.5rem;
 	font-size: 1.2rem;
 	font-family: 'kr-r';
 	color: #8e8e8e;

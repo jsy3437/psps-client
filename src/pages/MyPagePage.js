@@ -12,14 +12,14 @@ const MyPagePage = () => {
 
 	useEffect(() => {
 		_payment.get_list().then((res) => {
-			console.log(res.data);
+			// console.log(res.data);
 			const { success, payment_list } = res.data;
 			if (success) {
 				setPaymentList(payment_list);
 			}
 		});
 	}, []);
-
+	// console.log(paymentList);
 	return (
 		<div id="container">
 			<Container>

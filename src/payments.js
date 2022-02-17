@@ -3,7 +3,7 @@ export const payment_request = (
 	impData,
 	paymentProduct,
 	pasteAddrChecked,
-	delivery_req
+	delivery
 ) => {
 	const IMP = window.IMP;
 	IMP.init('iamport'); // 가맹점 식별코드자리
@@ -22,7 +22,7 @@ export const payment_request = (
 						payment_products: paymentProduct,
 						delivery_price: 3000,
 						paste_add: pasteAddrChecked,
-						delivery_req,
+						delivery,
 					})
 					.then((res) => {
 						const { success } = res.data;
