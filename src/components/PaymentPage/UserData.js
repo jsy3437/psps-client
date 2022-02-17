@@ -64,7 +64,7 @@ const UserData = (props) => {
 	};
 
 	const ChangeRequest = (e) => {
-		props.setReceiveUserRequest(e.target.value);
+		props.setDelivery_req(e.target.value);
 	};
 
 	return (
@@ -156,6 +156,8 @@ const UserData = (props) => {
 						<DataTitle>배송요청사항</DataTitle>
 						<ReceiveUserInput
 							long
+							type="text"
+							maxLength="25"
 							placeholder={receiveUserPlaceholder[2]}
 							onChange={ChangeRequest}
 						></ReceiveUserInput>

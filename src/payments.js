@@ -1,5 +1,10 @@
 import * as _payment from './controller/payment';
-export const payment_request = (impData, paymentProduct, pasteAddrChecked) => {
+export const payment_request = (
+	impData,
+	paymentProduct,
+	pasteAddrChecked,
+	delivery_req
+) => {
 	const IMP = window.IMP;
 	IMP.init('iamport'); // 가맹점 식별코드자리
 
@@ -17,11 +22,11 @@ export const payment_request = (impData, paymentProduct, pasteAddrChecked) => {
 						payment_products: paymentProduct,
 						delivery_price: 3000,
 						paste_add: pasteAddrChecked,
+						delivery_req,
 					})
 					.then((res) => {
 						const { success } = res.data;
 						if (success) {
-							console.log(res);
 							window.location.href = `http://localhost:3000/payment/result/${res.data.payment_id}`;
 						} else {
 							console.error('결제 완료, 서버 전달 실패');

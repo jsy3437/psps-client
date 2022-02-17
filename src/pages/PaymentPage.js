@@ -22,7 +22,7 @@ const PaymentPage = () => {
 	const [postAddr, setPostAddr] = useState('');
 	const [postZoneCode, setPostZoneCode] = useState('');
 	const [detailAddr, setDetailAddr] = useState('');
-	const [receiveUserRequest, setReceiveUserRequest] = useState('');
+	const [delivery_req, setDelivery_req] = useState('');
 	const [postcodeOpen, setPostcodeOpen] = useState(false);
 	const paymentProducts = location.state.paymentProducts;
 	const productName = location.state.productName;
@@ -57,7 +57,7 @@ const PaymentPage = () => {
 			amount: 100,
 		};
 
-		payment_request(impData, paymentProducts, pasteAddrChecked);
+		payment_request(impData, paymentProducts, pasteAddrChecked, delivery_req);
 	};
 
 	return (
@@ -83,7 +83,7 @@ const PaymentPage = () => {
 					setReceiveUserName={setReceiveUserName}
 					receiveUserPhNumber={receiveUserPhNumber}
 					setReceiveUserPhNumber={setReceiveUserPhNumber}
-					setReceiveUserRequest={setReceiveUserRequest}
+					setDelivery_req={setDelivery_req}
 				/>
 				<ProductData
 					paymentProducts={paymentProducts}
