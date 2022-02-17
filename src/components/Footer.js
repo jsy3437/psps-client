@@ -22,7 +22,10 @@ const Footer = () => {
 	const infoRight = `평일:08:30~17:30\n점심:12:00~13:30\n(토,일 및 공휴일 휴일)`;
 
 	const onBusinessNumber = () => {
-		window.open('https://api.makinet.kr/uploads/사업자등록증.jpg', '_blank');
+		window.open(
+			'http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1348675676',
+			'_blank'
+		);
 	};
 
 	const goService = () => {
