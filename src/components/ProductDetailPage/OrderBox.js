@@ -5,7 +5,6 @@ import * as _basket from '../../controller/basket';
 import angle_down from '../../images/angle-down.svg';
 import increase from '../../images/count-plus.svg';
 import decrease from '../../images/count-minus.svg';
-import { payment_request } from '../../payments';
 
 const OrderBox = (props) => {
 	const [openOption, setOpenOption] = useState(false);

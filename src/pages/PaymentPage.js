@@ -17,12 +17,12 @@ const PaymentPage = () => {
 	const [user, setUser] = useState('');
 	const [checked, setChecked] = useState(false);
 	const [pasteAddrChecked, setPasteAddrChecked] = useState(true);
-	const [receiveUserName, setReceiveUserName] = useState('');
-	const [receiveUserPhNumber, setReceiveUserPhNumber] = useState('');
+	const [del_name, setDel_name] = useState('');
+	const [del_tel, setDel_tel] = useState('');
 	const [postAddr, setPostAddr] = useState('');
 	const [postZoneCode, setPostZoneCode] = useState('');
 	const [detailAddr, setDetailAddr] = useState('');
-	const [delivery_req, setDelivery_req] = useState('');
+	const [del_req, setDel_req] = useState('');
 	const [postcodeOpen, setPostcodeOpen] = useState(false);
 	const paymentProducts = location.state.paymentProducts;
 	const productName = location.state.productName;
@@ -56,8 +56,16 @@ const PaymentPage = () => {
 			// amount: total_price + deliveryPrice,
 			amount: 100,
 		};
+		const delivery = {
+			del_name,
+			del_tel,
+			del_addr: postAddr + '/' + detailAddr,
+			del_postcode: postZoneCode,
+			del_price: 3000,
+			del_req,
+		};
 
-		payment_request(impData, paymentProducts, pasteAddrChecked, delivery_req);
+		payment_request(impData, paymentProducts, pasteAddrChecked, delivery);
 	};
 
 	return (
@@ -79,11 +87,11 @@ const PaymentPage = () => {
 					setPostZoneCode={setPostZoneCode}
 					detailAddr={detailAddr}
 					setDetailAddr={setDetailAddr}
-					receiveUserName={receiveUserName}
-					setReceiveUserName={setReceiveUserName}
-					receiveUserPhNumber={receiveUserPhNumber}
-					setReceiveUserPhNumber={setReceiveUserPhNumber}
-					setDelivery_req={setDelivery_req}
+					del_name={del_name}
+					setDel_name={setDel_name}
+					del_tel={del_tel}
+					setDel_tel={setDel_tel}
+					setDel_req={setDel_req}
 				/>
 				<ProductData
 					paymentProducts={paymentProducts}

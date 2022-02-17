@@ -16,16 +16,16 @@ const UserData = (props) => {
 	const onCheck = () => {
 		props.setChecked(!props.checked);
 		if (props.checked) {
-			props.setReceiveUserName('');
-			props.setReceiveUserPhNumber('');
+			props.setDel_name('');
+			props.setDel_tel('');
 			if (props.user.postcode) {
 				props.setPostAddr('');
 				props.setDetailAddr('');
 				props.setPostZoneCode('');
 			}
 		} else {
-			props.setReceiveUserName(props.user.name);
-			props.setReceiveUserPhNumber(props.user.phone_number);
+			props.setDel_name(props.user.name);
+			props.setDel_tel(props.user.phone_number);
 			if (props.user.postcode) {
 				const addrArr = props.user.address.split('/');
 				props.setPostAddr(addrArr[0]);
@@ -52,19 +52,19 @@ const UserData = (props) => {
 	};
 
 	const ChangeName = (e) => {
-		props.setReceiveUserName(e.target.value);
+		props.setDel_name(e.target.value);
 	};
 
 	const ChangePhNumber = (e) => {
 		if (isNaN(e.target.value)) {
 			return;
 		} else {
-			props.setReceiveUserPhNumber(e.target.value);
+			props.setDel_tel(e.target.value);
 		}
 	};
 
 	const ChangeRequest = (e) => {
-		props.setDelivery_req(e.target.value);
+		props.setDel_req(e.target.value);
 	};
 
 	return (
@@ -101,7 +101,7 @@ const UserData = (props) => {
 						<DataTitle>이름</DataTitle>
 						<ReceiveUserInput
 							placeholder={receiveUserPlaceholder[0]}
-							value={props.receiveUserName}
+							value={props.del_name}
 							onChange={ChangeName}
 						></ReceiveUserInput>
 					</DataBox>
@@ -112,7 +112,7 @@ const UserData = (props) => {
 							maxLength="11"
 							placeholder={receiveUserPlaceholder[1]}
 							onChange={ChangePhNumber}
-							value={props.receiveUserPhNumber}
+							value={props.del_tel}
 						></ReceiveUserInput>
 					</DataBox>
 					<DataBox>
