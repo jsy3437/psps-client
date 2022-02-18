@@ -27,7 +27,8 @@ export const payment_request = (
 					.then((res) => {
 						const { success } = res.data;
 						if (success) {
-							window.location.href = `http://localhost:3000/payment/result/${res.data.payment_id}`;
+							// window.location.href = `http://localhost:3000/payment/result/${res.data.payment_id}`;
+							window.location.href = `http://makinet.kr/payment/result/${res.data.payment_id}`;
 						} else {
 							console.error('결제 완료, 서버 전달 실패');
 						}
