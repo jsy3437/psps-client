@@ -131,11 +131,13 @@ const IntroTextPoint = styled.p`
 	color: #221814;
 `;
 const IntroWorryBox = styled.div`
-	width: 120rem;
+	width: 125rem;
 	margin: -23rem auto 0;
 	${(props) => props.top && `text-align:start; z-index:99`}
-	${(props) => props.middle && `text-align:center; z-index:98;`}
-	${(props) => props.bottom && `text-align:end; z-index:97;`}
+	${(props) =>
+		props.middle && `text-align:center; margin: -24rem auto 0;z-index:98;`}
+	${(props) =>
+		props.bottom && `text-align:end; margin: -22rem auto 0; z-index:97;`}
 `;
 const WorryImg = styled.img`
 	width: 38rem;
