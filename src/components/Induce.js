@@ -2,23 +2,18 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import img from '../images/induce.png';
 import * as _banner from '../controller/banner';
+import { useHistory } from 'react-router-dom';
 
 const Induce = () => {
-	const [subBannerList, setSubBannerList] = useState([]);
+	const history = useHistory();
 
-	useEffect(() => {
-		_banner.get_list('광고').then((res) => {
-			console.log(res.data);
-			const { success, banner_list } = res.data;
-			if (success) {
-				setSubBannerList(banner_list);
-			}
-		});
-	}, []);
+	const goShopping = () => {
+		history.push('/product');
+	};
 
 	return (
 		<InduceContainer>
-			<InduceImg alt="" src={img} />
+			<InduceImg alt="" src={img} onClick={goShopping} />
 		</InduceContainer>
 	);
 };
@@ -35,4 +30,5 @@ const InduceImg = styled.img`
 	width: 120rem;
 	height: 25rem;
 	margin-top: 4rem;
+	cursor: pointer;
 `;
