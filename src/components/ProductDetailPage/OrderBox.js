@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
 import * as _basket from '../../controller/basket';
@@ -10,6 +10,10 @@ const OrderBox = (props) => {
 	const [openOption, setOpenOption] = useState(false);
 	const [option, setOption] = useState(props.optionList[0]);
 	const [count, setCount] = useState(1);
+
+	useEffect(() => {
+		setOption(props.optionList[0]);
+	}, [props.optionList]);
 
 	const onChangeOption = (option) => {
 		setOption(option);
@@ -35,9 +39,12 @@ const OrderBox = (props) => {
 		_basket.add_cart(data).then((res) => {
 			const { success } = res.data;
 			if (success) {
-				alert(`제품명: ${props.detail.title}, 옵션: ${option.title}`);
+				alert(
+					`제품명: ${props.detail.title}\n옵션: ${option.title}\n장바구니에 담겼습니다.`
+				);
 				setOption(props.optionList[0]);
 			} else {
+				alert(`장바구니에 이미 존재하는 상품입니다.`);
 			}
 		});
 	};

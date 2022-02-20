@@ -12,7 +12,6 @@ const SubBanner = () => {
 
 	useEffect(() => {
 		_banner.get_list('광고').then((res) => {
-			console.log(res.data);
 			const { success, banner_list } = res.data;
 			if (success) {
 				setBannerList(banner_list);
@@ -43,7 +42,6 @@ const SubBanner = () => {
 			}
 		}, 4000);
 	};
-	console.log(bnnNum);
 
 	return (
 		<SubBannerContainer>
