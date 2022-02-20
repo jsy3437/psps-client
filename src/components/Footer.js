@@ -226,6 +226,7 @@ const InfoModalWrap = styled.div`
 	background-color: #0000005a;
 	position: fixed;
 	top: 0;
+	left: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
