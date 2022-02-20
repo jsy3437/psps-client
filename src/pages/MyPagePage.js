@@ -5,21 +5,22 @@ import MenuSelect from '../components/MyPage/MenuSelect';
 import OrderHistory from '../components/MyPage/OrderHistory';
 import Footer from '../components/Footer';
 import * as _payment from '../controller/payment';
+import { useLocation } from 'react-router-dom';
 
 const MyPagePage = () => {
+	const location = useLocation();
 	const [menu, setMenu] = useState('주문내역');
 	const [paymentList, setPaymentList] = useState('');
 
 	useEffect(() => {
 		_payment.get_list().then((res) => {
-			// console.log(res.data);
 			const { success, payment_list } = res.data;
 			if (success) {
 				setPaymentList(payment_list);
 			}
 		});
 	}, []);
-	// console.log(paymentList);
+	console.log(location.state);
 	return (
 		<div id="container">
 			<Container>
@@ -27,7 +28,9 @@ const MyPagePage = () => {
 					<LogoImg alt="logo" src={logo} />
 					<Title>마이페이지</Title>
 					<MenuSelect menu={menu} setMenu={setMenu} />
-					{menu === '주문내역' && <OrderHistory paymentList={paymentList} />}
+					{menu === '주문내역' && (
+						<OrderHistory paymentList={paymentList} location={location} />
+					)}
 				</MyPageInside>
 				<Footer />
 			</Container>

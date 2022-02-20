@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
 import OrderDetail from './OrderDetail';
@@ -6,33 +6,31 @@ import PageSelector from '../PageSelector';
 import * as _payment from '../../controller/payment';
 
 const OrderHistory = (props) => {
-	const list = Array(5).fill({
-		date: '2021.12.24',
-		name: '맛있고 품질 좋은 양배추같이 생긴 풀이파리 맛있고 품질 좋은 양배추같이 생긴 풀이파리 맛있고 품질 좋은 양배추같이 생긴 풀이파리 ',
-		state: '배송준비중',
-		contents: '7130원/5개',
-		option: '무농약',
-		price: '7130',
-		count: '5',
-	});
 	const [page, setPage] = useState(1);
-	const [total, setTotal] = useState(list.length);
+	const [total, setTotal] = useState(props.paymentList.length);
 	const [viewDetail, setViewDetail] = useState(false);
 
 	const goDetail = (payment_id) => {
 		setViewDetail(payment_id);
 	};
 
+	useEffect(() => {
+		if (props.location.state) {
+			setViewDetail(props.location.state);
+		}
+	}, [props.location.state]);
+	console.log('history', props.location.state);
+
 	return (
 		<MyPageInside>
-			{list.length === 0 && (
+			{props.paymentList.length === 0 && (
 				<OrderHistoryWrap>
 					<NothingText>현재 주문하신 내역이 없습니다.</NothingText>
 					<GoShoppingButton>쇼핑하기</GoShoppingButton>
 					<GrayBackground />
 				</OrderHistoryWrap>
 			)}
-			{list.length > 0 && !viewDetail && (
+			{props.paymentList.length > 0 && !viewDetail && (
 				<OrderHistoryWrap>
 					{props.paymentList &&
 						props.paymentList.map((el, idx) => (
@@ -40,9 +38,9 @@ const OrderHistory = (props) => {
 								<ListImg alt="product img" src={ex1} />
 								<ListContents>
 									<OrderTop>
-										<OrderTopText date>{`${
-											el.create_at.split('T')[0]
-										} 주문`}</OrderTopText>
+										<OrderTopText date>
+											{`${el.create_at.split('T')[0]} 주문`}
+										</OrderTopText>
 										<OrderTopText state>{el.process}</OrderTopText>
 									</OrderTop>
 									<ProductName>{el.name}</ProductName>
@@ -71,7 +69,7 @@ const OrderHistory = (props) => {
 					<GrayBackground />
 				</OrderHistoryWrap>
 			)}
-			{list.length > 0 && viewDetail && (
+			{props.paymentList.length > 0 && viewDetail && (
 				<OrderDetail viewDetail={viewDetail} setViewDetail={setViewDetail} />
 			)}
 		</MyPageInside>

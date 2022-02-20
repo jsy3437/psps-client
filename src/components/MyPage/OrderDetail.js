@@ -49,7 +49,8 @@ const OrderDetail = (props) => {
 							<OrderContents>
 								<OrderTop>
 									<OrderTopText date>
-										{el.create_at.split('T')[0]} 주문
+										{detailPayment && detailPayment.create_at.split('T')[0]}{' '}
+										주문
 									</OrderTopText>
 									<OrderTopText state>{`배송준비중`}</OrderTopText>
 								</OrderTop>

@@ -19,7 +19,7 @@ const PaymentResultPage = () => {
 	};
 
 	const goOrderDetail = () => {
-		history.push('/members');
+		history.push({ pathname: '/members', state: payment_id });
 	};
 
 	return (
