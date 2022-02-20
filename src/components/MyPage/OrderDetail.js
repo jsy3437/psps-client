@@ -141,12 +141,6 @@ const OrderDetail = (props) => {
 							카드영수증
 						</InfoReceiptButton>
 					</InfoReceiptList>
-					{/* <InfoReceiptList>
-						<InfoReceiptText>
-							해당 주문건에 대해 거래명세서 확인이 가능합니다.
-						</InfoReceiptText>
-						<InfoReceiptButton>거래명세서</InfoReceiptButton>
-					</InfoReceiptList> */}
 				</InfoWrap>
 			</Item>
 			<Button red>주문내역 삭제</Button>
@@ -158,7 +152,6 @@ export default OrderDetail;
 
 const OrderDetailWrap = styled.div`
 	width: 69.7rem;
-	height: 100rem;
 	display: flex;
 	flex-direction: column;
 	position: relative;
