@@ -59,9 +59,11 @@ const CartPage = () => {
 			} else if (!allChecked && productCheckTest(true)) {
 				setAllChecked(!allChecked);
 			}
+			settingOrderCalc();
 		}
 	}, [checked]);
 
+	// Test if there is a checked state different from allChecked
 	function productCheckTest(boolean) {
 		const test = checked.filter((el) => el === boolean);
 		if (!boolean && test.length !== 0) {
@@ -72,6 +74,20 @@ const CartPage = () => {
 		return false;
 	}
 
+	// trans checked -> resetting calc
+	function settingOrderCalc() {
+		let tempCalc = { total: 0, total_discount: 0, total_price: 0 };
+		checked.map((el, idx) => {
+			if (el) {
+				tempCalc.total += cartList[idx].total;
+				tempCalc.total_discount += cartList[idx].total_discount;
+				tempCalc.total_price += cartList[idx].total_price;
+			}
+		});
+		setOrderCalc(tempCalc);
+	}
+
+	// make all checked or all unchecked
 	const onAllCheck = () => {
 		if (allChecked) {
 			setChecked(new Array(cartCount).fill(false));
@@ -84,6 +100,7 @@ const CartPage = () => {
 		history.push('/product');
 	};
 
+	// select and remove submit
 	const onSelectRemove = () => {
 		let basketIdArr = [];
 		checked.map((el, idx) => {
@@ -95,7 +112,6 @@ const CartPage = () => {
 		basketIdArr.map((el, idx) => {
 			_basket.remove_cart(el).then((res) => {
 				const { success, basket_list, count, calc } = res.data;
-				console.log(res.data);
 				if (success && basketIdArr.length - 1 === idx) {
 					setCartList(basket_list);
 					setCartCount(count);
