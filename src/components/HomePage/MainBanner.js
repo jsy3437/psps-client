@@ -16,7 +16,6 @@ const MainBanner = () => {
 
 	useEffect(() => {
 		_banner.get_list('메인').then((res) => {
-			console.log(res.data);
 			const { success, banner_list } = res.data;
 			if (success) {
 				setBannerList(banner_list);
