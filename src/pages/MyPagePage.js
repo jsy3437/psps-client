@@ -6,6 +6,7 @@ import OrderHistory from '../components/MyPage/OrderHistory';
 import Footer from '../components/Footer';
 import * as _payment from '../controller/payment';
 import { useLocation } from 'react-router-dom';
+import Privacy from '../components/MyPage/Privacy';
 
 const MyPagePage = () => {
 	const location = useLocation();
@@ -20,7 +21,7 @@ const MyPagePage = () => {
 			}
 		});
 	}, []);
-	console.log(location.state);
+
 	return (
 		<div id="container">
 			<Container>
@@ -31,6 +32,7 @@ const MyPagePage = () => {
 					{menu === '주문내역' && (
 						<OrderHistory paymentList={paymentList} location={location} />
 					)}
+					{menu === '개인정보관리' && <Privacy />}
 				</MyPageInside>
 				<Footer />
 			</Container>
