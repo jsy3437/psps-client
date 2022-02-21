@@ -2,7 +2,6 @@ import REACT, { useState } from 'react';
 import DaumPostCode from 'react-daum-postcode';
 
 const DaumPost = (props, {}) => {
-	console.log(props.inputDetailAddr);
 	const style = {
 		width: '100%',
 		height: '100%',

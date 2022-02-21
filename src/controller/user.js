@@ -34,3 +34,12 @@ export const send_sms = async (smsData) => {
 export const check_sms = async (smsData) => {
 	return await instance.post('/sms/check', smsData).catch(errorMessage);
 };
+export const change_tel = async (userData) => {
+	return await instance.patch('/tel', userData).catch(errorMessage);
+};
+export const change_password = async (userData) => {
+	return await instance.patch('/pw', userData).catch(errorMessage);
+};
+export const change_address = async (userData) => {
+	return await instance.patch('/addr', userData).catch(errorMessage);
+};

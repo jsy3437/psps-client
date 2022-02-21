@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import * as _user from '../../controller/user';
-import ChangePw from './ChangePw';
+import ChangeAddr from './Change/ChangeAddr';
+import ChangePw from './Change/ChangePw';
+import ChangeTel from './Change/ChangeTel';
 
 const Privacy = () => {
 	const [user, setUser] = useState('');
+
 	const [changePWState, setChangePWState] = useState(false);
+	const [changeTelState, setChangeTelState] = useState(false);
+	const [changeAddrState, setChangeAddrState] = useState(false);
 
 	useEffect(() => {
 		_user.get_me().then((res) => {
 			const { success, user } = res.data;
 			if (success) {
-				console.log(res.data);
 				setUser(user);
 			}
 		});
-	}, []);
+	}, [changeAddrState]);
 
 	const onChangePw = () => {
 		setChangePWState(true);
+	};
+
+	const onchangeTel = () => {
+		setChangeTelState(true);
+	};
+
+	const onChangeAddr = () => {
+		setChangeAddrState(true);
 	};
 
 	return (
@@ -42,22 +54,35 @@ const Privacy = () => {
 						<PrivacyItem>
 							<PrivacyTitle>휴대폰</PrivacyTitle>
 							<PrivacyText>{user.phone_number}</PrivacyText>
+							<Button tel onClick={onchangeTel}>
+								변경하기
+							</Button>
 						</PrivacyItem>
 						<PrivacyItem>
 							<PrivacyTitle>배송지</PrivacyTitle>
 							<PrivacyText>
-								{user &&
+								{user.address &&
 									`(${user.postcode}) ${user.address.split('/')[0]} ${
 										user.address.split('/')[1]
 									}`}
 							</PrivacyText>
-							<Button addr>수정하기</Button>
+							<Button addr={user.address} onClick={onChangeAddr}>
+								{user.address ? '수정하기' : '등록하기'}
+							</Button>
 						</PrivacyItem>
 					</PrivacyBox>
 					<SecessionBtn>회원탈퇴</SecessionBtn>
 				</PrivacyWrap>
 			)}
-			{changePWState && <ChangePw />}
+			{changePWState && <ChangePw setChangePWState={setChangePWState} />}
+			{changeAddrState && (
+				<ChangeAddr
+					user={user}
+					setUser={setUser}
+					setChangeAddrState={setChangeAddrState}
+				/>
+			)}
+			{changeTelState && <ChangeTel setChangeTelState={setChangeTelState} />}
 		</Container>
 	);
 };
@@ -107,7 +132,7 @@ const Button = styled.button`
 	border: 1px solid #8e8e8e;
 	border-radius: 4px;
 	color: #8e8e8e;
-	${(props) => props.addr && `margin-left:2rem;`}
+	${(props) => (props.addr || props.tel ? `margin-left:2rem;` : null)}
 `;
 const SecessionBtn = styled.p`
 	font-size: 1.4rem;

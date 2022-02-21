@@ -26,10 +26,13 @@ const CartPage = () => {
 	const [checkCount, setCheckCount] = useState('');
 	const [orderCalc, setOrderCalc] = useState('');
 
+	// console.log(cartList);
+
 	useEffect(() => {
 		setIsLoading(true);
 		let isSubscribed = true;
 		_basket.get_list().then((res) => {
+			console.log(res.data);
 			const { success, count, basket_list, calc } = res.data;
 			if (isSubscribed && success) {
 				setCartList(basket_list);

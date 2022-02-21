@@ -223,7 +223,7 @@ const BodyRightText = styled.p`
 const InfoModalWrap = styled.div`
 	width: 100vw;
 	height: 100vh;
-	background-color: #0000005a;
+	background-color: #000000ba;
 	position: fixed;
 	top: 0;
 	left: 0;
