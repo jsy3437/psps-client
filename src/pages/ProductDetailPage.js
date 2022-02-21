@@ -17,7 +17,6 @@ const ProductDetailPage = () => {
 			let isSubscribed = true;
 			_product.get_detail(product_id).then((res) => {
 				const { success, product, product_option_list } = res.data;
-				// console.log(res.data);
 				if (isSubscribed && success) {
 					setDetail(product);
 					setOptionList([...product_option_list]);

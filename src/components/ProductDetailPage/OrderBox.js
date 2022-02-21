@@ -21,6 +21,7 @@ const OrderBox = (props) => {
 	const onChangeOption = (option) => {
 		setOption(option);
 		setOpenOption(false);
+		setCount(1);
 	};
 
 	const decreaseCount = () => {
@@ -55,6 +56,8 @@ const OrderBox = (props) => {
 		});
 	};
 
+	console.log(option);
+
 	return (
 		<BoxContainer>
 			<Box>
@@ -70,9 +73,26 @@ const OrderBox = (props) => {
 				<BoxRight>
 					<RightInside>
 						<RightTitle>{props.detail && props.detail.title}</RightTitle>
-						<RightPrice>
-							{option && `${(option.price - option.discount) * count}원`}
-						</RightPrice>
+						<RightPriceBox>
+							{option && option.discount !== 0 ? (
+								<RightExisting>
+									기존가
+									<RightExistingSpan>
+										{`${option && option.price.toLocaleString()}원`}
+									</RightExistingSpan>
+								</RightExisting>
+							) : null}
+							<RightPrice>
+								{option &&
+									((option.price - option.discount) * count).toLocaleString()}
+								<RightPriceWon>원</RightPriceWon>
+							</RightPrice>
+						</RightPriceBox>
+						<RightDeliveryPrice>
+							배송비
+							<DeliveryPriceSpan>3,000</DeliveryPriceSpan>원
+						</RightDeliveryPrice>
+
 						{!openOption ? (
 							<RightOptionBox option>
 								{option && option.title}
@@ -111,14 +131,14 @@ const OrderBox = (props) => {
 								<RightButtonImg alt="button" src={increase} />
 							</RightButton>
 						</RightOptionBox>
-						<UnitPriceBox>
-							<UnitPriceLeft>
-								{option && `기준가 ${option.price - option.discount}원 (수량)`}
-							</UnitPriceLeft>
-							<UnitPriceRight>수량 당 단가</UnitPriceRight>
-						</UnitPriceBox>
-						<OrderButton>주문하기</OrderButton>
-						<PutOnCartButton onClick={onAddCart}>장바구니 담기</PutOnCartButton>
+
+						<SubmitButton orderBtn>{`${
+							option &&
+							((option.price - option.discount) * count + 3000).toLocaleString()
+						}원 / 주문하기`}</SubmitButton>
+						<SubmitButton cartBtn onClick={onAddCart}>
+							장바구니 담기
+						</SubmitButton>
 					</RightInside>
 				</BoxRight>
 			</Box>
@@ -172,20 +192,51 @@ const RightTitle = styled.p`
 	font-family: 'kr-b';
 	color: #221814;
 `;
+const RightDeliveryPrice = styled.p`
+	margin-top: 1.1rem;
+	text-align: end;
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	letter-spacing: -0.56px;
+	color: #6b6462;
+`;
+const DeliveryPriceSpan = styled.span`
+	font-size: 1.8rem;
+	font-family: 'ro-r';
+	margin-left: 1rem;
+`;
+const RightPriceBox = styled.div`
+	display: flex;
+	align-items: baseline;
+	justify-content: end;
+`;
 const RightPrice = styled.p`
 	margin-top: 2rem;
 	height: 3.7rem;
 	line-height: 3.7rem;
 	text-align: right;
 	font-size: 3rem;
-	font-family: 'kr-b';
+	font-family: 'ro-b';
 	color: #e50011;
+`;
+const RightPriceWon = styled.span`
+	font-size: 2rem;
+`;
+const RightExisting = styled.p`
+	font-size: 1.4rem;
+	font-family: 'ro-r';
+	letter-spacing: -0.56px;
+	color: #a0a0a0;
+`;
+const RightExistingSpan = styled.span`
+	text-decoration: line-through;
+	margin: 0 0.5rem 0 0.3rem;
 `;
 const RightOptionListBox = styled.ul`
 	position: absolute;
-	top: 16.3rem;
+	top: 20.3rem;
 	width: 34.6rem;
-	height: 18.6rem;
+	max-height: 18.6rem;
 	display: flex;
 	flex-direction: column;
 	background: #ffffff;
@@ -194,8 +245,7 @@ const RightOptionListBox = styled.ul`
 	border-radius: 4px;
 	overflow-y: scroll;
 	z-index: 10;
-	/* border: 1px solid blue; */
-	/* 리스트 갯수에 따라 */
+	transition: all 200ms ease;
 `;
 const RightOptionList = styled.li`
 	width: 100%;
@@ -205,6 +255,7 @@ const RightOptionList = styled.li`
 	font-size: 1.8rem;
 	font-family: 'kr-r';
 	color: #221814;
+	cursor: pointer;
 	/* border: 1px solid blue; */
 	&:hover {
 		font-family: 'kr-b';
@@ -224,7 +275,7 @@ const RightOptionBox = styled.div`
 	border: 1px solid #c6c6c6;
 	border-radius: 4px;
 	text-align: center;
-	${(props) => props.option && `position:absolute; top:15.3rem;  `}
+	${(props) => props.option && `position:absolute; top:19.3rem;  `}
 	${(props) => props.option && `margin-top:2rem;`} 
 	${(props) => props.count && `margin-top:10.4rem;`}
 `;
@@ -256,27 +307,56 @@ const RightButtonImg = styled.img`
 	height: 100%;
 	display: flex;
 `;
-const UnitPriceBox = styled.div`
-	margin-top: 0.8rem;
-	margin-bottom: 2rem;
-	width: 100%;
-	height: 2.6rem;
-	line-height: 2.6rem;
-	display: flex;
-	justify-content: space-between;
-`;
-const UnitPriceLeft = styled.p`
-	font-size: 1.8rem;
-	font-family: 'kr-r';
-	color: #6b6462;
-`;
-const UnitPriceRight = styled.p`
-	font-size: 1.4rem;
-	font-family: 'kr-r';
-	color: #a0a0a0;
-`;
-const OrderButton = styled.button`
-	margin-bottom: 1.2rem;
+// const UnitPriceBox = styled.div`
+// 	margin-top: 0.8rem;
+// 	margin-bottom: 2rem;
+// 	width: 100%;
+// 	height: 2.6rem;
+// 	line-height: 2.6rem;
+// 	display: flex;
+// 	justify-content: space-between;
+// `;
+// const UnitPriceLeft = styled.p`
+// 	font-size: 1.8rem;
+// 	font-family: 'kr-r';
+// 	color: #6b6462;
+// `;
+// const UnitPriceRight = styled.p`
+// 	font-size: 1.4rem;
+// 	font-family: 'kr-r';
+// 	color: #a0a0a0;
+// `;
+// const OrderButton = styled.button`
+// 	margin: 2.5rem auto 1.2rem;
+// 	width: 34.6rem;
+// 	height: 6.2rem;
+// 	line-height: 6.2rem;
+// 	font-size: 2.4rem;
+// 	font-family: 'kr-r';
+// 	color: #fff;
+// 	letter-spacing: -0.96px;
+// 	border: none;
+// 	border-radius: 4px;
+// 	&:hover {
+// 		background-color: #e50011;
+// 	}
+// `;
+// const PutOnCartButton = styled.button`
+// 	width: 34.6rem;
+// 	height: 6.2rem;
+// 	line-height: 6.2rem;
+// 	font-size: 2.4rem;
+// 	font-family: 'kr-r';
+// 	letter-spacing: -0.96px;
+// 	border: none;
+// 	border: 1px solid #e50011;
+// 	border-radius: 4px;
+// 	&:hover {
+// 		background-color: #e50011;
+// 		color: #fff;
+// 	}
+// `;
+const SubmitButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;
 	line-height: 6.2rem;
@@ -287,23 +367,10 @@ const OrderButton = styled.button`
 	border: none;
 	background: #221814 0% 0% no-repeat padding-box;
 	border-radius: 4px;
-	&:hover {
-		background-color: #e50011;
-	}
-`;
-const PutOnCartButton = styled.button`
-	width: 34.6rem;
-	height: 6.2rem;
-	line-height: 6.2rem;
-	font-size: 2.4rem;
-	font-family: 'kr-r';
-	color: #e50011;
-	letter-spacing: -0.96px;
-	border: none;
-	border: 1px solid var(--unnamed-color-e50011);
-	background: #ffffff 0% 0% no-repeat padding-box;
-	border: 1px solid #e50011;
-	border-radius: 4px;
+	${(props) =>
+		props.cartBtn &&
+		`background: #ffffff 0% 0% no-repeat padding-box;	color: #e50011;	border: 1px solid #e50011;`}
+	${(props) => props.orderBtn && `margin: 2.5rem auto 1.2rem;`}
 	&:hover {
 		background-color: #e50011;
 		color: #fff;
