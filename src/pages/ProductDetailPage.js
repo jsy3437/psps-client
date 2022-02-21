@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { withRouter, useParams } from 'react-router-dom';
 import * as _product from '../controller/product';
 import OrderBox from '../components/ProductDetailPage/OrderBox';
@@ -9,6 +9,9 @@ import Footer from '../components/Footer';
 
 const ProductDetailPage = () => {
 	const { product_id } = useParams();
+	const selectRef = useRef();
+	const infoRef = useRef();
+	const detailRef = useRef();
 	const [detail, setDetail] = useState({});
 	const [optionList, setOptionList] = useState([]);
 
@@ -16,6 +19,7 @@ const ProductDetailPage = () => {
 		if (product_id) {
 			let isSubscribed = true;
 			_product.get_detail(product_id).then((res) => {
+				console.log(res.data);
 				const { success, product, product_option_list } = res.data;
 				if (isSubscribed && success) {
 					setDetail(product);
@@ -27,12 +31,21 @@ const ProductDetailPage = () => {
 			};
 		}
 	}, [product_id]);
-
+	console.log(optionList);
 	return (
 		<div id="container">
-			<OrderBox detail={detail} optionList={optionList} />
-			<ProductDetail detail={detail} />
-			<ProductInfoTable detail={detail} />
+			<OrderBox detail={detail} optionList={optionList} selectRef={selectRef} />
+			<ProductDetail
+				detail={detail}
+				detailRef={detailRef}
+				selectRef={selectRef}
+				infoRef={infoRef}
+			/>
+			<ProductInfoTable
+				detail={detail}
+				optionList={optionList}
+				infoRef={infoRef}
+			/>
 			<Induce />
 			<Footer />
 		</div>

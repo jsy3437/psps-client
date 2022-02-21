@@ -1,32 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
 
 const ProductDetail = (props) => {
 	const arr = ['상품선택', '상세설명', '상품정보'];
 	const [view, setView] = useState('상품선택');
+	const scroll = window.scrollY;
+
+	useEffect(() => {
+		window.addEventListener('scroll', listener);
+		return () => {
+			window.removeEventListener('scroll', listener);
+		};
+	});
+
+	const listener = (e) => {
+		const { pageYOffset } = e.target.defaultView;
+		// console.log(e.target.defaultView.pageYOffset);
+	};
 
 	const onChangeView = (e) => {
-		console.log(e);
+		const { innerText } = e.target;
+		let refEl;
+		setView(innerText);
+		switch (innerText) {
+			case arr[0]:
+				refEl = props.selectRef.current;
+				break;
+			case arr[1]:
+				refEl = props.detailRef.current;
+				break;
+			case arr[2]:
+				refEl = props.infoRef.current;
+				break;
+		}
+		return refEl.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start',
+		});
 	};
 
 	return (
-		<ProductDetailWrap>
-			<ProductDetailHead>
+		<ProductDetailWrap ref={props.detailRef}>
+			<ProductDetailHead></ProductDetailHead>
+			<ControllerBox>
 				<Controller>
 					{arr.map((el, idx) => (
-						<Switch
-							key={idx}
-							active={view === el}
-							onClick={() => {
-								onChangeView(el);
-							}}
-						>
+						<Switch key={idx} active={view === el} onClick={onChangeView}>
 							{el}
 						</Switch>
 					))}
 				</Controller>
-			</ProductDetailHead>
+			</ControllerBox>
+
 			<ProductDetailBody>
 				<DetailImg
 					alt="detail img"
@@ -44,8 +70,9 @@ const ProductDetail = (props) => {
 export default ProductDetail;
 
 const ProductDetailWrap = styled.div`
+	position: relative;
 	width: 192rem;
-	z-index: -5;
+	/* z-index: -5; */
 `;
 const ProductDetailHead = styled.div`
 	width: 192rem;
@@ -54,16 +81,22 @@ const ProductDetailHead = styled.div`
 	justify-content: center;
 	background-color: #e0e0e0;
 	position: relative;
+	z-index: -3;
+`;
+const ControllerBox = styled.div`
+	width: 100%;
+	position: absolute;
+	top: 22.7rem;
 `;
 const Controller = styled.ul`
 	width: 36rem;
 	height: 7rem;
 	display: flex;
-	position: absolute;
-	bottom: 3rem;
+	margin: auto;
 	background: #ffffff 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 10px #00000029;
 	border-radius: 4px;
+	z-index: 99;
 `;
 const Switch = styled.li`
 	width: 12rem;
@@ -79,7 +112,7 @@ const Switch = styled.li`
 		props.active &&
 		`border: 3px solid #E50011;
 		box-shadow: 0px 3px 6px #00000029;
-		border-radius: 4px;`}
+		border-radius: 4px; line-height:6.4rem;`}
 `;
 const ProductDetailBody = styled.div`
 	width: 192rem;

@@ -59,7 +59,7 @@ const OrderBox = (props) => {
 	console.log(option);
 
 	return (
-		<BoxContainer>
+		<BoxContainer ref={props.selectRef}>
 			<Box>
 				<BoxLeft>
 					<BoxLeftImg
