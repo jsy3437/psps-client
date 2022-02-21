@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import * as _basket from '../controller/basket';
+import { cart_remove } from '../modules/cart';
 
 import CartList from '../components/CartPage/CartList';
 import OrderBox from '../components/CartPage/OrderBox';
@@ -10,12 +11,13 @@ import logo from '../images/red-logo.svg';
 import checkImg from '../images/check_btn.svg';
 import uncheckImg from '../images/uncheck_btn.svg';
 import Footer from '../components/Footer';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '../components/Spinner';
 import { useHistory } from 'react-router-dom';
 
 const CartPage = () => {
 	const history = useHistory();
+	const dispatch = useDispatch();
 	const user = useSelector((state) => state.user);
 	const [cartCount, setCartCount] = useState('');
 	const [checked, setChecked] = useState([]);
@@ -25,8 +27,6 @@ const CartPage = () => {
 
 	const [checkCount, setCheckCount] = useState('');
 	const [orderCalc, setOrderCalc] = useState('');
-
-	// console.log(cartList);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -120,6 +120,7 @@ const CartPage = () => {
 					setCartCount(count);
 					setCheckCount(count);
 					setOrderCalc(calc);
+					dispatch(cart_remove(count));
 				} else {
 					console.log(idx);
 				}

@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 
 const Navbar = () => {
+	const cart = useSelector((state) => state.cart);
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const user = useSelector((state) => state.user);
@@ -20,7 +21,13 @@ const Navbar = () => {
 				setCartCount(count);
 			}
 		});
-	});
+	}, []);
+
+	useEffect(() => {
+		if (cart) {
+			setCartCount(cart.cartCount);
+		}
+	}, [cart]);
 
 	const goHome = () => {
 		history.push('/');

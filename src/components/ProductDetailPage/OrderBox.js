@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
 import * as _basket from '../../controller/basket';
+import { cart_newData } from '../../modules/cart';
 import angle_down from '../../images/angle-down.svg';
 import increase from '../../images/count-plus.svg';
 import decrease from '../../images/count-minus.svg';
+import { useDispatch } from 'react-redux';
 
 const OrderBox = (props) => {
+	const dispatch = useDispatch();
 	const [openOption, setOpenOption] = useState(false);
 	const [option, setOption] = useState(props.optionList[0]);
 	const [count, setCount] = useState(1);
@@ -19,9 +22,11 @@ const OrderBox = (props) => {
 		setOption(option);
 		setOpenOption(false);
 	};
+
 	const decreaseCount = () => {
 		count !== 1 && setCount(count - 1);
 	};
+
 	const increaseCount = () => {
 		// 재고량과 비교
 		setCount(count + 1);
@@ -35,14 +40,15 @@ const OrderBox = (props) => {
 			product_option_id: option.product_option_id,
 			quantity: count,
 		};
-
 		_basket.add_cart(data).then((res) => {
-			const { success } = res.data;
+			const { success, count } = res.data;
+			console.log(res.data);
 			if (success) {
 				alert(
 					`제품명: ${props.detail.title}\n옵션: ${option.title}\n장바구니에 담겼습니다.`
 				);
 				setOption(props.optionList[0]);
+				dispatch(cart_newData(count));
 			} else {
 				alert(`장바구니에 이미 존재하는 상품입니다.`);
 			}
