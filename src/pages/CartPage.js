@@ -24,7 +24,7 @@ const CartPage = () => {
 	const [allChecked, setAllChecked] = useState(true);
 	const [isLoading, setIsLoading] = useState(false);
 	const [cartList, setCartList] = useState([]);
-
+	const [supplierList, setSupplierList] = useState('');
 	const [checkCount, setCheckCount] = useState('');
 	const [orderCalc, setOrderCalc] = useState('');
 
@@ -32,15 +32,15 @@ const CartPage = () => {
 		setIsLoading(true);
 		let isSubscribed = true;
 		_basket.get_list().then((res) => {
-			console.log(res.data);
-			const { success, count, basket_list, calc } = res.data;
+			const { success, count, basket_list, calc, supplier_list } = res.data;
 			if (isSubscribed && success) {
 				setCartList(basket_list);
 				setCartCount(count);
 				setCheckCount(count);
 				setOrderCalc(calc);
+				setSupplierList(supplier_list);
 			} else {
-				console.log(res.data);
+				alert('잘못된 접근입니다');
 			}
 		});
 		setIsLoading(false);
@@ -154,6 +154,7 @@ const CartPage = () => {
 								user={user}
 								cartList={cartList}
 								checked={checked}
+								supplierList={supplierList}
 							/>
 						</OrderBoxBox>
 					</CartContentWrap>

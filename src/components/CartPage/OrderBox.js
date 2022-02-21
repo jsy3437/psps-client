@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -30,31 +30,47 @@ const OrderBox = (props) => {
 		});
 	};
 
+	console.log(props.supplierList);
 	return (
 		<OrderWrap>
-			<PriceBox>
-				<TitleAndPrice>
-					<PriceTitle>총 상품 금액</PriceTitle>
-					<Price color={'#e50011'}>
-						{orderCalc && orderCalc.total_price.toLocaleString()}원
-					</Price>
-				</TitleAndPrice>
-				<Price color={'#a0a0a0'}>
-					기존가 {orderCalc && orderCalc.total.toLocaleString()}원
-				</Price>
-				<Price color={'#a0a0a0'}>
-					할인금액 {orderCalc && orderCalc.total_discount.toLocaleString()}원
-				</Price>
-			</PriceBox>
-			<PriceBox>
+			{props.supplierList &&
+				props.supplierList.map((el, idx) => (
+					<PriceBox key={idx}>
+						<TitleAndPrice>
+							<PriceTitle>공급처</PriceTitle>
+
+							<Price color={'#A0A0A0'}>{el[0]}</Price>
+						</TitleAndPrice>
+						<TitleAndPrice>
+							<PriceTitle>총 상품 금액</PriceTitle>
+							<Price color={'#e50011'}>{el[1].amount.toLocaleString()}원</Price>
+						</TitleAndPrice>
+						<TitleAndPrice>
+							<PriceTitle>배송비</PriceTitle>
+							<Price color={'#e50011'}>
+								{deliveryPrice.toLocaleString()}원
+							</Price>
+						</TitleAndPrice>
+						{/* <Price color={'#a0a0a0'}>
+							기존가 {orderCalc && orderCalc.total.toLocaleString()}원
+						</Price>
+						<Price color={'#a0a0a0'}>
+							할인금액 {orderCalc && orderCalc.total_discount.toLocaleString()}
+							원
+						</Price> */}
+					</PriceBox>
+				))}
+			{/* <PriceBox>
 				<TitleAndPrice>
 					<PriceTitle>총 배송비</PriceTitle>
 					<Price color={'#e50011'}>3,000원</Price>
 				</TitleAndPrice>
-			</PriceBox>
+			</PriceBox> */}
 			<PredictionPriceTitle>예상 결제 금액</PredictionPriceTitle>
 			<PredictionPrice>
-				{(orderCalc && orderCalc.total_price + 3000).toLocaleString()}
+				{(
+					orderCalc && orderCalc.total_price + 3000 * props.supplierList.length
+				).toLocaleString()}
 				<PredictionPriceWon>원</PredictionPriceWon>
 			</PredictionPrice>
 			<SubmitButton productOrder onClick={goPayment}>
@@ -72,7 +88,7 @@ export default OrderBox;
 const OrderWrap = styled.div`
 	position: sticky;
 	width: 45.5rem;
-	height: 57.2rem;
+	/* height: 57.2rem; */
 	border: 1px solid #e0e0e0;
 	border-radius: 4px;
 	padding: 4rem 5.5rem;
@@ -140,7 +156,7 @@ const SubmitButton = styled.button`
 		`background-color:#221814; color:#fff ; margin-top:2rem `}
 	${(props) =>
 		props.shopping &&
-		`background-color:#fff; color: #E50011; border: 1px solid #E50011; margin-top:1.2rem ; margin-bottom:10rem;`};
+		`background-color:#fff; color: #E50011; border: 1px solid #E50011; margin-top:1.2rem ; margin-bottom:4rem;`};
 	&:hover {
 		background-color: #e50011;
 		color: #fff;
