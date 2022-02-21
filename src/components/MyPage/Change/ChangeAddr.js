@@ -135,10 +135,13 @@ const AddrInput = styled.input`
 	background-color: #fff;
 	font-size: 1.4rem;
 	letter-spacing: -0.28px;
-	margin-bottom: 1rem;
+	margin: 0.1rem 0.1rem 1.1rem;
 	${(props) => props.postcode && `width:23.8rem;`}
 	&::placeholder {
 		color: #8e8e8e;
+	}
+	&:focus {
+		margin: 0 0 1rem;
 	}
 `;
 const PostcodeBtn = styled.button`
@@ -159,6 +162,7 @@ const SubmitButton = styled.button`
 	letter-spacing: -0.96px;
 	color: #fff;
 	border-radius: 4px;
+	margin-top: 1.5rem;
 	${(props) =>
 		props.back &&
 		`border:1px solid #e50011; background-color:#fff; color:#e50011;`}
