@@ -11,20 +11,25 @@ import checkImg from '../../images/check_btn.svg';
 import uncheckImg from '../../images/uncheck_btn.svg';
 
 const CartList = (props) => {
-	const onChecked = (idx) => {
+	const onChecked = (supplier, id) => {
 		let copy = [...props.checked];
-		copy[idx] = !copy[idx];
+		copy.map((el, idx) => {
+			if (el.supplier_name === supplier) {
+				el.arr[id] = !el.arr[id];
+			}
+		});
 		props.setChecked(copy);
 	};
 
 	const onRemove = (id) => {
 		_basket.remove_cart(id).then((res) => {
-			const { success, basket_list, count, calc } = res.data;
+			const { success, supplier_list, count, calc } = res.data;
 			if (success) {
 				console.log(res.data);
-				props.setCartList(basket_list);
+				props.setSupplierList(supplier_list);
 				props.setCartCount(count);
 				props.setOrderCalc(calc);
+				props.setCheckCount(props.checkCount - 1);
 			}
 		});
 	};
@@ -44,10 +49,9 @@ const CartList = (props) => {
 	const submitQuantityPatch = (quantity, id) => {
 		console.log(quantity, id);
 		_basket.patch_cart(quantity, id).then((res) => {
-			const { success, basket_list, count, calc } = res.data;
+			const { success, supplier_list, count, calc } = res.data;
 			if (success) {
-				console.log(res.data);
-				props.setCartList(basket_list);
+				props.setSupplierList(supplier_list);
 				props.setCartCount(count);
 				props.setOrderCalc(calc);
 			}
@@ -56,65 +60,90 @@ const CartList = (props) => {
 
 	return (
 		<CartListWrap>
-			{props.cartList.map((el, idx) => (
-				<ShadowBox key={idx}>
-					<CheckImg
-						onClick={() => {
-							onChecked(idx);
-						}}
-						src={props.checked[idx] ? checkImg : uncheckImg}
-						alt="check image"
-					/>
-					<ProductImg
-						alt="product image"
-						src={`${IMG_ADDRESS}/${el.product_image}`}
-					/>
-					<InfoBox>
-						<ProductNameAndRemove>
-							<ProductName>{el.product_title}</ProductName>
-							<RoundBtn
-								alt="remove button"
-								src={exitBtn}
-								onClick={() => {
-									onRemove(el.basket_id);
-								}}
+			{props.supplierList &&
+				props.supplierList.map((supplier, id) => (
+					<SupplierBox key={id} wrap={true}>
+						<SupplierTitleAndCheckBox>
+							<SupplierAllCheckImg
+								alt="check image"
+								src={
+									props.allChecked[id] && props.allChecked[id]
+										? checkImg
+										: uncheckImg
+								}
 							/>
-						</ProductNameAndRemove>
-						<Option>옵션 : {el.product_option_title}</Option>
-						<CountAndPrice>
-							<CountBox>
-								<RoundBtn
-									alt="count button"
-									src={minusBtn}
+							<SupplierBox>
+								<SupplierTitle>공급처</SupplierTitle>
+								<Supplier>{supplier[0]}</Supplier>
+							</SupplierBox>
+						</SupplierTitleAndCheckBox>
+
+						{supplier[1].product.map((el, idx) => (
+							<ShadowBox key={idx}>
+								<CheckImg
 									onClick={() => {
-										onCount('minus', el.quantity, el.basket_id);
+										onChecked(supplier[0], idx);
 									}}
+									src={
+										// checkImg
+										props.checked[id] && props.checked[id].arr[idx]
+											? checkImg
+											: uncheckImg
+									}
+									alt="check image"
 								/>
-								<CountNum>{el.quantity}</CountNum>
-								<RoundBtn
-									alt="count button"
-									src={plusBtn}
-									onClick={() => {
-										onCount('plus', el.quantity, el.basket_id);
-									}}
+								<ProductImg
+									alt="product image"
+									src={`${IMG_ADDRESS}/${el.product_image}`}
 								/>
-							</CountBox>
-							<PriceBox>
-								<ExistingPrice>
-									기존가{' '}
-									<ExistingDeco>
-										{el.total_price.toLocaleString()}원
-									</ExistingDeco>
-								</ExistingPrice>
-								<DiscountPrice>
-									{el.total.toLocaleString()}
-									<DiscountWon>원</DiscountWon>
-								</DiscountPrice>
-							</PriceBox>
-						</CountAndPrice>
-					</InfoBox>
-				</ShadowBox>
-			))}
+								<InfoBox>
+									<ProductNameAndRemove>
+										<ProductName>{el.product_title}</ProductName>
+										<RoundBtn
+											alt="remove button"
+											src={exitBtn}
+											onClick={() => {
+												onRemove(el.basket_id);
+											}}
+										/>
+									</ProductNameAndRemove>
+									<Option>옵션 : {el.product_option_title}</Option>
+									<CountAndPrice>
+										<CountBox>
+											<RoundBtn
+												alt="count button"
+												src={minusBtn}
+												onClick={() => {
+													onCount('minus', el.quantity, el.basket_id);
+												}}
+											/>
+											<CountNum>{el.quantity}</CountNum>
+											<RoundBtn
+												alt="count button"
+												src={plusBtn}
+												onClick={() => {
+													onCount('plus', el.quantity, el.basket_id);
+												}}
+											/>
+										</CountBox>
+										<PriceBox>
+											<ExistingPrice>
+												기존가{' '}
+												<ExistingDeco>
+													{el.total_price.toLocaleString()}원
+												</ExistingDeco>
+											</ExistingPrice>
+											<DiscountPrice>
+												{el.total.toLocaleString()}
+												<DiscountWon>원</DiscountWon>
+											</DiscountPrice>
+										</PriceBox>
+									</CountAndPrice>
+								</InfoBox>
+							</ShadowBox>
+						))}
+					</SupplierBox>
+				))}
 		</CartListWrap>
 	);
 };
@@ -133,6 +162,38 @@ const ShadowBox = styled.div`
 	display: flex;
 	position: relative;
 	margin-bottom: 2rem;
+`;
+const SupplierBox = styled.div`
+	${(props) => props.wrap && `margin-bottom: 4rem;`}
+`;
+const SupplierTitleAndCheckBox = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: start;
+	align-items: flex-end;
+`;
+
+const SupplierAllCheckImg = styled.img`
+	width: 1.4rem;
+	height: 1.4rem;
+	top: 0.8rem;
+	left: 0.8rem;
+	cursor: pointer;
+	margin: auto 0.8rem 2.3rem 0;
+`;
+const SupplierTitle = styled.p`
+	font-size: 1.6rem;
+	font-family: 'kr-r';
+	letter-spacing: -0.64px;
+	color: #6b6462;
+	text-align: start;
+`;
+const Supplier = styled.p`
+	font-size: 2rem;
+	font-family: 'kr-b';
+	letter-spacing: -0.8px;
+	text-align: start;
+	margin-bottom: 1.6rem;
 `;
 const CheckImg = styled.img`
 	position: absolute;

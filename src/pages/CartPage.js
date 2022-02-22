@@ -19,14 +19,14 @@ const CartPage = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.user);
-	const [cartCount, setCartCount] = useState('');
-	const [checked, setChecked] = useState([]);
-	const [allChecked, setAllChecked] = useState(true);
 	const [isLoading, setIsLoading] = useState(false);
+	const [supplierList, setSupplierList] = useState([]);
+	const [allChecked, setAllChecked] = useState([]);
 	const [cartList, setCartList] = useState([]);
-	const [supplierList, setSupplierList] = useState('');
-	const [checkCount, setCheckCount] = useState('');
-	const [orderCalc, setOrderCalc] = useState('');
+	const [checked, setChecked] = useState([]);
+	const [orderCalc, setOrderCalc] = useState([]);
+
+	const [cartCount, setCartCount] = useState('');
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -34,10 +34,8 @@ const CartPage = () => {
 		_basket.get_list().then((res) => {
 			const { success, count, basket_list, calc, supplier_list } = res.data;
 			if (isSubscribed && success) {
-				setCartList(basket_list);
 				setCartCount(count);
-				setCheckCount(count);
-				setOrderCalc(calc);
+
 				setSupplierList(supplier_list);
 			} else {
 				alert('잘못된 접근입니다');
@@ -50,52 +48,90 @@ const CartPage = () => {
 	}, []);
 
 	useEffect(() => {
-		if (cartCount > 0) {
-			setChecked(new Array(cartCount).fill(true));
+		if (!!supplierList) {
+			const allCheckTemp = new Array(supplierList.length).fill(true);
+			setAllChecked(allCheckTemp);
+			onAllCheck();
+			settingOrderCalc();
 		}
-	}, [cartCount]);
-
+	}, [supplierList]);
+	console.log('allChecked', allChecked);
+	console.log('checked', checked);
 	useEffect(() => {
-		if (checked.length === cartCount) {
-			if (allChecked && productCheckTest(false)) {
-				setAllChecked(!allChecked);
-			} else if (!allChecked && productCheckTest(true)) {
-				setAllChecked(!allChecked);
-			}
+		if (checked.length !== 0) {
+			let copyAllChecked = [...allChecked];
+			checked.map((el, idx) => {
+				if (allChecked[idx] && productCheckTest(el.arr, false)) {
+					copyAllChecked[idx] = false;
+				} else if (!allChecked[idx] && productCheckTest(el.arr, true))
+					copyAllChecked[idx] = true;
+			});
+			setAllChecked(copyAllChecked);
 			settingOrderCalc();
 		}
 	}, [checked]);
 
 	// Test if there is a checked state different from allChecked
-	function productCheckTest(boolean) {
-		const test = checked.filter((el) => el === boolean);
-		if (!boolean && test.length !== 0) {
-			return true;
-		} else if (boolean && test.length === cartCount) {
-			return true;
+	function productCheckTest(checkedArr, boolean) {
+		if (checkedArr) {
+			const test = checkedArr.filter((el) => el === boolean);
+			if (!boolean && test.length !== 0) {
+				if (test.length !== 0 || test.length !== checkedArr.length) return true;
+			} else if (boolean && test.length === checkedArr.length) {
+				return true;
+			}
+			return false;
 		}
-		return false;
 	}
 
 	// trans checked -> resetting calc
 	function settingOrderCalc() {
-		let tempCalc = { total: 0, total_discount: 0, total_price: 0 };
-		checked.map((el, idx) => {
-			if (el) {
-				tempCalc.total += cartList[idx].total;
-				tempCalc.total_discount += cartList[idx].total_discount;
-				tempCalc.total_price += cartList[idx].total_price;
-			}
-		});
-		setOrderCalc(tempCalc);
+		if (supplierList && checked) {
+			let calcArr = [];
+			checked.map((checkedArr, id) => {
+				let tempCalc = {
+					supplier_name: supplierList[id][0],
+					total: 0,
+					total_discount: 0,
+					total_price: 0,
+				};
+				checkedArr.arr.map((el, idx) => {
+					if (el) {
+						tempCalc.total += supplierList[id][1].product[idx].total;
+					}
+				});
+				calcArr.push(tempCalc);
+			});
+			setOrderCalc(calcArr);
+		}
 	}
 
 	// make all checked or all unchecked
 	const onAllCheck = () => {
-		if (allChecked) {
-			setChecked(new Array(cartCount).fill(false));
-		} else {
-			setChecked(new Array(cartCount).fill(true));
+		console.log('onAllCheck');
+		if (supplierList) {
+			let checkArr;
+			const supplierArr = new Array(supplierList.length).fill('');
+
+			if (allChecked && !!checked) {
+				supplierList.map((x, idx) => {
+					checkArr = new Array(x[1].product.length).fill(true);
+					supplierArr[idx] = { supplier_name: x[0], arr: checkArr };
+				});
+				return setChecked(supplierArr);
+			} else if (allChecked) {
+				supplierList.map((x, idx) => {
+					checkArr = new Array(x[1].product.length).fill(false);
+					supplierArr[idx] = { supplier_name: x[0], arr: checkArr };
+				});
+			} else if (!allChecked) {
+				supplierList.map((x, idx) => {
+					checkArr = new Array(x[1].product.length).fill(true);
+					supplierArr[idx] = { supplier_name: x[0], arr: checkArr };
+				});
+			}
+
+			setChecked(supplierArr);
 		}
 	};
 
@@ -118,7 +154,6 @@ const CartPage = () => {
 				if (success && basketIdArr.length - 1 === idx) {
 					setCartList(basket_list);
 					setCartCount(count);
-					setCheckCount(count);
 					setOrderCalc(calc);
 					dispatch(cart_remove(count));
 				} else {
@@ -147,6 +182,8 @@ const CartPage = () => {
 							setOrderCalc={setOrderCalc}
 							allChecked={allChecked}
 							setAllChecked={setAllChecked}
+							supplierList={supplierList}
+							setSupplierList={setSupplierList}
 						/>
 						<OrderBoxBox>
 							<OrderBox
@@ -173,7 +210,7 @@ const CartPage = () => {
 							onClick={onAllCheck}
 						/>
 						<AllCheckText>
-							전체선택 ( {checkCount} / {cartCount} )
+							전체선택 ( {cartCount} / {cartCount} )
 						</AllCheckText>
 						<RemoveBtn onClick={onSelectRemove}>선택삭제</RemoveBtn>
 					</AllCheckAndRemove>
@@ -224,7 +261,7 @@ const AllCheckAndRemove = styled.div`
 const AllCheckImg = styled.img`
 	width: 1.4rem;
 	height: 1.4rem;
-	margin: auto 1rem auto 0.8rem;
+	margin: auto 1rem 0.5rem 1.2rem;
 	cursor: pointer;
 `;
 const AllCheckText = styled.span`

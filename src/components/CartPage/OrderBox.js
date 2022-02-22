@@ -30,7 +30,7 @@ const OrderBox = (props) => {
 		});
 	};
 
-	console.log(props.supplierList);
+	console.log(orderCalc);
 	return (
 		<OrderWrap>
 			{props.supplierList &&
@@ -43,7 +43,9 @@ const OrderBox = (props) => {
 						</TitleAndPrice>
 						<TitleAndPrice>
 							<PriceTitle>총 상품 금액</PriceTitle>
-							<Price color={'#e50011'}>{el[1].amount.toLocaleString()}원</Price>
+							<Price color={'#e50011'}>
+								{orderCalc[idx] && orderCalc[idx].total.toLocaleString()}원
+							</Price>
 						</TitleAndPrice>
 						<TitleAndPrice>
 							<PriceTitle>배송비</PriceTitle>
@@ -51,25 +53,13 @@ const OrderBox = (props) => {
 								{deliveryPrice.toLocaleString()}원
 							</Price>
 						</TitleAndPrice>
-						{/* <Price color={'#a0a0a0'}>
-							기존가 {orderCalc && orderCalc.total.toLocaleString()}원
-						</Price>
-						<Price color={'#a0a0a0'}>
-							할인금액 {orderCalc && orderCalc.total_discount.toLocaleString()}
-							원
-						</Price> */}
 					</PriceBox>
 				))}
-			{/* <PriceBox>
-				<TitleAndPrice>
-					<PriceTitle>총 배송비</PriceTitle>
-					<Price color={'#e50011'}>3,000원</Price>
-				</TitleAndPrice>
-			</PriceBox> */}
+
 			<PredictionPriceTitle>예상 결제 금액</PredictionPriceTitle>
 			<PredictionPrice>
 				{(
-					orderCalc && orderCalc.total_price + 3000 * props.supplierList.length
+					orderCalc && orderCalc.total + 3000 * props.supplierList.length
 				).toLocaleString()}
 				<PredictionPriceWon>원</PredictionPriceWon>
 			</PredictionPrice>
