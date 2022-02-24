@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import Background1 from '../../images/main-banner1.png';
 import * as _banner from '../../controller/banner';
 import { IMG_ADDRESS } from '../../config';
 import leftBtn from '../../images/left_btn.svg';
@@ -8,7 +7,6 @@ import rightBtn from '../../images/right_btn.svg';
 
 const MainBanner = () => {
 	const bannerBox = useRef();
-	const Backgrounds = [Background1];
 	const [bannerList, setBannerList] = useState([]);
 	const [bnnNum, setBnnNum] = useState(0);
 	const [autoScrollSwitch, setAutoScrollSwitch] = useState(true);
@@ -129,9 +127,9 @@ const BnnBtnBox = styled.div`
 	position: absolute;
 	display: flex;
 	justify-content: space-between;
-	padding: 0 1rem;
+	padding: 0 5rem;
 	align-items: center;
-	top: 48rem;
+	top: 43rem;
 	z-index: 3;
 `;
 const BnnScrollBtn = styled.div`
