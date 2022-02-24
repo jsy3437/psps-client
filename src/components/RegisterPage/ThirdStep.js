@@ -64,7 +64,6 @@ const ThirdStep = (props) => {
 	};
 
 	const getConfirmNumber = () => {
-		console.log({ phone_number });
 		if (phone_number.length === 11) {
 			_user.send_sms({ phone_number }).then((res) => {
 				if (res.data.success) {
@@ -115,16 +114,13 @@ const ThirdStep = (props) => {
 				name,
 				phone_number,
 			};
-			// console.log(data);
 			_user.register(data).then((res) => {
-				// console.log(res.data);
 				if (res.data.success) {
 					props.setStep(4);
-					// console.log(res.data);
 					dispatch(user_login(res.data.name));
 					history.push({ state: name });
 				} else {
-					console.log(res.data);
+					console.error(res.data);
 				}
 			});
 		}

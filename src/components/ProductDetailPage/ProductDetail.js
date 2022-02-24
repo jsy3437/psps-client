@@ -16,7 +16,6 @@ const ProductDetail = (props) => {
 
 	const listener = (e) => {
 		const { pageYOffset } = e.target.defaultView;
-		// console.log(e.target.defaultView.pageYOffset);
 	};
 
 	const onChangeView = (e) => {
@@ -79,7 +78,7 @@ const ProductDetailHead = styled.div`
 	height: 32.7rem;
 	display: flex;
 	justify-content: center;
-	background-color: #e0e0e0;
+	background-color: #f2f2f2;
 	position: relative;
 	z-index: -3;
 `;

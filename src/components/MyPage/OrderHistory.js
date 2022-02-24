@@ -19,7 +19,6 @@ const OrderHistory = (props) => {
 			setViewDetail(props.location.state);
 		}
 	}, [props.location.state]);
-	console.log('history', props.location.state);
 
 	return (
 		<MyPageInside>

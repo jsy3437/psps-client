@@ -10,13 +10,10 @@ const OrderDetail = (props) => {
 	const [detailProductList, setDetailProductList] = useState('');
 	const [claimType, setClaimType] = useState('cancel');
 
-	console.log(detailProductList);
-
 	useEffect(() => {
 		let isSubscribed = true;
 		if (props.viewDetail !== false) {
 			_payment.get_detail(props.viewDetail).then((res) => {
-				console.log(res.data);
 				const { success, payment, payment_product_list } = res.data;
 				if (isSubscribed && success) {
 					setDetailProductList(payment_product_list);
@@ -38,7 +35,6 @@ const OrderDetail = (props) => {
 	};
 
 	const submitCancel = (el) => {
-		console.log(claimType);
 		const data = {
 			payment: {
 				payment_id: detailPayment.payment_id,
@@ -52,15 +48,13 @@ const OrderDetail = (props) => {
 			payment_product_list: [el],
 			claim_reason: '잘못시켰네요 죄송합니다',
 		};
-		console.log('data', data);
 
 		_payment.claim_cancel(data, claimType).then((res) => {
 			const { success } = res.data;
 			if (success) {
 				alert('상품 취소가 완료되었습니다');
-				console.log(res.data);
 			} else {
-				alert(res.data.msg);
+				alert(res.data);
 			}
 		});
 	};
@@ -83,7 +77,7 @@ const OrderDetail = (props) => {
 										{detailPayment && detailPayment.create_at.split('T')[0]}{' '}
 										주문
 									</OrderTopText>
-									<OrderTopText state>{`배송준비중`}</OrderTopText>
+									<OrderTopText state>{el.process}</OrderTopText>
 								</OrderTop>
 								<ProductName>{el.name.split('|')[0]}</ProductName>
 								<ProductOption>{el.name.split('|')[1]}</ProductOption>
@@ -150,7 +144,9 @@ const OrderDetail = (props) => {
 						<InfoList>
 							<InfoItem>{paymentInfo[1]}</InfoItem>
 							<InfoContents>
-								{detailPayment.amount.toLocaleString()}
+								{(
+									detailPayment.amount - detailPayment.del_price
+								).toLocaleString()}
 							</InfoContents>
 						</InfoList>
 
@@ -164,9 +160,7 @@ const OrderDetail = (props) => {
 						<InfoList>
 							<InfoItem>{paymentInfo[3]}</InfoItem>
 							<InfoContents>
-								{(
-									detailPayment.amount - detailPayment.del_price
-								).toLocaleString()}
+								{detailPayment.amount.toLocaleString()}
 							</InfoContents>
 						</InfoList>
 					</InfoWrap>

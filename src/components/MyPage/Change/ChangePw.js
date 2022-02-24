@@ -52,10 +52,7 @@ const ChangePw = (props) => {
 			new_password: newPassword,
 		};
 
-		console.log(data);
-
 		_user.change_password(data).then((res) => {
-			console.log(res.data);
 			const { success } = res.data;
 			if (success) {
 				alert('비밀번호 변경완료');

@@ -19,7 +19,6 @@ const ProductDetailPage = () => {
 		if (product_id) {
 			let isSubscribed = true;
 			_product.get_detail(product_id).then((res) => {
-				console.log(res.data);
 				const { success, product, product_option_list } = res.data;
 				if (isSubscribed && success) {
 					setDetail(product);
@@ -31,7 +30,6 @@ const ProductDetailPage = () => {
 			};
 		}
 	}, [product_id]);
-	console.log(optionList);
 	return (
 		<div id="container">
 			<OrderBox detail={detail} optionList={optionList} selectRef={selectRef} />

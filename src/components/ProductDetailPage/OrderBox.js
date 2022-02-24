@@ -43,7 +43,6 @@ const OrderBox = (props) => {
 		};
 		_basket.add_cart(data).then((res) => {
 			const { success, count } = res.data;
-			console.log(res.data);
 			if (success) {
 				alert(
 					`제품명: ${props.detail.title}\n옵션: ${option.title}\n장바구니에 담겼습니다.`
@@ -55,8 +54,6 @@ const OrderBox = (props) => {
 			}
 		});
 	};
-
-	console.log(option);
 
 	return (
 		<BoxContainer ref={props.selectRef}>
@@ -72,6 +69,9 @@ const OrderBox = (props) => {
 				</BoxLeft>
 				<BoxRight>
 					<RightInside>
+						<PartInfo>
+							{props.detail && `${props.detail.part} > ${props.detail.subPart}`}
+						</PartInfo>
 						<RightTitle>{props.detail && props.detail.title}</RightTitle>
 						<RightPriceBox>
 							{option && option.discount !== 0 ? (
@@ -92,7 +92,6 @@ const OrderBox = (props) => {
 							배송비
 							<DeliveryPriceSpan>3,000</DeliveryPriceSpan>원
 						</RightDeliveryPrice>
-
 						{!openOption ? (
 							<RightOptionBox option>
 								{option && option.title}
@@ -120,7 +119,6 @@ const OrderBox = (props) => {
 								))}
 							</RightOptionListBox>
 						)}
-
 						<RightOptionBox count>
 							<RightButton minus onClick={decreaseCount}>
 								<RightButtonImg alt="button" src={decrease} />
@@ -131,7 +129,6 @@ const OrderBox = (props) => {
 								<RightButtonImg alt="button" src={increase} />
 							</RightButton>
 						</RightOptionBox>
-
 						<SubmitButton orderBtn>{`${
 							option &&
 							((option.price - option.discount) * count + 3000).toLocaleString()
@@ -185,6 +182,12 @@ const RightInside = styled.div`
 	width: 83.98058252427184%;
 	height: 86.59420289855072%;
 `;
+const PartInfo = styled.p`
+	font-size: 1.2rem;
+	font-family: 'kr-b';
+	letter-spacing: -0.48px;
+	color: #e50011;
+`;
 const RightTitle = styled.p`
 	height: 6.5rem;
 	line-height: 3.25rem;
@@ -211,7 +214,7 @@ const RightPriceBox = styled.div`
 	justify-content: end;
 `;
 const RightPrice = styled.p`
-	margin-top: 2rem;
+	margin-top: 0.5rem;
 	height: 3.7rem;
 	line-height: 3.7rem;
 	text-align: right;
@@ -277,7 +280,7 @@ const RightOptionBox = styled.div`
 	text-align: center;
 	${(props) => props.option && `position:absolute; top:19.3rem;  `}
 	${(props) => props.option && `margin-top:2rem;`} 
-	${(props) => props.count && `margin-top:10.4rem;`}
+	${(props) => props.count && `margin-top:9.4rem;`}
 `;
 const RightOptionTitle = styled.p`
 	width: 3.2rem;
@@ -307,55 +310,6 @@ const RightButtonImg = styled.img`
 	height: 100%;
 	display: flex;
 `;
-// const UnitPriceBox = styled.div`
-// 	margin-top: 0.8rem;
-// 	margin-bottom: 2rem;
-// 	width: 100%;
-// 	height: 2.6rem;
-// 	line-height: 2.6rem;
-// 	display: flex;
-// 	justify-content: space-between;
-// `;
-// const UnitPriceLeft = styled.p`
-// 	font-size: 1.8rem;
-// 	font-family: 'kr-r';
-// 	color: #6b6462;
-// `;
-// const UnitPriceRight = styled.p`
-// 	font-size: 1.4rem;
-// 	font-family: 'kr-r';
-// 	color: #a0a0a0;
-// `;
-// const OrderButton = styled.button`
-// 	margin: 2.5rem auto 1.2rem;
-// 	width: 34.6rem;
-// 	height: 6.2rem;
-// 	line-height: 6.2rem;
-// 	font-size: 2.4rem;
-// 	font-family: 'kr-r';
-// 	color: #fff;
-// 	letter-spacing: -0.96px;
-// 	border: none;
-// 	border-radius: 4px;
-// 	&:hover {
-// 		background-color: #e50011;
-// 	}
-// `;
-// const PutOnCartButton = styled.button`
-// 	width: 34.6rem;
-// 	height: 6.2rem;
-// 	line-height: 6.2rem;
-// 	font-size: 2.4rem;
-// 	font-family: 'kr-r';
-// 	letter-spacing: -0.96px;
-// 	border: none;
-// 	border: 1px solid #e50011;
-// 	border-radius: 4px;
-// 	&:hover {
-// 		background-color: #e50011;
-// 		color: #fff;
-// 	}
-// `;
 const SubmitButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;

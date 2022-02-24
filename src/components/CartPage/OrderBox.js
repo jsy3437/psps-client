@@ -33,7 +33,6 @@ const OrderBox = (props) => {
 		});
 	};
 
-	console.log(props.orderCalc);
 	return (
 		<OrderWrap>
 			{props.supplierList &&

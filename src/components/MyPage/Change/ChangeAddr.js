@@ -36,7 +36,6 @@ const ChangeAddr = (props) => {
 
 		_user.change_address(data).then((res) => {
 			const { success } = res.data;
-			console.log(res.data);
 			if (success) {
 				alert('주소가 변경되었습니다.');
 				props.setChangeAddrState(false);

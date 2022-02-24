@@ -54,7 +54,7 @@ const CartPage = () => {
 			const allCheckTemp = new Array(supplierList.length).fill(true);
 			setAllChecked(allCheckTemp);
 			onAllCheck();
-			settingOrderCalc();
+			// settingOrderCalc();
 		}
 	}, [supplierList]);
 
@@ -94,12 +94,11 @@ const CartPage = () => {
 
 			checked.map((checkedArr, id) => {
 				let tempCalc = {
-					supplier_name: supplierList[id][0],
+					supplier_name: supplierList[id] && supplierList[id][0],
 					total: 0,
 					delivery_price: 0,
 					checked_product_list: [],
 				};
-				console.log(supplierList);
 				checkedArr.arr.map((el, idx) => {
 					if (el) {
 						tempCalc.total += supplierList[id][1].product[idx].total;
@@ -112,7 +111,6 @@ const CartPage = () => {
 						}
 					}
 				});
-				console.log(tempCalc);
 
 				calcArr.push(tempCalc);
 				tempAmount += tempCalc.total;
@@ -127,7 +125,6 @@ const CartPage = () => {
 
 	// make all checked or all unchecked
 	const onAllCheck = () => {
-		console.log('onAllCheck');
 		if (supplierList) {
 			let checkArr;
 			const supplierArr = new Array(supplierList.length).fill('');
@@ -176,7 +173,7 @@ const CartPage = () => {
 					setOrderCalc(calc);
 					dispatch(cart_remove(count));
 				} else {
-					console.log(idx);
+					console.error(idx);
 				}
 			});
 		});

@@ -45,10 +45,13 @@ const Navbar = () => {
 		history.push('/login');
 	};
 	const goLogout = () => {
-		logout().then((res) => console.log(res.data));
-		dispatch(user_logout());
-		alert('로그아웃 되었습니다.');
-		history.push('/');
+		logout().then((res) => {
+			if (res.data.success) {
+				dispatch(user_logout());
+				alert('로그아웃 되었습니다.');
+				history.push('/');
+			}
+		});
 	};
 	const goRegister = () => {
 		history.push('/register');

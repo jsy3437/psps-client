@@ -10,7 +10,6 @@ export default function Auth(SpecificComponent, option, adminRoute = null) {
 
 	function AuthenticationCheck() {
 		useEffect(() => {
-			console.log('Auth check!');
 			_user.authCheck().then((res) => {
 				let isAuth = false;
 				const { success, name } = res.data;

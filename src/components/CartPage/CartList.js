@@ -28,7 +28,6 @@ const CartList = (props) => {
 		_basket.remove_cart(id).then((res) => {
 			const { success, supplier_list, count, calc } = res.data;
 			if (success) {
-				console.log(res.data);
 				props.setSupplierList(supplier_list);
 				props.setCartCount(count);
 				props.setOrderCalc(calc);
@@ -50,7 +49,6 @@ const CartList = (props) => {
 	};
 
 	const submitQuantityPatch = (quantity, id) => {
-		console.log(quantity, id);
 		_basket.patch_cart(quantity, id).then((res) => {
 			const { success, supplier_list, count, calc } = res.data;
 			if (success) {

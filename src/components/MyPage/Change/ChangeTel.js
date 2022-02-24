@@ -54,7 +54,6 @@ const ChangeTel = (props) => {
 		if (phNumberState) {
 			_user.send_sms({ phNumber }).then((res) => {
 				const { success } = res.data;
-				console.log(res.data);
 				if (success) {
 					alert('인증번호가 전송되었습니다');
 					setChecked({ ...checked, authSend: true });
@@ -69,7 +68,6 @@ const ChangeTel = (props) => {
 	const checkAuthNumber = () => {
 		if (authNumberState && checked.authSend) {
 			_user.check_sms({ authNumber }).then((res) => {
-				console.log(res.data);
 				const { success } = res.data;
 				if (success) {
 					alert('인증이 확인되었습니다');
@@ -84,7 +82,6 @@ const ChangeTel = (props) => {
 	const SubmitChangeTel = () => {
 		if (checked.authSend && checked.authConfirm) {
 			_user.change_tel({ phNumber }).then((res) => {
-				console.log(res.data);
 				const { success } = res.data;
 				if (success) {
 					alert('비밀번호가 변경되었습니다');

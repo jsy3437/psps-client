@@ -28,7 +28,6 @@ const RecommendList = () => {
 		history.push(`/detail/${product_id}`);
 	};
 
-	// console.log(list);
 	return (
 		<RecommendWrap>
 			<Logo alt="logo" src={logo} />

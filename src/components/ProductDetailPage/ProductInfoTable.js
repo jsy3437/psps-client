@@ -116,7 +116,7 @@ const ProductInfoTable = (props) => {
 				</InfoTable>
 			</Item>
 			<Item>
-				<Title>공급업체 정보</Title>
+				<Title>판매자 정보</Title>
 				<InfoTable>
 					<InfoItemBox>
 						<InfoTitle>상호/대표자</InfoTitle>

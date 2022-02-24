@@ -10,8 +10,6 @@ const PaymentResultPage = () => {
 	const history = useHistory();
 	const { payment_id } = useParams();
 
-	console.log('aa', payment_id);
-
 	const orderInfoMsg = `주문이 완료되었습니다! \n주문 상세내역은 마이페이지에서 확인하실 수 있습니다.`;
 
 	const goShopping = () => {

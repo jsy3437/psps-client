@@ -7,8 +7,6 @@ import plusImg from '../../images/plus-ico.svg';
 const ProductData = (props) => {
 	const PaymentAndDeliveryInfo = `- 신선식품이기 때문에 단순 소비자 단순 변심으로 인한 개인적인 사유로는 교환 및 환불이 불가합니다.\n- 상품의 변질, 이물질 발견, 아이스박스 및 아이스팩이 파손되어 배송될 경우 고객센터(${info.COMPANY_CONTACT})로 전화주시면 \b\b바로 교환/환불 해드리겠습니다.\n- 고객센터 운영시간은 평일 오전 9시부터 오후 6시까지 입니다. (점심시간 : 오전 12시부터 오후 1시)`;
 
-	console.log(props.orderCalc);
-
 	return (
 		<ProductDataWrap>
 			<Title>주문 상품</Title>
