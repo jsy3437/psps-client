@@ -8,6 +8,9 @@ const OrderDetail = (props) => {
 	const paymentInfo = ['결제수단', '총 상품가격', '배송비', '총 결제금액'];
 	const [detailPayment, setDetailPayment] = useState('');
 	const [detailProductList, setDetailProductList] = useState('');
+	const [claimType, setClaimType] = useState('cancel');
+
+	console.log(detailProductList);
 
 	useEffect(() => {
 		let isSubscribed = true;
@@ -32,6 +35,34 @@ const OrderDetail = (props) => {
 
 	const goReceipt = () => {
 		window.open(detailPayment.receipt_url, '_blank');
+	};
+
+	const submitCancel = (el) => {
+		console.log(claimType);
+		const data = {
+			payment: {
+				payment_id: detailPayment.payment_id,
+				delivery_price: detailPayment.del_price,
+				create_at: detailPayment.create_at,
+				user_id: detailPayment.user_id,
+				imp_id: detailPayment.imp_id,
+				name: detailPayment.name,
+				amount: detailPayment.amount,
+			},
+			payment_product_list: [el],
+			claim_reason: '잘못시켰네요 죄송합니다',
+		};
+		console.log('data', data);
+
+		_payment.claim_cancel(data, claimType).then((res) => {
+			const { success } = res.data;
+			if (success) {
+				alert('상품 취소가 완료되었습니다');
+				console.log(res.data);
+			} else {
+				alert(res.data.msg);
+			}
+		});
 	};
 
 	return (
@@ -65,7 +96,18 @@ const OrderDetail = (props) => {
 								<Button red onClick={goHistory}>
 									목록으로
 								</Button>
-								<Button red>교환, 반품 신청</Button>
+								{el.process === '결제완료' ? (
+									<Button
+										red
+										onClick={() => {
+											submitCancel(el);
+										}}
+									>
+										취소하기
+									</Button>
+								) : (
+									<Button red>교환, 반품 신청</Button>
+								)}
 							</Buttons>
 						</OrderInfo>
 					))}
