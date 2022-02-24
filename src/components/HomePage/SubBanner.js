@@ -106,5 +106,8 @@ const BnnInfoDot = styled.li`
 	background-color: #a0a0a0;
 	border-radius: 50%;
 	margin: 0.7rem;
-	${(props) => props.active && `background-color:#E50011;`}
+	transition: all 200ms ease-in;
+	${(props) =>
+		props.active &&
+		`background-color:#E50011; width:3.2rem; border-radius:10px;`}
 `;
