@@ -129,7 +129,7 @@ const BnnBtnBox = styled.div`
 	position: absolute;
 	display: flex;
 	justify-content: space-between;
-	padding: 0 33.8rem;
+	padding: 0 1rem;
 	align-items: center;
 	top: 48rem;
 	z-index: 3;
