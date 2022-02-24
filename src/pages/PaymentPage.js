@@ -46,9 +46,9 @@ const PaymentPage = () => {
 			let productList = [];
 			orderCalc.map((el) => {
 				if (el.total !== 0) {
-					count++;
-					name = el.supplier_name;
 					el.checked_product_list.map((list) => {
+						count++;
+						name = list.product_title;
 						productList = [
 							...productList,
 							{
@@ -64,7 +64,6 @@ const PaymentPage = () => {
 			} else {
 				setPayment_name(`${name} 외 ${count - 1}건`);
 			}
-			console.log('aa', productList);
 			setPayment_product_list(productList);
 		}
 	}, []);
