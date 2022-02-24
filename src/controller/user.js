@@ -34,6 +34,9 @@ export const send_sms = async (smsData) => {
 export const check_sms = async (smsData) => {
 	return await instance.post('/sms/check', smsData).catch(errorMessage);
 };
+export const check_email = async (userData) => {
+	return await instance.post('/check', userData).catch(errorMessage);
+};
 export const change_tel = async (userData) => {
 	return await instance.patch('/tel', userData).catch(errorMessage);
 };
