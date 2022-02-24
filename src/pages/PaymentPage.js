@@ -24,9 +24,9 @@ const PaymentPage = () => {
 	const [detailAddr, setDetailAddr] = useState('');
 	const [del_req, setDel_req] = useState('');
 	const [postcodeOpen, setPostcodeOpen] = useState(false);
-	const paymentProducts = location.state.paymentProducts;
-	const productName = location.state.productName;
-	const total_amount = location.state.total_amount;
+	const [payment_product_list, setPayment_product_list] = useState([]);
+	const [payment_name, setPayment_name] = useState('');
+	const { orderCalc, amount, delivery_price } = location.state;
 
 	useEffect(() => {
 		if (!!!user) {
@@ -39,21 +39,46 @@ const PaymentPage = () => {
 		}
 	}, []);
 
-	const onOrder = () => {
-		const name =
-			paymentProducts.length === 1
-				? productName
-				: `${productName} 외 ${paymentProducts.length - 1}건`;
+	useEffect(() => {
+		if (orderCalc) {
+			let count = 0;
+			let name;
+			let productList = [];
+			orderCalc.map((el) => {
+				if (el.total !== 0) {
+					count++;
+					name = el.supplier_name;
+					el.checked_product_list.map((list) => {
+						productList = [
+							...productList,
+							{
+								product_option_id: list.product_option_id,
+								quantity: list.quantity,
+							},
+						];
+					});
+				}
+			});
+			if (count === 1) {
+				setPayment_name(name);
+			} else {
+				setPayment_name(`${name} 외 ${count - 1}건`);
+			}
+			console.log('aa', productList);
+			setPayment_product_list(productList);
+		}
+	}, []);
 
+	const onOrder = () => {
 		const impData = {
 			buyer_name: user.name,
 			buyer_email: user.email,
 			buyer_tel: user.phone_number,
 			buyer_addr: postAddr + '/' + detailAddr,
 			buyer_postcode: postZoneCode,
-			name,
+			name: payment_name,
 			// TODO 테스트 끝나고 나면 금액 바꿔주기
-			// amount: total_price + deliveryPrice,
+			// amount: amount + delivery_price,
 			amount: 100,
 		};
 		const delivery = {
@@ -61,11 +86,11 @@ const PaymentPage = () => {
 			del_tel,
 			del_addr: postAddr + '/' + detailAddr,
 			del_postcode: postZoneCode,
-			del_price: 3000,
+			del_price: delivery_price,
 			del_req,
 		};
 
-		payment_request(impData, paymentProducts, pasteAddrChecked, delivery);
+		payment_request(impData, pasteAddrChecked, delivery, payment_product_list);
 	};
 
 	return (
@@ -94,8 +119,9 @@ const PaymentPage = () => {
 					setDel_req={setDel_req}
 				/>
 				<ProductData
-					paymentProducts={paymentProducts}
-					total_amount={total_amount}
+					orderCalc={orderCalc}
+					delivery_price={delivery_price}
+					amount={amount}
 				/>
 				<BtnBox>
 					<SubmitButton onClick={onOrder}> 주문하기</SubmitButton>

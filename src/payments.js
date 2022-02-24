@@ -1,9 +1,9 @@
 import * as _payment from './controller/payment';
 export const payment_request = (
 	impData,
-	paymentProduct,
 	pasteAddrChecked,
-	delivery
+	delivery,
+	payment_product_list
 ) => {
 	const IMP = window.IMP;
 	IMP.init('iamport'); // 가맹점 식별코드자리
@@ -19,8 +19,7 @@ export const payment_request = (
 				_payment
 					.payment({
 						imp_result: rsp,
-						payment_products: paymentProduct,
-						delivery_price: 3000,
+						payment_products: payment_product_list,
 						paste_add: pasteAddrChecked,
 						delivery,
 					})

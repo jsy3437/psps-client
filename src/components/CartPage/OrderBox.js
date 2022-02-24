@@ -7,30 +7,33 @@ import * as _user from '../../controller/user';
 const OrderBox = (props) => {
 	const history = useHistory();
 	const orderCalc = props.orderCalc;
-	const [deliveryPrice, setDeliveryPrice] = useState(3000);
 
 	const goShopping = () => {
 		history.push('/product');
 	};
 
 	const goPayment = () => {
-		const paymentProducts = [];
-		let productName;
+		// const paymentProducts = [];
+		// let productName;
 
-		props.checked.map((el, idx) => {
-			if (el) {
-				paymentProducts.push(props.cartList[idx]);
-				productName = props.cartList[idx].product_title;
-			}
-		});
+		// props.checked.map((el, idx) => {
+		// 	if (el) {
+		// 		// paymentProducts.push(props.cartList[idx]);
+		// 		// productName = props.cartList[idx].product_title;
+		// 	}
+		// });
 
 		history.push({
 			pathname: '/payment',
-			state: { paymentProducts, productName, total_amount: orderCalc.total },
+			state: {
+				orderCalc,
+				delivery_price: props.delivery_price,
+				amount: props.amount,
+			},
 		});
 	};
 
-	console.log(orderCalc);
+	console.log(props.orderCalc);
 	return (
 		<OrderWrap>
 			{props.supplierList &&
@@ -50,7 +53,9 @@ const OrderBox = (props) => {
 						<TitleAndPrice>
 							<PriceTitle>배송비</PriceTitle>
 							<Price color={'#e50011'}>
-								{deliveryPrice.toLocaleString()}원
+								{props.orderCalc[idx] &&
+									props.orderCalc[idx].delivery_price.toLocaleString()}
+								원
 							</Price>
 						</TitleAndPrice>
 					</PriceBox>
@@ -58,9 +63,9 @@ const OrderBox = (props) => {
 
 			<PredictionPriceTitle>예상 결제 금액</PredictionPriceTitle>
 			<PredictionPrice>
-				{(
-					orderCalc && orderCalc.total + 3000 * props.supplierList.length
-				).toLocaleString()}
+				{props.amount && props.delivery_price
+					? (props.amount + props.delivery_price).toLocaleString()
+					: 0}
 				<PredictionPriceWon>원</PredictionPriceWon>
 			</PredictionPrice>
 			<SubmitButton productOrder onClick={goPayment}>

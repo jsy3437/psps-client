@@ -25,6 +25,8 @@ const CartPage = () => {
 	const [cartList, setCartList] = useState([]);
 	const [checked, setChecked] = useState([]);
 	const [orderCalc, setOrderCalc] = useState([]);
+	const [amount, setAmount] = useState(0);
+	const [delivery_price, setDelivery_price] = useState(0);
 
 	const [cartCount, setCartCount] = useState('');
 
@@ -55,8 +57,7 @@ const CartPage = () => {
 			settingOrderCalc();
 		}
 	}, [supplierList]);
-	console.log('allChecked', allChecked);
-	console.log('checked', checked);
+
 	useEffect(() => {
 		if (checked.length !== 0) {
 			let copyAllChecked = [...allChecked];
@@ -88,20 +89,38 @@ const CartPage = () => {
 	function settingOrderCalc() {
 		if (supplierList && checked) {
 			let calcArr = [];
+			let tempAmount = 0;
+			let tempDelivery = 0;
+
 			checked.map((checkedArr, id) => {
 				let tempCalc = {
 					supplier_name: supplierList[id][0],
 					total: 0,
-					total_discount: 0,
-					total_price: 0,
+					delivery_price: 0,
+					checked_product_list: [],
 				};
+				console.log(supplierList);
 				checkedArr.arr.map((el, idx) => {
 					if (el) {
 						tempCalc.total += supplierList[id][1].product[idx].total;
+						tempCalc.checked_product_list.push(
+							supplierList[id][1].product[idx]
+						);
+
+						if (tempCalc.delivery_price === 0) {
+							tempCalc.delivery_price += 3000;
+						}
 					}
 				});
+				console.log(tempCalc);
+
 				calcArr.push(tempCalc);
+				tempAmount += tempCalc.total;
+				tempDelivery += tempCalc.delivery_price;
 			});
+
+			setDelivery_price(tempDelivery);
+			setAmount(tempAmount);
 			setOrderCalc(calcArr);
 		}
 	}
@@ -192,6 +211,8 @@ const CartPage = () => {
 								cartList={cartList}
 								checked={checked}
 								supplierList={supplierList}
+								amount={amount}
+								delivery_price={delivery_price}
 							/>
 						</OrderBoxBox>
 					</CartContentWrap>
