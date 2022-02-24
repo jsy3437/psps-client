@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { IMG_ADDRESS } from '../../config';
 
@@ -9,8 +10,10 @@ import plusBtn from '../../images/count-plus.svg';
 import minusBtn from '../../images/count-minus.svg';
 import checkImg from '../../images/check_btn.svg';
 import uncheckImg from '../../images/uncheck_btn.svg';
+import { cart_remove } from '../../modules/cart';
 
 const CartList = (props) => {
+	const dispatch = useDispatch();
 	const onChecked = (supplier, id) => {
 		let copy = [...props.checked];
 		copy.map((el, idx) => {
@@ -29,7 +32,7 @@ const CartList = (props) => {
 				props.setSupplierList(supplier_list);
 				props.setCartCount(count);
 				props.setOrderCalc(calc);
-				props.setCheckCount(props.checkCount - 1);
+				dispatch(cart_remove());
 			}
 		});
 	};
