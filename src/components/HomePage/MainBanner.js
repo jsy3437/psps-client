@@ -141,6 +141,11 @@ const BnnScrollBtn = styled.div`
 	padding: 1rem 1.6rem 0.8rem;
 	text-align: center;
 	cursor: pointer;
+	opacity: 0.4;
+	transition: all 100ms ease-in;
+	&:hover {
+		opacity: 1;
+	}
 `;
 const BtnImg = styled.img`
 	width: 1.2rem;
