@@ -25,3 +25,10 @@ export const get_list = async () => {
 export const get_detail = async (payment_id) => {
 	return await instance.get(`/detail/${payment_id}`).catch(errorMessage);
 };
+
+export const claim_cancel = async (paymentData, claimType) => {
+	console.log(claimType);
+	return await instance
+		.patch(`/claim/?type=${claimType}`, paymentData)
+		.catch(errorMessage);
+};
