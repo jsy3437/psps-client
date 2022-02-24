@@ -76,9 +76,7 @@ const PaymentPage = () => {
 			buyer_addr: postAddr + '/' + detailAddr,
 			buyer_postcode: postZoneCode,
 			name: payment_name,
-			// TODO 테스트 끝나고 나면 금액 바꿔주기
 			amount: amount + delivery_price,
-			// amount: 100,
 		};
 		const delivery = {
 			del_name,

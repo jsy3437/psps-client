@@ -29,7 +29,7 @@ export const payment_request = (
 							// window.location.href = `http://localhost:3000/payment/result/${res.data.payment_id}`;
 							window.location.href = `http://makinet.kr/payment/result/${res.data.payment_id}`;
 						} else {
-							console.error('결제 완료, 서버 전달 실패');
+							console.error(res.data);
 						}
 					});
 			} else {

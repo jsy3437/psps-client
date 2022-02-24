@@ -13,16 +13,6 @@ const OrderBox = (props) => {
 	};
 
 	const goPayment = () => {
-		// const paymentProducts = [];
-		// let productName;
-
-		// props.checked.map((el, idx) => {
-		// 	if (el) {
-		// 		// paymentProducts.push(props.cartList[idx]);
-		// 		// productName = props.cartList[idx].product_title;
-		// 	}
-		// });
-
 		history.push({
 			pathname: '/payment',
 			state: {

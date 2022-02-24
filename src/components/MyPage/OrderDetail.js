@@ -50,9 +50,12 @@ const OrderDetail = (props) => {
 		};
 
 		_payment.claim_cancel(data, claimType).then((res) => {
-			const { success } = res.data;
+			const { success, payment, payment_product_list } = res.data;
 			if (success) {
+				console.log(res.data);
 				alert('상품 취소가 완료되었습니다');
+				setDetailProductList(payment_product_list);
+				setDetailPayment(payment);
 			} else {
 				alert(res.data);
 			}
@@ -138,29 +141,33 @@ const OrderDetail = (props) => {
 					<InfoWrap>
 						<InfoList>
 							<InfoItem>{paymentInfo[0]}</InfoItem>
-							<InfoContents>{detailPayment.card_name}</InfoContents>
+							<InfoContents>
+								{detailPayment.card_name && detailPayment.card_name}
+							</InfoContents>
 						</InfoList>
 
 						<InfoList>
 							<InfoItem>{paymentInfo[1]}</InfoItem>
 							<InfoContents>
-								{(
-									detailPayment.amount - detailPayment.del_price
-								).toLocaleString()}
+								{detailPayment.amount &&
+									(
+										detailPayment.amount - detailPayment.del_price
+									).toLocaleString()}
 							</InfoContents>
 						</InfoList>
 
 						<InfoList>
 							<InfoItem>{paymentInfo[2]}</InfoItem>
 							<InfoContents>
-								{detailPayment.del_price.toLocaleString()}
+								{detailPayment.del_price &&
+									detailPayment.del_price.toLocaleString()}
 							</InfoContents>
 						</InfoList>
 
 						<InfoList>
 							<InfoItem>{paymentInfo[3]}</InfoItem>
 							<InfoContents>
-								{detailPayment.amount.toLocaleString()}
+								{detailPayment.amount && detailPayment.amount.toLocaleString()}
 							</InfoContents>
 						</InfoList>
 					</InfoWrap>

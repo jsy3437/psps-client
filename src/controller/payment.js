@@ -14,7 +14,6 @@ const errorMessage = () => {
 };
 
 export const payment = async (paymentData) => {
-	console.log('dd', paymentData);
 	return await instance.post('/', paymentData).catch(errorMessage);
 };
 
@@ -27,7 +26,6 @@ export const get_detail = async (payment_id) => {
 };
 
 export const claim_cancel = async (paymentData, claimType) => {
-	console.log(claimType);
 	return await instance
 		.patch(`/claim/?type=${claimType}`, paymentData)
 		.catch(errorMessage);

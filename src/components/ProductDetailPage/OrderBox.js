@@ -7,9 +7,11 @@ import angle_down from '../../images/angle-down.svg';
 import increase from '../../images/count-plus.svg';
 import decrease from '../../images/count-minus.svg';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const OrderBox = (props) => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const [openOption, setOpenOption] = useState(false);
 	const [option, setOption] = useState(props.optionList[0]);
 	const [count, setCount] = useState(1);
@@ -52,6 +54,33 @@ const OrderBox = (props) => {
 			} else {
 				alert(`장바구니에 이미 존재하는 상품입니다.`);
 			}
+		});
+	};
+
+	const goPayment = () => {
+		history.push({
+			pathname: '/payment',
+			state: {
+				orderCalc: [
+					{
+						supplier_name: props.detail.supplier_name,
+						total: (option.price - option.discount) * count,
+						delivery_price: 3000,
+						checked_product_list: [
+							{
+								product_option_id: option.product_option_id,
+								product_option_title: option.title,
+								quantity: count,
+								total: (option.price - option.discount) * count,
+								total_price: (option.price - option.discount) * count,
+								product_title: props.detail.title,
+							},
+						],
+					},
+				],
+				delivery_price: 3000,
+				amount: (option.price - option.discount) * count,
+			},
 		});
 	};
 
@@ -129,7 +158,7 @@ const OrderBox = (props) => {
 								<RightButtonImg alt="button" src={increase} />
 							</RightButton>
 						</RightOptionBox>
-						<SubmitButton orderBtn>{`${
+						<SubmitButton orderBtn onClick={goPayment}>{`${
 							option &&
 							((option.price - option.discount) * count + 3000).toLocaleString()
 						}원 / 주문하기`}</SubmitButton>
