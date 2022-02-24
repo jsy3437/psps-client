@@ -15,15 +15,18 @@ const ProductList = (props) => {
 			<ProductWrap>
 				{props.list.map((el, idx) => (
 					<Product key={idx}>
-						{el.image && (
-							<ProductImg
-								alt="product img"
-								src={`${IMG_ADDRESS}/${el.image}`}
-								onClick={() => {
-									goDetail(el.product_id);
-								}}
-							/>
-						)}
+						<ProductImgBox
+							onClick={() => {
+								goDetail(el.product_id);
+							}}
+						>
+							{el.image && (
+								<ProductImg
+									alt="product img"
+									src={`${IMG_ADDRESS}/${el.image}`}
+								/>
+							)}
+						</ProductImgBox>
 
 						<ProductTitle
 							onClick={() => {
@@ -63,10 +66,14 @@ const Product = styled.li`
 	height: 40rem;
 	margin-bottom: 5.9rem;
 `;
-const ProductImg = styled.img`
+const ProductImgBox = styled.div`
 	width: 38rem;
 	height: 35rem;
 	cursor: pointer;
+`;
+const ProductImg = styled.img`
+	width: 100%;
+	height: 100%;
 `;
 const ProductTitle = styled.h3`
 	margin-top: 0.3rem;
