@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { regexp } from '../../data/regexp';
 import styled from 'styled-components';
+import * as _user from '../../controller/user';
+
 import logo from '../../images/red-logo.svg';
 import check_box from '../../images/check-box.svg';
 import uncheck_box from '../../images/uncheck-box.svg';
@@ -82,16 +84,18 @@ const FirstStep = (props) => {
 			alert('비밀번호가 일치하지 않습니다');
 			passwordConfirmInput.current.focus();
 			return setCheck({ ...check, passwordConfirm: false });
-		}
-		// else if (
-		// 	이메일 중복확인 처리
-		// ) {
-		// }
-		else if (!agreeCheck) {
+		} else if (!agreeCheck) {
 			return alert('이용 약관에 동의해주세요.');
-		} else {
-			props.setStep(3);
-			history.push({ state: { email, password, passwordConfirm } });
+		} else if (email) {
+			_user.check_email({ email }).then((res) => {
+				const { success } = res.data;
+				if (!success) {
+					return alert('이미 가입된 이메일입니다');
+				} else {
+					props.setStep(3);
+					history.push({ state: { email, password, passwordConfirm } });
+				}
+			});
 		}
 	};
 
