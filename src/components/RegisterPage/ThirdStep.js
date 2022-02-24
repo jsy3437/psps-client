@@ -70,6 +70,7 @@ const ThirdStep = (props) => {
 				if (res.data.success) {
 					alert('인증번호가 발송되었습니다.');
 					confirmNumberInput.current.focus();
+					setCheck({ ...check, confirm_number: false });
 				} else {
 					alert('인증번호 발송에 실패했습니다. 다시 시도해주세요.');
 				}
@@ -78,7 +79,7 @@ const ThirdStep = (props) => {
 		}
 	};
 	const checkConfirmNumber = () => {
-		if (confirmSend) {
+		if (confirmSend && !check.confirm_number) {
 			const data = {
 				phone_number,
 				code: confirm_number,
