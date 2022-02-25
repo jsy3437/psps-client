@@ -20,8 +20,6 @@ const OrderHistory = (props) => {
 		}
 	}, [props.location.state]);
 
-	console.log(props.paymentList);
-
 	return (
 		<MyPageInside>
 			{props.paymentList.length === 0 && (
