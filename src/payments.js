@@ -6,7 +6,7 @@ export const payment_request = (
 	payment_product_list
 ) => {
 	const IMP = window.IMP;
-	IMP.init('iamport'); // 가맹점 식별코드자리
+	IMP.init('imp72388023'); // 가맹점 식별코드자리
 
 	IMP.request_pay(
 		{
