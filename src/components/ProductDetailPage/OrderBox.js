@@ -160,7 +160,7 @@ const OrderBox = (props) => {
 						</RightOptionBox>
 						<SubmitButton orderBtn onClick={goPayment}>{`${
 							option &&
-							((option.price - option.discount) * count + 3000).toLocaleString()
+							((option.price - option.discount) * count).toLocaleString()
 						}원 / 주문하기`}</SubmitButton>
 						<SubmitButton cartBtn onClick={onAddCart}>
 							장바구니 담기
