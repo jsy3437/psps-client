@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import KR_Regular from '../fonts/Noto_Sans_KR_woff/NotoSansKR-Regular.woff';
-import KR_Black from '../fonts/Noto_Sans_KR_woff/NotoSansKR-Black.woff';
+import KR_Black from '../fonts/Noto_Sans_KR_woff/NotoSansKR-Bold.woff';
 import Roboto_Black from '../fonts/Roboto_woff/Roboto-Bold.woff';
 import Roboto_Regular from '../fonts/Roboto_woff/Roboto-Regular.woff';
 
