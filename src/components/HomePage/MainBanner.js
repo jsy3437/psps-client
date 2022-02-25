@@ -4,8 +4,10 @@ import * as _banner from '../../controller/banner';
 import { IMG_ADDRESS } from '../../config';
 import leftBtn from '../../images/left_btn.svg';
 import rightBtn from '../../images/right_btn.svg';
+import { useHistory } from 'react-router-dom';
 
 const MainBanner = () => {
+	const history = useHistory();
 	const bannerBox = useRef();
 	const [bannerList, setBannerList] = useState([]);
 	const [bnnNum, setBnnNum] = useState(0);
@@ -61,6 +63,10 @@ const MainBanner = () => {
 		}
 	};
 
+	const goUrl = (el) => {
+		console.log(el);
+	};
+
 	return (
 		<Container>
 			<MainBannerWrap ref={bannerBox}>
@@ -70,6 +76,9 @@ const MainBanner = () => {
 							<MainBannerImg
 								alt="banner img"
 								src={`${IMG_ADDRESS}/${el.image}`}
+								onClick={() => {
+									goUrl(el);
+								}}
 							/>
 						</MainBannerList>
 					))}
