@@ -69,6 +69,10 @@ const PaymentPage = () => {
 	}, []);
 
 	const onOrder = () => {
+		if (!del_name || !del_tel || !postAddr || !detailAddr || !postZoneCode) {
+			return alert('배송 정보를 확인해주세요');
+		}
+
 		const impData = {
 			buyer_name: user.name,
 			buyer_email: user.email,

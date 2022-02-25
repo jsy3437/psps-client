@@ -10,7 +10,7 @@ const UserData = (props) => {
 	const receiveUserPlaceholder = [
 		'받으시는 분 이름을 입력해주세요.',
 		'연락처를 입력해주세요.',
-		'내용을 입력해주세요.',
+		'내용을 입력해주세요. (선택)',
 	];
 
 	const onCheck = () => {
