@@ -28,8 +28,7 @@ const CartPage = () => {
 	const [amount, setAmount] = useState(0);
 	const [delivery_price, setDelivery_price] = useState(0);
 
-	const [cartCount, setCartCount] = useState('');
-	console.log(user);
+	const [cartCount, setCartCount] = useState(0);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -41,7 +40,8 @@ const CartPage = () => {
 
 				setSupplierList(supplier_list);
 			} else {
-				alert('잘못된 접근입니다');
+				alert('로그인 후 이용가능');
+				return history.push('/login');
 			}
 		});
 		setIsLoading(false);
@@ -55,7 +55,6 @@ const CartPage = () => {
 			const allCheckTemp = new Array(supplierList.length).fill(true);
 			setAllChecked(allCheckTemp);
 			onAllCheck();
-			// settingOrderCalc();
 		}
 	}, [supplierList]);
 
@@ -130,29 +129,35 @@ const CartPage = () => {
 			let checkArr;
 			const supplierArr = new Array(supplierList.length).fill('');
 
-			if (allChecked && !!checked) {
+			if (allChecked && !checked) {
 				supplierList.map((x, idx) => {
 					checkArr = new Array(x[1].product.length).fill(true);
 					supplierArr[idx] = { supplier_name: x[0], arr: checkArr };
+					console.log('aa');
 				});
 				return setChecked(supplierArr);
 			} else if (allChecked) {
 				supplierList.map((x, idx) => {
 					checkArr = new Array(x[1].product.length).fill(false);
 					supplierArr[idx] = { supplier_name: x[0], arr: checkArr };
+					console.log('zz');
 				});
 			} else if (!allChecked) {
 				supplierList.map((x, idx) => {
 					checkArr = new Array(x[1].product.length).fill(true);
 					supplierArr[idx] = { supplier_name: x[0], arr: checkArr };
+					console.log('ee');
 				});
 			}
 
 			setChecked(supplierArr);
 		}
 	};
-
 	const goShopping = () => {
+		if (!user.login) {
+			alert('로그인 후 이용가능합니다');
+			return history.push('/login');
+		}
 		history.push('/product');
 	};
 

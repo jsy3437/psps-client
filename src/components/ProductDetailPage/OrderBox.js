@@ -38,6 +38,8 @@ const OrderBox = (props) => {
 	const onAddCart = () => {
 		if (!!!option) {
 			return alert('옵션을 선택해주세요');
+		} else if (!props.user.login) {
+			return alert('로그인 후 이용가능합니다');
 		}
 		const data = {
 			product_option_id: option.product_option_id,
@@ -52,12 +54,18 @@ const OrderBox = (props) => {
 				setOption(props.optionList[0]);
 				dispatch(cart_newData(count));
 			} else {
-				alert(`장바구니에 이미 존재하는 상품입니다.`);
+				alert(
+					`장바구니에 이미 존재하는 상품입니다.\n추가를 원하시면 갯수를 조정해주세요`
+				);
 			}
 		});
 	};
 
 	const goPayment = () => {
+		if (!props.user.login) {
+			return alert('로그인 후 이용가능합니다');
+		}
+
 		history.push({
 			pathname: '/payment',
 			state: {

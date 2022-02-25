@@ -34,6 +34,8 @@ const PaymentPage = () => {
 				const { success, user } = res.data;
 				if (success) {
 					setUser(user);
+				} else {
+					history.push('/login');
 				}
 			});
 		}
@@ -67,6 +69,7 @@ const PaymentPage = () => {
 			setPayment_product_list(productList);
 		}
 	}, []);
+	console.log(user);
 
 	const onOrder = () => {
 		if (!del_name || !del_tel || !postAddr || !detailAddr || !postZoneCode) {
@@ -77,8 +80,8 @@ const PaymentPage = () => {
 			buyer_name: user.name,
 			buyer_email: user.email,
 			buyer_tel: user.phone_number,
-			buyer_addr: postAddr + '/' + detailAddr,
-			buyer_postcode: postZoneCode,
+			buyer_addr: user.address,
+			buyer_postcode: user.postcode,
 			name: payment_name,
 			amount: amount + delivery_price,
 		};

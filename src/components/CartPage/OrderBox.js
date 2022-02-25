@@ -11,8 +11,13 @@ const OrderBox = (props) => {
 	const goShopping = () => {
 		history.push('/product');
 	};
-
+	console.log(props.user);
 	const goPayment = () => {
+		// count 갯수로 바꾸기
+		if (props.orderCalc.total === 0) {
+			return alert('상품을 선택해주세요');
+		}
+
 		history.push({
 			pathname: '/payment',
 			state: {
@@ -29,8 +34,7 @@ const OrderBox = (props) => {
 				props.supplierList.map((el, idx) => (
 					<PriceBox key={idx}>
 						<TitleAndPrice>
-							<PriceTitle>공급처</PriceTitle>
-
+							<PriceTitle>판매자</PriceTitle>
 							<Price color={'#A0A0A0'}>{el[0]}</Price>
 						</TitleAndPrice>
 						<TitleAndPrice>
