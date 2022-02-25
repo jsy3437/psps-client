@@ -9,6 +9,7 @@ const ProductList = (props) => {
 	const goDetail = (product_id) => {
 		history.push(`/detail/${product_id}`);
 	};
+	console.log(props.list);
 
 	return (
 		<ProductContainer>
@@ -35,7 +36,15 @@ const ProductList = (props) => {
 						>
 							{el.title}
 						</ProductTitle>
-						<ProductDesc>{el.desc}</ProductDesc>
+						<ProductDescTotalPrice>
+							{el.discount !== 0 && (
+								<ProductDesc>
+									{el.price && el.price.toLocaleString()}원
+								</ProductDesc>
+							)}
+							{el.price && (el.price - el.discount).toLocaleString()}
+							<DescWon>원</DescWon>
+						</ProductDescTotalPrice>
 					</Product>
 				))}
 			</ProductWrap>
@@ -70,10 +79,16 @@ const ProductImgBox = styled.div`
 	width: 38rem;
 	height: 35rem;
 	cursor: pointer;
+	border-radius: 4px;
+	overflow: hidden;
 `;
 const ProductImg = styled.img`
 	width: 100%;
 	height: 100%;
+	transition: all 300ms ease;
+	&:hover {
+		transform: scale(1.1);
+	}
 `;
 const ProductTitle = styled.h3`
 	margin-top: 0.3rem;
@@ -87,13 +102,7 @@ const ProductTitle = styled.h3`
 		text-decoration: underline;
 	}
 `;
-const ProductDesc = styled.p`
-	height: 2rem;
-	line-height: 2rem;
-	font-size: 1.6rem;
-	font-family: 'kr-r';
-	color: #8e8e8e;
-`;
+
 const GrayBackground = styled.div`
 	width: 100%;
 	height: 37.3rem;
@@ -101,4 +110,24 @@ const GrayBackground = styled.div`
 	position: absolute;
 	bottom: -9.5rem;
 	z-index: -10;
+`;
+const ProductDesc = styled.span`
+	font-size: 1.4rem;
+	font-family: 'ro-r';
+	letter-spacing: -0.28px;
+	color: #8e8e8e;
+	margin-right: 0.4rem;
+	text-decoration: line-through;
+`;
+const ProductDescTotalPrice = styled.p`
+	font-size: 2rem;
+	font-family: 'ro-b';
+	letter-spacing: -0.4px;
+	color: #e50011;
+	margin-top: 0.2rem;
+`;
+const DescWon = styled.span`
+	font-family: 'kr-b';
+	font-size: 1.6rem;
+	margin-left: 0.2rem;
 `;
