@@ -21,13 +21,13 @@ const Navbar = () => {
 				setCartCount(count);
 			}
 		});
-	}, []);
+	}, [user]);
 
 	useEffect(() => {
 		if (cart) {
 			setCartCount(cart.cartCount);
 		}
-	}, [cart]);
+	}, [cart, user]);
 
 	const goHome = () => {
 		history.push('/');

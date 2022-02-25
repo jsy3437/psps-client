@@ -29,6 +29,7 @@ const CartPage = () => {
 	const [delivery_price, setDelivery_price] = useState(0);
 
 	const [cartCount, setCartCount] = useState('');
+	console.log(user);
 
 	useEffect(() => {
 		setIsLoading(true);
