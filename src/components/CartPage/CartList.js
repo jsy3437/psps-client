@@ -63,20 +63,20 @@ const CartList = (props) => {
 		<CartListWrap>
 			{props.supplierList &&
 				props.supplierList.map((supplier, id) => (
-					<SupplierBox key={id} wrap={true}>
+					<SupplierBox key={id} wrap="true">
 						<SupplierTitleAndCheckBox>
-							<SupplierAllCheckImg
+							{/* <SupplierAllCheckImg
 								alt="check image"
 								src={
 									props.allChecked[id] && props.allChecked[id]
 										? checkImg
 										: uncheckImg
 								}
-							/>
-							<SupplierBox>
-								<SupplierTitle>공급처</SupplierTitle>
+							/> */}
+							<SupplierTitleBox>
+								<SupplierTitle>판매자</SupplierTitle>
 								<Supplier>{supplier[0]}</Supplier>
-							</SupplierBox>
+							</SupplierTitleBox>
 						</SupplierTitleAndCheckBox>
 
 						{supplier[1].product.map((el, idx) => (
@@ -152,6 +152,7 @@ const CartList = (props) => {
 export default CartList;
 
 const CartListWrap = styled.div`
+	margin: 3.3rem 0 0 3rem;
 	margin-left: 3rem;
 	width: 69.7rem;
 `;
@@ -162,9 +163,21 @@ const ShadowBox = styled.div`
 	border-radius: 4px;
 	display: flex;
 	position: relative;
-	margin-bottom: 2rem;
+	margin-bottom: 5rem;
+`;
+const SupplierTitleBox = styled.div`
+	position: absolute;
+	display: flex;
+	align-items: center;
+	background-color: #fff;
+	width: fit-content;
+	padding-right: 1.2;
+	top: -1.5rem;
 `;
 const SupplierBox = styled.div`
+	position: relative;
+	border-top: 1px solid #e0e0e0;
+	padding-top: 2.35rem;
 	${(props) => props.wrap && `margin-bottom: 4rem;`}
 `;
 const SupplierTitleAndCheckBox = styled.div`
@@ -188,13 +201,14 @@ const SupplierTitle = styled.p`
 	letter-spacing: -0.64px;
 	color: #6b6462;
 	text-align: start;
+	margin-right: 0.6rem;
 `;
 const Supplier = styled.p`
 	font-size: 2rem;
 	font-family: 'kr-b';
 	letter-spacing: -0.8px;
 	text-align: start;
-	margin-bottom: 1.6rem;
+	margin-right: 1.2rem;
 `;
 const CheckImg = styled.img`
 	position: absolute;
