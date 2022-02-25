@@ -101,12 +101,12 @@ const ProductInfoTable = (props) => {
 					</InfoItemBox>
 					<InfoItemBox>
 						<InfoTitle>배송사</InfoTitle>
-						<InfoText>CJ 대한통운</InfoText>
+						<InfoText>공급사별 상이</InfoText>
 					</InfoItemBox>
 					<InfoItemBox>
 						<InfoTitle>배송비</InfoTitle>
 						<InfoText>
-							무료배송 ∙ 도서산간 추가 배송비 - 제주, 도서산간 지역 : 5,000원
+							{`3,000원 ∙ 도서산간 추가 배송비\n- 제주, 도서산간 지역 : 5,000원`}
 						</InfoText>
 					</InfoItemBox>
 					<InfoItemBox>
