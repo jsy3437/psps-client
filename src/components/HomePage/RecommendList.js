@@ -27,6 +27,7 @@ const RecommendList = () => {
 	const goDetail = (product_id) => {
 		history.push(`/detail/${product_id}`);
 	};
+	console.log(list);
 
 	return (
 		<RecommendWrap>
@@ -42,26 +43,35 @@ const RecommendList = () => {
 			<Desc>{`품생품사에서 선별한\n특별한 상품들을 지금 바로 만나보세요!`}</Desc>
 			<Boundary />
 			<ListWrap>
-				{list.map((el, idx) => (
-					<List key={idx}>
-						<ListImg
-							alt="product img"
-							src={`${IMG_ADDRESS}/${el.image}`}
-							onClick={() => {
-								goDetail(el.product_id);
-							}}
-						/>
-						<ListTitle
-							onClick={() => {
-								goDetail(el.product_id);
-							}}
-						>
-							{el.title}
-						</ListTitle>
-						{/* 상품설명 */}
-						{/* <ListDesc>{el.desc}</ListDesc> */}
-					</List>
-				))}
+				{list &&
+					list.map((el, idx) => (
+						<List key={idx}>
+							<ListImgBox>
+								<ListImg
+									alt="product img"
+									src={`${IMG_ADDRESS}/${el.image}`}
+									onClick={() => {
+										goDetail(el.product_id);
+									}}
+								/>
+							</ListImgBox>
+							<ListTitle
+								onClick={() => {
+									goDetail(el.product_id);
+								}}
+							>
+								{el.title}
+							</ListTitle>
+							{/* 상품설명 */}
+							<ListDescTotalPrice>
+								{el.discount !== 0 && (
+									<ListDesc>{el.price && el.price.toLocaleString()}원</ListDesc>
+								)}
+								{el.total_price && el.total_price.toLocaleString()}
+								<DescWon>원</DescWon>
+							</ListDescTotalPrice>
+						</List>
+					))}
 			</ListWrap>
 		</RecommendWrap>
 	);
@@ -127,9 +137,19 @@ const List = styled.li`
 	height: 40rem;
 	margin-bottom: 5.9rem;
 `;
+const ListImgBox = styled.div`
+	width: 38rem;
+	height: 35rem;
+	overflow: hidden;
+	border-radius: 4px;
+`;
 const ListImg = styled.img`
 	width: 38rem;
 	height: 35rem;
+	transition: all 300ms ease;
+	&:hover {
+		transform: scale(1.1);
+	}
 `;
 const ListTitle = styled.h3`
 	height: 2.6rem;
@@ -139,11 +159,23 @@ const ListTitle = styled.h3`
 	letter-spacing: -0.72px;
 	color: #221814;
 `;
-// const ListDesc = styled.p`
-// 	height: 2rem;
-// 	line-height: 2rem;
-// 	font-size: 1.6rem;
-// 	font-family: 'kr-r';
-// 	letter-spacing: -0.32px;
-// 	color: #8e8e8e;
-// `;
+const ListDesc = styled.span`
+	font-size: 1.4rem;
+	font-family: 'ro-r';
+	letter-spacing: -0.28px;
+	color: #8e8e8e;
+	margin-right: 0.4rem;
+	text-decoration: line-through;
+`;
+const ListDescTotalPrice = styled.p`
+	font-size: 2rem;
+	font-family: 'ro-b';
+	letter-spacing: -0.4px;
+	color: #e50011;
+	margin-top: 0.2rem;
+`;
+const DescWon = styled.span`
+	font-family: 'kr-b';
+	font-size: 1.6rem;
+	margin-left: 0.2rem;
+`;
