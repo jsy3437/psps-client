@@ -1,4 +1,5 @@
 import * as _payment from './controller/payment';
+import { IMP_ID } from './config';
 export const payment_request = (
 	impData,
 	pasteAddrChecked,
@@ -6,7 +7,7 @@ export const payment_request = (
 	payment_product_list
 ) => {
 	const IMP = window.IMP;
-	IMP.init('imp72388023'); // 가맹점 식별코드자리
+	IMP.init(`${IMP_ID}`); // 가맹점 식별코드자리
 
 	IMP.request_pay(
 		{
@@ -29,7 +30,7 @@ export const payment_request = (
 							// window.location.href = `http://localhost:3000/payment/result/${res.data.payment_id}`;
 							window.location.href = `http://makinet.kr/payment/result/${res.data.payment_id}`;
 						} else {
-							console.error(res.data);
+							alert(`${res.data.msg}`);
 						}
 					});
 			} else {
