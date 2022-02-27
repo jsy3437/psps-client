@@ -4,10 +4,13 @@ import ex1 from '../../images/ex1.png';
 import * as _payment from '../../controller/payment';
 import checkImg from '../../images/check_btn.svg';
 import uncheckImg from '../../images/uncheck_btn.svg';
+import { useHistory } from 'react-router-dom';
 
 const OrderDetail = (props) => {
+	const history = useHistory();
 	const receiverInfo = ['받는분', '연락처', '받는주소', '배송요청사항'];
 	const paymentInfo = ['결제수단', '총 상품가격', '배송비', '총 결제금액'];
+
 	const [detailPayment, setDetailPayment] = useState('');
 	const [detailProductList, setDetailProductList] = useState('');
 	const [claimType, setClaimType] = useState('cancel');
@@ -47,33 +50,41 @@ const OrderDetail = (props) => {
 	const goReceipt = () => {
 		window.open(detailPayment.receipt_url, '_blank');
 	};
-
 	const goCancel = (el) => {
-		const data = {
-			payment: {
-				payment_id: detailPayment.payment_id,
-				delivery_price: detailPayment.del_price,
-				create_at: detailPayment.create_at,
-				user_id: detailPayment.user_id,
-				imp_id: detailPayment.imp_id,
-				name: detailPayment.name,
-				amount: detailPayment.amount,
-			},
-			payment_product_list: [el],
-			claim_reason: '잘못시켰네요 죄송합니다',
-		};
-
-		_payment.claim_cancel(data, claimType).then((res) => {
-			const { success, payment, payment_product_list } = res.data;
-			if (success) {
-				console.log(res.data);
-				alert('상품 취소가 완료되었습니다');
-				setDetailProductList(payment_product_list);
-				setDetailPayment(payment);
-			} else {
-				alert(res.data);
-			}
+		if (checkedList.length === 0) {
+			return alert('제품을 선택해주세요');
+		}
+		history.push({
+			pathname: '/order',
+			state: { type: 'cancel', checkProductList: checkedList, detailPayment },
 		});
+		// const data = {
+		// 	payment: {
+		// 		payment_id: detailPayment.payment_id,
+		// 		delivery_price: detailPayment.del_price,
+		// 		create_at: detailPayment.create_at,
+		// 		user_id: detailPayment.user_id,
+		// 		imp_id: detailPayment.imp_id,
+		// 		name: detailPayment.name,
+		// 		amount: detailPayment.amount,
+		// 	},
+		// 	payment_product_list: [el],
+		// 	claim_reason: '잘못시켰네요 죄송합니다',
+		// };
+
+		// _payment.claim_cancel(data, claimType).then((res) => {
+		// 	const { success, payment, payment_product_list, supplier_list } =
+		// 		res.data;
+		// 	if (success) {
+		// 		console.log(res.data);
+		// 		alert('상품 취소가 완료되었습니다');
+		// 		setDetailProductList(payment_product_list);
+		// 		setDetailPayment(payment);
+		// 		setSupplierList(supplier_list);
+		// 	} else {
+		// 		alert(res.data);
+		// 	}
+		// });
 	};
 	console.log('checked', checkedList);
 
@@ -112,16 +123,16 @@ const OrderDetail = (props) => {
 
 	return (
 		<OrderDetailWrap>
+			<TitleBox>
+				<Title top>주문내역</Title>
+				<OrderDate>
+					{detailPayment && detailPayment.create_at.split('T')[0]}
+					<OrderNumber>{`・주문번호 1300123123`}</OrderNumber>
+				</OrderDate>
+			</TitleBox>
 			{supplierList &&
 				supplierList.map((supplier, id) => (
 					<Item first key={id}>
-						<TitleBox>
-							<Title top>주문내역</Title>
-							<OrderDate>
-								{detailPayment && detailPayment.create_at.split('T')[0]}
-								<OrderNumber>{`・주문번호 1300123123`}</OrderNumber>
-							</OrderDate>
-						</TitleBox>
 						<Supplier>
 							<SupplierSpan>판매자</SupplierSpan>
 							{supplier[0]}
@@ -278,6 +289,9 @@ const OrderDetailWrap = styled.div`
 	flex-direction: column;
 	position: relative;
 `;
+const ItemBox = styled.div`
+	width: 100%;
+`;
 const Item = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -411,7 +425,7 @@ const Button = styled.button`
 	${(props) =>
 		props.color === 'grey' &&
 		`border:1px solid #A0A0A0; background-color:#A0A0A0;`} 
-	${(props) => props.color === 'red' && `color:#fff; background-color:#221814`}
+	${(props) => props.color === 'red' && `color:#E50011; border:1px solid #E50011`}
 	${(props) =>
 		props.color === 'white' && `border:1px solid #A0A0A0; color:#A0A0A0;`}
 `;

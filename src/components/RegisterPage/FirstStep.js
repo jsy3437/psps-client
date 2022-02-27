@@ -299,6 +299,7 @@ const SubmitButton = styled.button`
 	background-color: #fff;
 	border: 1px solid #e50011;
 	border-radius: 4px;
+	transition: all 200ms ease;
 	&:hover {
 		background-color: #e50011;
 		color: #fff;
