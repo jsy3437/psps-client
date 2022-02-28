@@ -68,9 +68,6 @@ const FirstStep = (props) => {
 	};
 
 	const goNext = () => {
-		//
-		// 다음으로 누를 때 이메일 중복확인 하고 넘어가기 !!!
-		//
 		setIsSubmit(true);
 		if (!regexp.email.test(email)) {
 			alert('이메일을 확인해주세요');

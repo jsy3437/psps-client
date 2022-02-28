@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import down from '../images/angle-down.svg';
 
-const OrderChangePage = (props) => {
+const OrderChangePage = () => {
 	const history = useHistory();
 	const location = useLocation().state;
-	const [claimType, setClaimType] = useState('');
+	const [claimType, setClaimType] = useState(location.type);
 	const [claimReason, setClaimReason] = useState('직접 입력');
 	const [claimReasonText, setClaimReasonText] = useState('');
 	const [bank, setBank] = useState('은행 선택');
@@ -134,6 +134,21 @@ const OrderChangePage = (props) => {
 			claim_reason: claimReasonText,
 			// 횐불계좌
 		};
+
+		// _payment.claim_cancel(data, claimType).then((res) => {
+		// 	const { success, payment, payment_product_list, supplier_list } =
+		// 		res.data;
+		// 	if (success) {
+		// 		console.log(res.data);
+		// 		alert('상품 취소가 완료되었습니다');
+		// 		history.push({
+		//		pathName:'/myPage',
+		// 		state: location.detailPayment.payment_id
+		// })
+		// 	} else {
+		// 		alert(res.data);
+		// 	}
+		// });
 	};
 
 	console.log(location.checkProductList);

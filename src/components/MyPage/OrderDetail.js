@@ -50,14 +50,69 @@ const OrderDetail = (props) => {
 	const goReceipt = () => {
 		window.open(detailPayment.receipt_url, '_blank');
 	};
-	const goCancel = (el) => {
+
+	const goCheckedAndCancel = async (el, e) => {
+		let type;
+		const { innerText } = e.target.value;
+
+		if (innerText && innerText === '취소하기') {
+			type = 'cancel';
+		} else if (innerText && innerText === '교환 / 반품 / 환불') {
+			type = 'exchange';
+		}
+
+		if (!submitStateTest(el.process, innerText)) {
+			return alert('취소, 반품, 교환 불가');
+		}
+
+		history.push({
+			pathname: '/order',
+			state: { type, checkProductList: [el], detailPayment },
+		});
+	};
+
+	const submitStateTest = (state, text) => {
+		let testResult = false;
+		if (state === '입금전' && text === '취소하기') {
+			testResult = true;
+		} else if (state === '결제완료' && text === '취소하기') {
+			testResult = true;
+		} else if (state === '배송중' && text === '교환 / 반품 / 환불') {
+			testResult = true;
+		} else if (state === '배송완료' && text === '교환 / 반품 / 환불') {
+			testResult = true;
+		}
+		return testResult;
+	};
+
+	const goCancelAndExchange = (e) => {
+		const { innerText } = e.target;
 		if (checkedList.length === 0) {
 			return alert('제품을 선택해주세요');
 		}
-		history.push({
-			pathname: '/order',
-			state: { type: 'cancel', checkProductList: checkedList, detailPayment },
+		let count = checkedList.length;
+		checkedList.map((el) => {
+			if (!submitStateTest(el.process, innerText)) {
+				count--;
+			}
 		});
+
+		if (count === checkedList.length) {
+			let type;
+			if (innerText && innerText === '취소하기') {
+				type = 'cancel';
+			} else if (innerText && innerText === '교환 / 반품 / 환불') {
+				type = 'exchange';
+			}
+
+			history.push({
+				pathname: '/order',
+				state: { type, checkProductList: checkedList, detailPayment },
+			});
+		} else {
+			return alert('취소, 교환, 환불 불가인 상품이 있습니다');
+		}
+
 		// const data = {
 		// 	payment: {
 		// 		payment_id: detailPayment.payment_id,
@@ -86,7 +141,6 @@ const OrderDetail = (props) => {
 		// 	}
 		// });
 	};
-	console.log('checked', checkedList);
 
 	const clickCheck = (el) => {
 		const copyChecked = [...checkedList];
@@ -175,8 +229,8 @@ const OrderDetail = (props) => {
 												? 'red'
 												: 'white'
 										}
-										onClick={() => {
-											goCancel(el);
+										onClick={(e) => {
+											goCheckedAndCancel(el, e);
 										}}
 									>
 										{el.process === '입금 전' || el.process === '결제완료'
@@ -197,8 +251,10 @@ const OrderDetail = (props) => {
 						onClick={ClickAllCheck}
 					/>
 					<AllCheckInfo>{`전체선택 ( ${checkedList.length} / ${detailProductList.length} )`}</AllCheckInfo>
-					<CancelBtn>취소하기</CancelBtn>
-					<CancelBtn>교환 / 반품 / 환불</CancelBtn>
+					<CancelBtn onClick={goCancelAndExchange}>취소하기</CancelBtn>
+					<CancelBtn onClick={goCancelAndExchange}>
+						교환 / 반품 / 환불
+					</CancelBtn>
 				</AllCheckingBox>
 				<Title>받는 분</Title>
 				{detailPayment && (

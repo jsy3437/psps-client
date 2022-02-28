@@ -18,6 +18,7 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentResultPage from './pages/PaymentResultPage';
+import OrderChangePage from './pages/OrderChangePage';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -59,6 +60,7 @@ const App = () => {
 						path="/payment/result/:payment_id"
 						component={Auth(PaymentResultPage, null)}
 					/>
+					<Route exact path="/order" component={Auth(OrderChangePage, true)} />
 				</Switch>
 			</div>
 		</Router>
