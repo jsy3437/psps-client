@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import down from '../images/angle-down.svg';
+import * as _payment from '../controller/payment';
 
 const OrderChangePage = () => {
 	const history = useHistory();
 	const location = useLocation().state;
 	const [claimType, setClaimType] = useState(location.type);
+	// const [claimType, setClaimType] = useState(location.type);
 	const [claimReason, setClaimReason] = useState('직접 입력');
 	const [claimReasonText, setClaimReasonText] = useState('');
 	const [bank, setBank] = useState('은행 선택');
@@ -20,9 +22,11 @@ const OrderChangePage = () => {
 		account: '',
 		accountHolder: '',
 	});
+
 	const [claimReasonMenu, setClaimReasonMenu] = useState(false);
 	const [bankMenu, setBankMenu] = useState(false);
 	const [applyMenu, setApplyMenu] = useState(false);
+	const [buttonState, setButtonState] = useState(false);
 
 	const applyList = [
 		{ en: 'exChange', kr: '교환 신청' },
@@ -44,6 +48,28 @@ const OrderChangePage = () => {
 		'하나은행',
 		'카카오뱅크',
 	];
+
+	useEffect(() => {
+		let state = false;
+		if (claimType === 'refund') {
+			if (
+				check.reasonText &&
+				check.bank &&
+				check.account &&
+				check.accountHolder
+			) {
+				state = true;
+			}
+		} else if (claimType === 'cancel' || claimType === 'exchange') {
+			if (check.reasonText) {
+				state = true;
+			}
+		}
+		setButtonState(state);
+	}, [check]);
+
+	console.log(check);
+	console.log('btn', buttonState);
 
 	// input onChange
 	const changeClaimReasonText = (e) => {
@@ -89,6 +115,7 @@ const OrderChangePage = () => {
 		setClaimReasonMenu(false);
 		if (innerText === '직접 입력') {
 			setClaimReasonText('');
+			setCheck({ ...check, reasonText: false });
 		} else {
 			setClaimReasonText(innerText);
 			setCheck({ ...check, reasonText: true });
@@ -119,12 +146,7 @@ const OrderChangePage = () => {
 	};
 
 	const onSubmit = () => {
-		if (
-			!check.reasonText ||
-			!check.bank ||
-			!check.account ||
-			!check.accountHolder
-		) {
+		if (!buttonState) {
 			return;
 		}
 
@@ -134,21 +156,21 @@ const OrderChangePage = () => {
 			claim_reason: claimReasonText,
 			// 횐불계좌
 		};
+		console.log(data);
 
-		// _payment.claim_cancel(data, claimType).then((res) => {
-		// 	const { success, payment, payment_product_list, supplier_list } =
-		// 		res.data;
-		// 	if (success) {
-		// 		console.log(res.data);
-		// 		alert('상품 취소가 완료되었습니다');
-		// 		history.push({
-		//		pathName:'/myPage',
-		// 		state: location.detailPayment.payment_id
-		// })
-		// 	} else {
-		// 		alert(res.data);
-		// 	}
-		// });
+		_payment.claim_cancel(data, claimType).then((res) => {
+			const { success } = res.data;
+			if (success) {
+				console.log(res.data);
+				alert('상품 취소가 완료되었습니다');
+				history.push({
+					pathName: '/myPage',
+					state: location.detailPayment.payment_id,
+				});
+			} else {
+				alert(res.data);
+			}
+		});
 	};
 
 	console.log(location.checkProductList);
@@ -214,7 +236,7 @@ const OrderChangePage = () => {
 						)}
 					</AlertTextBox>
 				</Item>
-				{claimType !== 'exchange' && (
+				{claimType === 'refund' && (
 					<Item>
 						<ItemTitle>환불 계좌</ItemTitle>
 						<BankInputBox>
@@ -271,14 +293,7 @@ const OrderChangePage = () => {
 					<Button back onClick={goMyPage}>
 						취소
 					</Button>
-					<SubmitButton
-						enter={
-							check.reasonText &&
-							check.bank &&
-							check.account &&
-							check.accountHolder
-						}
-					>
+					<SubmitButton enter={buttonState} onClick={onSubmit}>
 						확인
 					</SubmitButton>
 				</BtnBox>

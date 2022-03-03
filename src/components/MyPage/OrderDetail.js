@@ -51,13 +51,13 @@ const OrderDetail = (props) => {
 		window.open(detailPayment.receipt_url, '_blank');
 	};
 
-	const goCheckedAndCancel = async (el, e) => {
+	const goCheckedAndCancelOrExchange = async (el, e) => {
 		let type;
-		const { innerText } = e.target.value;
+		const { innerText } = e.target;
 
-		if (innerText && innerText === '취소하기') {
+		if (innerText === '취소하기') {
 			type = 'cancel';
-		} else if (innerText && innerText === '교환 / 반품 / 환불') {
+		} else if (innerText === '교환 / 반품 / 환불') {
 			type = 'exchange';
 		}
 
@@ -66,12 +66,13 @@ const OrderDetail = (props) => {
 		}
 
 		history.push({
-			pathname: '/order',
+			pathname: `/order/${type}`,
 			state: { type, checkProductList: [el], detailPayment },
 		});
 	};
 
 	const submitStateTest = (state, text) => {
+		console.log(state, text);
 		let testResult = false;
 		if (state === '입금전' && text === '취소하기') {
 			testResult = true;
@@ -85,7 +86,7 @@ const OrderDetail = (props) => {
 		return testResult;
 	};
 
-	const goCancelAndExchange = (e) => {
+	const goCancelOrExchange = (e) => {
 		const { innerText } = e.target;
 		if (checkedList.length === 0) {
 			return alert('제품을 선택해주세요');
@@ -106,7 +107,7 @@ const OrderDetail = (props) => {
 			}
 
 			history.push({
-				pathname: '/order',
+				pathname: `/order/${type}`,
 				state: { type, checkProductList: checkedList, detailPayment },
 			});
 		} else {
@@ -181,7 +182,9 @@ const OrderDetail = (props) => {
 				<Title top>주문내역</Title>
 				<OrderDate>
 					{detailPayment && detailPayment.create_at.split('T')[0]}
-					<OrderNumber>{`・주문번호 1300123123`}</OrderNumber>
+					<OrderNumber>{` ・ 주문번호 ${
+						detailPayment && detailPayment.payment_uid
+					}`}</OrderNumber>
 				</OrderDate>
 			</TitleBox>
 			{supplierList &&
@@ -213,7 +216,7 @@ const OrderDetail = (props) => {
 								<Buttons>
 									<Button
 										color={
-											el.process === '배송 중' || el.process === '배송완료'
+											el.process === '배송중' || el.process === '배송완료'
 												? 'black'
 												: 'grey'
 										}
@@ -222,7 +225,7 @@ const OrderDetail = (props) => {
 									</Button>
 									<Button
 										color={
-											el.process === '배송 중' ||
+											el.process === '배송중' ||
 											el.process === '배송완료' ||
 											el.process === '입금 전' ||
 											el.process === '결제완료'
@@ -230,7 +233,7 @@ const OrderDetail = (props) => {
 												: 'white'
 										}
 										onClick={(e) => {
-											goCheckedAndCancel(el, e);
+											goCheckedAndCancelOrExchange(el, e);
 										}}
 									>
 										{el.process === '입금 전' || el.process === '결제완료'
@@ -251,10 +254,8 @@ const OrderDetail = (props) => {
 						onClick={ClickAllCheck}
 					/>
 					<AllCheckInfo>{`전체선택 ( ${checkedList.length} / ${detailProductList.length} )`}</AllCheckInfo>
-					<CancelBtn onClick={goCancelAndExchange}>취소하기</CancelBtn>
-					<CancelBtn onClick={goCancelAndExchange}>
-						교환 / 반품 / 환불
-					</CancelBtn>
+					<CancelBtn onClick={goCancelOrExchange}>취소하기</CancelBtn>
+					<CancelBtn onClick={goCancelOrExchange}>교환 / 반품 / 환불</CancelBtn>
 				</AllCheckingBox>
 				<Title>받는 분</Title>
 				{detailPayment && (
@@ -332,7 +333,7 @@ const OrderDetail = (props) => {
 					</InfoReceiptList>
 				</InfoWrap>
 			</Item>
-			<Button red>주문내역 삭제</Button>
+			<RemoveButton>주문내역 삭제</RemoveButton>
 		</OrderDetailWrap>
 	);
 };
@@ -345,9 +346,7 @@ const OrderDetailWrap = styled.div`
 	flex-direction: column;
 	position: relative;
 `;
-const ItemBox = styled.div`
-	width: 100%;
-`;
+
 const Item = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -477,13 +476,15 @@ const Button = styled.button`
 	background-color: #fff;
 	color: #fff;
 	${(props) =>
-		props.color === 'black' && `color:#E50011; border:1px solid #E50011;`}
+		props.color === 'black' &&
+		`color:#fff; border:none;background-color:#221814;`}
 	${(props) =>
 		props.color === 'grey' &&
-		`border:1px solid #A0A0A0; background-color:#A0A0A0;`} 
+		`border:1px solid #A0A0A0; background-color:#A0A0A0; cursor:default !important;`} 
 	${(props) => props.color === 'red' && `color:#E50011; border:1px solid #E50011`}
 	${(props) =>
-		props.color === 'white' && `border:1px solid #A0A0A0; color:#A0A0A0;`}
+		props.color === 'white' &&
+		`border:1px solid #A0A0A0; color:#A0A0A0;  cursor:default !important;`}
 `;
 const InfoWrap = styled.ul`
 	width: 100%;
@@ -568,4 +569,17 @@ const CancelBtn = styled.button`
 	border-radius: 4px;
 	padding: 0 1.2rem;
 	margin-right: 0.8rem;
+`;
+const RemoveButton = styled.button`
+	width: 13.5rem;
+	border: 1px solid #e50011;
+	border-radius: 4px;
+	background-color: #fff;
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	letter-spacing: -0.56px;
+	color: #e50011;
+	padding: 0.8rem 2.8rem;
+	margin-left: auto;
+	margin-bottom: -3.5rem;
 `;
