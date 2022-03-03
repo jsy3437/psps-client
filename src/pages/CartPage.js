@@ -27,7 +27,7 @@ const CartPage = () => {
 	const [orderCalc, setOrderCalc] = useState([]);
 	const [amount, setAmount] = useState(0);
 	const [delivery_price, setDelivery_price] = useState(0);
-	const [tempChecked, setTempChecked] = useState([]); // 공급원 리스트의 모든상품들이 들어있는 임시배열
+	const [tempChecked, setTempChecked] = useState([]); // 공급원 리스트 각각의 모든상품들이 들어있는 임시배열
 	const [cartCount, setCartCount] = useState(0);
 	const [checkCount, setCheckCount] = useState(0);
 

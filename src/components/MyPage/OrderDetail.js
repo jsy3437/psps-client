@@ -163,7 +163,7 @@ const OrderDetail = (props) => {
 
 	const ClickAllCheck = () => {
 		if (detailProductList.length === checkedList.length) {
-			setCheckedList([]);
+			return setCheckedList([]);
 		} else {
 			let tempCheckList = [];
 			supplierList.map((supplier) => {
