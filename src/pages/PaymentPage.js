@@ -27,6 +27,7 @@ const PaymentPage = () => {
 	const [payment_product_list, setPayment_product_list] = useState([]);
 	const [payment_name, setPayment_name] = useState('');
 	const { orderCalc, amount, delivery_price } = location.state;
+	const [orderState, setOrderState] = useState(false);
 
 	useEffect(() => {
 		if (!!!user) {
@@ -40,6 +41,14 @@ const PaymentPage = () => {
 			});
 		}
 	}, []);
+
+	useEffect(() => {
+		if (del_name && del_tel && postAddr && detailAddr && postZoneCode) {
+			setOrderState(true);
+		} else {
+			setOrderState(false);
+		}
+	}, [del_name, del_tel, postAddr, detailAddr, postZoneCode]);
 
 	useEffect(() => {
 		if (orderCalc) {
@@ -69,32 +78,38 @@ const PaymentPage = () => {
 			setPayment_product_list(productList);
 		}
 	}, []);
-	console.log(user);
+
+	const goBack = () => {
+		history.goBack();
+	};
 
 	const onOrder = () => {
-		if (!del_name || !del_tel || !postAddr || !detailAddr || !postZoneCode) {
-			return alert('배송 정보를 확인해주세요');
+		if (orderState) {
+			const impData = {
+				buyer_name: user.name,
+				buyer_email: user.email,
+				buyer_tel: user.phone_number,
+				buyer_addr: user.address,
+				buyer_postcode: user.postcode,
+				name: payment_name,
+				amount: amount + delivery_price,
+			};
+			const delivery = {
+				del_name,
+				del_tel,
+				del_addr: postAddr + '/' + detailAddr,
+				del_postcode: postZoneCode,
+				del_price: delivery_price,
+				del_req,
+			};
+
+			payment_request(
+				impData,
+				pasteAddrChecked,
+				delivery,
+				payment_product_list
+			);
 		}
-
-		const impData = {
-			buyer_name: user.name,
-			buyer_email: user.email,
-			buyer_tel: user.phone_number,
-			buyer_addr: user.address,
-			buyer_postcode: user.postcode,
-			name: payment_name,
-			amount: amount + delivery_price,
-		};
-		const delivery = {
-			del_name,
-			del_tel,
-			del_addr: postAddr + '/' + detailAddr,
-			del_postcode: postZoneCode,
-			del_price: delivery_price,
-			del_req,
-		};
-
-		payment_request(impData, pasteAddrChecked, delivery, payment_product_list);
 	};
 
 	return (
@@ -128,7 +143,10 @@ const PaymentPage = () => {
 					amount={amount}
 				/>
 				<BtnBox>
-					<SubmitButton onClick={onOrder}> 주문하기</SubmitButton>
+					<SubmitButton onClick={onOrder} state={orderState}>
+						주문하기
+					</SubmitButton>
+					<BackButton onClick={goBack}>이전으로</BackButton>
 				</BtnBox>
 			</Container>
 			<Footer />
@@ -157,8 +175,12 @@ const Title = styled.h2`
 	margin: 1rem auto;
 `;
 const BtnBox = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	width: fit-content;
 	margin: auto;
+	height: 19.7rem;
 `;
 const SubmitButton = styled.button`
 	width: 34.6rem;
@@ -169,10 +191,31 @@ const SubmitButton = styled.button`
 	letter-spacing: -0.84px;
 	border: none;
 	transition: all 200ms ease;
-	background-color: #221814;
+	background-color: #a0a0a0;
 	color: #fff;
 	margin: 6.05rem auto 0;
-
+	cursor: default !important;
+	${(props) =>
+		props.state &&
+		`background-color: #221814;
+		cursor:pointer !important;
+	&:hover {
+		background-color: #e50011;
+		color: #fff;
+	}
+	`}
+`;
+const BackButton = styled.button`
+	width: 34.6rem;
+	height: 6.2rem;
+	border-radius: 4px;
+	font-size: 2.1rem;
+	font-family: 'kr-r';
+	letter-spacing: -0.84px;
+	border: 1px solid #e50011;
+	color: #e50011;
+	background-color: #fff;
+	transition: all 200ms ease;
 	&:hover {
 		background-color: #e50011;
 		color: #fff;

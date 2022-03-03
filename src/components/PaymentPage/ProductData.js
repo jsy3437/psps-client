@@ -13,19 +13,22 @@ const ProductData = (props) => {
 			{props.orderCalc &&
 				props.orderCalc.map((supplierList, id) => (
 					<MapBox key={id}>
+						<SupplierTitleBox>
+							판매자<SupplierName>{supplierList.supplier_name}</SupplierName>
+						</SupplierTitleBox>
+
 						{supplierList.checked_product_list.map((el, idx) => (
 							<BorderBox key={idx}>
-								<ProductText title="true">{el.product_title}</ProductText>
-								<ProductText option>{el.product_option_title}</ProductText>
-								<ProductText quantity>{el.quantity}개</ProductText>
+								<ProductText title="true">
+									{el.product_title}, {el.product_option_title}
+								</ProductText>
+								<ProductText quantity>수량 {el.quantity}개</ProductText>
 								<ProductText price>{el.total.toLocaleString()}원</ProductText>
 							</BorderBox>
 						))}
 						{supplierList.delivery_price !== 0 && (
 							<BorderBox>
 								<ProductText title>배송비</ProductText>
-								<ProductText option>{supplierList.supplier_name}</ProductText>
-								<ProductText quantity>1개</ProductText>
 								<ProductText price>
 									{supplierList.delivery_price.toLocaleString()}원
 								</ProductText>
@@ -64,38 +67,38 @@ const ProductDataWrap = styled.div`
 	width: 100%;
 `;
 const MapBox = styled.div`
+	position: relative;
 	width: 100%;
+	border-top: 1px solid #e0e0e0;
+	padding: 3.15rem 1rem 6.45rem;
 `;
 const Title = styled.h2`
 	font-size: 1.8rem;
 	font-family: 'kr-b';
 	letter-spacing: -0.072rem;
-	margin: 0 auto 1.3rem 1.5rem;
+	margin: 0 auto 3.25rem;
 	${(props) => props.receive && `margin: 0 auto 0.6rem 1.5rem`}
 `;
 const BorderBox = styled.div`
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	padding: 2rem 4rem;
-	border: 1px solid #e0e0e0;
 	border-radius: 4px;
-	margin-bottom: 0.6rem;
+	margin-bottom: 2rem;
 `;
 const ProductText = styled.p`
-	font-size: 1.6rem;
+	font-size: 1.5rem;
 	font-family: 'kr-r';
-	letter-spacing: -0.64px;
-	color: #221814;
+	letter-spacing: -0.6px;
+	color: #6b6462;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 
-	${(props) => props.title && `width:19.7rem`}
-	${(props) => props.option && `width:15.9rem`}
-	${(props) => props.quantity && `width:5rem`}
 	${(props) =>
-		props.price && `width:10rem; text-align: right; font-family: 'kr-b';`}
+		props.title && `width:42rem; font-family: 'kr-b'; color: #221814;`}
+	${(props) => props.quantity && `width:7rem;`}
+	${(props) => props.price && `width:10rem; text-align: right; `}
 `;
 const TotalPriceBox = styled.div`
 	display: flex;
@@ -108,7 +111,7 @@ const TotalPriceBox = styled.div`
 	color: #6b6462;
 	box-shadow: 0px 0px 10px #00000014;
 	border-radius: 4px;
-	margin: 3rem 0 8.6rem;
+	margin: 0rem 0 8.6rem;
 `;
 const PriceTitle = styled.p`
 	font-size: 1.4rem;
@@ -149,4 +152,19 @@ const PaymentAndDeliveryInfoBox = styled.div`
 	color: #6b6462;
 	word-break: break-all;
 	white-space: pre-wrap;
+`;
+const SupplierName = styled.span`
+	font-family: 'kr-r';
+	margin-left: 0.6rem;
+	margin-right: 1.2rem;
+`;
+const SupplierTitleBox = styled.div`
+	position: absolute;
+	top: -1rem;
+	left: 0;
+	font-size: 1.2rem;
+	font-family: 'kr-b';
+	letter-spacing: -0.48px;
+	color: #a0a0a0;
+	background-color: #fff;
 `;
