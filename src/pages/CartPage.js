@@ -21,23 +21,23 @@ const CartPage = () => {
 	const user = useSelector((state) => state.user);
 	const [isLoading, setIsLoading] = useState(false);
 	const [supplierList, setSupplierList] = useState([]);
-	const [allChecked, setAllChecked] = useState([]);
+	const [allChecked, setAllChecked] = useState(true);
 	const [cartList, setCartList] = useState([]);
 	const [checked, setChecked] = useState([]);
 	const [orderCalc, setOrderCalc] = useState([]);
 	const [amount, setAmount] = useState(0);
 	const [delivery_price, setDelivery_price] = useState(0);
-
+	const [tempChecked, setTempChecked] = useState([]); // 공급원 리스트의 모든상품들이 들어있는 임시배열
 	const [cartCount, setCartCount] = useState(0);
+	const [checkCount, setCheckCount] = useState(0);
 
 	useEffect(() => {
 		setIsLoading(true);
 		let isSubscribed = true;
 		_basket.get_list().then((res) => {
-			const { success, count, basket_list, calc, supplier_list } = res.data;
+			const { success, count, supplier_list } = res.data;
 			if (isSubscribed && success) {
 				setCartCount(count);
-
 				setSupplierList(supplier_list);
 			} else {
 				alert('로그인 후 이용가능');
@@ -51,73 +51,45 @@ const CartPage = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!!supplierList) {
-			const allCheckTemp = new Array(supplierList.length).fill(true);
-			setAllChecked(allCheckTemp);
-			onAllCheck();
+		if (checked.length === cartCount) {
+			setAllChecked(true);
+		} else {
+			setAllChecked(false);
 		}
-	}, [supplierList]);
-
-	useEffect(() => {
-		if (checked.length !== 0) {
-			let copyAllChecked = [...allChecked];
-			checked.map((el, idx) => {
-				if (allChecked[idx] && productCheckTest(el.arr, false)) {
-					copyAllChecked[idx] = false;
-				} else if (!allChecked[idx] && productCheckTest(el.arr, true))
-					copyAllChecked[idx] = true;
-			});
-			setAllChecked(copyAllChecked);
-			settingOrderCalc();
-		}
+		setCheckCount(checked.length);
+		settingOrderCalc();
 	}, [checked]);
-
-	// Test if there is a checked state different from allChecked
-	function productCheckTest(checkedArr, boolean) {
-		if (checkedArr) {
-			const test = checkedArr.filter((el) => el === boolean);
-			if (!boolean && test.length !== 0) {
-				if (test.length !== 0 || test.length !== checkedArr.length) return true;
-			} else if (boolean && test.length === checkedArr.length) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	// trans checked -> resetting calc
 	function settingOrderCalc() {
 		if (supplierList && checked) {
 			let calcArr = [];
 			let tempAmount = 0;
-			let tempDelivery = 0;
-
-			checked.map((checkedArr, id) => {
+			let tempDeliveryPrice = 0;
+			supplierList.map((supplier, id) => {
 				let tempCalc = {
 					supplier_name: supplierList[id] && supplierList[id][0],
 					total: 0,
 					delivery_price: 0,
 					checked_product_list: [],
 				};
-				checkedArr.arr.map((el, idx) => {
-					if (el) {
-						tempCalc.total += supplierList[id][1].product[idx].total;
-						tempCalc.checked_product_list.push(
-							supplierList[id][1].product[idx]
-						);
+				checked.map((el, idx) => {
+					if (supplier[0] === el.supplier_name) {
+						tempCalc.total += el.total;
+
+						tempCalc.checked_product_list.push(el);
 
 						if (tempCalc.delivery_price === 0) {
 							tempCalc.delivery_price += 3000;
 						}
 					}
 				});
-
+				tempDeliveryPrice += tempCalc.delivery_price;
 				calcArr.push(tempCalc);
 				tempAmount += tempCalc.total;
-				tempDelivery += tempCalc.delivery_price;
 			});
 
-			setDelivery_price(tempDelivery);
+			setDelivery_price(tempDeliveryPrice);
 			setAmount(tempAmount);
 			setOrderCalc(calcArr);
 		}
@@ -126,33 +98,14 @@ const CartPage = () => {
 	// make all checked or all unchecked
 	const onAllCheck = () => {
 		if (supplierList) {
-			let checkArr;
-			const supplierArr = new Array(supplierList.length).fill('');
-
-			if (allChecked && !checked) {
-				supplierList.map((x, idx) => {
-					checkArr = new Array(x[1].product.length).fill(true);
-					supplierArr[idx] = { supplier_name: x[0], arr: checkArr };
-					console.log('aa');
-				});
-				return setChecked(supplierArr);
-			} else if (allChecked) {
-				supplierList.map((x, idx) => {
-					checkArr = new Array(x[1].product.length).fill(false);
-					supplierArr[idx] = { supplier_name: x[0], arr: checkArr };
-					console.log('zz');
-				});
-			} else if (!allChecked) {
-				supplierList.map((x, idx) => {
-					checkArr = new Array(x[1].product.length).fill(true);
-					supplierArr[idx] = { supplier_name: x[0], arr: checkArr };
-					console.log('ee');
-				});
+			if (cartCount === checked.length) {
+				return setChecked([]);
+			} else {
+				return setChecked([...tempChecked]);
 			}
-
-			setChecked(supplierArr);
 		}
 	};
+
 	const goShopping = () => {
 		if (!user.login) {
 			alert('로그인 후 이용가능합니다');
@@ -206,6 +159,7 @@ const CartPage = () => {
 							setAllChecked={setAllChecked}
 							supplierList={supplierList}
 							setSupplierList={setSupplierList}
+							setTempChecked={setTempChecked}
 						/>
 						<OrderBoxBox>
 							<OrderBox
@@ -234,7 +188,7 @@ const CartPage = () => {
 							onClick={onAllCheck}
 						/>
 						<AllCheckText>
-							전체선택 ( {cartCount} / {cartCount} )
+							전체선택 ( {checkCount} / {cartCount} )
 						</AllCheckText>
 						<RemoveBtn onClick={onSelectRemove}>선택삭제</RemoveBtn>
 					</AllCheckAndRemove>

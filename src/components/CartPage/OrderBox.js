@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -11,10 +11,8 @@ const OrderBox = (props) => {
 	const goShopping = () => {
 		history.push('/product');
 	};
-	console.log(props.user);
 	const goPayment = () => {
-		// count 갯수로 바꾸기
-		if (props.orderCalc.total === 0) {
+		if (props.checked.length === 0) {
 			return alert('상품을 선택해주세요');
 		}
 

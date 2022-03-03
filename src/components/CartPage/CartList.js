@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { IMG_ADDRESS } from '../../config';
@@ -14,14 +14,35 @@ import { cart_remove } from '../../modules/cart';
 
 const CartList = (props) => {
 	const dispatch = useDispatch();
-	const onChecked = (supplier, id) => {
-		let copy = [...props.checked];
-		copy.map((el, idx) => {
-			if (el.supplier_name === supplier) {
-				el.arr[id] = !el.arr[id];
-			}
-		});
-		props.setChecked(copy);
+
+	useEffect(() => {
+		if (props.supplierList) {
+			let tempCheckList = [];
+			props.supplierList.map((el) => {
+				tempCheckList = [...tempCheckList, ...el[1].product];
+			});
+			props.setChecked(tempCheckList);
+			props.setTempChecked(tempCheckList);
+		}
+	}, [props.supplierList]);
+
+	const clickCheck = (el) => {
+		const copyChecked = [...props.checked];
+		const filterChecked = copyChecked.filter((x) => x !== el);
+		if (copyChecked.includes(el)) {
+			return props.setChecked(filterChecked);
+		} else {
+			copyChecked.push(el);
+			return props.setChecked(copyChecked);
+		}
+	};
+
+	const CheckedTest = (el) => {
+		if (props.checked.includes(el)) {
+			return true;
+		} else {
+			return false;
+		}
 	};
 
 	const onRemove = (id) => {
@@ -65,14 +86,6 @@ const CartList = (props) => {
 				props.supplierList.map((supplier, id) => (
 					<SupplierBox key={id} wrap="true">
 						<SupplierTitleAndCheckBox>
-							{/* <SupplierAllCheckImg
-								alt="check image"
-								src={
-									props.allChecked[id] && props.allChecked[id]
-										? checkImg
-										: uncheckImg
-								}
-							/> */}
 							<SupplierTitleBox>
 								<SupplierTitle>판매자</SupplierTitle>
 								<Supplier>{supplier[0]}</Supplier>
@@ -83,14 +96,9 @@ const CartList = (props) => {
 							<ShadowBox key={idx}>
 								<CheckImg
 									onClick={() => {
-										onChecked(supplier[0], idx);
+										clickCheck(el);
 									}}
-									src={
-										// checkImg
-										props.checked[id] && props.checked[id].arr[idx]
-											? checkImg
-											: uncheckImg
-									}
+									src={CheckedTest(el) ? checkImg : uncheckImg}
 									alt="check image"
 								/>
 								<ProductImg
