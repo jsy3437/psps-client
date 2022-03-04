@@ -28,7 +28,7 @@ const ProductData = (props) => {
 						))}
 						{supplierList.delivery_price !== 0 && (
 							<BorderBox>
-								<ProductText title>배송비</ProductText>
+								<ProductText title="true">배송비</ProductText>
 								<ProductText price>
 									{supplierList.delivery_price.toLocaleString()}원
 								</ProductText>
