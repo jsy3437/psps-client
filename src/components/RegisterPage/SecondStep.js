@@ -105,6 +105,18 @@ const ItemTextBox = styled.div`
 	border: 1px solid #e0e0e0;
 	border-radius: 4px;
 	white-space: pre-line;
+	::-webkit-scrollbar {
+		width: 0.9rem;
+		height: 4rem;
+		background-color: #fff;
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: #707070;
+		border-radius: 10px;
+		background-clip: padding-box;
+		border: 3px solid transparent;
+		height: 4.4rem;
+	}
 `;
 const SubmitButton = styled.button`
 	width: 34.6rem;

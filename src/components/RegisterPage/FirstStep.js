@@ -70,19 +70,16 @@ const FirstStep = (props) => {
 	const goNext = () => {
 		setIsSubmit(true);
 		if (!regexp.email.test(email)) {
-			alert('이메일을 확인해주세요');
 			emailInput.current.focus();
 			return setCheck({ ...check, email: false });
 		} else if (!regexp.password.test(password)) {
-			alert('비밀번호를 확인해주세요');
 			passwordInput.current.focus();
 			return setCheck({ ...check, password: false });
 		} else if (password !== passwordConfirm) {
-			alert('비밀번호가 일치하지 않습니다');
 			passwordConfirmInput.current.focus();
 			return setCheck({ ...check, passwordConfirm: false });
 		} else if (!agreeCheck) {
-			return alert('이용 약관에 동의해주세요.');
+			return;
 		} else if (email) {
 			_user.check_email({ email }).then((res) => {
 				const { success } = res.data;
@@ -108,9 +105,10 @@ const FirstStep = (props) => {
 						value={email ? email : ''}
 						onChange={emailController}
 						placeholder={'이메일 주소를 입력해주세요'}
+						error={isSubmit && !check.email}
 					/>
 					{isSubmit && !check.email && (
-						<InputError>{`ex) email@email.com`}</InputError>
+						<InputError>{'이메일 주소 형식이 틀렸습니다.'}</InputError>
 					)}
 				</Items>
 				<Items>
@@ -121,9 +119,10 @@ const FirstStep = (props) => {
 						value={password ? password : ''}
 						onChange={passwordController}
 						placeholder={'비밀번호를 입력해주세요'}
+						error={isSubmit && !check.password}
 					/>
 					{isSubmit && !check.password && (
-						<InputError>{`비밀번호는 숫자,문자,특수문자를 모두 포함한 8~20글자로 입력해주세요`}</InputError>
+						<InputError>{`비밀번호는 8자리 이상으로 숫자, 알파벳, 특수문자를 포함해야 합니다.`}</InputError>
 					)}
 				</Items>
 				<Items>
@@ -134,9 +133,10 @@ const FirstStep = (props) => {
 						value={passwordConfirm ? passwordConfirm : ''}
 						onChange={passwordConfirmController}
 						placeholder={'비밀번호를 확인해주세요'}
+						error={isSubmit && !check.passwordConfirm}
 					/>
 					{isSubmit && !check.passwordConfirm && (
-						<InputError>{`비밀번호와 비밀번호 확인이 일치하지 않습니다`}</InputError>
+						<InputError>{`비밀번호가 일치하지 않습니다.`}</InputError>
 					)}
 				</Items>
 
@@ -231,6 +231,7 @@ const ItemInput = styled.input`
 	border: 1px solid #c6c6c6;
 	border-radius: 4px;
 	background-color: #fff;
+	${(props) => props.error && `&:focus{border 1px solid #E50011}`}
 	&::placeholder {
 		color: #c6c6c6;
 	}
@@ -243,6 +244,7 @@ const InputError = styled.p`
 	font-size: 1rem;
 	font-family: 'kr-r';
 	color: #e50011;
+	margin-top: 0.6rem;
 `;
 const AgreeBox = styled.div`
 	width: 34.6rem;

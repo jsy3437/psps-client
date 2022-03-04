@@ -10,6 +10,7 @@
 - global : input요소들 focus 상태일때 border는 그대로 그림자만 적용완료
 - 로그인페이지 : 자동 로그인 추가, 아이디/비밀번호 찾기 문구 수정
 - 로그인페이지 : Footer 추가
+- 회원가입페이지 : step1 error info 수정, step2 약관동의 text박스 스크롤 스타일 수정
 
 ---
 
