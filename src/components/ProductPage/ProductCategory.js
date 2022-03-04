@@ -25,16 +25,20 @@ const ProductCategory = (props) => {
 			<SubPartWrap>
 				{props.subPartArr &&
 					props.subPartArr.arr.map((el, idx) => (
-						<SubPartList
-							key={idx}
-							active={
-								(idx === 0 && props.subPart === null) ||
-								(idx > 0 && props.subPart === el)
-							}
-							onClick={onChangeSubPart}
-						>
-							{el}
-						</SubPartList>
+						<SubPartListBox key={idx}>
+							<SubPartList
+								active={
+									(idx === 0 && props.subPart === null) ||
+									(idx > 0 && props.subPart === el)
+								}
+								onClick={onChangeSubPart}
+							>
+								{el}
+							</SubPartList>
+							<SubPartListLine
+								last={idx === props.subPartArr.arr.length - 1}
+							></SubPartListLine>
+						</SubPartListBox>
 					))}
 			</SubPartWrap>
 		</ProductCategoryWrap>
@@ -84,17 +88,30 @@ const SubPartWrap = styled.ul`
 	justify-content: center;
 	align-items: center;
 `;
-const SubPartList = styled.li`
-	height: 2.6rem;
+const SubPartListBox = styled.li`
+	display: flex;
+	align-items: center;
+	&:nth-last-child(1).SubPartListLine {
+		display: none;
+	}
+`;
+const SubPartList = styled.p`
 	font-size: 1.8rem;
 	font-family: 'kr-r';
 	color: #000000;
-	padding: 0 0.5rem;
-	border-right: 1px solid #000;
+	/* padding: 0 0.3rem; */
+	/* border-right: 1px solid #000; */
 	cursor: pointer;
 	&:nth-last-child(1) {
 		border: none;
 	}
 	${(props) =>
 		props.active && `font-family:'kr-b' ; border-bottom:2px solid #E50011`}
+`;
+const SubPartListLine = styled.div`
+	width: 0.1rem;
+	height: 1.3rem;
+	background-color: #8e8e8e;
+	margin: 0 1rem;
+	${(props) => props.last && `display:none`}
 `;

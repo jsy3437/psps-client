@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
 
 const ProductList = (props) => {
 	const history = useHistory();
+	const [hover, setHover] = useState('');
 
 	const goDetail = (product_id) => {
 		history.push(`/detail/${product_id}`);
@@ -15,7 +16,15 @@ const ProductList = (props) => {
 		<ProductContainer>
 			<ProductWrap>
 				{props.list.map((el, idx) => (
-					<Product key={idx}>
+					<Product
+						key={idx}
+						onMouseEnter={() => {
+							setHover(idx);
+						}}
+						onMouseLeave={() => {
+							setHover('');
+						}}
+					>
 						<ProductImgBox
 							onClick={() => {
 								goDetail(el.product_id);
@@ -25,6 +34,7 @@ const ProductList = (props) => {
 								<ProductImg
 									alt="product img"
 									src={`${IMG_ADDRESS}/${el.image}`}
+									hover={hover === idx}
 								/>
 							)}
 						</ProductImgBox>
@@ -33,6 +43,7 @@ const ProductList = (props) => {
 							onClick={() => {
 								goDetail(el.product_id);
 							}}
+							hover={hover === idx}
 						>
 							{el.title}
 						</ProductTitle>
@@ -86,9 +97,7 @@ const ProductImg = styled.img`
 	width: 100%;
 	height: 100%;
 	transition: all 300ms ease;
-	&:hover {
-		transform: scale(1.1);
-	}
+	${(props) => props.hover && `transform:scale(1.1)`}
 `;
 const ProductTitle = styled.h3`
 	margin-top: 0.3rem;
@@ -98,9 +107,7 @@ const ProductTitle = styled.h3`
 	font-family: 'kr-b';
 	color: #221814;
 	cursor: pointer;
-	&:hover {
-		text-decoration: underline;
-	}
+	${(props) => props.hover && `text-decoration: underline;`}
 `;
 
 const GrayBackground = styled.div`
