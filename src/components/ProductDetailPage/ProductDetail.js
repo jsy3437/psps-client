@@ -5,18 +5,6 @@ import styled from 'styled-components';
 const ProductDetail = (props) => {
 	const arr = ['상품선택', '상세설명', '상품정보'];
 	const [view, setView] = useState('상품선택');
-	const scroll = window.scrollY;
-
-	useEffect(() => {
-		window.addEventListener('scroll', listener);
-		return () => {
-			window.removeEventListener('scroll', listener);
-		};
-	});
-
-	const listener = (e) => {
-		const { pageYOffset } = e.target.defaultView;
-	};
 
 	const onChangeView = (e) => {
 		const { innerText } = e.target;

@@ -7,6 +7,7 @@
 - 결제페이지 : styledComponent props 전달 시 생기는 에러 때문에 수정
 - 상품페이지 : 서브카테고리 나눠지는 선 스타일 변경, 상품 호버시 스타일 변경
 - 상품상세페이지 : 상품상세이미지 width 수정, OrderBox의 기존가 수량 참조 가격으로 나오게 수정
+- global : input요소들 focus 상태일때 border는 그대로 그림자만 적용완료
 
 ---
 
