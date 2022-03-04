@@ -11,6 +11,7 @@ const RecommendList = () => {
 	const history = useHistory();
 	const titles = ['품생품사', '추천', '상품'];
 	const [list, setList] = useState([]);
+	const [hover, setHover] = useState('');
 
 	useEffect(() => {
 		let isSubscribed = true;
@@ -45,23 +46,26 @@ const RecommendList = () => {
 			<ListWrap>
 				{list &&
 					list.map((el, idx) => (
-						<List key={idx}>
+						<List
+							key={idx}
+							onClick={() => {
+								goDetail(el.product_id);
+							}}
+							onMouseEnter={() => {
+								setHover(idx);
+							}}
+							onMouseLeave={() => {
+								setHover('');
+							}}
+						>
 							<ListImgBox>
 								<ListImg
 									alt="product img"
 									src={`${IMG_ADDRESS}/${el.image}`}
-									onClick={() => {
-										goDetail(el.product_id);
-									}}
+									hover={hover === idx}
 								/>
 							</ListImgBox>
-							<ListTitle
-								onClick={() => {
-									goDetail(el.product_id);
-								}}
-							>
-								{el.title}
-							</ListTitle>
+							<ListTitle hover={hover === idx}>{el.title}</ListTitle>
 							{/* 상품설명 */}
 							<ListDescTotalPrice>
 								{el.discount !== 0 && (
@@ -136,6 +140,7 @@ const List = styled.li`
 	width: 38rem;
 	height: 40rem;
 	margin-bottom: 5.9rem;
+	cursor: pointer;
 `;
 const ListImgBox = styled.div`
 	width: 38rem;
@@ -147,9 +152,7 @@ const ListImg = styled.img`
 	width: 38rem;
 	height: 35rem;
 	transition: all 300ms ease;
-	&:hover {
-		transform: scale(1.1);
-	}
+	${(props) => props.hover && `transform:scale(1.1)`}
 `;
 const ListTitle = styled.h3`
 	height: 2.6rem;
@@ -158,6 +161,7 @@ const ListTitle = styled.h3`
 	font-family: 'kr-b';
 	letter-spacing: -0.72px;
 	color: #221814;
+	${(props) => props.hover && `text-decoration: underline;`}
 `;
 const ListDesc = styled.span`
 	font-size: 1.4rem;
