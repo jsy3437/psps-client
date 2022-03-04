@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
@@ -9,8 +9,7 @@ import * as _payment from '../controller/payment';
 const OrderChangePage = () => {
 	const history = useHistory();
 	const location = useLocation().state;
-	const [claimType, setClaimType] = useState(location.type);
-	// const [claimType, setClaimType] = useState(location.type);
+	const [claimType, setClaimType] = useState('');
 	const [claimReason, setClaimReason] = useState('직접 입력');
 	const [claimReasonText, setClaimReasonText] = useState('');
 	const [bank, setBank] = useState('은행 선택');
@@ -50,6 +49,15 @@ const OrderChangePage = () => {
 	];
 
 	useEffect(() => {
+		if (!!!location) {
+			alert('잘못된 접근입니다');
+			history.goBack();
+		} else {
+			setClaimType(location.type);
+		}
+	}, []);
+
+	useEffect(() => {
 		let state = false;
 		if (claimType === 'refund') {
 			if (
@@ -67,9 +75,6 @@ const OrderChangePage = () => {
 		}
 		setButtonState(state);
 	}, [check]);
-
-	console.log(check);
-	console.log('btn', buttonState);
 
 	// input onChange
 	const changeClaimReasonText = (e) => {
@@ -156,153 +161,154 @@ const OrderChangePage = () => {
 			claim_reason: claimReasonText,
 			// 횐불계좌
 		};
+
 		console.log(data);
 
 		_payment.claim_cancel(data, claimType).then((res) => {
 			const { success } = res.data;
 			if (success) {
 				console.log(res.data);
-				alert('상품 취소가 완료되었습니다');
+				alert('신청이 완료되었습니다');
 				history.push({
-					pathName: '/myPage',
+					pathname: '/members',
 					state: location.detailPayment.payment_id,
 				});
 			} else {
-				alert(res.data);
+				alert('신청이 불가한 상품');
 			}
 		});
 	};
 
-	console.log(location.checkProductList);
-
 	return (
 		<div id="container">
-			<Container>
-				<LogoImg alt="logo image" src={logo} />
-				<Title>
-					{location.type === 'cancel' ? '주문 취소' : '교환 / 반품 신청'}
-				</Title>
-				{location.type !== 'cancel' && (
-					<Item>
-						<ItemTitle>신청 목록</ItemTitle>
-						<InputAndMenuBox apply>
-							<InputBox onClick={openApplyMenu}>
-								<ColumnResult>{applySelect}</ColumnResult>
-								<ColumnBtn alt="down button" src={down} />
-							</InputBox>
-							{applyMenu ? (
-								<MenuBox>
-									{applyList.map((el, idx) => (
-										<MenuItem
-											key={idx}
-											onClick={() => {
-												onApplyMenu(el);
-											}}
-										>
-											{el.kr}
-										</MenuItem>
-									))}
-								</MenuBox>
-							) : null}
-						</InputAndMenuBox>
-					</Item>
-				)}
-				<Item>
-					<ItemTitle>신청 사유</ItemTitle>
-					<InputAndMenuBox>
-						<InputBox onClick={openClaimReasonMenu}>
-							<ColumnResult>{claimReason}</ColumnResult>
-							<ColumnBtn alt="down button" src={down} />
-						</InputBox>
-						{claimReasonMenu ? (
-							<MenuBox>
-								{ReasonItem.map((el, idx) => (
-									<MenuItem key={idx} onClick={onReasonMenu}>
-										{el}
-									</MenuItem>
-								))}
-							</MenuBox>
-						) : null}
-					</InputAndMenuBox>
-					<TextArea
-						placeholder="내용을 입력해주세요."
-						readOnly={claimReason !== '직접 입력'}
-						onChange={changeClaimReasonText}
-						value={claimReasonText}
-					></TextArea>
-					<AlertTextBox>
-						{check.reasonText === false && (
-							<AlertText>신청 사유를 입력해주세요.</AlertText>
-						)}
-					</AlertTextBox>
-				</Item>
-				{claimType === 'refund' && (
-					<Item>
-						<ItemTitle>환불 계좌</ItemTitle>
-						<BankInputBox>
-							<InputAndMenuBox bank>
-								<InputBox bank onClick={openBankMenu}>
-									<ColumnResult>{bank}</ColumnResult>
-									<ColumnBtn bank alt="down button" src={down} />
+			{location && (
+				<Container>
+					<LogoImg alt="logo image" src={logo} />
+					<Title>
+						{location.type === 'cancel' ? '주문 취소' : '교환 / 반품 신청'}
+					</Title>
+					{location.type !== 'cancel' && (
+						<Item>
+							<ItemTitle>신청 목록</ItemTitle>
+							<InputAndMenuBox apply>
+								<InputBox onClick={openApplyMenu}>
+									<ColumnResult>{applySelect}</ColumnResult>
+									<ColumnBtn alt="down button" src={down} />
 								</InputBox>
-								{bankMenu ? (
+								{applyMenu ? (
 									<MenuBox>
-										{bankItem.map((el, idx) => (
-											<MenuItem key={idx} onClick={onBankMenu}>
-												{el}
+										{applyList.map((el, idx) => (
+											<MenuItem
+												key={idx}
+												onClick={() => {
+													onApplyMenu(el);
+												}}
+											>
+												{el.kr}
 											</MenuItem>
 										))}
 									</MenuBox>
 								) : null}
 							</InputAndMenuBox>
-							<Input
-								type="text"
-								maxLength="20"
-								account
-								placeholder="‘ - ‘를 제외한 계좌번호를 입력해주세요."
-								onChange={changeAccount}
-								value={account}
-							/>
-						</BankInputBox>
+						</Item>
+					)}
+					<Item>
+						<ItemTitle>신청 사유</ItemTitle>
+						<InputAndMenuBox>
+							<InputBox onClick={openClaimReasonMenu}>
+								<ColumnResult>{claimReason}</ColumnResult>
+								<ColumnBtn alt="down button" src={down} />
+							</InputBox>
+							{claimReasonMenu ? (
+								<MenuBox>
+									{ReasonItem.map((el, idx) => (
+										<MenuItem key={idx} onClick={onReasonMenu}>
+											{el}
+										</MenuItem>
+									))}
+								</MenuBox>
+							) : null}
+						</InputAndMenuBox>
+						<TextArea
+							placeholder="내용을 입력해주세요."
+							readOnly={claimReason !== '직접 입력'}
+							onChange={changeClaimReasonText}
+							value={claimReasonText}
+						></TextArea>
 						<AlertTextBox>
-							{check.bank === false && (
-								<AlertText>은행을 선택해주세요.</AlertText>
-							)}
-							{check.account === false && (
-								<AlertText>계좌번호를 입력해주세요.</AlertText>
-							)}
-						</AlertTextBox>
-
-						<AccountHolder>예금주</AccountHolder>
-						<Input
-							type="text"
-							maxLength="30"
-							placeholder="예금주를 입력해주세요."
-							onChange={changeAccountHolder}
-							value={accountHolder}
-						/>
-						<AlertTextBox>
-							{check.accountHolder === false && (
-								<AlertText>예금주를 입력해주세요.</AlertText>
+							{check.reasonText === false && (
+								<AlertText>신청 사유를 입력해주세요.</AlertText>
 							)}
 						</AlertTextBox>
 					</Item>
-				)}
+					{claimType === 'refund' && (
+						<Item>
+							<ItemTitle>환불 계좌</ItemTitle>
+							<BankInputBox>
+								<InputAndMenuBox bank>
+									<InputBox bank onClick={openBankMenu}>
+										<ColumnResult>{bank}</ColumnResult>
+										<ColumnBtn bank alt="down button" src={down} />
+									</InputBox>
+									{bankMenu ? (
+										<MenuBox>
+											{bankItem.map((el, idx) => (
+												<MenuItem key={idx} onClick={onBankMenu}>
+													{el}
+												</MenuItem>
+											))}
+										</MenuBox>
+									) : null}
+								</InputAndMenuBox>
+								<Input
+									type="text"
+									maxLength="20"
+									account
+									placeholder="‘ - ‘를 제외한 계좌번호를 입력해주세요."
+									onChange={changeAccount}
+									value={account}
+								/>
+							</BankInputBox>
+							<AlertTextBox>
+								{check.bank === false && (
+									<AlertText>은행을 선택해주세요.</AlertText>
+								)}
+								{check.account === false && (
+									<AlertText>계좌번호를 입력해주세요.</AlertText>
+								)}
+							</AlertTextBox>
 
-				<BtnBox>
-					<Button back onClick={goMyPage}>
-						취소
-					</Button>
-					<SubmitButton enter={buttonState} onClick={onSubmit}>
-						확인
-					</SubmitButton>
-				</BtnBox>
-			</Container>
+							<AccountHolder>예금주</AccountHolder>
+							<Input
+								type="text"
+								maxLength="30"
+								placeholder="예금주를 입력해주세요."
+								onChange={changeAccountHolder}
+								value={accountHolder}
+							/>
+							<AlertTextBox>
+								{check.accountHolder === false && (
+									<AlertText>예금주를 입력해주세요.</AlertText>
+								)}
+							</AlertTextBox>
+						</Item>
+					)}
+
+					<BtnBox>
+						<Button back onClick={goMyPage}>
+							취소
+						</Button>
+						<SubmitButton enter={buttonState} onClick={onSubmit}>
+							확인
+						</SubmitButton>
+					</BtnBox>
+				</Container>
+			)}
 		</div>
 	);
 };
 
-export default OrderChangePage;
+export default withRouter(OrderChangePage);
 
 const Container = styled.div`
 	width: 51.9rem;

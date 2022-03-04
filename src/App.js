@@ -60,7 +60,7 @@ const App = () => {
 						path="/payment/result/:payment_id"
 						component={Auth(PaymentResultPage, null)}
 					/>
-					<Route exact path="/order" component={Auth(OrderChangePage, true)} />
+					<Route exact path="/claim" component={Auth(OrderChangePage, true)} />
 				</Switch>
 			</div>
 		</Router>

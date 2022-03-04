@@ -66,7 +66,7 @@ const OrderDetail = (props) => {
 		}
 
 		history.push({
-			pathname: `/order/${type}`,
+			pathname: '/claim',
 			state: { type, checkProductList: [el], detailPayment },
 		});
 	};
@@ -107,7 +107,7 @@ const OrderDetail = (props) => {
 			}
 
 			history.push({
-				pathname: `/order/${type}`,
+				pathname: '/claim',
 				state: { type, checkProductList: checkedList, detailPayment },
 			});
 		} else {
@@ -571,7 +571,7 @@ const CancelBtn = styled.button`
 	margin-right: 0.8rem;
 `;
 const RemoveButton = styled.button`
-	width: 13.5rem;
+	width: 14rem;
 	border: 1px solid #e50011;
 	border-radius: 4px;
 	background-color: #fff;
