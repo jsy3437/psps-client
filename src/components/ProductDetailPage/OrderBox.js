@@ -115,7 +115,7 @@ const OrderBox = (props) => {
 								<RightExisting>
 									기존가
 									<RightExistingSpan>
-										{`${option && option.price.toLocaleString()}원`}
+										{`${option && (option.price * count).toLocaleString()}원`}
 									</RightExistingSpan>
 								</RightExisting>
 							) : null}
@@ -358,6 +358,7 @@ const SubmitButton = styled.button`
 	border: none;
 	background: #221814 0% 0% no-repeat padding-box;
 	border-radius: 4px;
+	transition: all 200ms ease;
 	${(props) =>
 		props.cartBtn &&
 		`background: #ffffff 0% 0% no-repeat padding-box;	color: #e50011;	border: 1px solid #e50011;`}

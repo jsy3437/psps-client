@@ -120,7 +120,9 @@ const ProductDetailBody = styled.div`
 	position: relative;
 	margin-bottom: 7.5rem;
 `;
-const DetailImg = styled.img``;
+const DetailImg = styled.img`
+	width: 120rem;
+`;
 
 const GrayBackground = styled.div`
 	width: 192rem;
