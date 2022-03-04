@@ -7,12 +7,15 @@ import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import NLogo from '../images/n-logo.svg';
 import KLogo from '../images/k-logo.svg';
+import checkImg from '../images/check-box.svg';
+import uncheckImg from '../images/uncheck-box.svg';
 
 const LoginPage = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [checked, setChecked] = useState(false);
 
 	const onChangeEmail = (e) => {
 		setEmail(e.target.value);
@@ -27,8 +30,8 @@ const LoginPage = () => {
 		history.push('/register');
 	};
 
-	const goNonMember = () => {
-		//
+	const clickCheck = () => {
+		setChecked(!checked);
 	};
 
 	const onSubmit = () => {
@@ -74,7 +77,14 @@ const LoginPage = () => {
 						/>
 					</Items>
 					<AgreeBox>
-						<AgreeRight onClick={goFindInfo}>아이디/비밀번호</AgreeRight>
+						<AgreeLeft onClick={clickCheck}>
+							<CheckImg
+								alt="check image"
+								src={checked ? checkImg : uncheckImg}
+							/>
+							자동 로그인
+						</AgreeLeft>
+						<AgreeRight onClick={goFindInfo}>아이디/비밀번호 찾기</AgreeRight>
 					</AgreeBox>
 					<SubmitButton onClick={onSubmit}>로그인</SubmitButton>
 					<EasyBox>
@@ -94,7 +104,6 @@ const LoginPage = () => {
 							</SocialLogoBox>
 						</EasyRight>
 					</EasyBox>
-					<NonMemberInfo onClick={goNonMember}>비회원 주문조회</NonMemberInfo>
 				</RegisterInside>
 			</Container>
 		</div>
@@ -165,7 +174,22 @@ const AgreeBox = styled.div`
 	height: 2rem;
 	display: flex;
 	align-items: center;
-	justify-content: right;
+	justify-content: space-between;
+`;
+
+const AgreeLeft = styled.div`
+	font-size: 1.4rem;
+	font-family: 'kr-b';
+	letter-spacing: -0.56px;
+	color: #6b6462;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+`;
+const CheckImg = styled.img`
+	width: 1.6rem;
+	height: 1.6rem;
+	margin-right: 0.9rem;
 `;
 
 const AgreeRight = styled.div`
@@ -217,7 +241,7 @@ const GoRegister = styled.p`
 	font-size: 1.6rem;
 	font-family: 'kr-r';
 	color: #6b6462;
-	margin-left: 0.7rem;
+	margin-left: 1.3rem;
 	text-decoration: underline;
 	cursor: pointer;
 	&:hover {
