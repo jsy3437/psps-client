@@ -9,6 +9,7 @@ import NLogo from '../images/n-logo.svg';
 import KLogo from '../images/k-logo.svg';
 import checkImg from '../images/check-box.svg';
 import uncheckImg from '../images/uncheck-box.svg';
+import Footer from '../components/Footer';
 
 const LoginPage = () => {
 	const dispatch = useDispatch();
@@ -106,6 +107,7 @@ const LoginPage = () => {
 					</EasyBox>
 				</RegisterInside>
 			</Container>
+			<Footer />
 		</div>
 	);
 };
@@ -118,6 +120,7 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-bottom: 9.2rem;
 `;
 const RegisterInside = styled.div`
 	display: flex;
