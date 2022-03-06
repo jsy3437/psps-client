@@ -13,13 +13,17 @@ const ThirdStep = (props) => {
 	const nameInput = useRef();
 	const phoneNumberInput = useRef();
 	const confirmNumberInput = useRef();
+	const [time, setTime] = useState(180);
+	const [sec, setSec] = useState(59);
+	const [min, setMin] = useState(2);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [name, setName] = useState('');
 	const [phone_number, setPhone_number] = useState('');
-	const [confirmSend, setConfirmSend] = useState(false);
+	const [confirm, setConfirm] = useState(false);
+	const [getConfirmNum, setGetConfirmNum] = useState(false);
 	const [confirm_number, setConfirm_number] = useState('');
-	const [check, setCheck] = useState({
+	const [checkLength, setCheckLength] = useState({
 		name: false,
 		phone_number: false,
 		confirm_number: false,
@@ -35,30 +39,51 @@ const ThirdStep = (props) => {
 		// eslint-disable-next-line
 	}, []);
 
+	useEffect(() => {
+		let interval;
+		if (getConfirmNum && time !== -1) {
+			setMin(parseInt(time / 60));
+			setSec(time % 60);
+			interval = setTimeout(() => {
+				setTime(time - 1);
+			}, 1000);
+		}
+		return () => {
+			clearTimeout(interval);
+		};
+	}, [getConfirmNum, time]);
+
 	const goBack = () => {
 		props.setStep(1);
 	};
 
-	const nameController = (e) => {
+	const changeName = (e) => {
 		regexp.name.test(e.target.value)
-			? setCheck({ ...check, name: true })
-			: setCheck({ ...check, name: false });
+			? setCheckLength({ ...checkLength, name: true })
+			: setCheckLength({ ...checkLength, name: false });
 		return setName(e.target.value);
 	};
-	const phoneNumberController = (e) => {
+	const changePhoneNumber = (e) => {
 		if (isNaN(e.target.value)) {
 			return;
 		} else {
 			regexp.phone_number.test(e.target.value)
-				? setCheck({ ...check, phone_number: true })
-				: setCheck({ ...check, phone_number: false });
+				? setCheckLength({ ...checkLength, phone_number: true })
+				: setCheckLength({ ...checkLength, phone_number: false });
+			setConfirm(false);
+			setGetConfirmNum(false);
 			return setPhone_number(e.target.value);
 		}
 	};
-	const confirmController = (e) => {
+	const changeConfirm = (e) => {
 		if (isNaN(e.target.value)) {
 			return;
 		} else {
+			if (e.target.value.length === 6) {
+				setCheckLength({ ...checkLength, confirm_number: true });
+			} else {
+				setCheckLength({ ...checkLength, confirm_number: false });
+			}
 			return setConfirm_number(e.target.value);
 		}
 	};
@@ -69,42 +94,46 @@ const ThirdStep = (props) => {
 				if (res.data.success) {
 					alert('인증번호가 발송되었습니다.');
 					confirmNumberInput.current.focus();
-					setCheck({ ...check, confirm_number: false });
+					setGetConfirmNum(true);
+					setConfirm(false);
+					setConfirm_number('');
+					setTime(180);
 				} else {
 					alert('인증번호 발송에 실패했습니다. 다시 시도해주세요.');
 				}
 			});
-			setConfirmSend(true);
 		}
 	};
 	const checkConfirmNumber = () => {
-		if (confirmSend && !check.confirm_number) {
-			const data = {
-				phone_number,
-				code: confirm_number,
-			};
-			_user.check_sms(data).then((res) => {
-				if (res.data.success) {
-					setCheck({ ...check, confirm_number: true });
-					return alert('인증 확인되었습니다.');
-				} else {
-					return alert('인증번호를 확인해주세요.');
-				}
-			});
+		if (time > 0) {
+			if (getConfirmNum && checkLength.confirm_number && !confirm) {
+				const data = {
+					phone_number,
+					code: confirm_number,
+				};
+				_user.check_sms(data).then((res) => {
+					if (res.data.success) {
+						setConfirm(true);
+						return alert('인증 확인되었습니다.');
+					} else {
+						return alert('인증번호를 확인해주세요.');
+					}
+				});
+			}
 		}
 	};
 
 	const onSubmit = () => {
 		setIsSubmit(true);
 		if (!regexp.name.test(name)) {
-			setCheck({ ...check, name: false });
+			setCheckLength({ ...checkLength, name: false });
 			alert('이름을 확인해주세요');
 			nameInput.current.focus();
 		} else if (!regexp.phone_number.test(phone_number)) {
-			setCheck({ ...check, phone_number: false });
+			setCheckLength({ ...checkLength, phone_number: false });
 			alert('휴대폰번호를 확인해주세요');
 			phoneNumberInput.current.focus();
-		} else if (!check.confirm_number) {
+		} else if (!confirm || !getConfirmNum) {
 			alert('휴대폰번호 인증을 확인해주세요');
 			confirmNumberInput.current.focus();
 		} else {
@@ -120,7 +149,7 @@ const ThirdStep = (props) => {
 					dispatch(user_login(res.data.name));
 					history.push({ state: name });
 				} else {
-					console.error(res.data);
+					alert('이미 가입되어 있는 휴대폰번호입니다');
 				}
 			});
 		}
@@ -135,10 +164,10 @@ const ThirdStep = (props) => {
 					<ItemTitle>이름</ItemTitle>
 					<ItemInput
 						ref={nameInput}
-						onChange={nameController}
+						onChange={changeName}
 						placeholder="이름을 입력해주세요"
 					/>
-					{isSubmit && !check.name && (
+					{isSubmit && !checkLength.name && (
 						<InputError>{'이름을 확인해주세요'}</InputError>
 					)}
 				</Items>
@@ -148,49 +177,65 @@ const ThirdStep = (props) => {
 						type="text"
 						ref={phoneNumberInput}
 						maxLength="11"
-						onChange={phoneNumberController}
+						onChange={changePhoneNumber}
 						value={phone_number}
 						placeholder="'-'을 제외한 휴대폰 번호를 입력해주세요."
 					/>
-					{isSubmit && !check.phone_number && (
+					{isSubmit && !checkLength.phone_number && (
 						<InputError>{'휴대폰번호를 확인해주세요'}</InputError>
 					)}
-					<CheckButton
-						active={phone_number.length === 11}
-						onClick={getConfirmNumber}
-					>
-						인증하기
-					</CheckButton>
 				</Items>
 				<Items>
 					<ItemTitle>인증번호</ItemTitle>
 					<ItemInput
+						name={'confirmNum'}
 						type="text"
 						maxLength="6"
 						ref={confirmNumberInput}
 						value={confirm_number}
-						onChange={confirmController}
-						placeholder="인증번호를 입력해주세요"
+						onChange={changeConfirm}
+						placeholder={
+							getConfirmNum && `0${min}:${sec < 10 ? '0' + sec : sec}`
+						}
 					/>
-					{/* {isSubmit && !check.confirm_number && (
-						<InputError>{'인증번호를 확인해주세요'}</InputError>
-					)} */}
+
 					<CheckButton
-						send={confirmSend}
+						send={
+							getConfirmNum &&
+							time > 0 &&
+							checkLength.confirm_number &&
+							!confirm
+						}
 						onClick={() => {
 							checkConfirmNumber(confirm_number);
 						}}
 					>
 						인증확인
 					</CheckButton>
+					{!getConfirmNum && (
+						<CheckButton
+							active={phone_number.length === 11}
+							onClick={getConfirmNumber}
+						>
+							인증번호 발송
+						</CheckButton>
+					)}
 				</Items>
 
-				<SubmitButton enter onClick={onSubmit}>
+				<SubmitButton
+					enter={
+						checkLength.name &&
+						checkLength.phone_number &&
+						checkLength.confirm_number &&
+						confirm
+					}
+					onClick={onSubmit}
+				>
 					가입하기
 				</SubmitButton>
-				<SubmitButton back onClick={goBack}>
+				<BackButton back onClick={goBack}>
 					이전으로
-				</SubmitButton>
+				</BackButton>
 			</RegisterInside>
 		</Container>
 	);
@@ -266,7 +311,7 @@ const InputError = styled.p`
 	color: #e50011;
 `;
 const CheckButton = styled.button`
-	width: 6.7rem;
+	/* width: 6.7rem; */
 	height: 2.8rem;
 	font-size: 1.4rem;
 	font-family: 'kr-r';
@@ -277,11 +322,23 @@ const CheckButton = styled.button`
 	right: 12px;
 	border-radius: 4px;
 	border: 1px solid #c6c6c6;
-	background-color: unset;
-	cursor: default !important;
+	background-color: #fff;
+	cursor: pointer !important;
 	${(props) =>
 		(props.active || props.send) &&
 		`border: 2px solid #111a31;color:#111a31; cursor:pointer !important;`}
+`;
+const BackButton = styled.button`
+	width: 34.6rem;
+	height: 6.2rem;
+	line-height: 6.2rem;
+	border-radius: 4px;
+	font-size: 2.4rem;
+	font-family: 'kr-r';
+	background-color: #fff;
+	color: #e50011;
+	border: 1px solid #e50011;
+	margin-top: 1.2rem;
 `;
 const SubmitButton = styled.button`
 	width: 34.6rem;
@@ -291,9 +348,8 @@ const SubmitButton = styled.button`
 	font-size: 2.4rem;
 	font-family: 'kr-r';
 	border: none;
-	${(props) =>
-		props.enter && `background-color:#E50011; color:#fff ; margin-top:2rem`}
-	${(props) =>
-		props.back &&
-		`background-color:#fff; color: #E50011; border: 1px solid #E50011; margin-top:1.2rem`};
+	color: #fff;
+	background-color: #a0a0a0;
+	margin-top: 2rem;
+	${(props) => props.enter && `background-color:#E50011; `};
 `;
