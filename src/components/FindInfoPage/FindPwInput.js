@@ -1,32 +1,43 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { regexp } from '../../data/regexp';
 
-const FindPwInput = () => {
-	const [email, setEmail] = useState('');
-	const [phone_number, setPhone_number] = useState('');
-	const [confirmSend, setConfirmSend] = useState(false);
-	const [confirm_number, setConfirm_number] = useState('');
-
+const FindPwInput = (props) => {
 	const emailController = (e) => {
-		setEmail(e.target.value);
+		regexp.email.test(e.target.value)
+			? props.setCheckLength({ ...props.checkLength, email: true })
+			: props.setCheckLength({ ...props.checkLength, email: false });
+		props.setEmail(e.target.value);
 	};
 	const phoneNumberController = (e) => {
-		setPhone_number(e.target.value);
+		if (isNaN(e.target.value)) {
+			return;
+		} else {
+			regexp.phone_number.test(e.target.value)
+				? props.setCheckLength({ ...props.checkLength, phone_number: true })
+				: props.setCheckLength({ ...props.checkLength, phone_number: false });
+			props.setPhone_number(e.target.value);
+		}
+	};
+	const confirmNumberController = (e) => {
+		if (isNaN(e.target.value)) {
+			return;
+		} else {
+			props.setConfirmNum(e.target.value);
+		}
 	};
 	const getConfirmNumber = () => {
-		if (phone_number.length === 11) {
+		if (props.checkLength.phone_number) {
 			// 인증하기
 			alert('인증번호 1234');
-			setConfirmSend(true);
+			props.setGetConfirmNum(true);
 		} else {
 			return alert('휴대폰 번호를 정확하게 입력해주세요.');
 		}
 	};
-	const confirmNumberController = (e) => {
-		setConfirm_number(e.target.value);
-	};
+
 	const checkConfirmNumber = () => {
-		if (confirmSend) {
+		if (props.getConfirmNum) {
 			// 인증번호와 입력된 값이 같을 경우
 			return alert('인증 확인되었습니다.');
 			// 아닐 경우
@@ -39,7 +50,7 @@ const FindPwInput = () => {
 			<Items>
 				<ItemTitle>이메일</ItemTitle>
 				<ItemInput
-					value={email}
+					value={props.email}
 					placeholder={'이메일 주소를 입력해주세요.'}
 					onChange={emailController}
 				/>
@@ -47,30 +58,32 @@ const FindPwInput = () => {
 			<Items>
 				<ItemTitle>휴대폰번호</ItemTitle>
 				<ItemInput
-					type='number'
-					value={phone_number}
+					type="text"
+					maxLength={11}
+					value={props.phone_number}
 					placeholder={`'-'을 제외한 휴대폰 번호를 입력해주세요.`}
 					onChange={phoneNumberController}
 				/>
 				<CheckButton
-					active={phone_number.length === 11}
-					onClick={getConfirmNumber}>
+					active={props.checkLength.phone_number}
+					onClick={getConfirmNumber}
+				>
 					인증하기
 				</CheckButton>
 			</Items>
 			<Items>
 				<ItemTitle>인증번호</ItemTitle>
 				<ItemInput
-					type='number'
-					value={confirm_number}
+					type="text"
+					maxLength={6}
+					value={props.confirmNum}
 					placeholder={'발송된 인증번호를 입력해주세요.'}
 					onChange={confirmNumberController}
 				/>
 				<CheckButton
-					active={confirmSend}
-					onClick={() => {
-						checkConfirmNumber(confirm_number);
-					}}>
+					// active={props.confirmSend}
+					onClick={checkConfirmNumber}
+				>
 					인증확인
 				</CheckButton>
 			</Items>

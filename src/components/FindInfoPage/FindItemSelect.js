@@ -14,7 +14,8 @@ const FindItemSelect = (props) => {
 				<MainCategoryList
 					key={idx}
 					active={props.item === el}
-					onClick={onChangeItem}>
+					onClick={onChangeItem}
+				>
 					{el}
 				</MainCategoryList>
 			))}
@@ -44,7 +45,9 @@ const MainCategoryList = styled.li`
 	font-family: 'kr-r';
 	color: #221814;
 	letter-spacing: -0.72px;
+	cursor: pointer;
 	${(props) =>
 		props.active &&
-		`font-family:'kr-b'; border:3px solid #E50011;border-radius: 4px;`}
+		`font-family:'kr-b'; border:3px solid #E50011;border-radius: 4px;line-height: 6.3rem;
+`}
 `;
