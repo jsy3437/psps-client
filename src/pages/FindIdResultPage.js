@@ -9,7 +9,6 @@ const FindIdResultPage = () => {
 	const history = useHistory();
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
-	// const [phone_number, setPhone_number] = useState('');
 
 	useEffect(() => {
 		if (location) {
@@ -23,6 +22,9 @@ const FindIdResultPage = () => {
 
 	const goLogin = () => {
 		history.push('/login');
+	};
+	const goRegister = () => {
+		history.push('/register');
 	};
 	const goChangePassword = () => {
 		history.push({ pathname: '/find-info', state: '비밀번호' });
@@ -39,9 +41,15 @@ const FindIdResultPage = () => {
 							? `${name}님의 이메일은\n${email}입니다.`
 							: `가입된 아이디가 없습니다`}
 					</FindResult>
-					<SubmitButton login onClick={goLogin}>
-						로그인
-					</SubmitButton>
+					{name && email ? (
+						<SubmitButton login onClick={goLogin}>
+							로그인
+						</SubmitButton>
+					) : (
+						<SubmitButton login onClick={goRegister}>
+							회원가입
+						</SubmitButton>
+					)}
 					<SubmitButton password onClick={goChangePassword}>
 						비밀번호 찾기
 					</SubmitButton>
