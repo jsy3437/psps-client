@@ -30,9 +30,11 @@ const ProductPage = () => {
 		setIsLoading(true);
 		let isSubscribed = true;
 		_product.get_list(part, subPart, page).then((res) => {
-			if (isSubscribed && res.data.success) {
-				setList(res.data.product_list);
-				setTotal(res.data.total);
+			const { success, product_list } = res.data;
+			if (isSubscribed && success) {
+				console.log(res.data);
+				setList(product_list);
+				setTotal(product_list.length);
 			}
 		});
 
@@ -41,6 +43,10 @@ const ProductPage = () => {
 			isSubscribed = false;
 		};
 	}, [part, subPart, page]);
+
+	useEffect(() => {
+		setPage(1);
+	}, [part, subPart]);
 
 	const subPartArr = useMemo(() => {
 		const _part = _category.part;

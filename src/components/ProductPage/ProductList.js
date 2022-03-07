@@ -10,7 +10,6 @@ const ProductList = (props) => {
 	const goDetail = (product_id) => {
 		history.push(`/detail/${product_id}`);
 	};
-	console.log(props.list);
 
 	return (
 		<ProductContainer>
