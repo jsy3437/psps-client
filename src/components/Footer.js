@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
@@ -6,27 +7,84 @@ import * as info from '../config';
 const Footer = () => {
 	const headLeft = ['이용약관', '개인정보처리방침'];
 	const headRight = ['자주묻는질문', '문의하기'];
+=======
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+
+import logo from '../images/red-logo.svg';
+import * as info from '../config';
+import { termsArr } from '../data/terms';
+
+const Footer = () => {
+	const history = useHistory();
+	const arr = termsArr;
+	const [openHeadLeft, setOpenHeadLeft] = useState(false);
+	const headLeft = ['이용약관', '개인정보처리방침'];
+	const headRight = ['자주묻는질문'];
+>>>>>>> psps/seoyoon
 	const bodyRight = [
 		['T', info.COMPANY_CONTACT],
 		['M', info.OWNER_CONTACT],
 	];
+<<<<<<< HEAD
 	const infoLeft = `${info.COMPANY_NAME} 대표이사 : ${info.COMPANY_OWNER} | 주소 : ${info.COMPANY_PLACE}\n사업자등록번호 : ${info.BUSINESS_NUMBER} | 통신판매신고번호 : ${info.REPORT_NUMBER}\n개인정보관리책임자 : ${info.PRIVACY_PERSON} (${info.PRIVACY_EMAIL})\n\n©2021 CetusStudio Inc.All rights reserved.`;
 	const infoRight = `평일:08:30~17:30\n점심:12:00~13:30\n(토,일 및 공휴일 휴일)`;
 
+=======
+	const infoLeft1 = `${info.COMPANY_NAME} 대표이사 : ${info.COMPANY_OWNER} | 주소 : ${info.COMPANY_PLACE}\n사업자등록번호 : `;
+	const infoLeft2 = ` | 통신판매신고번호 : ${info.REPORT_NUMBER}\n개인정보관리책임자 : ${info.PRIVACY_PERSON} (${info.PRIVACY_EMAIL})\n${info.COMPANY_NAME}는 모든 거래에 대한 책임과 배송, 교환, 환불, 민원 등의 처리는 ${info.COMPANY_NAME}에서 진행합니다.\n민원 담당자 ${info.COMPANY_OWNER} / 연락처 ${info.COMPANY_CONTACT}\n\n©2021 CetusStudio Inc.All rights reserved.`;
+
+	const infoRight = `평일:08:30~17:30\n점심:12:00~13:30\n(토,일 및 공휴일 휴일)`;
+
+	const onBusinessNumber = () => {
+		window.open(
+			'http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1348675676',
+			'_blank'
+		);
+	};
+
+	const goService = () => {
+		history.push('/service');
+	};
+
+	const onInfoModalOpen = (idx) => {
+		setOpenHeadLeft(idx);
+	};
+
+	const onInfoModalClose = () => {
+		setOpenHeadLeft(false);
+	};
+
+>>>>>>> psps/seoyoon
 	return (
 		<FooterWrap>
 			<FooterHead>
 				<FooterHeadInside>
 					<FooterHeadLeft>
 						{headLeft.map((el, idx) => (
+<<<<<<< HEAD
 							<HeadLeftText key={idx} effect={idx === 1}>
+=======
+							<HeadLeftText
+								key={idx}
+								effect={idx === 1}
+								onClick={() => {
+									onInfoModalOpen(idx);
+								}}
+							>
+>>>>>>> psps/seoyoon
 								{el}
 							</HeadLeftText>
 						))}
 					</FooterHeadLeft>
 					<FooterHeadRight>
 						{headRight.map((el, idx) => (
+<<<<<<< HEAD
 							<HeadRightButton key={idx} effect={idx === 1}>
+=======
+							<HeadRightButton key={idx} effect={idx === 1} onClick={goService}>
+>>>>>>> psps/seoyoon
 								{el}
 							</HeadRightButton>
 						))}
@@ -36,8 +94,20 @@ const Footer = () => {
 			<FooterBody>
 				<FooterBodyInside>
 					<FooterBodyLeft>
+<<<<<<< HEAD
 						<BodyLeftImg alt='logo' src={logo} />
 						<BodyLeftText>{infoLeft}</BodyLeftText>
+=======
+						<BodyLeftImg alt="logo" src={logo} />
+
+						<BodyLeftText>
+							{infoLeft1}
+							<BodyLeftTextSpan onClick={onBusinessNumber}>
+								{info.BUSINESS_NUMBER}
+							</BodyLeftTextSpan>
+							{infoLeft2}
+						</BodyLeftText>
+>>>>>>> psps/seoyoon
 					</FooterBodyLeft>
 					<FooterBodyRight>
 						<BodyRightTitle>고객센터</BodyRightTitle>
@@ -51,6 +121,24 @@ const Footer = () => {
 					</FooterBodyRight>
 				</FooterBodyInside>
 			</FooterBody>
+<<<<<<< HEAD
+=======
+
+			{openHeadLeft !== false && (
+				<InfoModalWrap onClick={onInfoModalClose}>
+					{arr.map((el, idx) => {
+						if (idx === openHeadLeft) {
+							return (
+								<InfoBox key={idx}>
+									<InfoTitle>{el.title}</InfoTitle>
+									<InfoText>{el.contents}</InfoText>
+								</InfoBox>
+							);
+						}
+					})}
+				</InfoModalWrap>
+			)}
+>>>>>>> psps/seoyoon
 		</FooterWrap>
 	);
 };
@@ -87,6 +175,10 @@ const HeadLeftText = styled.p`
 	font-family: 'kr-r';
 	color: #8e8e8e;
 	padding: 0 1rem;
+<<<<<<< HEAD
+=======
+	cursor: pointer;
+>>>>>>> psps/seoyoon
 	${(props) =>
 		props.effect && 'border-left:1px solid #8e8e8e; font-family:"kr-b";'}
 `;
@@ -133,8 +225,18 @@ const BodyLeftText = styled.p`
 	color: #6b6462;
 	letter-spacing: -0.28px;
 `;
+<<<<<<< HEAD
 const FooterBodyRight = styled.div`
 	width: 30%;
+=======
+const BodyLeftTextSpan = styled.span`
+	text-decoration: underline;
+	cursor: pointer;
+`;
+const FooterBodyRight = styled.div`
+	width: 30%;
+	margin-top: 2rem;
+>>>>>>> psps/seoyoon
 `;
 const BodyRightTitle = styled.h3`
 	text-align: right;
@@ -161,3 +263,41 @@ const BodyRightText = styled.p`
 	color: #6b6462;
 	text-align: right;
 `;
+<<<<<<< HEAD
+=======
+const InfoModalWrap = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background-color: #000000ba;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+`;
+const InfoBox = styled.div`
+	width: 60rem;
+	max-height: 60vh;
+	background-color: #fff;
+	padding: 3rem 4rem;
+	overflow-y: auto;
+	margin-bottom: 10rem;
+	box-shadow: 3px 10px 18px #0000001a;
+	border-radius: 5px;
+`;
+const InfoTitle = styled.h2`
+	font-size: 3rem;
+	font-family: 'kr-b';
+	letter-spacing: -1.2px;
+	margin-bottom: 3rem;
+`;
+const InfoText = styled.p`
+	font-size: 1.7rem;
+	font-family: 'kr-r';
+	letter-spacing: -0.56px;
+	color: #221814;
+	white-space: pre-line;
+`;
+>>>>>>> psps/seoyoon

@@ -1,11 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+<<<<<<< HEAD
 import banner_img from '../../images/product_banner1.png';
+=======
+>>>>>>> psps/seoyoon
 
 const ProductBanner = (props) => {
 	return (
 		<ProductBannerWrap>
+<<<<<<< HEAD
 			<ProductBannerImg alt='배너' src={banner_img} />
+=======
+			<ProductBannerImg alt="배너" src={props.subPartArr.bnnImg} />
+>>>>>>> psps/seoyoon
 			<ProductBannerTitle>{`품질 좋은 ${props.part}`}</ProductBannerTitle>
 		</ProductBannerWrap>
 	);
@@ -30,4 +37,13 @@ const ProductBannerTitle = styled.h1`
 	font-family: 'kr-b';
 	color: #fff;
 	position: absolute;
+<<<<<<< HEAD
+=======
+	text-shadow: 0px 3px 6px #00000066;
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+>>>>>>> psps/seoyoon
 `;

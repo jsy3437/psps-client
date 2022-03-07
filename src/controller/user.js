@@ -2,9 +2,15 @@ import axios from 'axios';
 import { ADDRESS } from '../config';
 
 const instance = axios.create({
+<<<<<<< HEAD
 	proxy: `${ADDRESS}`,
 	baseURL: '/user',
 	// baseURL: `${ADDRESS}/user`,
+=======
+	// proxy: `${ADDRESS}`,
+	// baseURL: '/user',
+	baseURL: `${ADDRESS}/user`,
+>>>>>>> psps/seoyoon
 	withCredentials: true,
 });
 
@@ -14,7 +20,11 @@ const errorMessage = () => {
 };
 
 export const authCheck = async () => {
+<<<<<<< HEAD
 	return await instance.get('/').catch(errorMessage);
+=======
+	return await instance.get('/').catch({ data: { success: false } });
+>>>>>>> psps/seoyoon
 };
 export const login = async (userData) => {
 	return await instance.post('/login', userData).catch(errorMessage);
@@ -25,3 +35,33 @@ export const logout = async () => {
 export const register = async (userData) => {
 	return await instance.post('/register', userData).catch(errorMessage);
 };
+<<<<<<< HEAD
+=======
+export const get_me = async () => {
+	return await instance.get('/me').catch(errorMessage);
+};
+export const send_sms = async (userData) => {
+	return await instance.post('/sms/send', userData).catch(errorMessage);
+};
+export const check_sms = async (smsData) => {
+	return await instance.post('/sms/check', smsData).catch(errorMessage);
+};
+export const check_email = async (userData) => {
+	return await instance.post('/check', userData).catch(errorMessage);
+};
+export const change_tel = async (userData) => {
+	return await instance.patch('/tel', userData).catch(errorMessage);
+};
+export const change_password = async (userData) => {
+	return await instance.patch('/pw', userData).catch(errorMessage);
+};
+export const change_address = async (userData) => {
+	return await instance.patch('/addr', userData).catch(errorMessage);
+};
+export const find_email = async (userData) => {
+	return await instance.post('/email', userData).catch(errorMessage);
+};
+// export const find_Pw = async (userData) => {
+// 	return await instance.post('/email', userData).catch(errorMessage);
+// };
+>>>>>>> psps/seoyoon

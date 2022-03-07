@@ -1,15 +1,46 @@
+<<<<<<< HEAD
 import React from 'react';
+=======
+import React, { useEffect, useState } from 'react';
+>>>>>>> psps/seoyoon
 import { withRouter, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { user_logout } from '../modules/user';
 import { logout } from '../controller/user';
+<<<<<<< HEAD
+=======
+import * as _basket from '../controller/basket';
+>>>>>>> psps/seoyoon
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 
 const Navbar = () => {
+<<<<<<< HEAD
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const user = useSelector((state) => state.user);
+=======
+	const cart = useSelector((state) => state.cart);
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const user = useSelector((state) => state.user);
+	const [cartCount, setCartCount] = useState('');
+
+	useEffect(() => {
+		_basket.get_list().then((res) => {
+			const { success, count } = res.data;
+			if (success) {
+				setCartCount(count);
+			}
+		});
+	}, [user]);
+
+	useEffect(() => {
+		if (cart) {
+			setCartCount(cart.cartCount);
+		}
+	}, [cart, user]);
+>>>>>>> psps/seoyoon
 
 	const goHome = () => {
 		history.push('/');
@@ -27,10 +58,20 @@ const Navbar = () => {
 		history.push('/login');
 	};
 	const goLogout = () => {
+<<<<<<< HEAD
 		logout().then((res) => console.log(res.data));
 		dispatch(user_logout());
 		alert('로그아웃 되었습니다.');
 		history.push('/');
+=======
+		logout().then((res) => {
+			if (res.data.success) {
+				dispatch(user_logout());
+				alert('로그아웃 되었습니다.');
+				history.push('/');
+			}
+		});
+>>>>>>> psps/seoyoon
 	};
 	const goRegister = () => {
 		history.push('/register');
@@ -46,11 +87,19 @@ const Navbar = () => {
 		<NavbarWrap>
 			<NavbarInside>
 				<NavbarLeft>
+<<<<<<< HEAD
 					<NavbarLogo alt='logo' src={logo} onClick={goHome} />
 				</NavbarLeft>
 				<NavbarRight>
 					<RightFirst>
 						<RightFirstList onClick={goProduct}>카테고리</RightFirstList>
+=======
+					<NavbarLogo alt="logo" src={logo} onClick={goHome} />
+				</NavbarLeft>
+				<NavbarRight>
+					<RightFirst>
+						<RightFirstList onClick={goProduct}>쇼핑하기</RightFirstList>
+>>>>>>> psps/seoyoon
 						<RightFirstList onClick={goIntro}>품생품사란</RightFirstList>
 						<RightFirstList onClick={goService}>고객센터</RightFirstList>
 					</RightFirst>
@@ -58,13 +107,23 @@ const Navbar = () => {
 						<RightSecondList onClick={!user.login ? goLogin : goLogout}>
 							{!user.login ? '로그인' : '로그아웃'}
 						</RightSecondList>
+<<<<<<< HEAD
 						<RightSecondList
 							onClick={!user.login ? goRegister : goMyPage}>
+=======
+						<RightSecondList onClick={!user.login ? goRegister : goMyPage}>
+>>>>>>> psps/seoyoon
 							{!user.login ? '회원가입' : '마이페이지'}
 						</RightSecondList>
 						<RightSecondList onClick={goCart}>
 							장바구니
+<<<<<<< HEAD
 							<CartCount>3</CartCount>
+=======
+							{cartCount && cartCount.length !== 0 ? (
+								<CartCount>{cartCount && cartCount}</CartCount>
+							) : null}
+>>>>>>> psps/seoyoon
 						</RightSecondList>
 					</RightSecond>
 				</NavbarRight>

@@ -37,11 +37,19 @@ const SecondStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
+<<<<<<< HEAD
 				<LogoImg alt='logo' src={logo} />
 				<Title>품생품사 가입약관</Title>
 				{arr.map((el, idx) => (
 					<Items key={idx}>
 						<ItemTitle>{el.title}</ItemTitle>
+=======
+				<LogoImg alt="logo" src={logo} />
+				<Title>품생품사 가입약관</Title>
+				{arr.map((el, idx) => (
+					<Items key={idx}>
+						<ItemTitle>{el.title} (필수)</ItemTitle>
+>>>>>>> psps/seoyoon
 						<ItemTextBox>{el.contents}</ItemTextBox>
 					</Items>
 				))}
@@ -104,6 +112,22 @@ const ItemTextBox = styled.div`
 	overflow-y: scroll;
 	border: 1px solid #e0e0e0;
 	border-radius: 4px;
+<<<<<<< HEAD
+=======
+	white-space: pre-line;
+	::-webkit-scrollbar {
+		width: 0.9rem;
+		height: 4rem;
+		background-color: #fff;
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: #707070;
+		border-radius: 10px;
+		background-clip: padding-box;
+		border: 3px solid transparent;
+		height: 4.4rem;
+	}
+>>>>>>> psps/seoyoon
 `;
 const SubmitButton = styled.button`
 	width: 34.6rem;

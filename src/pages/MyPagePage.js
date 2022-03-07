@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
+=======
+import React, { useEffect, useState } from 'react';
+>>>>>>> psps/seoyoon
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import MenuSelect from '../components/MyPage/MenuSelect';
 import OrderHistory from '../components/MyPage/OrderHistory';
 import Footer from '../components/Footer';
+<<<<<<< HEAD
 
 const MyPagePage = () => {
 	const [menu, setMenu] = useState('주문내역');
@@ -16,6 +21,37 @@ const MyPagePage = () => {
 					<Title>마이페이지</Title>
 					<MenuSelect menu={menu} setMenu={setMenu} />
 					{menu === '주문내역' && <OrderHistory />}
+=======
+import * as _payment from '../controller/payment';
+import { useLocation } from 'react-router-dom';
+import Privacy from '../components/MyPage/Privacy';
+
+const MyPagePage = () => {
+	const location = useLocation();
+	const [menu, setMenu] = useState('주문내역');
+	const [paymentList, setPaymentList] = useState('');
+
+	useEffect(() => {
+		_payment.get_list().then((res) => {
+			const { success, payment_list } = res.data;
+			if (success) {
+				setPaymentList(payment_list);
+			}
+		});
+	}, []);
+
+	return (
+		<div id="container">
+			<Container>
+				<MyPageInside>
+					<LogoImg alt="logo" src={logo} />
+					<Title>마이페이지</Title>
+					<MenuSelect menu={menu} setMenu={setMenu} />
+					{menu === '주문내역' && (
+						<OrderHistory paymentList={paymentList} location={location} />
+					)}
+					{menu === '개인정보관리' && <Privacy />}
+>>>>>>> psps/seoyoon
 				</MyPageInside>
 				<Footer />
 			</Container>

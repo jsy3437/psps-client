@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+=======
+import bread from '../images/bnn_bread.png';
+import cabbage from '../images/bnn_cabbage.png';
+import dish from '../images/bnn_dish.png';
+import meat from '../images/bnn_meat.png';
+import shrimp from '../images/bnn_shrimp.png';
+import side from '../images/bnn_side.png';
+import snack from '../images/bnn_snack.png';
+import tea from '../images/bnn_tea.png';
+
+>>>>>>> psps/seoyoon
 export const mainCategories = [
 	'농산',
 	'수산',
@@ -8,6 +20,17 @@ export const mainCategories = [
 	'반찬',
 	'가정 간편식',
 ];
+<<<<<<< HEAD
+=======
+export const subCategories = [
+	'전체보기',
+	'과일·수입청과',
+	'샐러드·기본채소',
+	'즙용·특수채소',
+	'버섯·건나물류',
+	'쌀·잡곡',
+];
+>>>>>>> psps/seoyoon
 
 export const page = [
 	'메인페이지',
@@ -30,6 +53,10 @@ export const part = [
 			'버섯·건나물류',
 			'쌀·잡곡',
 		],
+<<<<<<< HEAD
+=======
+		bnnImg: cabbage,
+>>>>>>> psps/seoyoon
 	},
 	{
 		title: '수산',
@@ -41,6 +68,10 @@ export const part = [
 			'김·해조류·건어물',
 			'어묵·수산가공',
 		],
+<<<<<<< HEAD
+=======
+		bnnImg: shrimp,
+>>>>>>> psps/seoyoon
 	},
 	{
 		title: '축산',
@@ -52,6 +83,10 @@ export const part = [
 			'돼지고기',
 			'족발·육포·육가공',
 		],
+<<<<<<< HEAD
+=======
+		bnnImg: meat,
+>>>>>>> psps/seoyoon
 	},
 	{
 		title: '건강·음료',
@@ -63,21 +98,41 @@ export const part = [
 			'죽염·흑마늘',
 			'꿀·조청',
 		],
+<<<<<<< HEAD
+=======
+		bnnImg: tea,
+>>>>>>> psps/seoyoon
 	},
 	{
 		title: '생활·주방',
 		arr: ['전체보기', '마스크·위생장갑'],
+<<<<<<< HEAD
+=======
+		bnnImg: dish,
+>>>>>>> psps/seoyoon
 	},
 	{
 		title: '간식',
 		arr: ['전체보기', '과자·간식', '떡·빵·한과', '만두'],
+<<<<<<< HEAD
+=======
+		bnnImg: snack,
+>>>>>>> psps/seoyoon
 	},
 	{
 		title: '반찬',
 		arr: ['전체보기', '밑반찬·절임류', '김치류', '나물'],
+<<<<<<< HEAD
+=======
+		bnnImg: side,
+>>>>>>> psps/seoyoon
 	},
 	{
 		title: '가정 간편식',
 		arr: ['전체보기', '국·탕·찌개', '죽·스프·카레'],
+<<<<<<< HEAD
+=======
+		bnnImg: bread,
+>>>>>>> psps/seoyoon
 	},
 ];

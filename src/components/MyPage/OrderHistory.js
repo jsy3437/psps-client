@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
 import OrderDetail from './OrderDetail';
 import PageSelector from '../PageSelector';
+<<<<<<< HEAD
 
 const OrderHistory = () => {
 	const list = Array(5).fill({
@@ -49,16 +50,80 @@ const OrderHistory = () => {
 							</ListButtons>
 						</OrderHistoryList>
 					))}
+=======
+import * as _payment from '../../controller/payment';
+
+const OrderHistory = (props) => {
+	const [page, setPage] = useState(1);
+	const [total, setTotal] = useState(props.paymentList.length);
+	const [viewDetail, setViewDetail] = useState(false);
+
+	const goDetail = (payment_id) => {
+		setViewDetail(payment_id);
+	};
+
+	useEffect(() => {
+		if (props.location.state) {
+			setViewDetail(props.location.state);
+		}
+	}, [props.location.state]);
+
+	return (
+		<MyPageInside>
+			{props.paymentList.length === 0 && (
+				<OrderHistoryWrap>
+					<NothingText>현재 주문하신 내역이 없습니다.</NothingText>
+					<GoShoppingButton>쇼핑하기</GoShoppingButton>
+				</OrderHistoryWrap>
+			)}
+			{props.paymentList.length > 0 && !viewDetail && (
+				<OrderHistoryWrap>
+					{props.paymentList &&
+						props.paymentList.map((el, idx) => (
+							<OrderHistoryList
+								key={idx}
+								onClick={() => {
+									goDetail(el.payment_id);
+								}}
+							>
+								<OrderTopDate>
+									{el.create_at.split('T')[0]}
+									<OrderId>・{el.payment_uid}</OrderId>
+								</OrderTopDate>
+								<ListImg alt="product img" src={ex1} />
+								<ListContents>
+									<ProductNameBox>
+										<ProductName>{el.name}</ProductName>
+										<ProductNameSpan>외 3건</ProductNameSpan>
+									</ProductNameBox>
+									<DeliveryAddr>
+										{`(${el.del_postcode}) ${el.del_addr.split('/')[0]} ${
+											el.del_addr.split('/')[1]
+										}`}
+									</DeliveryAddr>
+									<ProductTotalPrice>{`총 결제 금액 ${el.amount.toLocaleString()}원`}</ProductTotalPrice>
+								</ListContents>
+							</OrderHistoryList>
+						))}
+>>>>>>> psps/seoyoon
 					<PageSelector
 						style={{ margin: '5.2rem 0 5.5rem 0' }}
 						total={total}
 						page={page}
 						setPage={setPage}
 					/>
+<<<<<<< HEAD
 					<GrayBackground />
 				</OrderHistoryWrap>
 			)}
 			{list.length > 0 && viewDetail && <OrderDetail detail={detail} />}
+=======
+				</OrderHistoryWrap>
+			)}
+			{props.paymentList.length > 0 && viewDetail && (
+				<OrderDetail viewDetail={viewDetail} setViewDetail={setViewDetail} />
+			)}
+>>>>>>> psps/seoyoon
 		</MyPageInside>
 	);
 };
@@ -71,6 +136,10 @@ const MyPageInside = styled.div`
 	align-items: center;
 	position: relative;
 	margin-bottom: 7.7rem;
+<<<<<<< HEAD
+=======
+	margin-top: 2rem;
+>>>>>>> psps/seoyoon
 `;
 const OrderHistoryWrap = styled.ul`
 	display: flex;
@@ -98,7 +167,13 @@ const GoShoppingButton = styled.button`
 	background-color: #221814;
 `;
 const OrderHistoryList = styled.li`
+<<<<<<< HEAD
 	margin-bottom: 2rem;
+=======
+	position: relative;
+	margin-bottom: 2rem;
+	margin-top: 2rem;
+>>>>>>> psps/seoyoon
 	width: 69.7rem;
 	height: 17.6rem;
 	background-color: #fff;
@@ -109,11 +184,28 @@ const OrderHistoryList = styled.li`
 		margin: 0;
 	}
 `;
+<<<<<<< HEAD
+=======
+const OrderTopDate = styled.p`
+	position: absolute;
+	font-size: 1.6rem;
+	font-family: 'ro-b';
+	letter-spacing: -0.64px;
+	color: #221814;
+	top: -2.5rem;
+`;
+const OrderId = styled.span`
+	font-family: 'ro-r';
+	color: #8e8e8e;
+	margin-left: 0.2rem;
+`;
+>>>>>>> psps/seoyoon
 const ListImg = styled.img`
 	width: 27.5%;
 	height: 100%;
 `;
 const ListContents = styled.div`
+<<<<<<< HEAD
 	width: 47.5%;
 	height: 100%;
 	padding: 2rem;
@@ -186,11 +278,55 @@ const ListButton = styled.button`
 			? `margin-bottom:0; color:#E50011; border:1px solid #E50011;`
 			: `color:#fff; background-color:#221814`}
 `;
+=======
+	width: 100%;
+	height: 100%;
+	padding: 2rem;
+`;
+const ProductNameBox = styled.div`
+	width: 31rem;
+	display: flex;
+	margin-bottom: 0.4rem;
+	align-items: flex-end;
+`;
+const ProductName = styled.p`
+	max-width: 25rem;
+	font-size: 2rem;
+	font-family: 'kr-b';
+	color: #221814;
+	text-overflow: ellipsis;
+	overflow: hidden;
+`;
+const ProductNameSpan = styled.span`
+	font-size: 1.8rem;
+	font-family: 'kr-r';
+	margin-left: 0.2rem;
+`;
+const DeliveryAddr = styled.p`
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	letter-spacing: -0.56px;
+	color: #6b6462;
+`;
+const ProductTotalPrice = styled.p`
+	font-size: 1.6rem;
+	font-family: 'kr-b';
+	letter-spacing: -0.64px;
+	color: #221814;
+	margin-top: 5.9rem;
+`;
+
+>>>>>>> psps/seoyoon
 const GrayBackground = styled.div`
 	width: 192rem;
 	height: 37.3rem;
 	background-color: #f2f2f2;
 	z-index: -1;
 	position: absolute;
+<<<<<<< HEAD
 	bottom: 0;
+=======
+	/* bottom: 0; */
+	top: 13.5rem;
+>>>>>>> psps/seoyoon
 `;

@@ -2,6 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { regexp } from '../../data/regexp';
 import styled from 'styled-components';
+<<<<<<< HEAD
+=======
+import * as _user from '../../controller/user';
+
+>>>>>>> psps/seoyoon
 import logo from '../../images/red-logo.svg';
 import check_box from '../../images/check-box.svg';
 import uncheck_box from '../../images/uncheck-box.svg';
@@ -66,6 +71,7 @@ const FirstStep = (props) => {
 	};
 
 	const goNext = () => {
+<<<<<<< HEAD
 		//
 		// 다음으로 누를 때 이메일 중복확인 하고 넘어가기 !!!
 		//
@@ -92,13 +98,41 @@ const FirstStep = (props) => {
 		} else {
 			props.setStep(3);
 			history.push({ state: { email, password, passwordConfirm } });
+=======
+		setIsSubmit(true);
+		if (!regexp.email.test(email)) {
+			emailInput.current.focus();
+			return setCheck({ ...check, email: false });
+		} else if (!regexp.password.test(password)) {
+			passwordInput.current.focus();
+			return setCheck({ ...check, password: false });
+		} else if (password !== passwordConfirm) {
+			passwordConfirmInput.current.focus();
+			return setCheck({ ...check, passwordConfirm: false });
+		} else if (!agreeCheck) {
+			return;
+		} else if (email) {
+			_user.check_email({ email }).then((res) => {
+				const { success } = res.data;
+				if (!success) {
+					return alert('이미 가입된 이메일입니다');
+				} else {
+					props.setStep(3);
+					history.push({ state: { email, password, passwordConfirm } });
+				}
+			});
+>>>>>>> psps/seoyoon
 		}
 	};
 
 	return (
 		<Container>
 			<RegisterInside>
+<<<<<<< HEAD
 				<LogoImg alt='logo' src={logo} />
+=======
+				<LogoImg alt="logo" src={logo} />
+>>>>>>> psps/seoyoon
 				<Title>품생품사 회원가입</Title>
 				<Items>
 					<ItemTitle>이메일</ItemTitle>
@@ -107,15 +141,23 @@ const FirstStep = (props) => {
 						value={email ? email : ''}
 						onChange={emailController}
 						placeholder={'이메일 주소를 입력해주세요'}
+<<<<<<< HEAD
 					/>
 					{isSubmit && !check.email && (
 						<InputError>{`ex) email@email.com`}</InputError>
+=======
+						error={isSubmit && !check.email}
+					/>
+					{isSubmit && !check.email && (
+						<InputError>{'이메일 주소 형식이 틀렸습니다.'}</InputError>
+>>>>>>> psps/seoyoon
 					)}
 				</Items>
 				<Items>
 					<ItemTitle>비밀번호</ItemTitle>
 					<ItemInput
 						ref={passwordInput}
+<<<<<<< HEAD
 						type='password'
 						value={password ? password : ''}
 						onChange={passwordController}
@@ -123,12 +165,23 @@ const FirstStep = (props) => {
 					/>
 					{isSubmit && !check.password && (
 						<InputError>{`비밀번호는 숫자,문자,특수문자를 모두 포함한 8~20글자로 입력해주세요`}</InputError>
+=======
+						type="password"
+						value={password ? password : ''}
+						onChange={passwordController}
+						placeholder={'비밀번호를 입력해주세요'}
+						error={isSubmit && !check.password}
+					/>
+					{isSubmit && !check.password && (
+						<InputError>{`비밀번호는 8자리 이상으로 숫자, 알파벳, 특수문자를 포함해야 합니다.`}</InputError>
+>>>>>>> psps/seoyoon
 					)}
 				</Items>
 				<Items>
 					<ItemTitle>비밀번호 확인</ItemTitle>
 					<ItemInput
 						ref={passwordConfirmInput}
+<<<<<<< HEAD
 						type='password'
 						value={passwordConfirm ? passwordConfirm : ''}
 						onChange={passwordConfirmController}
@@ -136,13 +189,27 @@ const FirstStep = (props) => {
 					/>
 					{isSubmit && !check.passwordConfirm && (
 						<InputError>{`비밀번호와 비밀번호 확인이 일치하지 않습니다`}</InputError>
+=======
+						type="password"
+						value={passwordConfirm ? passwordConfirm : ''}
+						onChange={passwordConfirmController}
+						placeholder={'비밀번호를 확인해주세요'}
+						error={isSubmit && !check.passwordConfirm}
+					/>
+					{isSubmit && !check.passwordConfirm && (
+						<InputError>{`비밀번호가 일치하지 않습니다.`}</InputError>
+>>>>>>> psps/seoyoon
 					)}
 				</Items>
 
 				<AgreeBox>
 					<AgreeLeft>
 						<AgreeCheck
+<<<<<<< HEAD
 							alt=''
+=======
+							alt=""
+>>>>>>> psps/seoyoon
 							src={agreeCheck ? check_box : uncheck_box}
 							onClick={agreeCheckController}
 						/>
@@ -166,10 +233,17 @@ const FirstStep = (props) => {
 					</EasyLeft>
 					<EasyRight>
 						<SocialLogoBox NLogo>
+<<<<<<< HEAD
 							<SocialLogo alt='icon' src={NLogo} />
 						</SocialLogoBox>
 						<SocialLogoBox KLogo>
 							<SocialLogo alt='icon' src={KLogo} />
+=======
+							<SocialLogo alt="icon" src={NLogo} />
+						</SocialLogoBox>
+						<SocialLogoBox KLogo>
+							<SocialLogo alt="icon" src={KLogo} />
+>>>>>>> psps/seoyoon
 						</SocialLogoBox>
 					</EasyRight>
 				</EasyBox>
@@ -230,6 +304,10 @@ const ItemInput = styled.input`
 	border: 1px solid #c6c6c6;
 	border-radius: 4px;
 	background-color: #fff;
+<<<<<<< HEAD
+=======
+	${(props) => props.error && `&:focus{border 1px solid #E50011}`}
+>>>>>>> psps/seoyoon
 	&::placeholder {
 		color: #c6c6c6;
 	}
@@ -242,6 +320,10 @@ const InputError = styled.p`
 	font-size: 1rem;
 	font-family: 'kr-r';
 	color: #e50011;
+<<<<<<< HEAD
+=======
+	margin-top: 0.6rem;
+>>>>>>> psps/seoyoon
 `;
 const AgreeBox = styled.div`
 	width: 34.6rem;
@@ -257,6 +339,10 @@ const AgreeLeft = styled.div`
 const AgreeCheck = styled.img`
 	width: 1.6rem;
 	height: 1.6rem;
+<<<<<<< HEAD
+=======
+	cursor: pointer;
+>>>>>>> psps/seoyoon
 `;
 const AgreeAllText = styled.p`
 	font-size: 1.4rem;
@@ -269,6 +355,10 @@ const AgreeRight = styled.div`
 	font-family: 'kr-r';
 	color: #6b6462;
 	text-decoration: underline;
+<<<<<<< HEAD
+=======
+	cursor: pointer;
+>>>>>>> psps/seoyoon
 	&:hover {
 		color: #e50011;
 	}
@@ -293,6 +383,10 @@ const SubmitButton = styled.button`
 	background-color: #fff;
 	border: 1px solid #e50011;
 	border-radius: 4px;
+<<<<<<< HEAD
+=======
+	transition: all 200ms ease;
+>>>>>>> psps/seoyoon
 	&:hover {
 		background-color: #e50011;
 		color: #fff;
@@ -321,6 +415,10 @@ const GoLogin = styled.p`
 	color: #6b6462;
 	margin-left: 0.7rem;
 	text-decoration: underline;
+<<<<<<< HEAD
+=======
+	cursor: pointer;
+>>>>>>> psps/seoyoon
 	&:hover {
 		color: #e50011;
 	}
@@ -344,4 +442,8 @@ const SocialLogoBox = styled.div`
 const SocialLogo = styled.img`
 	width: 3.6rem;
 	height: 3.6rem;
+<<<<<<< HEAD
+=======
+	cursor: pointer;
+>>>>>>> psps/seoyoon
 `;

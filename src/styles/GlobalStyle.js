@@ -9,10 +9,18 @@ html {
 }
 body {
 	margin: 0;
+<<<<<<< HEAD
+=======
+	overflow-x:hidden;
+>>>>>>> psps/seoyoon
 }
 #root {
 	width: 100vw;
 	/* height: 100vh; */
+<<<<<<< HEAD
+=======
+	
+>>>>>>> psps/seoyoon
 }
 #App {
 	width:100%;
@@ -20,6 +28,10 @@ body {
 	display: flex;
 	flex-direction:column;
 	align-items:center;
+<<<<<<< HEAD
+=======
+	
+>>>>>>> psps/seoyoon
 }
 #container {
 	width: 100%;
@@ -58,11 +70,18 @@ input {
 }
 input:focus,
 textarea:focus {
+<<<<<<< HEAD
 	outline: none;
 	background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
 	background: #ffffff 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 6px #00000029;
 	border: 2px solid #111a31;
+=======
+	outline: none;	
+	background: #fff 0% 0% no-repeat padding-box;
+	box-shadow: 2px 6px 15px #00000029;
+	/* border: 2px solid #111a31; */
+>>>>>>> psps/seoyoon
 }
 input:focus::placeholder {
 	color: #111a31;
