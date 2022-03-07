@@ -42,5 +42,6 @@ const MenuList = styled.li`
 	cursor: pointer;
 	${(props) =>
 		props.active &&
-		`font-family:'kr-b'; border:3px solid #E50011;border-radius: 4px;`}
+		`font-family:'kr-b'; border:3px solid #E50011;border-radius: 4px; line-height: 6.5rem;
+`}
 `;
