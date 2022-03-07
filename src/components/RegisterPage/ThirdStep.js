@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { user_login } from '../../modules/user';
 import { regexp } from '../../data/regexp';
 import * as _user from '../../controller/user';
-import { user_login } from '../../modules/user';
+import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
 
 const ThirdStep = (props) => {
