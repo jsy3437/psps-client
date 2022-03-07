@@ -16,7 +16,6 @@ const LoginPage = () => {
 	const history = useHistory();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [checked, setChecked] = useState(false);
 
 	const onChangeEmail = (e) => {
 		setEmail(e.target.value);
@@ -29,10 +28,6 @@ const LoginPage = () => {
 	};
 	const goRegister = () => {
 		history.push('/register');
-	};
-
-	const clickCheck = () => {
-		setChecked(!checked);
 	};
 
 	const onSubmit = () => {
@@ -78,17 +73,10 @@ const LoginPage = () => {
 						/>
 					</Items>
 					<AgreeBox>
-						<AgreeLeft onClick={clickCheck}>
-							<CheckImg
-								alt="check image"
-								src={checked ? checkImg : uncheckImg}
-							/>
-							자동 로그인
-						</AgreeLeft>
 						<AgreeRight onClick={goFindInfo}>아이디/비밀번호 찾기</AgreeRight>
 					</AgreeBox>
 					<SubmitButton onClick={onSubmit}>로그인</SubmitButton>
-					<EasyBox>
+					{/* <EasyBox>
 						<EasyLeft>
 							<EasyLeftText>SNS계정으로 간편하게 로그인</EasyLeftText>
 							<GoLoginBox>
@@ -104,7 +92,7 @@ const LoginPage = () => {
 								<SocialLogo alt="icon" src={KLogo} />
 							</SocialLogoBox>
 						</EasyRight>
-					</EasyBox>
+					</EasyBox> */}
 				</RegisterInside>
 			</Container>
 			<Footer />
