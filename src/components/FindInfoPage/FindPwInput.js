@@ -1,8 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { regexp } from '../../data/regexp';
+import * as _user from '../../controller/user';
 
 const FindPwInput = (props) => {
+	const confirmEl = useRef();
+	const [time, setTime] = useState(180);
+	const [sec, setSec] = useState(0);
+	const [min, setMin] = useState(0);
+
+	useEffect(() => {
+		let interval;
+		if (props.getConfirmNum && time > -1) {
+			setMin(parseInt(time / 60));
+			setSec(time % 60);
+			interval = setTimeout(() => {
+				setTime(time - 1);
+			}, 1000);
+		}
+		return () => {
+			clearTimeout(interval);
+		};
+	}, [props.getConfirmNum, time]);
+
 	const emailController = (e) => {
 		regexp.email.test(e.target.value)
 			? props.setCheckLength({ ...props.checkLength, email: true })
@@ -17,31 +37,63 @@ const FindPwInput = (props) => {
 				? props.setCheckLength({ ...props.checkLength, phone_number: true })
 				: props.setCheckLength({ ...props.checkLength, phone_number: false });
 			props.setPhone_number(e.target.value);
+			props.setConfirm(false);
+			props.setGetConfirmNum(false);
 		}
 	};
 	const confirmNumberController = (e) => {
 		if (isNaN(e.target.value)) {
 			return;
 		} else {
-			props.setConfirmNum(e.target.value);
-		}
-	};
-	const getConfirmNumber = () => {
-		if (props.checkLength.phone_number) {
-			// 인증하기
-			alert('인증번호 1234');
-			props.setGetConfirmNum(true);
-		} else {
-			return alert('휴대폰 번호를 정확하게 입력해주세요.');
+			if (e.target.value.length === 6) {
+				props.setCheckLength({ ...props.checkLength, confirmNum: true });
+			} else {
+				props.setCheckLength({ ...props.checkLength, confirmNum: false });
+			}
+			return props.setConfirmNum(e.target.value);
 		}
 	};
 
+	const getConfirmNumber = () => {
+		if (props.checkLength.phone_number) {
+			_user.send_sms({ phone_number: props.phone_number }).then((res) => {
+				const { success } = res.data;
+				console.log(res.data);
+				if (success) {
+					alert('인증번호가 발송되었습니다.');
+					confirmEl.current.focus();
+					setTime(180);
+					props.setGetConfirmNum(true);
+					props.setConfirmNum('');
+				} else {
+					alert(res.data.msg);
+				}
+			});
+		}
+	};
 	const checkConfirmNumber = () => {
-		if (props.getConfirmNum) {
-			// 인증번호와 입력된 값이 같을 경우
-			return alert('인증 확인되었습니다.');
-			// 아닐 경우
-			// return alert('인증번호를 확인해주세요.')
+		if (time > 0) {
+			if (
+				props.getConfirmNum &&
+				props.checkLength.confirmNum &&
+				!props.confirm
+			) {
+				console.log('aa');
+				const data = {
+					phone_number: props.phone_number,
+					code: props.confirmNum,
+				};
+				console.log(data);
+				_user.check_sms(data).then((res) => {
+					console.log(res.data);
+					if (res.data.success) {
+						props.setConfirm(true);
+						return alert('인증 확인되었습니다.');
+					} else {
+						return alert(res.data.msg);
+					}
+				});
+			}
 		}
 	};
 
@@ -74,14 +126,19 @@ const FindPwInput = (props) => {
 			<Items>
 				<ItemTitle>인증번호</ItemTitle>
 				<ItemInput
+					ref={confirmEl}
 					type="text"
 					maxLength={6}
 					value={props.confirmNum}
-					placeholder={'발송된 인증번호를 입력해주세요.'}
+					placeholder={
+						props.getConfirmNum && `0${min}:${sec < 10 ? '0' + sec : sec}`
+					}
 					onChange={confirmNumberController}
 				/>
 				<CheckButton
-					// active={props.confirmSend}
+					active={
+						props.getConfirmNum && props.checkLength.confirmNum && time > 0
+					}
 					onClick={checkConfirmNumber}
 				>
 					인증확인
