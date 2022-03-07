@@ -2,15 +2,9 @@ import axios from 'axios';
 import { ADDRESS } from '../config';
 
 const instance = axios.create({
-<<<<<<< HEAD
 	proxy: `${ADDRESS}`,
 	baseURL: '/product',
 	// baseURL: `${ADDRESS}/product`,
-=======
-	// proxy: `${ADDRESS}`,
-	// baseURL: '/product',
-	baseURL: `${ADDRESS}/product`,
->>>>>>> psps/seoyoon
 	withCredentials: true,
 });
 

@@ -17,32 +17,15 @@ const ProductCategory = (props) => {
 		<ProductCategoryWrap>
 			<PartWrap>
 				{category.mainCategories.map((el, idx) => (
-<<<<<<< HEAD
 					<PartList
 						key={idx}
 						active={props.part === el}
 						onClick={onChangePart}>
-=======
-					<PartList key={idx} active={props.part === el} onClick={onChangePart}>
->>>>>>> psps/seoyoon
 						{el}
 					</PartList>
 				))}
 			</PartWrap>
 			<SubPartWrap>
-<<<<<<< HEAD
-				{props.subPartArr.map((el, idx) => (
-					<SubPartList
-						key={idx}
-						active={
-							(idx === 0 && props.subPart === null) ||
-							(idx > 0 && props.subPart === el)
-						}
-						onClick={onChangeSubPart}>
-						{el}
-					</SubPartList>
-				))}
-=======
 				{props.subPartArr &&
 					props.subPartArr.arr.map((el, idx) => (
 						<SubPartListBox key={idx}>
@@ -51,16 +34,15 @@ const ProductCategory = (props) => {
 									(idx === 0 && props.subPart === null) ||
 									(idx > 0 && props.subPart === el)
 								}
-								onClick={onChangeSubPart}
-							>
+								onClick={onChangeSubPart}>
 								{el}
 							</SubPartList>
 							<SubPartListLine
-								last={idx === props.subPartArr.arr.length - 1}
-							></SubPartListLine>
+								last={
+									idx === props.subPartArr.arr.length - 1
+								}></SubPartListLine>
 						</SubPartListBox>
 					))}
->>>>>>> psps/seoyoon
 			</SubPartWrap>
 		</ProductCategoryWrap>
 	);
@@ -92,27 +74,16 @@ const PartWrap = styled.ul`
 const PartList = styled.li`
 	width: 12rem;
 	height: 7rem;
-<<<<<<< HEAD
-	line-height: 7rem;
-=======
 	line-height: 6.5rem;
->>>>>>> psps/seoyoon
 	text-align: center;
 	font-size: 1.8rem;
 	font-family: 'kr-r';
 	color: #221814;
-<<<<<<< HEAD
-	letter-spacing: -0.72px;
-	${(props) =>
-		props.active &&
-		`font-family:'kr-b'; border:3px solid #E50011; border-radius:4px;`}
-=======
 	padding: 0.3rem;
 	letter-spacing: -0.72px;
 	${(props) =>
 		props.active &&
 		`font-family:'kr-b'; border:3px solid #E50011; border-radius:4px; padding:0`}
->>>>>>> psps/seoyoon
 `;
 const SubPartWrap = styled.ul`
 	height: 2.6rem;
@@ -120,15 +91,6 @@ const SubPartWrap = styled.ul`
 	justify-content: center;
 	align-items: center;
 `;
-<<<<<<< HEAD
-const SubPartList = styled.li`
-	height: 2.6rem;
-	font-size: 1.8rem;
-	font-family: 'kr-r';
-	color: #000000;
-	padding: 0 0.5rem;
-	border-right: 1px solid #000;
-=======
 const SubPartListBox = styled.li`
 	display: flex;
 	align-items: center;
@@ -142,7 +104,6 @@ const SubPartList = styled.p`
 	color: #000000;
 	/* padding: 0 0.3rem; */
 	/* border-right: 1px solid #000; */
->>>>>>> psps/seoyoon
 	cursor: pointer;
 	&:nth-last-child(1) {
 		border: none;
@@ -150,8 +111,6 @@ const SubPartList = styled.p`
 	${(props) =>
 		props.active && `font-family:'kr-b' ; border-bottom:2px solid #E50011`}
 `;
-<<<<<<< HEAD
-=======
 const SubPartListLine = styled.div`
 	width: 0.1rem;
 	height: 1.3rem;
@@ -159,4 +118,3 @@ const SubPartListLine = styled.div`
 	margin: 0 1rem;
 	${(props) => props.last && `display:none`}
 `;
->>>>>>> psps/seoyoon

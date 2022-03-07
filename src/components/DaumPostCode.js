@@ -17,7 +17,9 @@ const DaumPost = (props, {}) => {
 			}
 			if (data.buildingName !== '') {
 				extraAddress +=
-					extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+					extraAddress !== ''
+						? `, ${data.buildingName}`
+						: data.buildingName;
 			}
 			fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
 		}
@@ -30,7 +32,7 @@ const DaumPost = (props, {}) => {
 	return (
 		<DaumPostCode
 			onComplete={handleComplete}
-			className="post-code"
+			className='post-code'
 			style={style}
 		/>
 	);

@@ -1,15 +1,5 @@
-<<<<<<< HEAD
-import React from 'react';
-
-const ServicePage = () => {
-	return <div id='container'>ServicePage</div>;
-};
-
-export default ServicePage;
-=======
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import logo from '../images/red-logo.svg';
 import backgroundA from '../images/background-A.svg';
 import backgroundQ from '../images/background-Q.svg';
@@ -36,9 +26,9 @@ const ServicePage = () => {
 	};
 
 	return (
-		<div id="container">
+		<div id='container'>
 			<Container>
-				<LogoImg alt="logo" src={logo} />
+				<LogoImg alt='logo' src={logo} />
 				<Title>자주 묻는 질문</Title>
 				<MenuBox>
 					{menuText.map((el, idx) => (
@@ -47,8 +37,7 @@ const ServicePage = () => {
 							onClick={() => {
 								clickMenu(el);
 							}}
-							select={selectMenu === el ? true : false}
-						>
+							select={selectMenu === el ? true : false}>
 							{el}
 						</Menu>
 					))}
@@ -60,8 +49,7 @@ const ServicePage = () => {
 								<QuestionBox
 									onClick={() => {
 										OpenAnswer(idx);
-									}}
-								>
+									}}>
 									<QnAText>질문질문질문 질문질문질문</QnAText>
 								</QuestionBox>
 								{answerOpen === idx && (
@@ -174,4 +162,3 @@ const QnAInfoText = styled.h2`
 	color: #221814;
 	margin: 10rem auto;
 `;
->>>>>>> psps/seoyoon

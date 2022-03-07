@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
-
+import { useHistory, useLocation } from 'react-router-dom';
+import { payment_request } from '../payments';
 import * as _user from '../controller/user';
-import UserData from '../components/PaymentPage/UserData';
-import ProductData from '../components/PaymentPage/ProductData';
+import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import Footer from '../components/Footer';
-
-import { payment_request } from '../payments';
-import { useHistory } from 'react-router-dom';
+import UserData from '../components/PaymentPage/UserData';
+import ProductData from '../components/PaymentPage/ProductData';
 
 const PaymentPage = () => {
 	const history = useHistory();
@@ -113,9 +110,9 @@ const PaymentPage = () => {
 	};
 
 	return (
-		<div id="container">
+		<div id='container'>
 			<Container>
-				<LogoImg alt="logo" src={logo} />
+				<LogoImg alt='logo' src={logo} />
 				<Title>주문하기</Title>
 				<UserData
 					user={user}

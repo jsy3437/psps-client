@@ -1,12 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import KR_Regular from '../fonts/Noto_Sans_KR_woff/NotoSansKR-Regular.woff';
-<<<<<<< HEAD
-import KR_Black from '../fonts/Noto_Sans_KR_woff/NotoSansKR-Black.woff';
-=======
 import KR_Black from '../fonts/Noto_Sans_KR_woff/NotoSansKR-Bold.woff';
 import Roboto_Black from '../fonts/Roboto_woff/Roboto-Bold.woff';
 import Roboto_Regular from '../fonts/Roboto_woff/Roboto-Regular.woff';
->>>>>>> psps/seoyoon
 
 const GlobalFonts = createGlobalStyle`
 	@font-face {
@@ -19,8 +15,6 @@ const GlobalFonts = createGlobalStyle`
 		src:local('kr-r'),
 		url(${KR_Regular}) format('woff')
 	}
-<<<<<<< HEAD
-=======
 	@font-face {
 		font-family:'ro-b';
 		src:local('ro-b'),
@@ -31,7 +25,6 @@ const GlobalFonts = createGlobalStyle`
 		src:local('ro-r'),
 		url(${Roboto_Regular}) format('woff')
 	}
->>>>>>> psps/seoyoon
 	
 `;
 export default GlobalFonts;

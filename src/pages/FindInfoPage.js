@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-=======
 import React, { useEffect, useState } from 'react';
 import { withRouter, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import * as _user from '../controller/user';
->>>>>>> psps/seoyoon
 import logo from '../images/red-logo.svg';
 import FindItemSelect from '../components/FindInfoPage/FindItemSelect';
 import FindId from '../components/FindInfoPage/FindIdInput';
@@ -16,32 +10,6 @@ import Footer from '../components/Footer';
 
 const FindInfoPage = () => {
 	const history = useHistory();
-<<<<<<< HEAD
-	const [item, setItem] = useState('아이디');
-
-	const goFindID = () => {
-		history.push('/find-result');
-	};
-	const goFindPW = () => {
-		alert('비밀번호 찾기로 이동');
-	};
-
-	// 기능 아직 없음
-
-	return (
-		<div id='container'>
-			<Container>
-				<FindInfoInside>
-					<LogoImg alt='logo' src={logo} />
-					<Title>품생품사 아이디/비밀번호 찾기</Title>
-					<FindItemSelect item={item} setItem={setItem} />
-					{item === '아이디' ? <FindId /> : <FindPw />}
-
-					{item === '아이디' ? (
-						<SubmitButton onClick={goFindID}>아이디 찾기</SubmitButton>
-					) : (
-						<SubmitButton onClick={goFindPW}>비밀번호 찾기</SubmitButton>
-=======
 	const location = useLocation().state;
 	const [item, setItem] = useState('아이디');
 	const [name, setName] = useState('');
@@ -119,10 +87,10 @@ const FindInfoPage = () => {
 	};
 
 	return (
-		<div id="container">
+		<div id='container'>
 			<Container>
 				<FindInfoInside>
-					<LogoImg alt="logo" src={logo} />
+					<LogoImg alt='logo' src={logo} />
 					<Title>품생품사 아이디/비밀번호 찾기</Title>
 					<FindItemSelect item={item} setItem={setItem} />
 					{item === '아이디' ? (
@@ -160,7 +128,6 @@ const FindInfoPage = () => {
 						<SubmitButton onClick={goFindPW} state={findPwState}>
 							비밀번호 찾기
 						</SubmitButton>
->>>>>>> psps/seoyoon
 					)}
 				</FindInfoInside>
 				<Footer />
@@ -203,18 +170,11 @@ const SubmitButton = styled.button`
 	margin-bottom: 4rem;
 	font-size: 2.4rem;
 	font-family: 'kr-r';
-<<<<<<< HEAD
-	color: #e50011;
-	background-color: #fff;
-	border: 1px solid #e50011;
-	border-radius: 4px;
-=======
 	color: #a0a0a0;
 	background-color: #fff;
 	border: 1px solid #a0a0a0;
 	border-radius: 4px;
 	${(props) => props.state && `border: 1px solid #e50011;color: #e50011;`}
->>>>>>> psps/seoyoon
 	&:hover {
 		background-color: #e50011;
 		color: #fff;

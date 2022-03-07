@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import styled from 'styled-components';
-import img from '../images/induce.png';
-
-const Induce = () => {
-	return (
-		<InduceContainer>
-			<InduceImg alt='' src={img} />
-=======
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import img from '../images/induce.png';
@@ -23,8 +13,7 @@ const Induce = () => {
 
 	return (
 		<InduceContainer>
-			<InduceImg alt="" src={img} onClick={goShopping} />
->>>>>>> psps/seoyoon
+			<InduceImg alt='' src={img} onClick={goShopping} />
 		</InduceContainer>
 	);
 };
@@ -41,8 +30,5 @@ const InduceImg = styled.img`
 	width: 120rem;
 	height: 25rem;
 	margin-top: 4rem;
-<<<<<<< HEAD
-=======
 	cursor: pointer;
->>>>>>> psps/seoyoon
 `;

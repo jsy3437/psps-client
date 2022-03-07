@@ -14,13 +14,8 @@ const FindItemSelect = (props) => {
 				<MainCategoryList
 					key={idx}
 					active={props.item === el}
-<<<<<<< HEAD
 					onClick={onChangeItem}>
-=======
-					onClick={onChangeItem}
-				>
->>>>>>> psps/seoyoon
-					{el}
+					onClick={onChangeItem}> >{el}
 				</MainCategoryList>
 			))}
 		</MainCategoryWrap>
@@ -49,15 +44,15 @@ const MainCategoryList = styled.li`
 	font-family: 'kr-r';
 	color: #221814;
 	letter-spacing: -0.72px;
-<<<<<<< HEAD
+
 	${(props) =>
 		props.active &&
 		`font-family:'kr-b'; border:3px solid #E50011;border-radius: 4px;`}
-=======
+
 	cursor: pointer;
 	${(props) =>
 		props.active &&
 		`font-family:'kr-b'; border:3px solid #E50011;border-radius: 4px;line-height: 6.3rem;
 `}
->>>>>>> psps/seoyoon
+	>
 `;

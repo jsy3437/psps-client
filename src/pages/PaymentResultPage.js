@@ -21,9 +21,9 @@ const PaymentResultPage = () => {
 	};
 
 	return (
-		<div id="container">
+		<div id='container'>
 			<Container>
-				<LogoImg alt="logo" src={logo} />
+				<LogoImg alt='logo' src={logo} />
 				<Title>주문하기</Title>
 				<OrderResultInfo>{orderInfoMsg}</OrderResultInfo>
 				<SubmitButton orderDetail onClick={goOrderDetail}>

@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import { IMG_ADDRESS } from '../../config';
 import * as _product from '../../controller/product';
-<<<<<<< HEAD
-=======
 import * as _banner from '../../controller/banner';
 
->>>>>>> psps/seoyoon
 import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
 
@@ -14,10 +11,7 @@ const RecommendList = () => {
 	const history = useHistory();
 	const titles = ['품생품사', '추천', '상품'];
 	const [list, setList] = useState([]);
-<<<<<<< HEAD
-=======
 	const [hover, setHover] = useState('');
->>>>>>> psps/seoyoon
 
 	useEffect(() => {
 		let isSubscribed = true;
@@ -34,18 +28,11 @@ const RecommendList = () => {
 	const goDetail = (product_id) => {
 		history.push(`/detail/${product_id}`);
 	};
-<<<<<<< HEAD
-
-	return (
-		<RecommendWrap>
-			<Logo alt='logo' src={logo} />
-=======
 	console.log(list);
 
 	return (
 		<RecommendWrap>
-			<Logo alt="logo" src={logo} />
->>>>>>> psps/seoyoon
+			<Logo alt='logo' src={logo} />
 			<BrownBackground />
 			<Titles>
 				{titles.map((el, idx) => (
@@ -57,27 +44,6 @@ const RecommendList = () => {
 			<Desc>{`품생품사에서 선별한\n특별한 상품들을 지금 바로 만나보세요!`}</Desc>
 			<Boundary />
 			<ListWrap>
-<<<<<<< HEAD
-				{list.map((el, idx) => (
-					<List key={idx}>
-						<ListImg
-							alt='product img'
-							src={`${IMG_ADDRESS}/${el.image}`}
-							onClick={() => {
-								goDetail(el.product_id);
-							}}
-						/>
-						<ListTitle
-							onClick={() => {
-								goDetail(el.product_id);
-							}}>
-							{el.title}
-						</ListTitle>
-						{/* 상품설명 */}
-						{/* <ListDesc>{el.desc}</ListDesc> */}
-					</List>
-				))}
-=======
 				{list &&
 					list.map((el, idx) => (
 						<List
@@ -90,11 +56,10 @@ const RecommendList = () => {
 							}}
 							onMouseLeave={() => {
 								setHover('');
-							}}
-						>
+							}}>
 							<ListImgBox>
 								<ListImg
-									alt="product img"
+									alt='product img'
 									src={`${IMG_ADDRESS}/${el.image}`}
 									hover={hover === idx}
 								/>
@@ -103,14 +68,15 @@ const RecommendList = () => {
 							{/* 상품설명 */}
 							<ListDescTotalPrice>
 								{el.discount !== 0 && (
-									<ListDesc>{el.price && el.price.toLocaleString()}원</ListDesc>
+									<ListDesc>
+										{el.price && el.price.toLocaleString()}원
+									</ListDesc>
 								)}
 								{el.total_price && el.total_price.toLocaleString()}
 								<DescWon>원</DescWon>
 							</ListDescTotalPrice>
 						</List>
 					))}
->>>>>>> psps/seoyoon
 			</ListWrap>
 		</RecommendWrap>
 	);
@@ -175,8 +141,6 @@ const List = styled.li`
 	width: 38rem;
 	height: 40rem;
 	margin-bottom: 5.9rem;
-<<<<<<< HEAD
-=======
 	cursor: pointer;
 `;
 const ListImgBox = styled.div`
@@ -184,16 +148,12 @@ const ListImgBox = styled.div`
 	height: 35rem;
 	overflow: hidden;
 	border-radius: 4px;
->>>>>>> psps/seoyoon
 `;
 const ListImg = styled.img`
 	width: 38rem;
 	height: 35rem;
-<<<<<<< HEAD
-=======
 	transition: all 300ms ease;
 	${(props) => props.hover && `transform:scale(1.1)`}
->>>>>>> psps/seoyoon
 `;
 const ListTitle = styled.h3`
 	height: 2.6rem;
@@ -202,16 +162,6 @@ const ListTitle = styled.h3`
 	font-family: 'kr-b';
 	letter-spacing: -0.72px;
 	color: #221814;
-<<<<<<< HEAD
-`;
-const ListDesc = styled.p`
-	height: 2rem;
-	line-height: 2rem;
-	font-size: 1.6rem;
-	font-family: 'kr-r';
-	letter-spacing: -0.32px;
-	color: #8e8e8e;
-=======
 	${(props) => props.hover && `text-decoration: underline;`}
 `;
 const ListDesc = styled.span`
@@ -233,5 +183,4 @@ const DescWon = styled.span`
 	font-family: 'kr-b';
 	font-size: 1.6rem;
 	margin-left: 0.2rem;
->>>>>>> psps/seoyoon
 `;

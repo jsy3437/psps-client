@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import Background1 from '../../images/main-banner1.png';
-
-const MainBanner = () => {
-	const Backgrounds = [Background1];
-	const [bannerList, setBannerList] = useState([]);
-
-	return (
-		<MainBannerWrap>
-			{Backgrounds.map((el, idx) => (
-				<MainBannerList key={idx}>
-					<MainBannerImg alt='banner img' src={el} />
-				</MainBannerList>
-			))}
-		</MainBannerWrap>
-=======
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import * as _banner from '../../controller/banner';
@@ -92,7 +74,7 @@ const MainBanner = () => {
 					bannerList.map((el, idx) => (
 						<MainBannerList key={idx}>
 							<MainBannerImg
-								alt="banner img"
+								alt='banner img'
 								src={`${IMG_ADDRESS}/${el.image}`}
 								onClick={() => {
 									goUrl(el);
@@ -103,10 +85,10 @@ const MainBanner = () => {
 				{bannerList.length > 1 && (
 					<BnnBtnBox>
 						<BnnScrollBtn onClick={onSlideLeft}>
-							<BtnImg alt="banner button" src={leftBtn} />
+							<BtnImg alt='banner button' src={leftBtn} />
 						</BnnScrollBtn>
 						<BnnScrollBtn onClick={onSlideRight}>
-							<BtnImg alt="banner button" src={rightBtn} />
+							<BtnImg alt='banner button' src={rightBtn} />
 						</BnnScrollBtn>
 					</BnnBtnBox>
 				)}
@@ -114,43 +96,29 @@ const MainBanner = () => {
 					<BnnInfoDotBox>
 						{bannerList &&
 							bannerList.map((el, idx) => (
-								<BnnInfoDot active={bnnNum === idx} key={idx}></BnnInfoDot>
+								<BnnInfoDot
+									active={bnnNum === idx}
+									key={idx}></BnnInfoDot>
 							))}
 					</BnnInfoDotBox>
 				)}
 			</MainBannerWrap>
 		</Container>
->>>>>>> psps/seoyoon
 	);
 };
 
 export default MainBanner;
 
-<<<<<<< HEAD
-=======
 const Container = styled.div`
 	width: 192rem;
 	margin-top: -2rem;
 	position: relative;
 `;
 
->>>>>>> psps/seoyoon
 const MainBannerWrap = styled.ul`
 	display: flex;
 	width: 192rem;
 	height: 85rem;
-<<<<<<< HEAD
-	z-index: -5;
-	/* overflow-x: hidden; */
-`;
-const MainBannerList = styled.li`
-	width: 100%;
-	height: 100%;
-`;
-const MainBannerImg = styled.img`
-	width: 100%;
-	height: 100%;
-=======
 	/* z-index: -5; */
 	overflow: hidden;
 	/* border: 5px solid green; */
@@ -212,5 +180,4 @@ const BnnInfoDot = styled.li`
 	${(props) =>
 		props.active &&
 		`background-color:#E50011; width:3.2rem; border-radius:10px;`}
->>>>>>> psps/seoyoon
 `;

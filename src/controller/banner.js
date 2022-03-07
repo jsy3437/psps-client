@@ -2,15 +2,9 @@ import axios from 'axios';
 import { ADDRESS } from '../config';
 
 const instance = axios.create({
-<<<<<<< HEAD
 	proxy: `${ADDRESS}`,
-	baseURL: '/deco',
-	// baseURL: `${ADDRESS}/deco`,
-=======
-	// proxy: `${ADDRESS}`,
-	// baseURL: '/banner',
-	baseURL: `${ADDRESS}/banner`,
->>>>>>> psps/seoyoon
+	baseURL: '/banner',
+	// baseURL: `${ADDRESS}/banner`,
 	withCredentials: true,
 });
 
@@ -20,9 +14,5 @@ const errorMessage = () => {
 };
 
 export const get_list = async (type) => {
-<<<<<<< HEAD
-	console.log('type', type);
-=======
->>>>>>> psps/seoyoon
 	return await instance.get(`/?type=${type}`).catch(errorMessage);
 };

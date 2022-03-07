@@ -1,14 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-<<<<<<< HEAD
-import { useHistory } from 'react-router-dom';
-import { regexp } from '../../data/regexp';
-import * as _user from '../../controller/user';
-import styled from 'styled-components';
-import logo from '../../images/red-logo.svg';
-// import axios from 'axios';
-
-const ThirdStep = (props) => {
-=======
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -19,29 +9,17 @@ import logo from '../../images/red-logo.svg';
 
 const ThirdStep = (props) => {
 	const dispatch = useDispatch();
->>>>>>> psps/seoyoon
 	const history = useHistory();
 	const nameInput = useRef();
 	const phoneNumberInput = useRef();
 	const confirmNumberInput = useRef();
-<<<<<<< HEAD
-=======
 	const [time, setTime] = useState(180);
 	const [sec, setSec] = useState(59);
 	const [min, setMin] = useState(2);
->>>>>>> psps/seoyoon
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [name, setName] = useState('');
 	const [phone_number, setPhone_number] = useState('');
-<<<<<<< HEAD
-	const [confirmSend, setConfirmSend] = useState(false);
-	const [confirm_number, setConfirm_number] = useState('');
-	const [check, setCheck] = useState({
-		name: true,
-		phone_number: true,
-		// confirm_number: true,
-=======
 	const [confirm, setConfirm] = useState(false);
 	const [getConfirmNum, setGetConfirmNum] = useState(false);
 	const [confirm_number, setConfirm_number] = useState('');
@@ -49,7 +27,6 @@ const ThirdStep = (props) => {
 		name: false,
 		phone_number: false,
 		confirm_number: false,
->>>>>>> psps/seoyoon
 	});
 	const [isSubmit, setIsSubmit] = useState(false);
 
@@ -62,28 +39,6 @@ const ThirdStep = (props) => {
 		// eslint-disable-next-line
 	}, []);
 
-<<<<<<< HEAD
-	const goBack = () => {
-		props.setStep(1);
-	};
-	const onChangeName = (e) => {
-		regexp.name.test(e.target.value)
-			? setCheck({ ...check, name: true })
-			: setCheck({ ...check, name: false });
-		return setName(e.target.value);
-	};
-	const onChangePhoneNumber = (e) => {
-		regexp.phone_number.test(e.target.value)
-			? setCheck({ ...check, phone_number: true })
-			: setCheck({ ...check, phone_number: false });
-		return setPhone_number(e.target.value);
-	};
-	const onChangeConfirm = (e) => {
-		// regexp.confirm_number.test.test(e.target.value)
-		// 	? setCheck({ ...check, confirm_number: true })
-		// 	: setCheck({ ...check, confirm_number: false });
-		return setConfirm_number(e.target.value);
-=======
 	useEffect(() => {
 		let interval;
 		if (getConfirmNum && time !== -1) {
@@ -131,26 +86,10 @@ const ThirdStep = (props) => {
 			}
 			return setConfirm_number(e.target.value);
 		}
->>>>>>> psps/seoyoon
 	};
 
 	const getConfirmNumber = () => {
 		if (phone_number.length === 11) {
-<<<<<<< HEAD
-			// 인증하기
-			alert('인증번호 1234');
-			setConfirmSend(true);
-		} else {
-			return alert('휴대폰 번호를 정확하게 입력해주세요.');
-		}
-	};
-	const checkConfirmNumber = () => {
-		if (confirmSend) {
-			// 인증번호와 입력된 값이 같을 경우
-			return alert('인증 확인되었습니다.');
-			// 아닐 경우
-			// return alert('인증번호를 확인해주세요.');
-=======
 			_user.send_sms({ phone_number }).then((res) => {
 				if (res.data.success) {
 					alert('인증번호가 발송되었습니다.');
@@ -181,34 +120,12 @@ const ThirdStep = (props) => {
 					}
 				});
 			}
->>>>>>> psps/seoyoon
 		}
 	};
 
 	const onSubmit = () => {
 		setIsSubmit(true);
 		if (!regexp.name.test(name)) {
-<<<<<<< HEAD
-			setCheck({ ...check, name: false });
-			alert('이름을 확인해주세요');
-			nameInput.current.focus();
-		} else if (!regexp.phone_number.test(phone_number)) {
-			setCheck({ ...check, phone_number: false });
-			alert('휴대폰번호를 확인해주세요');
-			phoneNumberInput.current.focus();
-		} else if (!confirmSend) {
-			alert('휴대전화 인증을 해주세요');
-		}
-		// else if(인증번호가 안맞으면){
-		// }
-		else {
-			const data = { email, password, name, phone_number };
-			_user.register(data).then((res) => {
-				console.log(res.data);
-				if (res.data.success) {
-					props.setStep(4);
-					history.push({ state: name });
-=======
 			setCheckLength({ ...checkLength, name: false });
 			alert('이름을 확인해주세요');
 			nameInput.current.focus();
@@ -233,7 +150,6 @@ const ThirdStep = (props) => {
 					history.push({ state: name });
 				} else {
 					alert('이미 가입되어 있는 휴대폰번호입니다');
->>>>>>> psps/seoyoon
 				}
 			});
 		}
@@ -242,52 +158,25 @@ const ThirdStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-<<<<<<< HEAD
 				<LogoImg alt='logo' src={logo} />
-				<Title>품생품사 회원가입-정보입력</Title>
-=======
-				<LogoImg alt="logo" src={logo} />
 				<Title>품생품사 회원가입 - 정보입력</Title>
->>>>>>> psps/seoyoon
 				<Items>
 					<ItemTitle>이름</ItemTitle>
 					<ItemInput
 						ref={nameInput}
-<<<<<<< HEAD
-						onChange={onChangeName}
+						onChange={changeName}
 						placeholder='이름을 입력해주세요'
 					/>
-					{isSubmit && !check.name && (
-=======
-						onChange={changeName}
-						placeholder="이름을 입력해주세요"
-					/>
 					{isSubmit && !checkLength.name && (
->>>>>>> psps/seoyoon
 						<InputError>{'이름을 확인해주세요'}</InputError>
 					)}
 				</Items>
 				<Items>
 					<ItemTitle>휴대폰번호</ItemTitle>
 					<ItemInput
-<<<<<<< HEAD
-						type='number'
+						type='text'
 						ref={phoneNumberInput}
-						onChange={onChangePhoneNumber}
-						placeholder="'-'을 제외한 휴대폰 번호를 입력해주세요."
-					/>
-					{isSubmit && !check.phone_number && (
-						<InputError>{'휴대폰번호를 확인해주세요'}</InputError>
-					)}
-					<CheckButton
-						active={phone_number.length === 11}
-						onClick={getConfirmNumber}>
-						인증하기
-					</CheckButton>
-=======
-						type="text"
-						ref={phoneNumberInput}
-						maxLength="11"
+						maxLength='11'
 						onChange={changePhoneNumber}
 						value={phone_number}
 						placeholder="'-'을 제외한 휴대폰 번호를 입력해주세요."
@@ -295,41 +184,13 @@ const ThirdStep = (props) => {
 					{isSubmit && !checkLength.phone_number && (
 						<InputError>{'휴대폰번호를 확인해주세요'}</InputError>
 					)}
->>>>>>> psps/seoyoon
 				</Items>
 				<Items>
 					<ItemTitle>인증번호</ItemTitle>
 					<ItemInput
-<<<<<<< HEAD
-						ref={confirmNumberInput}
-						onChange={onChangeConfirm}
-						placeholder='인증번호를 입력해주세요'
-					/>
-					{/* {isSubmit && !check.confirm_number && (
-						<InputError>{'인증번호를 확인해주세요'}</InputError>
-					)} */}
-					<CheckButton
-						send={confirmSend}
-						onClick={() => {
-							checkConfirmNumber(confirm_number);
-						}}>
-						인증확인
-					</CheckButton>
-				</Items>
-
-				<SubmitButton
-					enter
-					// onClick={goNext}
-					onClick={onSubmit}>
-					가입하기
-				</SubmitButton>
-				<SubmitButton back onClick={goBack}>
-					이전으로
-				</SubmitButton>
-=======
 						name={'confirmNum'}
-						type="text"
-						maxLength="6"
+						type='text'
+						maxLength='6'
 						ref={confirmNumberInput}
 						value={confirm_number}
 						onChange={changeConfirm}
@@ -347,15 +208,13 @@ const ThirdStep = (props) => {
 						}
 						onClick={() => {
 							checkConfirmNumber(confirm_number);
-						}}
-					>
+						}}>
 						인증확인
 					</CheckButton>
 					{!getConfirmNum && (
 						<CheckButton
 							active={phone_number.length === 11}
-							onClick={getConfirmNumber}
-						>
+							onClick={getConfirmNumber}>
 							인증번호 발송
 						</CheckButton>
 					)}
@@ -368,14 +227,12 @@ const ThirdStep = (props) => {
 						checkLength.confirm_number &&
 						confirm
 					}
-					onClick={onSubmit}
-				>
+					onClick={onSubmit}>
 					가입하기
 				</SubmitButton>
 				<BackButton back onClick={goBack}>
 					이전으로
 				</BackButton>
->>>>>>> psps/seoyoon
 			</RegisterInside>
 		</Container>
 	);
@@ -451,11 +308,7 @@ const InputError = styled.p`
 	color: #e50011;
 `;
 const CheckButton = styled.button`
-<<<<<<< HEAD
-	width: 6.7rem;
-=======
 	/* width: 6.7rem; */
->>>>>>> psps/seoyoon
 	height: 2.8rem;
 	font-size: 1.4rem;
 	font-family: 'kr-r';
@@ -466,12 +319,6 @@ const CheckButton = styled.button`
 	right: 12px;
 	border-radius: 4px;
 	border: 1px solid #c6c6c6;
-<<<<<<< HEAD
-	background-color: unset;
-	${(props) =>
-		(props.active || props.send) &&
-		`border: 2px solid #111a31;color:#111a31; cursor:pointer`}
-=======
 	background-color: #fff;
 	cursor: pointer !important;
 	${(props) =>
@@ -489,7 +336,6 @@ const BackButton = styled.button`
 	color: #e50011;
 	border: 1px solid #e50011;
 	margin-top: 1.2rem;
->>>>>>> psps/seoyoon
 `;
 const SubmitButton = styled.button`
 	width: 34.6rem;
@@ -499,16 +345,8 @@ const SubmitButton = styled.button`
 	font-size: 2.4rem;
 	font-family: 'kr-r';
 	border: none;
-<<<<<<< HEAD
-	${(props) =>
-		props.enter && `background-color:#E50011; color:#fff ; margin-top:2rem`}
-	${(props) =>
-		props.back &&
-		`background-color:#fff; color: #E50011; border: 1px solid #E50011; margin-top:1.2rem`};
-=======
 	color: #fff;
 	background-color: #a0a0a0;
 	margin-top: 2rem;
 	${(props) => props.enter && `background-color:#E50011; `};
->>>>>>> psps/seoyoon
 `;

@@ -1,24 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
-<<<<<<< HEAD
-import angle_down from '../../images/angle-down.svg';
-import increase from '../../images/count-plus.svg';
-import decrease from '../../images/count-minus.svg';
-
-const OrderBox = (props) => {
-	const [openOption, setOpenOption] = useState(false);
-	const [option, setOption] = useState(false);
-	const [count, setCount] = useState(1);
-
-	const onChangeOption = (option) => {
-		setOption(option);
-		setOpenOption(false);
-	};
-	const decreaseCount = () => {
-		count !== 1 && setCount(count - 1);
-	};
-=======
 import * as _basket from '../../controller/basket';
 import { cart_newData } from '../../modules/cart';
 import angle_down from '../../images/angle-down.svg';
@@ -48,25 +30,10 @@ const OrderBox = (props) => {
 		count !== 1 && setCount(count - 1);
 	};
 
->>>>>>> psps/seoyoon
 	const increaseCount = () => {
 		// 재고량과 비교
 		setCount(count + 1);
 	};
-<<<<<<< HEAD
-	useEffect(() => {
-		if (props.optionList) {
-			setOption(props.optionList[0]);
-		}
-	}, [props.optionList]);
-
-	return (
-		<BoxContainer>
-			<Box>
-				<BoxLeft>
-					<BoxLeftImg
-						alt='product img'
-=======
 
 	const onAddCart = () => {
 		if (!!!option) {
@@ -130,8 +97,7 @@ const OrderBox = (props) => {
 			<Box>
 				<BoxLeft>
 					<BoxLeftImg
-						alt="product img"
->>>>>>> psps/seoyoon
+						alt='product img'
 						src={
 							props.detail.temp_image &&
 							`${IMG_ADDRESS}/${props.detail.temp_image}`
@@ -140,14 +106,9 @@ const OrderBox = (props) => {
 				</BoxLeft>
 				<BoxRight>
 					<RightInside>
-<<<<<<< HEAD
-						<RightTitle>{props.detail && props.detail.title}</RightTitle>
-						<RightPrice>
-							{option && `${(option.price - option.discount) * count}원`}
-						</RightPrice>
-=======
 						<PartInfo>
-							{props.detail && `${props.detail.part} > ${props.detail.subPart}`}
+							{props.detail &&
+								`${props.detail.part} > ${props.detail.subPart}`}
 						</PartInfo>
 						<RightTitle>{props.detail && props.detail.title}</RightTitle>
 						<RightPriceBox>
@@ -155,13 +116,19 @@ const OrderBox = (props) => {
 								<RightExisting>
 									기존가
 									<RightExistingSpan>
-										{`${option && (option.price * count).toLocaleString()}원`}
+										{`${
+											option &&
+											(option.price * count).toLocaleString()
+										}원`}
 									</RightExistingSpan>
 								</RightExisting>
 							) : null}
 							<RightPrice>
 								{option &&
-									((option.price - option.discount) * count).toLocaleString()}
+									(
+										(option.price - option.discount) *
+										count
+									).toLocaleString()}
 								<RightPriceWon>원</RightPriceWon>
 							</RightPrice>
 						</RightPriceBox>
@@ -169,7 +136,6 @@ const OrderBox = (props) => {
 							배송비
 							<DeliveryPriceSpan>3,000</DeliveryPriceSpan>원
 						</RightDeliveryPrice>
->>>>>>> psps/seoyoon
 						{!openOption ? (
 							<RightOptionBox option>
 								{option && option.title}
@@ -178,14 +144,8 @@ const OrderBox = (props) => {
 									option
 									onClick={() => {
 										setOpenOption(!openOption);
-<<<<<<< HEAD
 									}}>
 									<RightButtonImg alt='' src={angle_down} />
-=======
-									}}
-								>
-									<RightButtonImg alt="" src={angle_down} />
->>>>>>> psps/seoyoon
 								</RightButton>
 							</RightOptionBox>
 						) : (
@@ -195,46 +155,20 @@ const OrderBox = (props) => {
 										key={idx}
 										onClick={() => {
 											onChangeOption(el);
-<<<<<<< HEAD
 										}}>
-=======
-										}}
-									>
->>>>>>> psps/seoyoon
 										{el.title}
 									</RightOptionList>
 								))}
 							</RightOptionListBox>
 						)}
-<<<<<<< HEAD
-
 						<RightOptionBox count>
 							<RightButton minus onClick={decreaseCount}>
 								<RightButtonImg alt='button' src={decrease} />
-=======
-						<RightOptionBox count>
-							<RightButton minus onClick={decreaseCount}>
-								<RightButtonImg alt="button" src={decrease} />
->>>>>>> psps/seoyoon
 							</RightButton>
 							{count}
 							<RightOptionTitle>수량</RightOptionTitle>
 							<RightButton plus onClick={increaseCount}>
-<<<<<<< HEAD
 								<RightButtonImg alt='button' src={increase} />
-							</RightButton>
-						</RightOptionBox>
-						<UnitPriceBox>
-							<UnitPriceLeft>
-								{option &&
-									`기준가 ${option.price - option.discount}원 (수량)`}
-							</UnitPriceLeft>
-							<UnitPriceRight>수량 당 단가</UnitPriceRight>
-						</UnitPriceBox>
-						<OrderButton>주문하기</OrderButton>
-						<PutOnCartButton>장바구니 담기</PutOnCartButton>
-=======
-								<RightButtonImg alt="button" src={increase} />
 							</RightButton>
 						</RightOptionBox>
 						<SubmitButton orderBtn onClick={goPayment}>{`${
@@ -244,7 +178,6 @@ const OrderBox = (props) => {
 						<SubmitButton cartBtn onClick={onAddCart}>
 							장바구니 담기
 						</SubmitButton>
->>>>>>> psps/seoyoon
 					</RightInside>
 				</BoxRight>
 			</Box>
@@ -291,15 +224,12 @@ const RightInside = styled.div`
 	width: 83.98058252427184%;
 	height: 86.59420289855072%;
 `;
-<<<<<<< HEAD
-=======
 const PartInfo = styled.p`
 	font-size: 1.2rem;
 	font-family: 'kr-b';
 	letter-spacing: -0.48px;
 	color: #e50011;
 `;
->>>>>>> psps/seoyoon
 const RightTitle = styled.p`
 	height: 6.5rem;
 	line-height: 3.25rem;
@@ -307,10 +237,6 @@ const RightTitle = styled.p`
 	font-family: 'kr-b';
 	color: #221814;
 `;
-<<<<<<< HEAD
-const RightPrice = styled.p`
-	margin-top: 2rem;
-=======
 const RightDeliveryPrice = styled.p`
 	margin-top: 1.1rem;
 	text-align: end;
@@ -331,21 +257,10 @@ const RightPriceBox = styled.div`
 `;
 const RightPrice = styled.p`
 	margin-top: 0.5rem;
->>>>>>> psps/seoyoon
 	height: 3.7rem;
 	line-height: 3.7rem;
 	text-align: right;
 	font-size: 3rem;
-<<<<<<< HEAD
-	font-family: 'kr-b';
-	color: #e50011;
-`;
-const RightOptionListBox = styled.ul`
-	position: absolute;
-	top: 16.3rem;
-	width: 34.6rem;
-	height: 18.6rem;
-=======
 	font-family: 'ro-b';
 	color: #e50011;
 `;
@@ -367,7 +282,6 @@ const RightOptionListBox = styled.ul`
 	top: 20.3rem;
 	width: 34.6rem;
 	max-height: 18.6rem;
->>>>>>> psps/seoyoon
 	display: flex;
 	flex-direction: column;
 	background: #ffffff;
@@ -376,12 +290,7 @@ const RightOptionListBox = styled.ul`
 	border-radius: 4px;
 	overflow-y: scroll;
 	z-index: 10;
-<<<<<<< HEAD
-	/* border: 1px solid blue; */
-	/* 리스트 갯수에 따라 */
-=======
 	transition: all 200ms ease;
->>>>>>> psps/seoyoon
 `;
 const RightOptionList = styled.li`
 	width: 100%;
@@ -391,10 +300,7 @@ const RightOptionList = styled.li`
 	font-size: 1.8rem;
 	font-family: 'kr-r';
 	color: #221814;
-<<<<<<< HEAD
-=======
 	cursor: pointer;
->>>>>>> psps/seoyoon
 	/* border: 1px solid blue; */
 	&:hover {
 		font-family: 'kr-b';
@@ -414,15 +320,9 @@ const RightOptionBox = styled.div`
 	border: 1px solid #c6c6c6;
 	border-radius: 4px;
 	text-align: center;
-<<<<<<< HEAD
-	${(props) => props.option && `position:absolute; top:15.3rem;  `}
-	${(props) => props.option && `margin-top:2rem;`} 
-	${(props) => props.count && `margin-top:10.4rem;`}
-=======
 	${(props) => props.option && `position:absolute; top:19.3rem;  `}
 	${(props) => props.option && `margin-top:2rem;`} 
 	${(props) => props.count && `margin-top:9.4rem;`}
->>>>>>> psps/seoyoon
 `;
 const RightOptionTitle = styled.p`
 	width: 3.2rem;
@@ -452,31 +352,7 @@ const RightButtonImg = styled.img`
 	height: 100%;
 	display: flex;
 `;
-<<<<<<< HEAD
-const UnitPriceBox = styled.div`
-	margin-top: 0.8rem;
-	margin-bottom: 2rem;
-	width: 100%;
-	height: 2.6rem;
-	line-height: 2.6rem;
-	display: flex;
-	justify-content: space-between;
-`;
-const UnitPriceLeft = styled.p`
-	font-size: 1.8rem;
-	font-family: 'kr-r';
-	color: #6b6462;
-`;
-const UnitPriceRight = styled.p`
-	font-size: 1.4rem;
-	font-family: 'kr-r';
-	color: #a0a0a0;
-`;
-const OrderButton = styled.button`
-	margin-bottom: 1.2rem;
-=======
 const SubmitButton = styled.button`
->>>>>>> psps/seoyoon
 	width: 34.6rem;
 	height: 6.2rem;
 	line-height: 6.2rem;
@@ -487,31 +363,11 @@ const SubmitButton = styled.button`
 	border: none;
 	background: #221814 0% 0% no-repeat padding-box;
 	border-radius: 4px;
-<<<<<<< HEAD
-	&:hover {
-		background-color: #e50011;
-	}
-`;
-const PutOnCartButton = styled.button`
-	width: 34.6rem;
-	height: 6.2rem;
-	line-height: 6.2rem;
-	font-size: 2.4rem;
-	font-family: 'kr-r';
-	color: #e50011;
-	letter-spacing: -0.96px;
-	border: none;
-	border: 1px solid var(--unnamed-color-e50011);
-	background: #ffffff 0% 0% no-repeat padding-box;
-	border: 1px solid #e50011;
-	border-radius: 4px;
-=======
 	transition: all 200ms ease;
 	${(props) =>
 		props.cartBtn &&
 		`background: #ffffff 0% 0% no-repeat padding-box;	color: #e50011;	border: 1px solid #e50011;`}
 	${(props) => props.orderBtn && `margin: 2.5rem auto 1.2rem;`}
->>>>>>> psps/seoyoon
 	&:hover {
 		background-color: #e50011;
 		color: #fff;

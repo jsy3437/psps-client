@@ -7,12 +7,9 @@ import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import NLogo from '../images/n-logo.svg';
 import KLogo from '../images/k-logo.svg';
-<<<<<<< HEAD
-=======
 import checkImg from '../images/check-box.svg';
 import uncheckImg from '../images/uncheck-box.svg';
 import Footer from '../components/Footer';
->>>>>>> psps/seoyoon
 
 const LoginPage = () => {
 	const dispatch = useDispatch();
@@ -53,17 +50,10 @@ const LoginPage = () => {
 	};
 
 	return (
-<<<<<<< HEAD
 		<div id='container'>
 			<Container>
 				<RegisterInside>
 					<LogoImg alt='logo' src={logo} />
-=======
-		<div id="container">
-			<Container>
-				<RegisterInside>
-					<LogoImg alt="logo" src={logo} />
->>>>>>> psps/seoyoon
 					<Title>품생품사 로그인</Title>
 					<Items>
 						<ItemTitle>이메일</ItemTitle>
@@ -76,31 +66,19 @@ const LoginPage = () => {
 					<Items last>
 						<ItemTitle>비밀번호</ItemTitle>
 						<ItemInput
-<<<<<<< HEAD
 							type='password'
-=======
-							type="password"
->>>>>>> psps/seoyoon
 							value={password ? password : ''}
 							onChange={onChangePassword}
 							placeholder={'비밀번호를 입력해주세요'}
 						/>
 					</Items>
-<<<<<<< HEAD
-
-					{/* 이메일, 비번 입력인데 아이디/비번찾기 괜찮은지 확인 후 수정 */}
 					<AgreeBox>
-						<AgreeRight onClick={goFindInfo}>아이디/비밀번호</AgreeRight>
-					</AgreeBox>
-					<SubmitButton onClick={onSubmit}>로그인</SubmitButton>
-					<EasyBox>
-=======
-					<AgreeBox>
-						<AgreeRight onClick={goFindInfo}>아이디/비밀번호 찾기</AgreeRight>
+						<AgreeRight onClick={goFindInfo}>
+							아이디/비밀번호 찾기
+						</AgreeRight>
 					</AgreeBox>
 					<SubmitButton onClick={onSubmit}>로그인</SubmitButton>
 					{/* <EasyBox>
->>>>>>> psps/seoyoon
 						<EasyLeft>
 							<EasyLeftText>SNS계정으로 간편하게 로그인</EasyLeftText>
 							<GoLoginBox>
@@ -110,17 +88,6 @@ const LoginPage = () => {
 						</EasyLeft>
 						<EasyRight>
 							<SocialLogoBox NLogo>
-<<<<<<< HEAD
-								<SocialLogo alt='icon' src={NLogo} />
-							</SocialLogoBox>
-							<SocialLogoBox KLogo>
-								<SocialLogo alt='icon' src={KLogo} />
-							</SocialLogoBox>
-						</EasyRight>
-					</EasyBox>
-				</RegisterInside>
-			</Container>
-=======
 								<SocialLogo alt="icon" src={NLogo} />
 							</SocialLogoBox>
 							<SocialLogoBox KLogo>
@@ -131,7 +98,6 @@ const LoginPage = () => {
 				</RegisterInside>
 			</Container>
 			<Footer />
->>>>>>> psps/seoyoon
 		</div>
 	);
 };
@@ -144,10 +110,7 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-<<<<<<< HEAD
-=======
 	margin-bottom: 9.2rem;
->>>>>>> psps/seoyoon
 `;
 const RegisterInside = styled.div`
 	display: flex;
@@ -204,9 +167,6 @@ const AgreeBox = styled.div`
 	height: 2rem;
 	display: flex;
 	align-items: center;
-<<<<<<< HEAD
-	justify-content: right;
-=======
 	justify-content: space-between;
 `;
 
@@ -223,7 +183,6 @@ const CheckImg = styled.img`
 	width: 1.6rem;
 	height: 1.6rem;
 	margin-right: 0.9rem;
->>>>>>> psps/seoyoon
 `;
 
 const AgreeRight = styled.div`
@@ -231,10 +190,7 @@ const AgreeRight = styled.div`
 	font-family: 'kr-r';
 	color: #6b6462;
 	text-decoration: underline;
-<<<<<<< HEAD
-=======
 	cursor: pointer;
->>>>>>> psps/seoyoon
 	&:hover {
 		color: #e50011;
 	}
@@ -251,10 +207,7 @@ const SubmitButton = styled.button`
 	background-color: #fff;
 	border: 1px solid #e50011;
 	border-radius: 4px;
-<<<<<<< HEAD
-=======
 	transition: all 200ms ease;
->>>>>>> psps/seoyoon
 	&:hover {
 		background-color: #e50011;
 		color: #fff;
@@ -281,14 +234,9 @@ const GoRegister = styled.p`
 	font-size: 1.6rem;
 	font-family: 'kr-r';
 	color: #6b6462;
-<<<<<<< HEAD
-	margin-left: 0.7rem;
-	text-decoration: underline;
-=======
 	margin-left: 1.3rem;
 	text-decoration: underline;
 	cursor: pointer;
->>>>>>> psps/seoyoon
 	&:hover {
 		color: #e50011;
 	}
@@ -312,8 +260,6 @@ const SocialLogoBox = styled.div`
 const SocialLogo = styled.img`
 	width: 3.6rem;
 	height: 3.6rem;
-<<<<<<< HEAD
-=======
 	cursor: pointer;
 `;
 const NonMemberInfo = styled.p`
@@ -329,5 +275,4 @@ const NonMemberInfo = styled.p`
 	&:hover {
 		color: #e50011;
 	}
->>>>>>> psps/seoyoon
 `;

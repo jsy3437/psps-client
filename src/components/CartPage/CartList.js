@@ -84,7 +84,7 @@ const CartList = (props) => {
 		<CartListWrap>
 			{props.supplierList &&
 				props.supplierList.map((supplier, id) => (
-					<SupplierBox key={id} wrap="true">
+					<SupplierBox key={id} wrap='true'>
 						<SupplierTitleAndCheckBox>
 							<SupplierTitleBox>
 								<SupplierTitle>판매자</SupplierTitle>
@@ -99,17 +99,17 @@ const CartList = (props) => {
 										clickCheck(el);
 									}}
 									src={CheckedTest(el) ? checkImg : uncheckImg}
-									alt="check image"
+									alt='check image'
 								/>
 								<ProductImg
-									alt="product image"
+									alt='product image'
 									src={`${IMG_ADDRESS}/${el.product_image}`}
 								/>
 								<InfoBox>
 									<ProductNameAndRemove>
 										<ProductName>{el.product_title}</ProductName>
 										<RoundBtn
-											alt="remove button"
+											alt='remove button'
 											src={exitBtn}
 											onClick={() => {
 												onRemove(el.basket_id);
@@ -120,18 +120,26 @@ const CartList = (props) => {
 									<CountAndPrice>
 										<CountBox>
 											<RoundBtn
-												alt="count button"
+												alt='count button'
 												src={minusBtn}
 												onClick={() => {
-													onCount('minus', el.quantity, el.basket_id);
+													onCount(
+														'minus',
+														el.quantity,
+														el.basket_id
+													);
 												}}
 											/>
 											<CountNum>{el.quantity}</CountNum>
 											<RoundBtn
-												alt="count button"
+												alt='count button'
 												src={plusBtn}
 												onClick={() => {
-													onCount('plus', el.quantity, el.basket_id);
+													onCount(
+														'plus',
+														el.quantity,
+														el.basket_id
+													);
 												}}
 											/>
 										</CountBox>

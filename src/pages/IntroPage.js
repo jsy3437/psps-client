@@ -2,28 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
-<<<<<<< HEAD
-import logo from '../images/red-logo.svg';
-import ex1 from '../images/ex1.png';
-
-const IntroPage = () => {
-	return (
-		<div id='container'>
-			<WhiteBackground style={{ height: '62.4rem' }} />
-			<ShadowUpBackground>
-				<TopImg alt='' src={ex1} />
-			</ShadowUpBackground>
-			<BlackBackground />
-			<ShadowDownBackground />
-			<WhiteBackground style={{ height: '178.9rem' }}>
-				<BottomText first>이를 위한 해결책이 되겠습니다.</BottomText>
-				<BottomText second>저희는 품질에 살고, 품질에 죽는</BottomText>
-				<BottomBox>
-					<BottomLogo alt='logo' src={logo} />
-					<BottomBigText>입니다</BottomBigText>
-				</BottomBox>
-			</WhiteBackground>
-=======
 import bnnTop from '../images/intro_bnn_top.png';
 import bnnBottom from '../images/intro_bnn_bottom.png';
 
@@ -67,9 +45,9 @@ const IntroPage = () => {
 		},
 	];
 	return (
-		<div id="container">
+		<div id='container'>
 			<Container>
-				<BackgroundImg alt="intro banner" src={bnnTop} />
+				<BackgroundImg alt='intro banner' src={bnnTop} />
 				<IntroTextBox top>
 					<IntroTextTitle>{intro[0].title}</IntroTextTitle>
 					<IntroText>{intro[0].text}</IntroText>
@@ -81,17 +59,17 @@ const IntroPage = () => {
 					<IntroTextPoint>{intro[1].point}</IntroTextPoint>
 				</IntroTextBox>
 				<IntroWorryBox top>
-					<WorryImg alt="worry image" src={intro[2].src} />
+					<WorryImg alt='worry image' src={intro[2].src} />
 					<IntroTextPoint>{intro[2].point}</IntroTextPoint>
 					<IntroText>{intro[2].text}</IntroText>
 				</IntroWorryBox>
 				<IntroWorryBox middle>
-					<WorryImg alt="worry image" src={intro[3].src} />
+					<WorryImg alt='worry image' src={intro[3].src} />
 					<IntroTextPoint>{intro[3].point}</IntroTextPoint>
 					<IntroText>{intro[3].text}</IntroText>
 				</IntroWorryBox>
 				<IntroWorryBox bottom>
-					<WorryImg alt="worry image" src={intro[4].src} />
+					<WorryImg alt='worry image' src={intro[4].src} />
 					<IntroTextPoint>{intro[4].point}</IntroTextPoint>
 					<IntroText>{intro[4].text}</IntroText>
 				</IntroWorryBox>
@@ -100,9 +78,8 @@ const IntroPage = () => {
 					<IntroText>{intro[5].text}</IntroText>
 					<IntroTextPoint>{intro[5].point}</IntroTextPoint>
 				</IntroTextBox>
-				<BackgroundImg alt="intro banner" src={bnnBottom} />
+				<BackgroundImg alt='intro banner' src={bnnBottom} />
 			</Container>
->>>>>>> psps/seoyoon
 			<Induce />
 			<Footer />
 		</div>
@@ -111,70 +88,6 @@ const IntroPage = () => {
 
 export default IntroPage;
 
-<<<<<<< HEAD
-const WhiteBackground = styled.div`
-	width: 100%;
-	background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-	background: #ffffff 0% 0% no-repeat padding-box;
-	opacity: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
-const BlackBackground = styled.div`
-	width: 100%;
-	height: 145.9rem;
-	background: #000000 0% 0% no-repeat padding-box;
-`;
-const ShadowUpBackground = styled.div`
-	width: 100%;
-	height: 72.1rem;
-	background: transparent linear-gradient(180deg, #ffffff00 0%, #000000 100%)
-		0% 0% no-repeat padding-box;
-	display: flex;
-	justify-content: center;
-	position: relative;
-`;
-const TopImg = styled.img`
-	width: 63rem;
-	height: 71.7rem;
-	position: absolute;
-	top: -25%;
-`;
-const ShadowDownBackground = styled.div`
-	width: 100%;
-	height: 72.1rem;
-	background: transparent linear-gradient(0deg, #ffffff00 0%, #000000 100%) 0%
-		0% no-repeat padding-box;
-	opacity: 1;
-`;
-const BottomText = styled.p`
-	height: 4.8rem;
-	line-height: 4.8rem;
-	font-size: 4rem;
-	font-family: 'kr-b';
-	color: #221814;
-	${(props) => props.first && `margin:5.5rem 0 39.2rem 0`}
-	${(props) => props.second && `margin-bottom:36.7rem`}
-`;
-const BottomBox = styled.div`
-	display: flex;
-	align-items: flex-end;
-	margin-bottom: 60.4rem;
-`;
-const BottomLogo = styled.img`
-	width: 41.2rem;
-	height: 41.2rem;
-`;
-const BottomBigText = styled.p`
-	margin-left: 4.7rem;
-	height: 11.7rem;
-	line-height: 11.7rem;
-	font-size: 9.8rem;
-	font-family: 'kr-b';
-	color: #221814;
-	letter-spacing: -3.92px;
-=======
 const Container = styled.div`
 	width: 192rem;
 	display: flex;
@@ -235,5 +148,4 @@ const WorryImg = styled.img`
 	width: 38rem;
 	height: 50.1rem;
 	margin-bottom: -9rem;
->>>>>>> psps/seoyoon
 `;

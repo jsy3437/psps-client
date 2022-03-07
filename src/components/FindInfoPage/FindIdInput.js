@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import styled from 'styled-components';
-
-const FindIdInput = () => {
-	const [name, setName] = useState('');
-	const [phone_number, setPhone_number] = useState('');
-
-	const onChangeName = (e) => {
-		setName(e.target.value);
-	};
-	const onChangePhoneNumber = (e) => {
-		setPhone_number(e.target.value);
-=======
 import React from 'react';
 import styled from 'styled-components';
 import { regexp } from '../../data/regexp';
@@ -30,10 +16,12 @@ const FindIdInput = (props) => {
 		} else {
 			regexp.phone_number.test(e.target.value)
 				? props.setCheckLength({ ...props.checkLength, phone_number: true })
-				: props.setCheckLength({ ...props.checkLength, phone_number: false });
+				: props.setCheckLength({
+						...props.checkLength,
+						phone_number: false,
+				  });
 			props.setPhone_number(e.target.value);
 		}
->>>>>>> psps/seoyoon
 	};
 
 	return (
@@ -41,11 +29,7 @@ const FindIdInput = (props) => {
 			<Items>
 				<ItemTitle>이름</ItemTitle>
 				<ItemInput
-<<<<<<< HEAD
-					value={name ? name : ''}
-=======
 					value={props.name ? props.name : ''}
->>>>>>> psps/seoyoon
 					placeholder={'이름을 입력해주세요.'}
 					onChange={onChangeName}
 				/>
@@ -53,14 +37,9 @@ const FindIdInput = (props) => {
 			<Items>
 				<ItemTitle>휴대폰번호</ItemTitle>
 				<ItemInput
-<<<<<<< HEAD
-					type='number'
-					value={phone_number ? phone_number : ''}
-=======
-					type="text"
+					type='text'
 					maxLength={11}
 					value={props.phone_number ? props.phone_number : ''}
->>>>>>> psps/seoyoon
 					placeholder={`'-'을 제외한 휴대폰 번호를 입력해주세요.`}
 					onChange={onChangePhoneNumber}
 				/>

@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import styled from 'styled-components';
-import Image1 from '../../images/sub-banner1.png';
-
-const SubBanner = () => {
-	const Images = [Image1];
-
-	return (
-		<SubBannerContainer>
-			<SubBannerWrap>
-				{Images.map((el, idx) => (
-					<SubBannerList key={idx}>
-						<SubBannerImg alt='sub_banner img' src={el} />
-					</SubBannerList>
-				))}
-=======
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import * as _banner from '../../controller/banner';
@@ -67,7 +50,7 @@ const SubBanner = () => {
 					bannerList.map((el, idx) => (
 						<SubBannerList key={idx}>
 							<SubBannerImg
-								alt="sub_banner img"
+								alt='sub_banner img'
 								src={`${IMG_ADDRESS}/${el.image}`}
 							/>
 						</SubBannerList>
@@ -76,11 +59,12 @@ const SubBanner = () => {
 					<BnnInfoDotBox>
 						{bannerList &&
 							bannerList.map((el, idx) => (
-								<BnnInfoDot active={bnnNum === idx} key={idx}></BnnInfoDot>
+								<BnnInfoDot
+									active={bnnNum === idx}
+									key={idx}></BnnInfoDot>
 							))}
 					</BnnInfoDotBox>
 				)}
->>>>>>> psps/seoyoon
 			</SubBannerWrap>
 		</SubBannerContainer>
 	);
@@ -89,34 +73,15 @@ const SubBanner = () => {
 export default SubBanner;
 
 const SubBannerContainer = styled.div`
-<<<<<<< HEAD
-	width: 192rem;
-	height: 56.6rem;
-	display: flex;
-	justify-content: center;
-=======
 	position: relative;
 	width: 192rem;
 	/* height: 56.6rem; */
 	margin-top: 1.8rem;
 	margin-bottom: 13.2rem;
->>>>>>> psps/seoyoon
 `;
 const SubBannerWrap = styled.ul`
 	width: 120rem;
 	height: 35rem;
-<<<<<<< HEAD
-	margin-bottom: 21.6rem;
-	/* overflow-x: hidden; */
-`;
-const SubBannerList = styled.li`
-	width: 100%;
-	height: 100%;
-`;
-const SubBannerImg = styled.img`
-	width: 100%;
-	height: 100%;
-=======
 	margin: 0 auto;
 	display: flex;
 	overflow-x: hidden;
@@ -147,5 +112,4 @@ const BnnInfoDot = styled.li`
 	${(props) =>
 		props.active &&
 		`background-color:#E50011; width:3.2rem; border-radius:10px;`}
->>>>>>> psps/seoyoon
 `;

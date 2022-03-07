@@ -1,72 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import styled from 'styled-components';
-import ex1 from '../../images/ex1.png';
-
-const OrderDetail = () => {
-	const receiverInfo = [
-		{ title: '받는분', contents: '최준영' },
-		{ title: '연락처', contents: '01050074116' },
-		{
-			title: '받는주소',
-			contents: '(15461)경기도 안산시 단원구 광덕서로 102 406-7호(고잔동)',
-		},
-		{ title: '배송요청사항', contents: '문 앞에 두고 문자 주세요.' },
-	];
-	const paymentInfo = [
-		{ title: '결제수단', contents: '비씨카드' },
-		{ title: '총 상품가격', contents: '7130원' },
-		{ title: '배송비', contents: '0원' },
-		{ title: '총 결제금액', contents: '7130원' },
-	];
-
-	return (
-		<OrderDetailWrap>
-			<Item first>
-				<TitleBox>
-					<Title>주문내역</Title>
-					<OrderNumber>{`주문번호 1300123123`}</OrderNumber>
-				</TitleBox>
-				<OrderInfo>
-					<ProductImg alt='product img' src={ex1} />
-					<OrderContents>
-						<OrderTop>
-							<OrderTopText date>{`2021.12.25 주문`}</OrderTopText>
-							<OrderTopText state>{`배송준비중`}</OrderTopText>
-						</OrderTop>
-						<ProductName>{`맛있고 품질 좋은 양배추같이 생긴 풀이파리`}</ProductName>
-						<ProductOption>{`무농약`}</ProductOption>
-						<ProductCount>{`7130원 / 5개`}</ProductCount>
-					</OrderContents>
-					<Buttons>
-						<Button>배송조회</Button>
-						<Button red>목록으로</Button>
-						<Button red>교환, 반품 신청</Button>
-					</Buttons>
-				</OrderInfo>
-			</Item>
-			<Item>
-				<Title>받는 분</Title>
-				<InfoWrap>
-					{receiverInfo.map((el, idx) => (
-						<InfoList key={idx}>
-							<InfoItem>{el.title}</InfoItem>
-							<InfoContents>{el.contents}</InfoContents>
-						</InfoList>
-					))}
-				</InfoWrap>
-			</Item>
-			<Item>
-				<Title>결제 정보</Title>
-				<InfoWrap>
-					{paymentInfo.map((el, idx) => (
-						<InfoList key={idx}>
-							<InfoItem>{el.title}</InfoItem>
-							<InfoContents>{el.contents}</InfoContents>
-						</InfoList>
-					))}
-				</InfoWrap>
-=======
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
@@ -266,18 +197,22 @@ const OrderDetail = (props) => {
 						{supplier[1].product.map((el, idx) => (
 							<OrderInfo key={idx}>
 								<CheckImg
-									alt="check image"
+									alt='check image'
 									src={testCheck(el) ? checkImg : uncheckImg}
 									onClick={() => {
 										clickCheck(el);
 									}}
 								/>
-								<ProductImg alt="product img" src={ex1} />
+								<ProductImg alt='product img' src={ex1} />
 								<OrderContents>
-									<OrderState state={el.process}>{el.process}</OrderState>
+									<OrderState state={el.process}>
+										{el.process}
+									</OrderState>
 
 									<ProductName>{el.name.split('|')[0]}</ProductName>
-									<ProductOption>{el.name.split('|')[1]}</ProductOption>
+									<ProductOption>
+										{el.name.split('|')[1]}
+									</ProductOption>
 									<ProductCount>{`${el.amount.toLocaleString()}원 / ${
 										el.quantity
 									}개`}</ProductCount>
@@ -285,11 +220,11 @@ const OrderDetail = (props) => {
 								<Buttons>
 									<Button
 										color={
-											el.process === '배송중' || el.process === '배송완료'
+											el.process === '배송중' ||
+											el.process === '배송완료'
 												? 'black'
 												: 'grey'
-										}
-									>
+										}>
 										배송조회
 									</Button>
 									<Button
@@ -303,9 +238,9 @@ const OrderDetail = (props) => {
 										}
 										onClick={(e) => {
 											goCheckedAndCancelOrExchange(el, e);
-										}}
-									>
-										{el.process === '입금 전' || el.process === '결제완료'
+										}}>
+										{el.process === '입금 전' ||
+										el.process === '결제완료'
 											? '취소하기'
 											: '교환 / 반품 / 환불'}
 									</Button>
@@ -318,13 +253,15 @@ const OrderDetail = (props) => {
 				<AllCheckingBox>
 					<CheckImg
 						allCheck
-						alt="all check image"
+						alt='all check image'
 						src={allChecked ? checkImg : uncheckImg}
 						onClick={ClickAllCheck}
 					/>
 					<AllCheckInfo>{`전체선택 ( ${checkedList.length} / ${detailProductList.length} )`}</AllCheckInfo>
 					<CancelBtn onClick={goCancelOrExchange}>취소하기</CancelBtn>
-					<CancelBtn onClick={goCancelOrExchange}>교환 / 반품 / 환불</CancelBtn>
+					<CancelBtn onClick={goCancelOrExchange}>
+						교환 / 반품 / 환불
+					</CancelBtn>
 				</AllCheckingBox>
 				<Title>받는 분</Title>
 				{detailPayment && (
@@ -383,12 +320,12 @@ const OrderDetail = (props) => {
 						<InfoList>
 							<InfoItem>{paymentInfo[3]}</InfoItem>
 							<InfoContents>
-								{detailPayment.amount && detailPayment.amount.toLocaleString()}
+								{detailPayment.amount &&
+									detailPayment.amount.toLocaleString()}
 							</InfoContents>
 						</InfoList>
 					</InfoWrap>
 				)}
->>>>>>> psps/seoyoon
 			</Item>
 			<Item>
 				<Title>결제영수증 정보</Title>
@@ -397,19 +334,6 @@ const OrderDetail = (props) => {
 						<InfoReceiptText>
 							해당 주문건에 대해 구매 카드영수증 확인이 가능합니다.
 						</InfoReceiptText>
-<<<<<<< HEAD
-						<InfoReceiptButton>카드영수증</InfoReceiptButton>
-					</InfoReceiptList>
-					<InfoReceiptList>
-						<InfoReceiptText>
-							해당 주문건에 대해 거래명세서 확인이 가능합니다.
-						</InfoReceiptText>
-						<InfoReceiptButton>거래명세서</InfoReceiptButton>
-					</InfoReceiptList>
-				</InfoWrap>
-			</Item>
-			<Button red>주문내역 삭제</Button>
-=======
 						<InfoReceiptButton onClick={goReceipt}>
 							카드영수증
 						</InfoReceiptButton>
@@ -417,7 +341,6 @@ const OrderDetail = (props) => {
 				</InfoWrap>
 			</Item>
 			<RemoveButton>주문내역 삭제</RemoveButton>
->>>>>>> psps/seoyoon
 		</OrderDetailWrap>
 	);
 };
@@ -426,18 +349,11 @@ export default OrderDetail;
 
 const OrderDetailWrap = styled.div`
 	width: 69.7rem;
-<<<<<<< HEAD
-	height: 100rem;
-=======
->>>>>>> psps/seoyoon
 	display: flex;
 	flex-direction: column;
 	position: relative;
 `;
-<<<<<<< HEAD
-=======
 
->>>>>>> psps/seoyoon
 const Item = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -448,10 +364,7 @@ const TitleBox = styled.div`
 	height: 2.6rem;
 	display: flex;
 	align-items: flex-end;
-<<<<<<< HEAD
-=======
 	justify-content: space-between;
->>>>>>> psps/seoyoon
 `;
 const Title = styled.p`
 	height: 2.6rem;
@@ -459,17 +372,6 @@ const Title = styled.p`
 	font-family: 'kr-b';
 	letter-spacing: -0.72px;
 	color: #000000;
-<<<<<<< HEAD
-`;
-const OrderNumber = styled.p`
-	margin-left: 2rem;
-	font-size: 1.4rem;
-	font-family: 'kr-r';
-	letter-spacing: -0.56px;
-	color: #000000;
-`;
-const OrderInfo = styled.div`
-=======
 	margin-bottom: 1.25rem;
 	${(props) => props.top && `margin-bottom:0`}
 `;
@@ -495,7 +397,6 @@ const SupplierSpan = styled.span`
 `;
 const OrderInfo = styled.div`
 	position: relative;
->>>>>>> psps/seoyoon
 	margin-bottom: 2rem;
 	width: 69.7rem;
 	height: 17.6rem;
@@ -516,21 +417,6 @@ const OrderContents = styled.div`
 	height: 100%;
 	padding: 2rem;
 `;
-<<<<<<< HEAD
-const OrderTop = styled.div`
-	height: 2.4rem;
-	display: flex;
-	align-items: center;
-	margin-bottom: 1.7rem;
-`;
-const OrderTopText = styled.p`
-	height: 2.4rem;
-	line-height: 2.4rem;
-	font-size: 1.6rem;
-	font-family: 'kr-b';
-	${(props) => props.date && `color:#221814;`}
-	${(props) => props.state && `color:#E50011; margin-left:2rem;`}
-=======
 
 const OrderState = styled.p`
 	height: 2.4rem;
@@ -545,16 +431,11 @@ const OrderState = styled.p`
 	${(props) => props.state === '배송완료' && `color: #163495;`}
 	${(props) => props.state === '취소완료' && `color: #8E8E8E;`}
 	${(props) => props.state === '환불완료' && `color: #8E8E8E;`}
->>>>>>> psps/seoyoon
 `;
 const ProductName = styled.p`
 	height: 4.2rem;
 	line-height: 2.1rem;
-<<<<<<< HEAD
-	margin-bottom: 1.7rem;
-=======
 	margin-bottom: 2rem;
->>>>>>> psps/seoyoon
 	font-size: 1.4rem;
 	font-family: 'kr-r';
 	color: #221814;
@@ -599,19 +480,6 @@ const Button = styled.button`
 	margin-top: 0.6rem;
 	border-radius: 4px;
 	border: none;
-<<<<<<< HEAD
-	background-color: unset;
-	${(props) =>
-		props.red
-			? `color:#E50011; border:1px solid #E50011;`
-			: `margin-top:0; color:#fff; background-color:#221814`}
-`;
-const InfoWrap = styled.ul`
-	width: 100%;
-	height: 13.7rem;
-	margin: 0;
-	padding: 0.85rem 0;
-=======
 	background-color: #fff;
 	color: #fff;
 	${(props) =>
@@ -630,7 +498,6 @@ const InfoWrap = styled.ul`
 	/* height: 13.7rem; */
 	margin: 0;
 	padding: 1.65rem 0;
->>>>>>> psps/seoyoon
 	border-top: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 `;
@@ -667,9 +534,6 @@ const InfoReceiptText = styled.p`
 const InfoReceiptButton = styled.button`
 	width: 8rem;
 	height: 2.7rem;
-<<<<<<< HEAD
-	line-height: 2.7rem;
-=======
 	line-height: 2.5rem;
 	font-size: 1.2rem;
 	font-family: 'kr-r';
@@ -704,15 +568,12 @@ const AllCheckInfo = styled.p`
 const CancelBtn = styled.button`
 	height: 2.7rem;
 	line-height: 2.5rem;
->>>>>>> psps/seoyoon
 	font-size: 1.2rem;
 	font-family: 'kr-r';
 	color: #8e8e8e;
 	background-color: unset;
 	border: 1px solid #8e8e8e;
 	border-radius: 4px;
-<<<<<<< HEAD
-=======
 	padding: 0 1.2rem;
 	margin-right: 0.8rem;
 `;
@@ -728,5 +589,4 @@ const RemoveButton = styled.button`
 	padding: 0.8rem 2.8rem;
 	margin-left: auto;
 	margin-bottom: -3.5rem;
->>>>>>> psps/seoyoon
 `;

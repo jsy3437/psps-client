@@ -1,38 +1,3 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import styled from 'styled-components';
-
-const FindPwInput = () => {
-	const [email, setEmail] = useState('');
-	const [phone_number, setPhone_number] = useState('');
-	const [confirmSend, setConfirmSend] = useState(false);
-	const [confirm_number, setConfirm_number] = useState('');
-
-	const emailController = (e) => {
-		setEmail(e.target.value);
-	};
-	const phoneNumberController = (e) => {
-		setPhone_number(e.target.value);
-	};
-	const getConfirmNumber = () => {
-		if (phone_number.length === 11) {
-			// 인증하기
-			alert('인증번호 1234');
-			setConfirmSend(true);
-		} else {
-			return alert('휴대폰 번호를 정확하게 입력해주세요.');
-		}
-	};
-	const confirmNumberController = (e) => {
-		setConfirm_number(e.target.value);
-	};
-	const checkConfirmNumber = () => {
-		if (confirmSend) {
-			// 인증번호와 입력된 값이 같을 경우
-			return alert('인증 확인되었습니다.');
-			// 아닐 경우
-			// return alert('인증번호를 확인해주세요.')
-=======
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { regexp } from '../../data/regexp';
@@ -70,7 +35,10 @@ const FindPwInput = (props) => {
 		} else {
 			regexp.phone_number.test(e.target.value)
 				? props.setCheckLength({ ...props.checkLength, phone_number: true })
-				: props.setCheckLength({ ...props.checkLength, phone_number: false });
+				: props.setCheckLength({
+						...props.checkLength,
+						phone_number: false,
+				  });
 			props.setPhone_number(e.target.value);
 			props.setConfirm(false);
 			props.setGetConfirmNum(false);
@@ -129,7 +97,6 @@ const FindPwInput = (props) => {
 					}
 				});
 			}
->>>>>>> psps/seoyoon
 		}
 	};
 
@@ -138,11 +105,7 @@ const FindPwInput = (props) => {
 			<Items>
 				<ItemTitle>이메일</ItemTitle>
 				<ItemInput
-<<<<<<< HEAD
-					value={email}
-=======
 					value={props.email}
->>>>>>> psps/seoyoon
 					placeholder={'이메일 주소를 입력해주세요.'}
 					onChange={emailController}
 				/>
@@ -150,46 +113,23 @@ const FindPwInput = (props) => {
 			<Items>
 				<ItemTitle>휴대폰번호</ItemTitle>
 				<ItemInput
-<<<<<<< HEAD
-					type='number'
-					value={phone_number}
-=======
-					type="text"
+					type='text'
 					maxLength={11}
 					value={props.phone_number}
->>>>>>> psps/seoyoon
 					placeholder={`'-'을 제외한 휴대폰 번호를 입력해주세요.`}
 					onChange={phoneNumberController}
 				/>
 				<CheckButton
-<<<<<<< HEAD
-					active={phone_number.length === 11}
-					onClick={getConfirmNumber}>
-=======
 					active={props.checkLength.phone_number}
-					onClick={getConfirmNumber}
-				>
->>>>>>> psps/seoyoon
+					onClick={getConfirmNumber}>
 					인증하기
 				</CheckButton>
 			</Items>
 			<Items>
 				<ItemTitle>인증번호</ItemTitle>
 				<ItemInput
-<<<<<<< HEAD
-					type='number'
-					value={confirm_number}
-					placeholder={'발송된 인증번호를 입력해주세요.'}
-					onChange={confirmNumberController}
-				/>
-				<CheckButton
-					active={confirmSend}
-					onClick={() => {
-						checkConfirmNumber(confirm_number);
-					}}>
-=======
 					ref={confirmEl}
-					type="text"
+					type='text'
 					maxLength={6}
 					value={props.confirmNum}
 					placeholder={
@@ -199,11 +139,11 @@ const FindPwInput = (props) => {
 				/>
 				<CheckButton
 					active={
-						props.getConfirmNum && props.checkLength.confirmNum && time > 0
+						props.getConfirmNum &&
+						props.checkLength.confirmNum &&
+						time > 0
 					}
-					onClick={checkConfirmNumber}
-				>
->>>>>>> psps/seoyoon
+					onClick={checkConfirmNumber}>
 					인증확인
 				</CheckButton>
 			</Items>

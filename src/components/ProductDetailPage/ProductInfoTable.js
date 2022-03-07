@@ -1,13 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-<<<<<<< HEAD
-
-const ProductInfoTable = () => {
-=======
 import * as info from '../../config';
 
 const ProductInfoTable = (props) => {
->>>>>>> psps/seoyoon
 	// 항목 수정 필요함. 협의 후 진행하기
 	const productInfoArr = [
 		'품목명',
@@ -33,31 +28,12 @@ const ProductInfoTable = (props) => {
 		'배송사',
 		'CJ대한통운',
 		'배송비',
-<<<<<<< HEAD
-		'무료배송∙도서산간 추가 배송비 - 제주, 도서산간 지역:',
-=======
 		'무료배송∙도서산간 추가 배송비 - 제주, 도서산간 지역',
->>>>>>> psps/seoyoon
 		'묶음배송 여부',
 		'가능',
 	];
 	const supplyInfoArr = [
 		'상호/대표자',
-<<<<<<< HEAD
-		'플라이삼육오(주)/강석봉',
-		'사업자번호',
-		'139-81-46152',
-		'e-mail',
-		'abx@gmail.com',
-		'연락처',
-		'010-1234-1234',
-		'사업장 소재지',
-		'서울특별시 강서구 공항대로 213 3층 302-12호',
-	];
-	const refundInfoArr = [
-		'- 신선식품이기 때문에 단순 소비자 단순 변심으로 인한 개인적인 사유로는 교환 및 환불이 불가합니다.',
-		' - 상품의 변질, 이물질 발견, 아이스박스 및 아이스팩이 파손되어 배송될 경우 고객센터(1234-1234)로 전화주시면 바로 교환/환불 해드리겠습니다. ',
-=======
 
 		'사업자번호',
 
@@ -70,45 +46,10 @@ const ProductInfoTable = (props) => {
 	const refundInfoArr = [
 		'- 식품의 경우 단순 소비자 단순 변심으로 인한 개인적인 사유로는 교환 및 환불이 불가합니다.',
 		`- 상품의 변질, 이물질 발견, 아이스박스 및 아이스팩이 파손되어 배송될 경우 마이페이지 결제내역을 통해 교환/환불 요청을 보낼 수 있으며,\n  고객센터(${info.COMPANY_CONTACT})로 전화주시면 바로 교환/환불 해드리겠습니다.`,
->>>>>>> psps/seoyoon
 		'- 고객센터 운영시간은 평일 오전 9시부터 오후 6시까지 입니다. (점심시간 : 오전 12시부터 오후 1시)',
 	];
 
 	return (
-<<<<<<< HEAD
-		<InfoTableWrap>
-			<Item>
-				<InfoTitle>상품 정보</InfoTitle>
-				<InfoTable>
-					{productInfoArr.map((el, idx) => (
-						<InfoList key={idx}>{el}</InfoList>
-					))}
-				</InfoTable>
-			</Item>
-			<Item>
-				<InfoTitle>배송 정보</InfoTitle>
-				<InfoTable>
-					{deliveryInfoArr.map((el, idx) => (
-						<InfoList key={idx}>{el}</InfoList>
-					))}
-				</InfoTable>
-			</Item>
-			<Item>
-				<InfoTitle>공급업체 정보</InfoTitle>
-				<InfoTable>
-					{supplyInfoArr.map((el, idx) => (
-						<InfoList key={idx}>{el}</InfoList>
-					))}
-				</InfoTable>
-			</Item>
-			<Item>
-				<InfoTitle>교환/환불 안내</InfoTitle>
-				<InfoTextBox>
-					{refundInfoArr.map((el, idx) => (
-						<InfoText key={idx}>{el}</InfoText>
-					))}
-				</InfoTextBox>
-=======
 		// 홀수개가 들어있는 table은 ItemBox를 하나더 넣으면 border가 생김
 		<InfoTableWrap ref={props.infoRef}>
 			<Item>
@@ -192,15 +133,21 @@ const ProductInfoTable = (props) => {
 					</InfoItemBox>
 					<InfoItemBox>
 						<InfoTitle>e-mail</InfoTitle>
-						<InfoText>{props.detail && props.detail.supplier_email}</InfoText>
+						<InfoText>
+							{props.detail && props.detail.supplier_email}
+						</InfoText>
 					</InfoItemBox>
 					<InfoItemBox>
 						<InfoTitle>연락처</InfoTitle>
-						<InfoText>{props.detail && props.detail.supplier_tel}</InfoText>
+						<InfoText>
+							{props.detail && props.detail.supplier_tel}
+						</InfoText>
 					</InfoItemBox>
 					<InfoItemBox>
 						<InfoTitle>사업장 소재지</InfoTitle>
-						<InfoText>{props.detail && props.detail.supplier_address}</InfoText>
+						<InfoText>
+							{props.detail && props.detail.supplier_address}
+						</InfoText>
 					</InfoItemBox>
 					<InfoItemBox></InfoItemBox>
 				</InfoTable>
@@ -214,7 +161,6 @@ const ProductInfoTable = (props) => {
 						</InfoText>
 					))}
 				</InfoItemBox>
->>>>>>> psps/seoyoon
 			</Item>
 		</InfoTableWrap>
 	);
@@ -230,25 +176,12 @@ const InfoTableWrap = styled.div`
 	align-items: center;
 `;
 const Item = styled.div``;
-<<<<<<< HEAD
-const InfoTitle = styled.p`
-=======
 const Title = styled.p`
->>>>>>> psps/seoyoon
 	height: 4rem;
 	line-height: 4rem;
 	font-size: 2.8rem;
 	font-family: 'kr-b';
 	color: #000000;
-<<<<<<< HEAD
-`;
-const InfoTable = styled.ul`
-	margin-bottom: 4.6rem;
-	width: 120rem;
-	border: 1px solid #e0e0e0;
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-=======
 	margin-bottom: 1.15rem;
 `;
 const InfoTable = styled.div`
@@ -284,7 +217,6 @@ const InfoText = styled.p`
 	max-width: 42rem;
 	${(props) =>
 		props.long && `padding:0; max-width:none; width:120rem; font-size:2rem`}
->>>>>>> psps/seoyoon
 `;
 const InfoList = styled.li`
 	width: 18rem;
@@ -312,16 +244,8 @@ const InfoTextBox = styled.div`
 	border-top: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 `;
-<<<<<<< HEAD
-const InfoText = styled.p`
-	font-size: 2rem;
-	font-family: 'kr-r';
-	color: #6b6462;
-`;
-=======
 // const InfoText = styled.p`
 // 	font-size: 2rem;
 // 	font-family: 'kr-r';
 // 	color: #6b6462;
 // `;
->>>>>>> psps/seoyoon
