@@ -30,8 +30,8 @@ const ChangeAddr = (props) => {
 			return alert('변경할 주소를 확인해주세요');
 		}
 		const data = {
-			del_addr: postAddr + '/' + postDetailAddr,
-			del_postcode: postZoneCode,
+			address: postAddr + '/' + postDetailAddr,
+			postcode: postZoneCode,
 		};
 
 		_user.change_address(data).then((res) => {
