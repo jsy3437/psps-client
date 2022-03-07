@@ -29,4 +29,10 @@ const ProductBannerTitle = styled.h1`
 	font-family: 'kr-b';
 	color: #fff;
 	position: absolute;
+	text-shadow: 0px 3px 6px #00000066;
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 `;
