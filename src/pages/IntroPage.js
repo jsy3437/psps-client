@@ -94,6 +94,11 @@ const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	margin-bottom: 5rem;
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 `;
 const BackgroundImg = styled.img`
 	width: 100%;
