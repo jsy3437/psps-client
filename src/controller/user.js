@@ -28,8 +28,8 @@ export const register = async (userData) => {
 export const get_me = async () => {
 	return await instance.get('/me').catch(errorMessage);
 };
-export const send_sms = async (smsData) => {
-	return await instance.post('/sms/send', smsData).catch(errorMessage);
+export const send_sms = async (userData) => {
+	return await instance.post('/sms/send', userData).catch(errorMessage);
 };
 export const check_sms = async (smsData) => {
 	return await instance.post('/sms/check', smsData).catch(errorMessage);
@@ -46,3 +46,9 @@ export const change_password = async (userData) => {
 export const change_address = async (userData) => {
 	return await instance.patch('/addr', userData).catch(errorMessage);
 };
+export const find_email = async (userData) => {
+	return await instance.post('/email', userData).catch(errorMessage);
+};
+// export const find_Pw = async (userData) => {
+// 	return await instance.post('/email', userData).catch(errorMessage);
+// };
