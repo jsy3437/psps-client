@@ -9,10 +9,12 @@ html {
 }
 body {
 	margin: 0;
+	overflow-x:hidden;
 }
 #root {
 	width: 100vw;
 	/* height: 100vh; */
+	
 }
 #App {
 	width:100%;
@@ -20,6 +22,7 @@ body {
 	display: flex;
 	flex-direction:column;
 	align-items:center;
+	
 }
 #container {
 	width: 100%;
