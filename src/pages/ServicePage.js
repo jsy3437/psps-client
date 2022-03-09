@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { COMPANY_CONTACT } from '../config';
+import * as _question from '../controller/question';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import backgroundA from '../images/background-A.svg';
@@ -7,8 +9,9 @@ import Footer from '../components/Footer';
 
 const ServicePage = () => {
 	const [answerOpen, setAnswerOpen] = useState('');
-	const [selectMenu, setSelectMenu] = useState('상품관련');
-	const menuText = [
+	const [list, setList] = useState([]);
+	const [type, setType] = useState(1);
+	const types = [
 		'상품관련',
 		'주문/결제',
 		'배송',
@@ -17,13 +20,16 @@ const ServicePage = () => {
 		'서비스이용',
 	];
 
-	const OpenAnswer = (idx) => {
-		setAnswerOpen(idx);
+	const callQuestion = () => {
+		document.location.href = `tel:${COMPANY_CONTACT}`;
 	};
 
-	const clickMenu = (el) => {
-		setSelectMenu(el);
-	};
+	useEffect(() => {
+		setAnswerOpen(false);
+		_question.get_list(type).then((res) => {
+			setList(res.data.question_list);
+		});
+	}, [type]);
 
 	return (
 		<div id='container'>
@@ -31,38 +37,39 @@ const ServicePage = () => {
 				<LogoImg alt='logo' src={logo} />
 				<Title>자주 묻는 질문</Title>
 				<MenuBox>
-					{menuText.map((el, idx) => (
+					{types.map((el, idx) => (
 						<Menu
 							key={idx}
+							select={type === idx + 1}
 							onClick={() => {
-								clickMenu(el);
-							}}
-							select={selectMenu === el ? true : false}>
+								setType(idx + 1);
+							}}>
 							{el}
 						</Menu>
 					))}
 				</MenuBox>
-				{menuText.length !== 0 ? (
+				{list.length !== 0 ? (
 					<QnABox>
-						{menuText.map((el, idx) => (
+						{list.map((el, idx) => (
 							<QnAList key={idx}>
 								<QuestionBox
 									onClick={() => {
-										OpenAnswer(idx);
+										setAnswerOpen(idx);
 									}}>
-									<QnAText>질문질문질문 질문질문질문</QnAText>
+									<QnAText>{el.qu_title}</QnAText>
 								</QuestionBox>
 								{answerOpen === idx && (
 									<AnswerBox>
-										<QnAText answer>답답답다받바답답답답</QnAText>
+										<QnAText answer>{el.qu_text}</QnAText>
 									</AnswerBox>
 								)}
 							</QnAList>
 						))}
 					</QnABox>
 				) : (
-					<QnAInfoText>자주 묻는 질문이 없습니다.</QnAInfoText>
+					<QnAInfoText>질문 내역이 없습니다.</QnAInfoText>
 				)}
+				<Button onClick={callQuestion}>문의하기</Button>
 			</Container>
 			<Footer />
 		</div>
@@ -132,27 +139,19 @@ const QuestionBox = styled.div`
 	padding: 3.7px auto;
 	border-bottom: 1px solid #e0e0e0;
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
-const AnswerBox = styled.div`
-	position: relative;
-	min-height: 10.3rem;
+const AnswerBox = styled(QuestionBox)`
 	background-image: url(${backgroundA});
-	background-size: 5rem 8rem;
-	background-position: center;
-	background-repeat: no-repeat;
-	transition: all 300ms ease;
-	/* padding: 3.7px auto; */
 `;
 const QnAText = styled.p`
-	position: absolute;
 	font-size: 1.8rem;
 	font-family: 'kr-b';
 	letter-spacing: -0.72px;
 	color: #221814;
 	text-align: center;
-	top: 40%;
-	left: 50%;
-	transform: translateX(-50%);
 	${(props) => props.answer && `color: #E50011;`}
 `;
 const QnAInfoText = styled.h2`
@@ -161,4 +160,16 @@ const QnAInfoText = styled.h2`
 	letter-spacing: -0.72px;
 	color: #221814;
 	margin: 10rem auto;
+`;
+
+const Button = styled.button`
+	width: 34.6rem;
+	height: 6.2rem;
+	font-size: 2.1rem;
+	font-family: 'kr-r';
+	color: #fff;
+	letter-spacing: -0.84px;
+	border: none;
+	border-radius: 4px;
+	background-color: #221814;
 `;
