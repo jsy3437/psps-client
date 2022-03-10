@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
 import { IMG_ADDRESS } from '../../config';
-
-import * as _basket from '../../controller/basket';
-
-import exitBtn from '../../images/exit_btn.svg';
-import plusBtn from '../../images/count-plus.svg';
-import minusBtn from '../../images/count-minus.svg';
-import checkImg from '../../images/check_btn.svg';
-import uncheckImg from '../../images/uncheck_btn.svg';
 import { cart_remove } from '../../modules/cart';
+import * as _basket from '../../controller/basket';
+import styled from 'styled-components';
+import exit_btn from '../../images/exit_btn.svg';
+import plus_btn from '../../images/count-plus.svg';
+import minus_btn from '../../images/count-minus.svg';
+import check_img from '../../images/check_btn.svg';
+import uncheck_img from '../../images/uncheck_btn.svg';
 
 const CartList = (props) => {
 	const dispatch = useDispatch();
@@ -98,7 +96,7 @@ const CartList = (props) => {
 									onClick={() => {
 										clickCheck(el);
 									}}
-									src={CheckedTest(el) ? checkImg : uncheckImg}
+									src={CheckedTest(el) ? check_img : uncheck_img}
 									alt='check image'
 								/>
 								<ProductImg
@@ -110,7 +108,7 @@ const CartList = (props) => {
 										<ProductName>{el.product_title}</ProductName>
 										<RoundBtn
 											alt='remove button'
-											src={exitBtn}
+											src={exit_btn}
 											onClick={() => {
 												onRemove(el.basket_id);
 											}}
@@ -121,7 +119,7 @@ const CartList = (props) => {
 										<CountBox>
 											<RoundBtn
 												alt='count button'
-												src={minusBtn}
+												src={minus_btn}
 												onClick={() => {
 													onCount(
 														'minus',
@@ -133,7 +131,7 @@ const CartList = (props) => {
 											<CountNum>{el.quantity}</CountNum>
 											<RoundBtn
 												alt='count button'
-												src={plusBtn}
+												src={plus_btn}
 												onClick={() => {
 													onCount(
 														'plus',

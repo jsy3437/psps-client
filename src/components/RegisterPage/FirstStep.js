@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { regexp } from '../../data/regexp';
-import styled from 'styled-components';
 import * as _user from '../../controller/user';
-
+import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
 import check_box from '../../images/check-box.svg';
 import uncheck_box from '../../images/uncheck-box.svg';
-import NLogo from '../../images/n-logo.svg';
-import KLogo from '../../images/k-logo.svg';
+import N_logo from '../../images/n-logo.svg';
+import K_logo from '../../images/k-logo.svg';
 
 const FirstStep = (props) => {
 	const history = useHistory();
@@ -167,10 +166,10 @@ const FirstStep = (props) => {
 					</EasyLeft>
 					<EasyRight>
 						<SocialLogoBox NLogo>
-							<SocialLogo alt='icon' src={NLogo} />
+							<SocialLogo alt='icon' src={N_logo} />
 						</SocialLogoBox>
 						<SocialLogoBox KLogo>
-							<SocialLogo alt='icon' src={KLogo} />
+							<SocialLogo alt='icon' src={K_logo} />
 						</SocialLogoBox>
 					</EasyRight>
 				</EasyBox>
@@ -179,7 +178,7 @@ const FirstStep = (props) => {
 	);
 };
 
-export default withRouter(FirstStep);
+export default FirstStep;
 
 const Container = styled.div`
 	width: 192rem;

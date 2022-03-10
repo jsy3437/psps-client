@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
+import check_img from '../../images/check_btn.svg';
+import uncheck_img from '../../images/uncheck_btn.svg';
 import DaumPostcode from '../DaumPostCode';
-import checkImg from '../../images/check_btn.svg';
-import uncheckImg from '../../images/uncheck_btn.svg';
 
 const UserData = (props) => {
 	const inputDetailAddr = useRef();
@@ -90,8 +90,8 @@ const UserData = (props) => {
 				<ReceiveUserTitleBox>
 					<Title receive>받으시는 분</Title>
 					<CheckImg
-						alt="check button"
-						src={props.checked ? checkImg : uncheckImg}
+						alt='check button'
+						src={props.checked ? check_img : uncheck_img}
 						onClick={onCheck}
 					/>
 					<CheckInfo>주문자 정보 가져오기</CheckInfo>
@@ -102,18 +102,16 @@ const UserData = (props) => {
 						<ReceiveUserInput
 							placeholder={receiveUserPlaceholder[0]}
 							value={props.del_name}
-							onChange={ChangeName}
-						></ReceiveUserInput>
+							onChange={ChangeName}></ReceiveUserInput>
 					</DataBox>
 					<DataBox>
 						<DataTitle>연락처</DataTitle>
 						<ReceiveUserInput
-							type="text"
-							maxLength="11"
+							type='text'
+							maxLength='11'
 							placeholder={receiveUserPlaceholder[1]}
 							onChange={ChangePhNumber}
-							value={props.del_tel}
-						></ReceiveUserInput>
+							value={props.del_tel}></ReceiveUserInput>
 					</DataBox>
 					<DataBox>
 						<DataTitle>배송지</DataTitle>
@@ -121,8 +119,7 @@ const UserData = (props) => {
 							<InputAndPostcode>
 								<ReceiveUserInput
 									value={props.postZoneCode && props.postZoneCode}
-									readOnly
-								></ReceiveUserInput>
+									readOnly></ReceiveUserInput>
 								<InputPostcodeBtn onClick={goDaumPostcode}>
 									우편번호 찾기
 								</InputPostcodeBtn>
@@ -131,20 +128,22 @@ const UserData = (props) => {
 								value={props.postAddr && props.postAddr}
 								long
 								destination
-								readOnly
-							></ReceiveUserInput>
+								readOnly></ReceiveUserInput>
 							<ReceiveUserInput
 								long
 								destination
 								ref={inputDetailAddr}
 								value={props.detailAddr}
-								placeholder={props.postAddr && '상세주소를 입력해주세요'}
-								onChange={changeDetailAddr}
-							></ReceiveUserInput>
+								placeholder={
+									props.postAddr && '상세주소를 입력해주세요'
+								}
+								onChange={changeDetailAddr}></ReceiveUserInput>
 							<PasteAddrCheckBox>
 								<CheckImg
-									alt="check button"
-									src={props.pasteAddrChecked ? checkImg : uncheckImg}
+									alt='check button'
+									src={
+										props.pasteAddrChecked ? check_img : uncheck_img
+									}
 									onClick={onPasteAddrCheck}
 								/>
 								<CheckInfo addr>기본 배송지로 저장</CheckInfo>
@@ -156,11 +155,10 @@ const UserData = (props) => {
 						<DataTitle>배송요청사항</DataTitle>
 						<ReceiveUserInput
 							long
-							type="text"
-							maxLength="25"
+							type='text'
+							maxLength='25'
 							placeholder={receiveUserPlaceholder[2]}
-							onChange={ChangeRequest}
-						></ReceiveUserInput>
+							onChange={ChangeRequest}></ReceiveUserInput>
 					</DataBox>
 				</BorderBox>
 			</ReceiveUserWrap>
@@ -173,7 +171,9 @@ const UserData = (props) => {
 							setPostAddr={props.setPostAddr}
 							inputDetailAddr={inputDetailAddr}
 						/>
-						<PostcodeCloseBtn onClick={onPostcodeClose}>닫기</PostcodeCloseBtn>
+						<PostcodeCloseBtn onClick={onPostcodeClose}>
+							닫기
+						</PostcodeCloseBtn>
 					</PostcodeBox>
 				</PostcodeModal>
 			)}

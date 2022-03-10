@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import { regexp } from '../../data/regexp';
 import * as _user from '../../controller/user';
+import styled from 'styled-components';
 
 const FindPwInput = (props) => {
 	const confirmEl = useRef();

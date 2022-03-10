@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import * as _banner from '../../controller/banner';
-import { IMG_ADDRESS } from '../../config';
-import leftBtn from '../../images/left_btn.svg';
-import rightBtn from '../../images/right_btn.svg';
 import { useHistory } from 'react-router-dom';
+import { IMG_ADDRESS } from '../../config';
+import * as _banner from '../../controller/banner';
+import styled from 'styled-components';
+import left_btn from '../../images/left_btn.svg';
+import right_btn from '../../images/right_btn.svg';
 
 const MainBanner = () => {
 	const history = useHistory();
@@ -85,10 +85,10 @@ const MainBanner = () => {
 				{bannerList.length > 1 && (
 					<BnnBtnBox>
 						<BnnScrollBtn onClick={onSlideLeft}>
-							<BtnImg alt='banner button' src={leftBtn} />
+							<BtnImg alt='banner button' src={left_btn} />
 						</BnnScrollBtn>
 						<BnnScrollBtn onClick={onSlideRight}>
-							<BtnImg alt='banner button' src={rightBtn} />
+							<BtnImg alt='banner button' src={right_btn} />
 						</BnnScrollBtn>
 					</BnnBtnBox>
 				)}

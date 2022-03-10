@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import * as _user from '../../controller/user';
-import ChangeAddr from './Change/ChangeAddr';
+import styled from 'styled-components';
 import ChangePw from './Change/ChangePw';
 import ChangeTel from './Change/ChangeTel';
+import ChangeAddr from './Change/ChangeAddr';
 
 const Privacy = () => {
 	const [user, setUser] = useState('');
@@ -21,18 +21,6 @@ const Privacy = () => {
 		});
 	}, [changeAddrState]);
 
-	const onChangePw = () => {
-		setChangePWState(true);
-	};
-
-	const onchangeTel = () => {
-		setChangeTelState(true);
-	};
-
-	const onChangeAddr = () => {
-		setChangeAddrState(true);
-	};
-
 	return (
 		<Container>
 			{!changePWState && (
@@ -43,21 +31,34 @@ const Privacy = () => {
 							<PrivacyTitle>이메일</PrivacyTitle>
 							<PrivacyText>{user.email}</PrivacyText>
 						</PrivacyItem>
+
 						<PrivacyItem>
 							<PrivacyTitle>비밀번호</PrivacyTitle>
-							<Button onClick={onChangePw}>변경하기</Button>
+							<Button
+								onClick={() => {
+									setChangePWState(true);
+								}}>
+								변경하기
+							</Button>
 						</PrivacyItem>
+
 						<PrivacyItem>
 							<PrivacyTitle>이름</PrivacyTitle>
 							<PrivacyText>{user.name}</PrivacyText>
 						</PrivacyItem>
+
 						<PrivacyItem>
 							<PrivacyTitle>휴대폰</PrivacyTitle>
 							<PrivacyText>{user.phone_number}</PrivacyText>
-							<Button tel onClick={onchangeTel}>
+							<Button
+								tel
+								onClick={() => {
+									setChangeTelState(true);
+								}}>
 								변경하기
 							</Button>
 						</PrivacyItem>
+
 						<PrivacyItem>
 							<PrivacyTitle>배송지</PrivacyTitle>
 							<PrivacyText>
@@ -66,7 +67,28 @@ const Privacy = () => {
 										user.address.split('/')[1]
 									}`}
 							</PrivacyText>
-							<Button addr={user.address} onClick={onChangeAddr}>
+							<Button
+								addr={user.address}
+								onClick={() => {
+									setChangeAddrState(true);
+								}}>
+								{user.address ? '수정하기' : '등록하기'}
+							</Button>
+						</PrivacyItem>
+
+						<PrivacyItem>
+							<PrivacyTitle>환불계좌</PrivacyTitle>
+							<PrivacyText>
+								{user.address &&
+									`(${user.postcode}) ${user.address.split('/')[0]} ${
+										user.address.split('/')[1]
+									}`}
+							</PrivacyText>
+							<Button
+								addr={user.address}
+								onClick={() => {
+									setChangeAddrState(true);
+								}}>
 								{user.address ? '수정하기' : '등록하기'}
 							</Button>
 						</PrivacyItem>

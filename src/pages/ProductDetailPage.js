@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { withRouter, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import * as _product from '../controller/product';
 import OrderBox from '../components/ProductDetailPage/OrderBox';
 import ProductDetail from '../components/ProductDetailPage/ProductDetail';
 import ProductInfoTable from '../components/ProductDetailPage/ProductInfoTable';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
-import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 
 const ProductDetailPage = () => {
 	const { pathname } = useLocation();
@@ -67,4 +66,4 @@ const ProductDetailPage = () => {
 	);
 };
 
-export default withRouter(ProductDetailPage);
+export default ProductDetailPage;

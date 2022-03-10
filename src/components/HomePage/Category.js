@@ -1,8 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-
 import { homeCategories } from '../../data/category_icon';
+import styled from 'styled-components';
 
 const Category = () => {
 	const history = useHistory();
@@ -24,8 +23,7 @@ const Category = () => {
 							key={idx}
 							onClick={() => {
 								onCategory(el.title);
-							}}
-						>
+							}}>
 							<IconImg alt={`${el.title} image`} src={el.src} />
 							<IconTitle>{el.title}</IconTitle>
 						</IconBox>

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import * as _product from '../controller/product';
 import * as _category from '../data/category';
+import styled from 'styled-components';
 import ProductBanner from '../components/ProductPage/ProductBanner';
 import ProductCategory from '../components/ProductPage/ProductCategory';
 import ProductList from '../components/ProductPage/ProductList';
@@ -9,7 +10,6 @@ import PageSelector from '../components/PageSelector';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
 import Spinner from '../components/Spinner';
-import styled from 'styled-components';
 
 const ProductPage = () => {
 	const location = useLocation();
@@ -21,9 +21,7 @@ const ProductPage = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		if (location.state) {
-			setPart(location.state);
-		}
+		location.state && setPart(location.state);
 	}, []);
 
 	useEffect(() => {

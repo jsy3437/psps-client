@@ -1,10 +1,8 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import Footer from '../components/Footer';
-
 import logo from '../images/red-logo.svg';
+import Footer from '../components/Footer';
 
 const PaymentResultPage = () => {
 	const history = useHistory();
@@ -38,7 +36,7 @@ const PaymentResultPage = () => {
 	);
 };
 
-export default withRouter(PaymentResultPage);
+export default PaymentResultPage;
 
 const Container = styled.div`
 	width: 54rem;

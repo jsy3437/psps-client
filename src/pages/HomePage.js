@@ -1,11 +1,10 @@
 import React from 'react';
 import MainBanner from '../components/HomePage/MainBanner';
 import SubBanner from '../components/HomePage/SubBanner';
+import Category from '../components/HomePage/Category';
 import RecommendList from '../components/HomePage/RecommendList';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
-import Category from '../components/HomePage/Category';
-import styled from 'styled-components';
 
 const HomePage = () => {
 	return (

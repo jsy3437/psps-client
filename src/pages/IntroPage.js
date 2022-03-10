@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import Induce from '../components/Induce';
-import Footer from '../components/Footer';
-import bnnTop from '../images/intro_bnn_top.png';
-import bnnBottom from '../images/intro_bnn_bottom.png';
-
+import bnn_top from '../images/intro_bnn_top.png';
+import bnn_bottom from '../images/intro_bnn_bottom.png';
 import cabbage from '../images/intro_cabbage.png';
 import dish from '../images/intro_dish.png';
 import egg from '../images/intro_egg.png';
 import watermelon from '../images/intro_watermelon.png';
+import Induce from '../components/Induce';
+import Footer from '../components/Footer';
 
 const IntroPage = () => {
 	const intro = [
@@ -47,7 +46,7 @@ const IntroPage = () => {
 	return (
 		<div id='container'>
 			<Container>
-				<BackgroundImg alt='intro banner' src={bnnTop} />
+				<BackgroundImg alt='intro banner' src={bnn_top} />
 				<IntroTextBox top>
 					<IntroTextTitle>{intro[0].title}</IntroTextTitle>
 					<IntroText>{intro[0].text}</IntroText>
@@ -78,7 +77,7 @@ const IntroPage = () => {
 					<IntroText>{intro[5].text}</IntroText>
 					<IntroTextPoint>{intro[5].point}</IntroTextPoint>
 				</IntroTextBox>
-				<BackgroundImg alt='intro banner' src={bnnBottom} />
+				<BackgroundImg alt='intro banner' src={bnn_bottom} />
 			</Container>
 			<Induce />
 			<Footer />

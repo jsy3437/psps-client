@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { withRouter, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import * as _user from '../controller/user';
 import logo from '../images/red-logo.svg';
@@ -136,7 +136,7 @@ const FindInfoPage = () => {
 	);
 };
 
-export default withRouter(FindInfoPage);
+export default FindInfoPage;
 
 const Container = styled.div`
 	width: 192rem;

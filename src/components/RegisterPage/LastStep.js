@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { withRouter, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
 
@@ -32,7 +32,7 @@ const LastStep = () => {
 	);
 };
 
-export default withRouter(LastStep);
+export default LastStep;
 
 const Container = styled.div`
 	width: 192rem;

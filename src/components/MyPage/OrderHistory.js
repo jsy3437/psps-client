@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
 import OrderDetail from './OrderDetail';
 import PageSelector from '../PageSelector';
-import * as _payment from '../../controller/payment';
 
 const OrderHistory = (props) => {
+	const total = props.paymentList.length;
 	const [page, setPage] = useState(1);
-	const [total, setTotal] = useState(props.paymentList.length);
 	const [viewDetail, setViewDetail] = useState(false);
 
 	const goDetail = (payment_id) => {

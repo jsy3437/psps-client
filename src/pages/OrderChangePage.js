@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import * as _payment from '../controller/payment';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import down from '../images/angle-down.svg';
-import * as _payment from '../controller/payment';
 
 const OrderChangePage = () => {
 	const history = useHistory();
@@ -180,12 +179,14 @@ const OrderChangePage = () => {
 	};
 
 	return (
-		<div id="container">
+		<div id='container'>
 			{location && (
 				<Container>
-					<LogoImg alt="logo image" src={logo} />
+					<LogoImg alt='logo image' src={logo} />
 					<Title>
-						{location.type === 'cancel' ? '주문 취소' : '교환 / 반품 신청'}
+						{location.type === 'cancel'
+							? '주문 취소'
+							: '교환 / 반품 신청'}
 					</Title>
 					{location.type !== 'cancel' && (
 						<Item>
@@ -193,7 +194,7 @@ const OrderChangePage = () => {
 							<InputAndMenuBox apply>
 								<InputBox onClick={openApplyMenu}>
 									<ColumnResult>{applySelect}</ColumnResult>
-									<ColumnBtn alt="down button" src={down} />
+									<ColumnBtn alt='down button' src={down} />
 								</InputBox>
 								{applyMenu ? (
 									<MenuBox>
@@ -202,8 +203,7 @@ const OrderChangePage = () => {
 												key={idx}
 												onClick={() => {
 													onApplyMenu(el);
-												}}
-											>
+												}}>
 												{el.kr}
 											</MenuItem>
 										))}
@@ -217,7 +217,7 @@ const OrderChangePage = () => {
 						<InputAndMenuBox>
 							<InputBox onClick={openClaimReasonMenu}>
 								<ColumnResult>{claimReason}</ColumnResult>
-								<ColumnBtn alt="down button" src={down} />
+								<ColumnBtn alt='down button' src={down} />
 							</InputBox>
 							{claimReasonMenu ? (
 								<MenuBox>
@@ -230,11 +230,10 @@ const OrderChangePage = () => {
 							) : null}
 						</InputAndMenuBox>
 						<TextArea
-							placeholder="내용을 입력해주세요."
+							placeholder='내용을 입력해주세요.'
 							readOnly={claimReason !== '직접 입력'}
 							onChange={changeClaimReasonText}
-							value={claimReasonText}
-						></TextArea>
+							value={claimReasonText}></TextArea>
 						<AlertTextBox>
 							{check.reasonText === false && (
 								<AlertText>신청 사유를 입력해주세요.</AlertText>
@@ -248,7 +247,7 @@ const OrderChangePage = () => {
 								<InputAndMenuBox bank>
 									<InputBox bank onClick={openBankMenu}>
 										<ColumnResult>{bank}</ColumnResult>
-										<ColumnBtn bank alt="down button" src={down} />
+										<ColumnBtn bank alt='down button' src={down} />
 									</InputBox>
 									{bankMenu ? (
 										<MenuBox>
@@ -261,10 +260,10 @@ const OrderChangePage = () => {
 									) : null}
 								</InputAndMenuBox>
 								<Input
-									type="text"
-									maxLength="20"
+									type='text'
+									maxLength='20'
 									account
-									placeholder="‘ - ‘를 제외한 계좌번호를 입력해주세요."
+									placeholder='‘ - ‘를 제외한 계좌번호를 입력해주세요.'
 									onChange={changeAccount}
 									value={account}
 								/>
@@ -280,9 +279,9 @@ const OrderChangePage = () => {
 
 							<AccountHolder>예금주</AccountHolder>
 							<Input
-								type="text"
-								maxLength="30"
-								placeholder="예금주를 입력해주세요."
+								type='text'
+								maxLength='30'
+								placeholder='예금주를 입력해주세요.'
 								onChange={changeAccountHolder}
 								value={accountHolder}
 							/>
@@ -308,7 +307,7 @@ const OrderChangePage = () => {
 	);
 };
 
-export default withRouter(OrderChangePage);
+export default OrderChangePage;
 
 const Container = styled.div`
 	width: 51.9rem;

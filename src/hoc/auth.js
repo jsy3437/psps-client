@@ -2,11 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { user_login, user_logout } from '../modules/user';
 import * as _user from '../controller/user';
-import { useHistory } from 'react-router-dom';
 
 export default function Auth(SpecificComponent, option, adminRoute = null) {
 	const dispatch = useDispatch();
-	const history = useHistory();
 
 	function AuthenticationCheck() {
 		useEffect(() => {
@@ -15,7 +13,6 @@ export default function Auth(SpecificComponent, option, adminRoute = null) {
 				.then((res) => {
 					let isAuth = false;
 					const { success, name } = res.data;
-
 					if (success) {
 						isAuth = true;
 						dispatch(user_login(name));

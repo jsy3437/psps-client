@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
-
-import styled from 'styled-components';
-import * as _user from '../../../controller/user';
 import { regexp } from '../../../data/regexp';
+import * as _user from '../../../controller/user';
+import styled from 'styled-components';
 
 const ChangePw = (props) => {
 	const passwordInput = useRef();
@@ -68,16 +67,16 @@ const ChangePw = (props) => {
 			<Items>
 				<ItemTitle>현재 비밀번호</ItemTitle>
 				<ItemInput
-					type="password"
-					placeholder="현재 비밀번호를 입력해주세요"
+					type='password'
+					placeholder='현재 비밀번호를 입력해주세요'
 					onChange={changePassword}
 				/>
 			</Items>
 			<Items>
 				<ItemTitle>변경할 비밀번호</ItemTitle>
 				<ItemInput
-					type="password"
-					placeholder="비밀번호를 입력해주세요."
+					type='password'
+					placeholder='비밀번호를 입력해주세요.'
 					onChange={changeNewPassword}
 					ref={passwordInput}
 				/>
@@ -85,8 +84,8 @@ const ChangePw = (props) => {
 			<Items>
 				<ItemTitle>비밀번호 확인</ItemTitle>
 				<ItemInput
-					type="password"
-					placeholder="비밀번호를 확인해주세요."
+					type='password'
+					placeholder='비밀번호를 확인해주세요.'
 					onChange={changeConfirmPassword}
 					ref={passwordConfirmInput}
 				/>

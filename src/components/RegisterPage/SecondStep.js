@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { terms } from '../../data/terms';
 import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
-import { termsArr } from '../../data/terms';
 
 const SecondStep = (props) => {
-	const arr = termsArr;
+	const arr = terms;
 	const history = useHistory();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');

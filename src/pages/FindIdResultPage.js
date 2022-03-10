@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { withRouter, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import Footer from '../components/Footer';
@@ -62,7 +62,7 @@ const FindIdResultPage = () => {
 	);
 };
 
-export default withRouter(FindIdResultPage);
+export default FindIdResultPage;
 
 const Container = styled.div`
 	width: 192rem;

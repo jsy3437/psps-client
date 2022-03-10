@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import * as info from '../../config';
-import equalImg from '../../images/equal-ico.svg';
-import plusImg from '../../images/plus-ico.svg';
+import styled from 'styled-components';
+import equal_img from '../../images/equal-ico.svg';
+import plus_img from '../../images/plus-ico.svg';
 
 const ProductData = (props) => {
 	const PaymentAndDeliveryInfo = `- 신선식품이기 때문에 단순 소비자 단순 변심으로 인한 개인적인 사유로는 교환 및 환불이 불가합니다.\n- 상품의 변질, 이물질 발견, 아이스박스 및 아이스팩이 파손되어 배송될 경우 고객센터(${info.COMPANY_CONTACT})로 전화주시면 \b\b바로 교환/환불 해드리겠습니다.\n- 고객센터 운영시간은 평일 오전 9시부터 오후 6시까지 입니다. (점심시간 : 오전 12시부터 오후 1시)`;
@@ -14,21 +14,24 @@ const ProductData = (props) => {
 				props.orderCalc.map((supplierList, id) => (
 					<MapBox key={id}>
 						<SupplierTitleBox>
-							판매자<SupplierName>{supplierList.supplier_name}</SupplierName>
+							판매자
+							<SupplierName>{supplierList.supplier_name}</SupplierName>
 						</SupplierTitleBox>
 
 						{supplierList.checked_product_list.map((el, idx) => (
 							<BorderBox key={idx}>
-								<ProductText title="true">
+								<ProductText title='true'>
 									{el.product_title}, {el.product_option_title}
 								</ProductText>
 								<ProductText quantity>수량 {el.quantity}개</ProductText>
-								<ProductText price>{el.total.toLocaleString()}원</ProductText>
+								<ProductText price>
+									{el.total.toLocaleString()}원
+								</ProductText>
 							</BorderBox>
 						))}
 						{supplierList.delivery_price !== 0 && (
 							<BorderBox>
-								<ProductText title="true">배송비</ProductText>
+								<ProductText title='true'>배송비</ProductText>
 								<ProductText price>
 									{supplierList.delivery_price.toLocaleString()}원
 								</ProductText>
@@ -38,14 +41,16 @@ const ProductData = (props) => {
 				))}
 			<TotalPriceBox>
 				<PriceTitle>총 상품 금액</PriceTitle>
-				<PriceText>{props.amount && props.amount.toLocaleString()}원</PriceText>
-				<PlusImg alt="plus sign" src={plusImg} />
+				<PriceText>
+					{props.amount && props.amount.toLocaleString()}원
+				</PriceText>
+				<PlusImg alt='plus sign' src={plus_img} />
 				<PriceTitle>배송비</PriceTitle>
 				{/* TODO 배송비 기준 정해서 구현하기 */}
 				<PriceText>
 					{props.delivery_price && props.delivery_price.toLocaleString()}원
 				</PriceText>
-				<PlusImg alt="equal sign" src={equalImg} />
+				<PlusImg alt='equal sign' src={equal_img} />
 				<PaymentPrice>
 					{props.amount && props.delivery_price
 						? (props.amount + props.delivery_price).toLocaleString()

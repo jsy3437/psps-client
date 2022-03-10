@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import img from '../images/induce.png';
-import * as _banner from '../controller/banner';
-import { useHistory } from 'react-router-dom';
 
 const Induce = () => {
 	const history = useHistory();

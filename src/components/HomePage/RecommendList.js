@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { IMG_ADDRESS } from '../../config';
 import * as _product from '../../controller/product';
-import * as _banner from '../../controller/banner';
-
 import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
 
@@ -82,7 +80,7 @@ const RecommendList = () => {
 	);
 };
 
-export default withRouter(RecommendList);
+export default RecommendList;
 
 const RecommendWrap = styled.div`
 	width: 192rem;

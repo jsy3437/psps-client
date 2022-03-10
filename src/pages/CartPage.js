@@ -1,19 +1,16 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-
-import * as _basket from '../controller/basket';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { cart_remove } from '../modules/cart';
-
+import * as _basket from '../controller/basket';
+import styled from 'styled-components';
+import logo from '../images/red-logo.svg';
+import check_img from '../images/check_btn.svg';
+import uncheck_img from '../images/uncheck_btn.svg';
 import CartList from '../components/CartPage/CartList';
 import OrderBox from '../components/CartPage/OrderBox';
-import logo from '../images/red-logo.svg';
-import checkImg from '../images/check_btn.svg';
-import uncheckImg from '../images/uncheck_btn.svg';
-import Footer from '../components/Footer';
-import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '../components/Spinner';
-import { useHistory } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 const CartPage = () => {
 	const history = useHistory();
@@ -141,9 +138,9 @@ const CartPage = () => {
 	return isLoading ? (
 		<Spinner />
 	) : (
-		<div id="container">
+		<div id='container'>
 			<Container>
-				<LogoImg alt="logo" src={logo} />
+				<LogoImg alt='logo' src={logo} />
 				<Title>{user.name}님의 장바구니</Title>
 				{cartCount > 0 ? (
 					<CartContentWrap>
@@ -183,8 +180,8 @@ const CartPage = () => {
 				{cartCount > 0 && (
 					<AllCheckAndRemove>
 						<AllCheckImg
-							alt="all check img"
-							src={allChecked ? checkImg : uncheckImg}
+							alt='all check img'
+							src={allChecked ? check_img : uncheck_img}
 							onClick={onAllCheck}
 						/>
 						<AllCheckText>

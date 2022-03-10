@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
+import * as _user from '../../../controller/user';
 import styled from 'styled-components';
 import Postcode from '../../DaumPostCode';
-import * as _user from '../../../controller/user';
 
 const ChangeAddr = (props) => {
 	const inputDetailAddr = useRef();
@@ -58,7 +58,9 @@ const ChangeAddr = (props) => {
 					<PostcodeBtn onClick={onPostcode}>우편번호 찾기</PostcodeBtn>
 				</PostcodeBox>
 				<AddrInput
-					placeholder={props.user.address && props.user.address.split('/')[0]}
+					placeholder={
+						props.user.address && props.user.address.split('/')[0]
+					}
 					value={postAddr}
 					readOnly
 				/>
@@ -87,7 +89,9 @@ const ChangeAddr = (props) => {
 							setPostAddr={setPostAddr}
 							inputDetailAddr={inputDetailAddr}
 						/>
-						<PostcodeCloseBtn onClick={onPostcodeClose}>닫기</PostcodeCloseBtn>
+						<PostcodeCloseBtn onClick={onPostcodeClose}>
+							닫기
+						</PostcodeCloseBtn>
 					</PostcodeWrap>
 				</PostcodeModal>
 			)}

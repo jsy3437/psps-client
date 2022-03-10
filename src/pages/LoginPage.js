@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { user_login } from '../modules/user';
 import * as _user from '../controller/user';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
-import NLogo from '../images/n-logo.svg';
-import KLogo from '../images/k-logo.svg';
-import checkImg from '../images/check-box.svg';
-import uncheckImg from '../images/uncheck-box.svg';
+// import N_logo from '../images/n-logo.svg';
+// import K_logo from '../images/k-logo.svg';
 import Footer from '../components/Footer';
 
 const LoginPage = () => {
@@ -26,9 +24,9 @@ const LoginPage = () => {
 	const goFindInfo = () => {
 		history.push('/find-info');
 	};
-	const goRegister = () => {
-		history.push('/register');
-	};
+	// const goRegister = () => {
+	// 	history.push('/register');
+	// };
 
 	const onSubmit = () => {
 		if (email.length === 0) {
@@ -72,11 +70,9 @@ const LoginPage = () => {
 							placeholder={'비밀번호를 입력해주세요'}
 						/>
 					</Items>
-					<AgreeBox>
-						<AgreeRight onClick={goFindInfo}>
-							아이디/비밀번호 찾기
-						</AgreeRight>
-					</AgreeBox>
+					<FindBox>
+						<FindText onClick={goFindInfo}>아이디/비밀번호 찾기</FindText>
+					</FindBox>
 					<SubmitButton onClick={onSubmit}>로그인</SubmitButton>
 					{/* <EasyBox>
 						<EasyLeft>
@@ -88,10 +84,10 @@ const LoginPage = () => {
 						</EasyLeft>
 						<EasyRight>
 							<SocialLogoBox NLogo>
-								<SocialLogo alt="icon" src={NLogo} />
+								<SocialLogo alt="icon" src={N_logo} />
 							</SocialLogoBox>
 							<SocialLogoBox KLogo>
-								<SocialLogo alt="icon" src={KLogo} />
+								<SocialLogo alt="icon" src={K_logo} />
 							</SocialLogoBox>
 						</EasyRight>
 					</EasyBox> */}
@@ -102,7 +98,7 @@ const LoginPage = () => {
 	);
 };
 
-export default withRouter(LoginPage);
+export default LoginPage;
 
 const Container = styled.div`
 	width: 192rem;
@@ -162,30 +158,14 @@ const ItemInput = styled.input`
 		box-shadow: 2px 6px 15px #00000029;
 	}
 `;
-const AgreeBox = styled.div`
+const FindBox = styled.div`
 	width: 34.6rem;
 	height: 2rem;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
 `;
-
-const AgreeLeft = styled.div`
-	font-size: 1.4rem;
-	font-family: 'kr-b';
-	letter-spacing: -0.56px;
-	color: #6b6462;
-	display: flex;
-	align-items: center;
-	cursor: pointer;
-`;
-const CheckImg = styled.img`
-	width: 1.6rem;
-	height: 1.6rem;
-	margin-right: 0.9rem;
-`;
-
-const AgreeRight = styled.div`
+const FindText = styled.div`
 	font-size: 1.4rem;
 	font-family: 'kr-r';
 	color: #6b6462;
@@ -213,66 +193,67 @@ const SubmitButton = styled.button`
 		color: #fff;
 	}
 `;
-const EasyBox = styled.div`
-	width: 100%;
-	height: 5.2rem;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`;
-const EasyLeft = styled.div``;
-const EasyLeftText = styled.p`
-	font-size: 1.6rem;
-	font-family: 'kr-b';
-	color: #221814;
-`;
-const GoLoginBox = styled.div`
-	display: flex;
-	align-items: center;
-`;
-const GoRegister = styled.p`
-	font-size: 1.6rem;
-	font-family: 'kr-r';
-	color: #6b6462;
-	margin-left: 1.3rem;
-	text-decoration: underline;
-	cursor: pointer;
-	&:hover {
-		color: #e50011;
-	}
-`;
-const EasyRight = styled.div`
-	display: flex;
-	align-items: center;
-`;
-const SocialLogoBox = styled.div`
-	width: 5.2rem;
-	height: 5.2rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 4px;
-	${(props) =>
-		props.NLogo
-			? `background-color:#50AA34`
-			: `background-color: #FFE733; margin-left:0.8rem;`}
-`;
-const SocialLogo = styled.img`
-	width: 3.6rem;
-	height: 3.6rem;
-	cursor: pointer;
-`;
-const NonMemberInfo = styled.p`
-	width: 100%;
-	text-decoration: underline;
-	text-align: end;
-	letter-spacing: -0.56px;
-	color: #6b6462;
-	font-size: 1.4rem;
-	font-family: 'kr-r';
-	margin-top: 2rem;
-	cursor: pointer;
-	&:hover {
-		color: #e50011;
-	}
-`;
+
+// const EasyBox = styled.div`
+// 	width: 100%;
+// 	height: 5.2rem;
+// 	display: flex;
+// 	justify-content: space-between;
+// 	align-items: center;
+// `;
+// const EasyLeft = styled.div``;
+// const EasyLeftText = styled.p`
+// 	font-size: 1.6rem;
+// 	font-family: 'kr-b';
+// 	color: #221814;
+// `;
+// const GoLoginBox = styled.div`
+// 	display: flex;
+// 	align-items: center;
+// `;
+// const GoRegister = styled.p`
+// 	font-size: 1.6rem;
+// 	font-family: 'kr-r';
+// 	color: #6b6462;
+// 	margin-left: 1.3rem;
+// 	text-decoration: underline;
+// 	cursor: pointer;
+// 	&:hover {
+// 		color: #e50011;
+// 	}
+// `;
+// const EasyRight = styled.div`
+// 	display: flex;
+// 	align-items: center;
+// `;
+// const SocialLogoBox = styled.div`
+// 	width: 5.2rem;
+// 	height: 5.2rem;
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// 	border-radius: 4px;
+// 	${(props) =>
+// 		props.NLogo
+// 			? `background-color:#50AA34`
+// 			: `background-color: #FFE733; margin-left:0.8rem;`}
+// `;
+// const SocialLogo = styled.img`
+// 	width: 3.6rem;
+// 	height: 3.6rem;
+// 	cursor: pointer;
+// `;
+// const NonMemberInfo = styled.p`
+// 	width: 100%;
+// 	text-decoration: underline;
+// 	text-align: end;
+// 	letter-spacing: -0.56px;
+// 	color: #6b6462;
+// 	font-size: 1.4rem;
+// 	font-family: 'kr-r';
+// 	margin-top: 2rem;
+// 	cursor: pointer;
+// 	&:hover {
+// 		color: #e50011;
+// 	}
+// `;

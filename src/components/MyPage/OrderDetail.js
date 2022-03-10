@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import * as _payment from '../../controller/payment';
 import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
-import * as _payment from '../../controller/payment';
-import checkImg from '../../images/check_btn.svg';
-import uncheckImg from '../../images/uncheck_btn.svg';
-import { useHistory } from 'react-router-dom';
+import check_img from '../../images/check_btn.svg';
+import uncheck_img from '../../images/uncheck_btn.svg';
 
 const OrderDetail = (props) => {
 	const history = useHistory();
@@ -198,7 +198,7 @@ const OrderDetail = (props) => {
 							<OrderInfo key={idx}>
 								<CheckImg
 									alt='check image'
-									src={testCheck(el) ? checkImg : uncheckImg}
+									src={testCheck(el) ? check_img : uncheck_img}
 									onClick={() => {
 										clickCheck(el);
 									}}
@@ -254,7 +254,7 @@ const OrderDetail = (props) => {
 					<CheckImg
 						allCheck
 						alt='all check image'
-						src={allChecked ? checkImg : uncheckImg}
+						src={allChecked ? check_img : uncheck_img}
 						onClick={ClickAllCheck}
 					/>
 					<AllCheckInfo>{`전체선택 ( ${checkedList.length} / ${detailProductList.length} )`}</AllCheckInfo>

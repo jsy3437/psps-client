@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styled from 'styled-components';
 import * as _banner from '../../controller/banner';
 import { IMG_ADDRESS } from '../../config';
+import styled from 'styled-components';
 
 const SubBanner = () => {
 	const bannerBox = useRef();

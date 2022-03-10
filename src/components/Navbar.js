@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { user_logout } from '../modules/user';
 import { logout } from '../controller/user';
@@ -8,9 +8,9 @@ import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 
 const Navbar = () => {
-	const cart = useSelector((state) => state.cart);
-	const dispatch = useDispatch();
 	const history = useHistory();
+	const dispatch = useDispatch();
+	const cart = useSelector((state) => state.cart);
 	const user = useSelector((state) => state.user);
 	const [cartCount, setCartCount] = useState('');
 
@@ -96,7 +96,7 @@ const Navbar = () => {
 	);
 };
 
-export default withRouter(Navbar);
+export default Navbar;
 
 const NavbarWrap = styled.div`
 	width: 100%;

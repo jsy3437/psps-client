@@ -3,8 +3,8 @@ import { COMPANY_CONTACT } from '../config';
 import * as _question from '../controller/question';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
-import backgroundA from '../images/background-A.svg';
-import backgroundQ from '../images/background-Q.svg';
+import background_A from '../images/background-A.svg';
+import background_Q from '../images/background-Q.svg';
 import Footer from '../components/Footer';
 
 const ServicePage = () => {
@@ -132,7 +132,7 @@ const QnAList = styled.li`
 const QuestionBox = styled.div`
 	position: relative;
 	min-height: 10.3rem;
-	background-image: url(${backgroundQ});
+	background-image: url(${background_Q});
 	background-size: 5rem 8rem;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -144,7 +144,7 @@ const QuestionBox = styled.div`
 	align-items: center;
 `;
 const AnswerBox = styled(QuestionBox)`
-	background-image: url(${backgroundA});
+	background-image: url(${background_A});
 `;
 const QnAText = styled.p`
 	font-size: 1.8rem;

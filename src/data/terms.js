@@ -1,6 +1,4 @@
-import * as info from '../config';
-
-export const termsArr = [
+export const terms = [
 	{
 		title: '품생품사 서비스 약관동의',
 		contents: `제1조(목적) 

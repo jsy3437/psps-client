@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import * as _payment from '../controller/payment';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import MenuSelect from '../components/MyPage/MenuSelect';
 import OrderHistory from '../components/MyPage/OrderHistory';
-import Footer from '../components/Footer';
-import * as _payment from '../controller/payment';
-import { useLocation } from 'react-router-dom';
 import Privacy from '../components/MyPage/Privacy';
+import Footer from '../components/Footer';
 
 const MyPagePage = () => {
 	const location = useLocation();

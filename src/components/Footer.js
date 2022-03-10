@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-
-import logo from '../images/red-logo.svg';
+import { terms } from '../data/terms';
 import * as info from '../config';
-import { termsArr } from '../data/terms';
+import styled from 'styled-components';
+import logo from '../images/red-logo.svg';
 
 const Footer = () => {
 	const history = useHistory();
-	const arr = termsArr;
 	const [openHeadLeft, setOpenHeadLeft] = useState(false);
 	const headLeft = ['이용약관', '개인정보처리방침'];
 	const headRight = ['자주묻는질문'];
@@ -94,18 +92,18 @@ const Footer = () => {
 				</FooterBodyInside>
 			</FooterBody>
 
-			{openHeadLeft !== false && (
+			{openHeadLeft && (
 				<InfoModalWrap onClick={onInfoModalClose}>
-					{arr.map((el, idx) => {
-						if (idx === openHeadLeft) {
-							return (
-								<InfoBox key={idx}>
-									<InfoTitle>{el.title}</InfoTitle>
-									<InfoText>{el.contents}</InfoText>
-								</InfoBox>
-							);
-						}
-					})}
+					<InfoBox>
+						<InfoTitle>
+							{openHeadLeft === 0 ? terms[0].title : terms[1].title}
+						</InfoTitle>
+						<InfoText>
+							{openHeadLeft === 0
+								? terms[0].contents
+								: terms[1].contents}
+						</InfoText>
+					</InfoBox>
 				</InfoModalWrap>
 			)}
 		</FooterWrap>

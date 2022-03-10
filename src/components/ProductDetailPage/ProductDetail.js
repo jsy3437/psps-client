@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
 
@@ -20,6 +20,7 @@ const ProductDetail = (props) => {
 			case arr[2]:
 				refEl = props.infoRef.current;
 				break;
+			default:
 		}
 		return refEl.scrollIntoView({
 			behavior: 'smooth',

@@ -3,19 +3,18 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { user_logout } from './modules/user';
 import Auth from './hoc/auth';
-
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import MyPagePage from './pages/MyPagePage';
 import RegisterPage from './pages/RegisterPage';
 import FindInfoPage from './pages/FindInfoPage';
 import FindIdResultPage from './pages/FindIdResultPage';
-import MyPagePage from './pages/MyPagePage';
-import ServicePage from './pages/ServicePage';
-import ProductPage from './pages/ProductPage';
-import IntroPage from './pages/IntroPage';
-import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
+import IntroPage from './pages/IntroPage';
+import ProductPage from './pages/ProductPage';
+import ServicePage from './pages/ServicePage';
+import ProductDetailPage from './pages/ProductDetailPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentResultPage from './pages/PaymentResultPage';
 import OrderChangePage from './pages/OrderChangePage';
@@ -25,6 +24,8 @@ const App = () => {
 	window.addEventListener('unload', () => {
 		dispatch(user_logout());
 	});
+
+	console.log('-----');
 
 	return (
 		<Router>

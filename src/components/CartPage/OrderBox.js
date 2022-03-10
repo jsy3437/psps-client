@@ -2,8 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import * as _user from '../../controller/user';
-
 const OrderBox = (props) => {
 	const history = useHistory();
 	const orderCalc = props.orderCalc;
@@ -38,7 +36,9 @@ const OrderBox = (props) => {
 						<TitleAndPrice>
 							<PriceTitle>총 상품 금액</PriceTitle>
 							<Price color={'#e50011'}>
-								{orderCalc[idx] && orderCalc[idx].total.toLocaleString()}원
+								{orderCalc[idx] &&
+									orderCalc[idx].total.toLocaleString()}
+								원
 							</Price>
 						</TitleAndPrice>
 						<TitleAndPrice>

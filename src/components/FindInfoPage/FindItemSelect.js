@@ -15,7 +15,7 @@ const FindItemSelect = (props) => {
 					key={idx}
 					active={props.item === el}
 					onClick={onChangeItem}>
-					onClick={onChangeItem}> >{el}
+					{el}
 				</MainCategoryList>
 			))}
 		</MainCategoryWrap>
@@ -54,5 +54,4 @@ const MainCategoryList = styled.li`
 		props.active &&
 		`font-family:'kr-b'; border:3px solid #E50011;border-radius: 4px;line-height: 6.3rem;
 `}
-	>
 `;
