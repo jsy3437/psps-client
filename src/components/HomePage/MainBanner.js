@@ -71,21 +71,21 @@ const MainBanner = () => {
 		}, 4000);
 	};
 
-	// const onSlideLeft = () => {
-	// 	setAutoScrollSwitch(false);
-	// 	clearTimeout(time);
-	// 	if (bnnNum !== 0) {
-	// 		setBnnNum(bnnNum - 1);
-	// 	}
-	// };
+	const onSlideLeft = () => {
+		setAutoScrollSwitch(false);
+		clearTimeout(time);
+		if (bnnNum !== 0) {
+			setBnnNum(bnnNum - 1);
+		}
+	};
 
-	// const onSlideRight = () => {
-	// 	setAutoScrollSwitch(false);
-	// 	clearTimeout(time);
-	// 	if (bnnNum !== bannerList.length - 1) {
-	// 		setBnnNum(bnnNum + 1);
-	// 	}
-	// };
+	const onSlideRight = () => {
+		setAutoScrollSwitch(false);
+		clearTimeout(time);
+		if (bnnNum !== bannerList.length - 1) {
+			setBnnNum(bnnNum + 1);
+		}
+	};
 
 	const goUrl = (el) => {
 		switch (el.page) {
@@ -141,14 +141,10 @@ const MainBanner = () => {
 				</MainBannerList>
 				{bannerList.length > 1 && (
 					<BnnBtnBox>
-						<BnnScrollBtn
-						// onClick={onSlideLeft}
-						>
+						<BnnScrollBtn onClick={onSlideLeft}>
 							<BtnImg alt="banner button" src={leftBtn} />
 						</BnnScrollBtn>
-						<BnnScrollBtn
-						// onClick={onSlideRight}
-						>
+						<BnnScrollBtn onClick={onSlideRight}>
 							<BtnImg alt="banner button" src={rightBtn} />
 						</BnnScrollBtn>
 					</BnnBtnBox>
