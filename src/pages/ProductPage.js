@@ -21,7 +21,9 @@ const ProductPage = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		location.state && setPart(location.state);
+		if (location.state) {
+			setPart(location.state);
+		}
 	}, []);
 
 	useEffect(() => {
