@@ -22,7 +22,10 @@ const ProductPage = () => {
 
 	useEffect(() => {
 		if (location.state) {
-			setPart(location.state);
+			setPart(location.state.part);
+			if (location.state.subPart) {
+				setSubPart(location.state.subPart);
+			}
 		}
 	}, []);
 
@@ -61,7 +64,7 @@ const ProductPage = () => {
 	return isLoading ? (
 		<Spinner />
 	) : (
-		<div id='container'>
+		<div id="container">
 			<ProductBanner part={part} subPartArr={subPartArr} />
 			<ProductCategory
 				part={part}

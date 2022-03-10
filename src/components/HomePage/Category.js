@@ -9,7 +9,7 @@ const Category = () => {
 	const onCategory = (title) => {
 		history.push({
 			pathname: '/product',
-			state: title,
+			state: { part: title },
 		});
 	};
 
