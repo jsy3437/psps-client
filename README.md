@@ -3,6 +3,7 @@
 > 2022.03.11
 
 -  상품페이지 : part, subPart 변경 시 page 1로 초기화
+-  Navbar : 최상단 fixed로 고정
 -  PageSelector : onePage 변수 추가, 사용되는 장소의 한 페이지 당 리스트 갯수에 따라 페이지 수 다르게 출력
 
 ---

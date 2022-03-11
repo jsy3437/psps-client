@@ -105,6 +105,9 @@ const NavbarWrap = styled.div`
 	justify-content: center;
 	background-color: #fff;
 	border-bottom: 1px solid #a0a0a0;
+	z-index: 100;
+	position: fixed;
+	top: 0rem;
 `;
 const NavbarInside = styled.div`
 	width: 120rem;
