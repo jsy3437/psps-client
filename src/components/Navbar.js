@@ -17,16 +17,12 @@ const Navbar = () => {
 	useEffect(() => {
 		_basket.get_list().then((res) => {
 			const { success, count } = res.data;
-			if (success) {
-				setCartCount(count);
-			}
+			success && setCartCount(count);
 		});
 	}, [user]);
 
 	useEffect(() => {
-		if (cart) {
-			setCartCount(cart.cartCount);
-		}
+		cart && setCartCount(cart.cartCount);
 	}, [cart, user]);
 
 	const goHome = () => {

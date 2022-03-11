@@ -90,7 +90,6 @@ const ProductPage = () => {
 			) : (
 				<ListInfoText>상품이 없습니다.</ListInfoText>
 			)}
-
 			<Induce />
 			<Footer />
 		</div>

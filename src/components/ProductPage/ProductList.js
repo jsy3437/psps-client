@@ -46,10 +46,10 @@ const ProductList = (props) => {
 						<ProductDescTotalPrice>
 							{el.discount !== 0 && (
 								<ProductDesc>
-									{el.price && el.price.toLocaleString()}원
+									{`${el.price.toLocaleString()}원`}
 								</ProductDesc>
 							)}
-							{el.price && (el.price - el.discount).toLocaleString()}
+							{`${(el.price - el.discount).toLocaleString()}`}
 							<DescWon>원</DescWon>
 						</ProductDescTotalPrice>
 					</Product>

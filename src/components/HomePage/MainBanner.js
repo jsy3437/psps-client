@@ -13,7 +13,7 @@ const MainBanner = () => {
 	const [bannerList, setBannerList] = useState([]);
 	const [bnnNum, setBnnNum] = useState(0);
 	const [autoScrollSwitch, setAutoScrollSwitch] = useState(true);
-
+	const [first, setFirst] = useState(true);
 	let time;
 
 	// 변경됨
@@ -27,7 +27,11 @@ const MainBanner = () => {
 	useEffect(() => {
 		if (bannerList.length !== 1) {
 			if (autoScrollSwitch && bnnNum === 0) {
-				bannerBox.current.scrollTo({ left: 0 });
+				if (first) {
+					firstScroll();
+				} else {
+					bannerBox.current.scrollTo({ left: 0 });
+				}
 			}
 			bannerBox.current.scrollTo({
 				left: (bnnNum + 1) * 1920,
@@ -41,13 +45,16 @@ const MainBanner = () => {
 		};
 	}, [bnnNum]);
 
+	const firstScroll = () => {
+		bannerBox.current.scrollTo({ left: 1920 });
+		setFirst(false);
+	};
+
 	const autoScroll = () => {
 		time = setTimeout(() => {
-			if (bnnNum === bannerList.length - 1) {
-				setBnnNum(0);
-			} else {
-				setBnnNum(bnnNum + 1);
-			}
+			bnnNum === bannerList.length - 1
+				? setBnnNum(0)
+				: setBnnNum(bnnNum + 1);
 		}, 4000);
 	};
 
@@ -99,26 +106,27 @@ const MainBanner = () => {
 		<Container>
 			<MainBannerWrap ref={bannerBox}>
 				<MainBannerList ref={bannerListEl}>
-					{bannerList && bannerList.length > 1 && (
+					{bannerList.length > 1 && (
 						<TempBannerImg
-							alt="banner image"
-							src={`${IMG_ADDRESS}/${bannerList[bannerList.length - 1].image}`}
+							alt='banner image'
+							src={`${IMG_ADDRESS}/${
+								bannerList[bannerList.length - 1].image
+							}`}
 						/>
 					)}
-					{bannerList &&
-						bannerList.map((el, idx) => (
-							<MainBannerImg
-								key={idx}
-								alt="banner image"
-								src={`${IMG_ADDRESS}/${el.image}`}
-								onClick={() => {
-									goUrl(el);
-								}}
-							/>
-						))}
-					{bannerList && bannerList.length > 1 && (
+					{bannerList.map((el, idx) => (
+						<MainBannerImg
+							key={idx}
+							alt='banner image'
+							src={`${IMG_ADDRESS}/${el.image}`}
+							onClick={() => {
+								goUrl(el);
+							}}
+						/>
+					))}
+					{bannerList.length > 1 && (
 						<TempBannerImg
-							alt="banner image"
+							alt='banner image'
 							src={`${IMG_ADDRESS}/${bannerList[0].image}`}
 						/>
 					)}
@@ -126,19 +134,18 @@ const MainBanner = () => {
 				{bannerList.length > 1 && (
 					<BnnBtnBox>
 						<BnnScrollBtn onClick={onSlideLeft}>
-							<BtnImg alt="banner button" src={left_btn} />
+							<BtnImg alt='banner button' src={left_btn} />
 						</BnnScrollBtn>
 						<BnnScrollBtn onClick={onSlideRight}>
-							<BtnImg alt="banner button" src={right_btn} />
+							<BtnImg alt='banner button' src={right_btn} />
 						</BnnScrollBtn>
 					</BnnBtnBox>
 				)}
 				{bannerList.length > 1 && (
 					<BnnInfoDotBox>
-						{bannerList &&
-							bannerList.map((el, idx) => (
-								<BnnInfoDot active={bnnNum === idx} key={idx}></BnnInfoDot>
-							))}
+						{bannerList.map((el, idx) => (
+							<BnnInfoDot active={bnnNum === idx} key={idx}></BnnInfoDot>
+						))}
 					</BnnInfoDotBox>
 				)}
 			</MainBannerWrap>
