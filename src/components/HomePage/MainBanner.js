@@ -3,63 +3,43 @@ import { useHistory } from 'react-router-dom';
 import { IMG_ADDRESS } from '../../config';
 import * as _banner from '../../controller/banner';
 import styled from 'styled-components';
-import leftBtn from '../../images/left_btn.svg';
-import rightBtn from '../../images/right_btn.svg';
+import left_btn from '../../images/left_btn.svg';
+import right_btn from '../../images/right_btn.svg';
 
 const MainBanner = () => {
 	const history = useHistory();
 	const bannerBox = useRef();
 	const bannerListEl = useRef();
 	const [bannerList, setBannerList] = useState([]);
-	const [tempBnnState, setTempBnnState] = useState([false, false]);
 	const [bnnNum, setBnnNum] = useState(0);
 	const [autoScrollSwitch, setAutoScrollSwitch] = useState(true);
+
 	let time;
 
+	// 변경됨
 	useEffect(() => {
 		_banner.get_list('메인').then((res) => {
 			const { success, banner_list } = res.data;
-			if (success) {
-				setBannerList(banner_list);
-			}
+			success && setBannerList(banner_list);
 		});
 	}, []);
-	// console.log(bannerListEl.current.children);
 
 	useEffect(() => {
-		bannerBox.current.scrollTo({
-			left: bnnNum * 1920,
-			behavior: 'smooth',
-		});
-
-		setAutoScrollSwitch(true);
-		autoScroll();
-
-		if (bnnNum === bannerList.length - 1) {
-			setTempBnnState([true, false]);
-		} else if (bnnNum === 0) {
-			setTempBnnState([false, true]);
-		} else {
-			setTempBnnState([false, false]);
+		if (bannerList.length !== 1) {
+			if (autoScrollSwitch && bnnNum === 0) {
+				bannerBox.current.scrollTo({ left: 0 });
+			}
+			bannerBox.current.scrollTo({
+				left: (bnnNum + 1) * 1920,
+				behavior: 'smooth',
+			});
+			setAutoScrollSwitch(true);
+			autoScroll();
 		}
-
 		return () => {
 			clearTimeout(time);
 		};
 	}, [bnnNum]);
-	console.log(tempBnnState);
-
-	useEffect(() => {
-		let tempTime = setTimeout(() => {
-			if (tempBnnState[0]) {
-				console.log('!!!!');
-				// bannerBox.current.scrollTo({ left: 0 });
-			} else if (tempBnnState[1]) {
-				console.log('aaa');
-				// 	bannerBox.current.scrollTo({ left: bannerList.length * 1920 });
-			}
-		}, 2000);
-	}, [tempBnnState]);
 
 	const autoScroll = () => {
 		time = setTimeout(() => {
@@ -76,6 +56,9 @@ const MainBanner = () => {
 		clearTimeout(time);
 		if (bnnNum !== 0) {
 			setBnnNum(bnnNum - 1);
+		} else {
+			bannerBox.current.scrollTo({ left: (bannerList.length + 1) * 1920 });
+			setBnnNum(bannerList.length - 1);
 		}
 	};
 
@@ -84,6 +67,9 @@ const MainBanner = () => {
 		clearTimeout(time);
 		if (bnnNum !== bannerList.length - 1) {
 			setBnnNum(bnnNum + 1);
+		} else {
+			bannerBox.current.scrollTo({ left: 0 });
+			setBnnNum(0);
 		}
 	};
 
@@ -115,7 +101,6 @@ const MainBanner = () => {
 				<MainBannerList ref={bannerListEl}>
 					{bannerList && bannerList.length > 1 && (
 						<TempBannerImg
-							// temp={tempBnnState[0]}
 							alt="banner image"
 							src={`${IMG_ADDRESS}/${bannerList[bannerList.length - 1].image}`}
 						/>
@@ -133,7 +118,6 @@ const MainBanner = () => {
 						))}
 					{bannerList && bannerList.length > 1 && (
 						<TempBannerImg
-							// temp={tempBnnState[1]}
 							alt="banner image"
 							src={`${IMG_ADDRESS}/${bannerList[0].image}`}
 						/>
@@ -142,10 +126,10 @@ const MainBanner = () => {
 				{bannerList.length > 1 && (
 					<BnnBtnBox>
 						<BnnScrollBtn onClick={onSlideLeft}>
-							<BtnImg alt="banner button" src={leftBtn} />
+							<BtnImg alt="banner button" src={left_btn} />
 						</BnnScrollBtn>
 						<BnnScrollBtn onClick={onSlideRight}>
-							<BtnImg alt="banner button" src={rightBtn} />
+							<BtnImg alt="banner button" src={right_btn} />
 						</BnnScrollBtn>
 					</BnnBtnBox>
 				)}
@@ -191,8 +175,7 @@ const MainBannerImg = styled.img`
 `;
 
 const TempBannerImg = styled(MainBannerImg)`
-	display: none;
-	${(props) => props.temp && `display:block;`};
+	${(props) => props.temp && `display:none;`};
 `;
 const BnnBtnBox = styled.div`
 	width: 124.4rem;
