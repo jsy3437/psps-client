@@ -26,11 +26,11 @@ const RecommendList = () => {
 	const goDetail = (product_id) => {
 		history.push(`/detail/${product_id}`);
 	};
-	console.log(list);
+	// console.log(list);
 
 	return (
 		<RecommendWrap>
-			<Logo alt='logo' src={logo} />
+			<Logo alt="logo" src={logo} />
 			<BrownBackground />
 			<Titles>
 				{titles.map((el, idx) => (
@@ -54,10 +54,11 @@ const RecommendList = () => {
 							}}
 							onMouseLeave={() => {
 								setHover('');
-							}}>
+							}}
+						>
 							<ListImgBox>
 								<ListImg
-									alt='product img'
+									alt="product img"
 									src={`${IMG_ADDRESS}/${el.image}`}
 									hover={hover === idx}
 								/>
@@ -66,9 +67,7 @@ const RecommendList = () => {
 							{/* 상품설명 */}
 							<ListDescTotalPrice>
 								{el.discount !== 0 && (
-									<ListDesc>
-										{el.price && el.price.toLocaleString()}원
-									</ListDesc>
+									<ListDesc>{el.price && el.price.toLocaleString()}원</ListDesc>
 								)}
 								{el.total_price && el.total_price.toLocaleString()}
 								<DescWon>원</DescWon>
