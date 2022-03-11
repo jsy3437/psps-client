@@ -13,10 +13,8 @@ const MainBanner = () => {
 	const [bannerList, setBannerList] = useState([]);
 	const [bnnNum, setBnnNum] = useState(0);
 	const [autoScrollSwitch, setAutoScrollSwitch] = useState(true);
-	const [first, setFirst] = useState(true);
 	let time;
 
-	// 변경됨
 	useEffect(() => {
 		_banner.get_list('메인').then((res) => {
 			const { success, banner_list } = res.data;
@@ -27,11 +25,7 @@ const MainBanner = () => {
 	useEffect(() => {
 		if (bannerList.length !== 1) {
 			if (autoScrollSwitch && bnnNum === 0) {
-				if (first) {
-					firstScroll();
-				} else {
-					bannerBox.current.scrollTo({ left: 0 });
-				}
+				bannerBox.current.scrollTo({ left: 0 });
 			}
 			bannerBox.current.scrollTo({
 				left: (bnnNum + 1) * 1920,
@@ -44,11 +38,6 @@ const MainBanner = () => {
 			clearTimeout(time);
 		};
 	}, [bnnNum]);
-
-	const firstScroll = () => {
-		bannerBox.current.scrollTo({ left: 1920 });
-		setFirst(false);
-	};
 
 	const autoScroll = () => {
 		time = setTimeout(() => {
@@ -102,9 +91,13 @@ const MainBanner = () => {
 		}
 	};
 
+	const firstLoad = () => {
+		bannerBox.current.scrollTo({ left: 1920 });
+	};
+
 	return (
 		<Container>
-			<MainBannerWrap ref={bannerBox}>
+			<MainBannerWrap ref={bannerBox} onLoad={firstLoad}>
 				<MainBannerList ref={bannerListEl}>
 					{bannerList.length > 1 && (
 						<TempBannerImg
@@ -165,11 +158,8 @@ const MainBannerWrap = styled.div`
 	display: flex;
 	width: 192rem;
 	height: 85rem;
-	/* z-index: -5; */
 	overflow: hidden;
-	/* border: 5px solid green; */
 `;
-const BannerBox = styled.div``;
 const MainBannerList = styled.div`
 	display: flex;
 	width: 192rem;
@@ -178,7 +168,6 @@ const MainBannerList = styled.div`
 const MainBannerImg = styled.img`
 	width: 192rem;
 	height: 85rem;
-	/* object-fit: contain; */
 `;
 
 const TempBannerImg = styled(MainBannerImg)`

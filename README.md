@@ -3,6 +3,7 @@
 > 2022.03.11
 
 -  상품페이지 : part, subPart 변경 시 page 1로 초기화
+-  MainBanner : 슬라이드 배너 초기 렌더링 시 스크롤 위치 맞지 않는 오류 수정 => 슬라이드 배너 기능 완성
 -  Navbar : 최상단 fixed로 고정
 -  PageSelector : onePage 변수 추가, 사용되는 장소의 한 페이지 당 리스트 갯수에 따라 페이지 수 다르게 출력
 
@@ -34,6 +35,8 @@
 -  상품페이지 : 상품 개수에 따라 페이지수 바뀌고 part나 subPart 변했을때 1페이지로 시작하게 수정완료
 
 **원격저장소 병합, branch => main, develop, feature, hotfix, release**
+
+---
 
 > 2022.03.06
 
