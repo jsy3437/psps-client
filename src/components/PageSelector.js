@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import left from '../images/page_left.svg';
 import right from '../images/page_right.svg';
 
-const PageSelector = ({ style, total, page, setPage }) => {
+const PageSelector = ({ style, total, page, setPage, onePage }) => {
 	const [pages, setPages] = useState([]);
-	const totalPage = Math.ceil(total / 12);
+	const totalPage = Math.ceil(total / onePage);
 
 	useEffect(() => {
 		const update = [];
