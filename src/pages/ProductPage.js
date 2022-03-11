@@ -16,16 +16,16 @@ const ProductPage = () => {
 	const [part, setPart] = useState('농산');
 	const [subPart, setSubPart] = useState(null);
 	const [page, setPage] = useState(1);
-	const [total, setTotal] = useState(0);
+	const [total, setTotal] = useState(1);
+	const onePage = 12;
 	const [list, setList] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		if (location.state) {
-			setPart(location.state.part);
-			if (location.state.subPart) {
-				setSubPart(location.state.subPart);
-			}
+		const _state = location.state;
+		if (_state) {
+			_state.part && setPart(_state.part);
+			_state.subPart && setSubPart(_state.subPart);
 		}
 	}, []);
 
@@ -40,7 +40,6 @@ const ProductPage = () => {
 				setTotal(product_list.length);
 			}
 		});
-
 		setIsLoading(false);
 		return () => {
 			isSubscribed = false;
@@ -64,7 +63,7 @@ const ProductPage = () => {
 	return isLoading ? (
 		<Spinner />
 	) : (
-		<div id="container">
+		<div id='container'>
 			<ProductBanner part={part} subPartArr={subPartArr} />
 			<ProductCategory
 				part={part}
@@ -86,6 +85,7 @@ const ProductPage = () => {
 					total={total}
 					page={page}
 					setPage={setPage}
+					onePage={onePage}
 				/>
 			) : (
 				<ListInfoText>상품이 없습니다.</ListInfoText>

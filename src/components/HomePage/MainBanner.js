@@ -16,6 +16,7 @@ const MainBanner = () => {
 
 	let time;
 
+	// 변경됨
 	useEffect(() => {
 		_banner.get_list('메인').then((res) => {
 			const { success, banner_list } = res.data;

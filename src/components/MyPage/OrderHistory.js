@@ -5,8 +5,9 @@ import OrderDetail from './OrderDetail';
 import PageSelector from '../PageSelector';
 
 const OrderHistory = (props) => {
-	const total = props.paymentList.length;
 	const [page, setPage] = useState(1);
+	const total = props.paymentList.length;
+	const onePage = 10;
 	const [viewDetail, setViewDetail] = useState(false);
 
 	const goDetail = (payment_id) => {
@@ -60,6 +61,7 @@ const OrderHistory = (props) => {
 						total={total}
 						page={page}
 						setPage={setPage}
+						onePage={onePage}
 					/>
 				</OrderHistoryWrap>
 			)}

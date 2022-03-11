@@ -38,13 +38,13 @@ export const check_email = async (userData) => {
 	return await instance.post('/check', userData).catch(errorMessage);
 };
 export const change_tel = async (userData) => {
-	return await instance.patch('/tel', userData).catch(errorMessage);
+	return await instance.patch('/', userData).catch(errorMessage);
 };
 export const change_password = async (userData) => {
-	return await instance.patch('/pw', userData).catch(errorMessage);
+	return await instance.patch('/', userData).catch(errorMessage);
 };
 export const change_address = async (userData) => {
-	return await instance.patch('/addr', userData).catch(errorMessage);
+	return await instance.patch('/', userData).catch(errorMessage);
 };
 export const find_email = async (userData) => {
 	return await instance.post('/email', userData).catch(errorMessage);

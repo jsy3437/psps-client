@@ -76,7 +76,7 @@ const Privacy = () => {
 							</Button>
 						</PrivacyItem>
 
-						<PrivacyItem>
+						{/* <PrivacyItem>
 							<PrivacyTitle>환불계좌</PrivacyTitle>
 							<PrivacyText>
 								{user.address &&
@@ -91,7 +91,7 @@ const Privacy = () => {
 								}}>
 								{user.address ? '수정하기' : '등록하기'}
 							</Button>
-						</PrivacyItem>
+						</PrivacyItem> */}
 					</PrivacyBox>
 					<SecessionBtn>회원탈퇴</SecessionBtn>
 				</PrivacyWrap>
