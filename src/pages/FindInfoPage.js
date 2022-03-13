@@ -38,6 +38,14 @@ const FindInfoPage = () => {
 		setPhone_number('');
 		setEmail('');
 		setConfirmNum('');
+		setGetConfirmNum(false);
+		setConfirm(false);
+		setCheckLength({
+			name: false,
+			phone_number: false,
+			email: false,
+			confirmNum: false,
+		});
 	}, [item]);
 
 	useEffect(() => {
@@ -60,7 +68,7 @@ const FindInfoPage = () => {
 				setFindPwState(false);
 			}
 		}
-	}, [checkLength, confirm, getConfirmNum]);
+	}, [checkLength, confirm, getConfirmNum, item]);
 
 	const goFindID = () => {
 		if (!findIdState) {
@@ -87,10 +95,10 @@ const FindInfoPage = () => {
 	};
 
 	return (
-		<div id='container'>
+		<div id="container">
 			<Container>
 				<FindInfoInside>
-					<LogoImg alt='logo' src={logo} />
+					<LogoImg alt="logo" src={logo} />
 					<Title>품생품사 아이디/비밀번호 찾기</Title>
 					<FindItemSelect item={item} setItem={setItem} />
 					{item === '아이디' ? (

@@ -10,16 +10,16 @@ const FindPwInput = (props) => {
 	const [min, setMin] = useState(0);
 
 	useEffect(() => {
-		let interval;
+		let timeout;
 		if (props.getConfirmNum && time > -1) {
 			setMin(parseInt(time / 60));
 			setSec(time % 60);
-			interval = setTimeout(() => {
+			timeout = setTimeout(() => {
 				setTime(time - 1);
 			}, 1000);
 		}
 		return () => {
-			clearTimeout(interval);
+			clearTimeout(timeout);
 		};
 	}, [props.getConfirmNum, time]);
 
@@ -61,7 +61,6 @@ const FindPwInput = (props) => {
 		if (props.checkLength.phone_number) {
 			_user.send_sms({ phone_number: props.phone_number }).then((res) => {
 				const { success } = res.data;
-				console.log(res.data);
 				if (success) {
 					alert('인증번호가 발송되었습니다.');
 					confirmEl.current.focus();
@@ -81,14 +80,11 @@ const FindPwInput = (props) => {
 				props.checkLength.confirmNum &&
 				!props.confirm
 			) {
-				console.log('aa');
 				const data = {
 					phone_number: props.phone_number,
 					code: props.confirmNum,
 				};
-				console.log(data);
 				_user.check_sms(data).then((res) => {
-					console.log(res.data);
 					if (res.data.success) {
 						props.setConfirm(true);
 						return alert('인증 확인되었습니다.');
@@ -113,7 +109,7 @@ const FindPwInput = (props) => {
 			<Items>
 				<ItemTitle>휴대폰번호</ItemTitle>
 				<ItemInput
-					type='text'
+					type="text"
 					maxLength={11}
 					value={props.phone_number}
 					placeholder={`'-'을 제외한 휴대폰 번호를 입력해주세요.`}
@@ -121,7 +117,8 @@ const FindPwInput = (props) => {
 				/>
 				<CheckButton
 					active={props.checkLength.phone_number}
-					onClick={getConfirmNumber}>
+					onClick={getConfirmNumber}
+				>
 					인증하기
 				</CheckButton>
 			</Items>
@@ -129,21 +126,20 @@ const FindPwInput = (props) => {
 				<ItemTitle>인증번호</ItemTitle>
 				<ItemInput
 					ref={confirmEl}
-					type='text'
+					type="text"
 					maxLength={6}
 					value={props.confirmNum}
 					placeholder={
-						props.getConfirmNum && `0${min}:${sec < 10 ? '0' + sec : sec}`
+						props.getConfirmNum ? `0${min}:${sec < 10 ? '0' + sec : sec}` : ''
 					}
 					onChange={confirmNumberController}
 				/>
 				<CheckButton
 					active={
-						props.getConfirmNum &&
-						props.checkLength.confirmNum &&
-						time > 0
+						props.getConfirmNum && props.checkLength.confirmNum && time > 0
 					}
-					onClick={checkConfirmNumber}>
+					onClick={checkConfirmNumber}
+				>
 					인증확인
 				</CheckButton>
 			</Items>

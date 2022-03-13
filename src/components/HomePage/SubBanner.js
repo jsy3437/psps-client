@@ -5,9 +5,11 @@ import styled from 'styled-components';
 
 const SubBanner = () => {
 	const bannerBox = useRef();
+	const banner = useRef();
 	const [bannerList, setBannerList] = useState([]);
 	const [bnnNum, setBnnNum] = useState(0);
-	// const [autoScrollSwitch, setAutoScrollSwitch] = useState(true);
+	const [autoScrollSwitch, setAutoScrollSwitch] = useState(true);
+	let bannerWidth = banner.current && banner.current.offsetWidth;
 	let time;
 
 	useEffect(() => {
@@ -20,49 +22,64 @@ const SubBanner = () => {
 	}, []);
 
 	useEffect(() => {
-		bannerBox.current.scrollTo({
-			left: bnnNum * 1200,
-			behavior: 'smooth',
-		});
-		// if (!autoScrollSwitch) {
-		// 	setAutoScrollSwitch(true);
-		// }
-		autoScroll();
+		if (bannerList.length !== 1) {
+			if (autoScrollSwitch && bnnNum === 0) {
+				bannerBox.current.scrollTo({ left: 0 });
+			}
+			bannerBox.current.scrollTo({
+				left: (bnnNum + 1) * bannerWidth,
+				behavior: 'smooth',
+			});
+			setAutoScrollSwitch(true);
+			autoScroll();
+		}
 		return () => {
 			clearTimeout(time);
 		};
+		// eslint-disable-next-line
 	}, [bnnNum]);
 
 	const autoScroll = () => {
 		time = setTimeout(() => {
-			if (bnnNum === bannerList.length - 1) {
-				setBnnNum(0);
-			} else if (bnnNum !== bannerList.length - 1) {
-				setBnnNum(bnnNum + 1);
-			}
+			bnnNum === bannerList.length - 1 ? setBnnNum(0) : setBnnNum(bnnNum + 1);
 		}, 4000);
+	};
+
+	const firstLoad = () => {
+		bannerBox.current.scrollTo({ left: banner.current.offsetWidth });
 	};
 
 	return (
 		<SubBannerContainer>
-			<SubBannerWrap ref={bannerBox}>
-				{bannerList &&
-					bannerList.map((el, idx) => (
-						<SubBannerList key={idx}>
-							<SubBannerImg
-								alt='sub_banner img'
-								src={`${IMG_ADDRESS}/${el.image}`}
-							/>
-						</SubBannerList>
+			<SubBannerWrap ref={bannerBox} onLoad={firstLoad}>
+				<SubBannerList>
+					{bannerList.length > 1 && (
+						<TempSubBannerImg
+							ref={banner}
+							alt="sub banner image"
+							src={`${IMG_ADDRESS}/${bannerList[bannerList.length - 1].image}`}
+						/>
+					)}
+					{bannerList.map((el, idx) => (
+						<SubBannerImg
+							key={idx}
+							ref={banner}
+							alt="sub_banner img"
+							src={`${IMG_ADDRESS}/${el.image}`}
+						/>
 					))}
+					{bannerList.length > 1 && (
+						<TempSubBannerImg
+							alt="sub banner image"
+							src={`${IMG_ADDRESS}/${bannerList[0].image}`}
+						/>
+					)}
+				</SubBannerList>
 				{bannerList.length > 1 && (
 					<BnnInfoDotBox>
-						{bannerList &&
-							bannerList.map((el, idx) => (
-								<BnnInfoDot
-									active={bnnNum === idx}
-									key={idx}></BnnInfoDot>
-							))}
+						{bannerList.map((el, idx) => (
+							<BnnInfoDot key={idx} active={bnnNum === idx}></BnnInfoDot>
+						))}
 					</BnnInfoDotBox>
 				)}
 			</SubBannerWrap>
@@ -75,25 +92,29 @@ export default SubBanner;
 const SubBannerContainer = styled.div`
 	position: relative;
 	width: 192rem;
-	/* height: 56.6rem; */
 	margin-top: 1.8rem;
 	margin-bottom: 13.2rem;
 `;
-const SubBannerWrap = styled.ul`
+const SubBannerWrap = styled.div`
 	width: 120rem;
 	height: 35rem;
 	margin: 0 auto;
 	display: flex;
-	overflow-x: hidden;
+	overflow: hidden;
 `;
-const SubBannerList = styled.li`
+const SubBannerList = styled.div`
+	display: flex;
 	width: 120rem;
 	height: 35rem;
 `;
 const SubBannerImg = styled.img`
-	width: 120rem;
+	min-width: 100%;
+	max-width: 100%;
+	width: 100%;
 	height: 35rem;
+	object-fit: fill;
 `;
+const TempSubBannerImg = styled(SubBannerImg)``;
 const BnnInfoDotBox = styled.ul`
 	width: 120rem;
 	position: absolute;

@@ -16,12 +16,13 @@ const CartList = (props) => {
 	useEffect(() => {
 		if (props.supplierList) {
 			let tempCheckList = [];
-			props.supplierList.map((el) => {
+			props.supplierList.forEach((el) => {
 				tempCheckList = [...tempCheckList, ...el[1].product];
 			});
 			props.setChecked(tempCheckList);
 			props.setTempChecked(tempCheckList);
 		}
+		// eslint-disable-next-line
 	}, [props.supplierList]);
 
 	const clickCheck = (el) => {
@@ -82,7 +83,7 @@ const CartList = (props) => {
 		<CartListWrap>
 			{props.supplierList &&
 				props.supplierList.map((supplier, id) => (
-					<SupplierBox key={id} wrap='true'>
+					<SupplierBox key={id} wrap="true">
 						<SupplierTitleAndCheckBox>
 							<SupplierTitleBox>
 								<SupplierTitle>판매자</SupplierTitle>
@@ -97,17 +98,17 @@ const CartList = (props) => {
 										clickCheck(el);
 									}}
 									src={CheckedTest(el) ? check_img : uncheck_img}
-									alt='check image'
+									alt="check image"
 								/>
 								<ProductImg
-									alt='product image'
+									alt="product image"
 									src={`${IMG_ADDRESS}/${el.product_image}`}
 								/>
 								<InfoBox>
 									<ProductNameAndRemove>
 										<ProductName>{el.product_title}</ProductName>
 										<RoundBtn
-											alt='remove button'
+											alt="remove button"
 											src={exit_btn}
 											onClick={() => {
 												onRemove(el.basket_id);
@@ -118,26 +119,18 @@ const CartList = (props) => {
 									<CountAndPrice>
 										<CountBox>
 											<RoundBtn
-												alt='count button'
+												alt="count button"
 												src={minus_btn}
 												onClick={() => {
-													onCount(
-														'minus',
-														el.quantity,
-														el.basket_id
-													);
+													onCount('minus', el.quantity, el.basket_id);
 												}}
 											/>
 											<CountNum>{el.quantity}</CountNum>
 											<RoundBtn
-												alt='count button'
+												alt="count button"
 												src={plus_btn}
 												onClick={() => {
-													onCount(
-														'plus',
-														el.quantity,
-														el.basket_id
-													);
+													onCount('plus', el.quantity, el.basket_id);
 												}}
 											/>
 										</CountBox>
@@ -201,14 +194,6 @@ const SupplierTitleAndCheckBox = styled.div`
 	align-items: flex-end;
 `;
 
-const SupplierAllCheckImg = styled.img`
-	width: 1.4rem;
-	height: 1.4rem;
-	top: 0.8rem;
-	left: 0.8rem;
-	cursor: pointer;
-	margin: auto 0.8rem 2.3rem 0;
-`;
 const SupplierTitle = styled.p`
 	font-size: 1.6rem;
 	font-family: 'kr-r';

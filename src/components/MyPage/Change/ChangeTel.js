@@ -81,7 +81,6 @@ const ChangeTel = (props) => {
 			});
 		}
 	};
-	console.log(phNumber);
 	const SubmitChangeTel = () => {
 		if (checked.authSend && checked.authConfirm) {
 			_user.change_tel({ phone_number: phNumber }).then((res) => {
@@ -90,7 +89,7 @@ const ChangeTel = (props) => {
 					alert('비밀번호가 변경되었습니다');
 					props.setChangePWState(false);
 				} else {
-					console.log(res.data);
+					console.error(res.data);
 				}
 			});
 		} else {
@@ -105,29 +104,28 @@ const ChangeTel = (props) => {
 				<InputItemBox>
 					<InputTitle>연락처</InputTitle>
 					<TelInput
-						type='text'
-						maxLength='11'
+						type="text"
+						maxLength="11"
 						onChange={ChangePhNumber}
 						value={phNumber}
 					/>
-					<ConfirmButton
-						phNumberState={phNumberState}
-						onClick={getAuthNumber}>
+					<ConfirmButton phNumberState={phNumberState} onClick={getAuthNumber}>
 						인증하기
 					</ConfirmButton>
 				</InputItemBox>
 				<InputItemBox>
 					<InputTitle>인증번호</InputTitle>
 					<TelInput
-						type='text'
-						maxLength='6'
+						type="text"
+						maxLength="6"
 						onChange={ChangeAuthNumber}
 						value={authNumber}
 						ref={authNumberInput}
 					/>
 					<ConfirmButton
 						authNumberState={authNumberState && checked.authSend}
-						onClick={checkAuthNumber}>
+						onClick={checkAuthNumber}
+					>
 						인증확인
 					</ConfirmButton>
 				</InputItemBox>

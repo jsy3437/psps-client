@@ -36,21 +36,22 @@ const OrderHistory = (props) => {
 								key={idx}
 								onClick={() => {
 									goDetail(el.payment_id);
-								}}>
+								}}
+							>
 								<OrderTopDate>
 									{el.create_at.split('T')[0]}
 									<OrderId>・{el.payment_uid}</OrderId>
 								</OrderTopDate>
-								<ListImg alt='product img' src={ex1} />
+								<ListImg alt="product img" src={ex1} />
 								<ListContents>
 									<ProductNameBox>
 										<ProductName>{el.name}</ProductName>
 										<ProductNameSpan>외 3건</ProductNameSpan>
 									</ProductNameBox>
 									<DeliveryAddr>
-										{`(${el.del_postcode}) ${
-											el.del_addr.split('/')[0]
-										} ${el.del_addr.split('/')[1]}`}
+										{`(${el.del_postcode}) ${el.del_addr.split('/')[0]} ${
+											el.del_addr.split('/')[1]
+										}`}
 									</DeliveryAddr>
 									<ProductTotalPrice>{`총 결제 금액 ${el.amount.toLocaleString()}원`}</ProductTotalPrice>
 								</ListContents>
@@ -66,10 +67,7 @@ const OrderHistory = (props) => {
 				</OrderHistoryWrap>
 			)}
 			{props.paymentList.length > 0 && viewDetail && (
-				<OrderDetail
-					viewDetail={viewDetail}
-					setViewDetail={setViewDetail}
-				/>
+				<OrderDetail viewDetail={viewDetail} setViewDetail={setViewDetail} />
 			)}
 		</MyPageInside>
 	);
@@ -177,14 +175,4 @@ const ProductTotalPrice = styled.p`
 	letter-spacing: -0.64px;
 	color: #221814;
 	margin-top: 5.9rem;
-`;
-
-const GrayBackground = styled.div`
-	width: 192rem;
-	height: 37.3rem;
-	background-color: #f2f2f2;
-	z-index: -1;
-	position: absolute;
-	/* bottom: 0; */
-	top: 13.5rem;
 `;

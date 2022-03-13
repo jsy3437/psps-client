@@ -1,7 +1,7 @@
 import React from 'react';
 import DaumPostCode from 'react-daum-postcode';
 
-const DaumPost = (props, {}) => {
+const DaumPost = (props) => {
 	const style = {
 		width: '100%',
 		height: '100%',
@@ -17,9 +17,7 @@ const DaumPost = (props, {}) => {
 			}
 			if (data.buildingName !== '') {
 				extraAddress +=
-					extraAddress !== ''
-						? `, ${data.buildingName}`
-						: data.buildingName;
+					extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
 			}
 			fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
 		}
@@ -32,7 +30,7 @@ const DaumPost = (props, {}) => {
 	return (
 		<DaumPostCode
 			onComplete={handleComplete}
-			className='post-code'
+			className="post-code"
 			style={style}
 		/>
 	);

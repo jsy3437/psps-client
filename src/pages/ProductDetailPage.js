@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import * as _product from '../controller/product';
 import OrderBox from '../components/ProductDetailPage/OrderBox';
@@ -9,7 +9,6 @@ import Induce from '../components/Induce';
 import Footer from '../components/Footer';
 
 const ProductDetailPage = () => {
-	const { pathname } = useLocation();
 	const user = useSelector((state) => state.user);
 	const { product_id } = useParams();
 	const selectRef = useRef();
@@ -21,7 +20,7 @@ const ProductDetailPage = () => {
 	function ScrollToTop() {
 		useEffect(() => {
 			window.scrollTo(0, 0);
-		}, [pathname]);
+		}, []);
 		return null;
 	}
 
@@ -41,7 +40,7 @@ const ProductDetailPage = () => {
 		}
 	}, [product_id]);
 	return (
-		<div id='container'>
+		<div id="container">
 			<ScrollToTop />
 			<OrderBox
 				detail={detail}

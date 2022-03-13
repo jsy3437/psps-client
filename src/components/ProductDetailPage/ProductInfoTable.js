@@ -93,21 +93,15 @@ const ProductInfoTable = (props) => {
 					</InfoItemBox>
 					<InfoItemBox>
 						<InfoTitle>e-mail</InfoTitle>
-						<InfoText>
-							{props.detail && props.detail.supplier_email}
-						</InfoText>
+						<InfoText>{props.detail && props.detail.supplier_email}</InfoText>
 					</InfoItemBox>
 					<InfoItemBox>
 						<InfoTitle>연락처</InfoTitle>
-						<InfoText>
-							{props.detail && props.detail.supplier_tel}
-						</InfoText>
+						<InfoText>{props.detail && props.detail.supplier_tel}</InfoText>
 					</InfoItemBox>
 					<InfoItemBox>
 						<InfoTitle>사업장 소재지</InfoTitle>
-						<InfoText>
-							{props.detail && props.detail.supplier_address}
-						</InfoText>
+						<InfoText>{props.detail && props.detail.supplier_address}</InfoText>
 					</InfoItemBox>
 					<InfoItemBox></InfoItemBox>
 				</InfoTable>
@@ -178,34 +172,3 @@ const InfoText = styled.p`
 	${(props) =>
 		props.long && `padding:0; max-width:none; width:120rem; font-size:2rem`}
 `;
-const InfoList = styled.li`
-	width: 18rem;
-	height: 7.4rem;
-	line-height: 7.4rem;
-	font-size: 1.8rem;
-	font-family: 'kr-r';
-	color: #6b6462;
-	padding-left: 2rem;
-	white-space: pre-wrap;
-	/* border-top: 1px solid #e0e0e0;
-	border-bottom: 1px solid #e0e0e0; */
-	background: #f8f8f8 0% 0% no-repeat padding-box;
-	&:nth-child(2n) {
-		width: 42rem;
-		background-color: #fff;
-	}
-	&:nth-last-child(1) {
-		/* border-top: 1px solid #e0e0e0; */
-	}
-`;
-const InfoTextBox = styled.div`
-	margin: 1.15rem 0;
-	padding: 3.05rem 0;
-	border-top: 1px solid #e0e0e0;
-	border-bottom: 1px solid #e0e0e0;
-`;
-// const InfoText = styled.p`
-// 	font-size: 2rem;
-// 	font-family: 'kr-r';
-// 	color: #6b6462;
-// `;

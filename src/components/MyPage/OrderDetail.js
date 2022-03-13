@@ -13,7 +13,6 @@ const OrderDetail = (props) => {
 
 	const [detailPayment, setDetailPayment] = useState('');
 	const [detailProductList, setDetailProductList] = useState('');
-	const [claimType, setClaimType] = useState('cancel');
 	const [supplierList, setSupplierList] = useState([]);
 	const [checkedList, setCheckedList] = useState([]);
 	const [allChecked, setAllChecked] = useState(false);
@@ -24,7 +23,6 @@ const OrderDetail = (props) => {
 			_payment.get_detail(props.viewDetail).then((res) => {
 				const { success, payment, payment_product_list, supplier_list } =
 					res.data;
-				console.log(res.data);
 				if (isSubscribed && success) {
 					setDetailProductList(payment_product_list);
 					setDetailPayment(payment);
@@ -45,6 +43,7 @@ const OrderDetail = (props) => {
 				setAllChecked(false);
 			}
 		}
+		// eslint-disable-next-line
 	}, [checkedList]);
 
 	const goReceipt = () => {
@@ -72,7 +71,6 @@ const OrderDetail = (props) => {
 	};
 
 	const submitStateTest = (state, text) => {
-		console.log(state, text);
 		let testResult = false;
 		if (state === '입금전' && text === '취소하기') {
 			testResult = true;
@@ -92,11 +90,7 @@ const OrderDetail = (props) => {
 			return alert('제품을 선택해주세요');
 		}
 		let count = checkedList.length;
-		checkedList.map((el) => {
-			if (!submitStateTest(el.process, innerText)) {
-				count--;
-			}
-		});
+		checkedList.map((el) => !submitStateTest(el.process, innerText) && count--);
 
 		if (count === checkedList.length) {
 			let type;
@@ -132,7 +126,6 @@ const OrderDetail = (props) => {
 		// 	const { success, payment, payment_product_list, supplier_list } =
 		// 		res.data;
 		// 	if (success) {
-		// 		console.log(res.data);
 		// 		alert('상품 취소가 완료되었습니다');
 		// 		setDetailProductList(payment_product_list);
 		// 		setDetailPayment(payment);
@@ -167,11 +160,9 @@ const OrderDetail = (props) => {
 			return setCheckedList([]);
 		} else {
 			let tempCheckList = [];
-			supplierList.map((supplier) => {
-				supplier[1].product.map((el) => {
-					tempCheckList.push(el);
-				});
-			});
+			supplierList.map((supplier) =>
+				supplier[1].product.map((el) => tempCheckList.push(el))
+			);
 			setCheckedList(tempCheckList);
 		}
 	};
@@ -197,22 +188,18 @@ const OrderDetail = (props) => {
 						{supplier[1].product.map((el, idx) => (
 							<OrderInfo key={idx}>
 								<CheckImg
-									alt='check image'
+									alt="check image"
 									src={testCheck(el) ? check_img : uncheck_img}
 									onClick={() => {
 										clickCheck(el);
 									}}
 								/>
-								<ProductImg alt='product img' src={ex1} />
+								<ProductImg alt="product img" src={ex1} />
 								<OrderContents>
-									<OrderState state={el.process}>
-										{el.process}
-									</OrderState>
+									<OrderState state={el.process}>{el.process}</OrderState>
 
 									<ProductName>{el.name.split('|')[0]}</ProductName>
-									<ProductOption>
-										{el.name.split('|')[1]}
-									</ProductOption>
+									<ProductOption>{el.name.split('|')[1]}</ProductOption>
 									<ProductCount>{`${el.amount.toLocaleString()}원 / ${
 										el.quantity
 									}개`}</ProductCount>
@@ -220,11 +207,11 @@ const OrderDetail = (props) => {
 								<Buttons>
 									<Button
 										color={
-											el.process === '배송중' ||
-											el.process === '배송완료'
+											el.process === '배송중' || el.process === '배송완료'
 												? 'black'
 												: 'grey'
-										}>
+										}
+									>
 										배송조회
 									</Button>
 									<Button
@@ -238,9 +225,9 @@ const OrderDetail = (props) => {
 										}
 										onClick={(e) => {
 											goCheckedAndCancelOrExchange(el, e);
-										}}>
-										{el.process === '입금 전' ||
-										el.process === '결제완료'
+										}}
+									>
+										{el.process === '입금 전' || el.process === '결제완료'
 											? '취소하기'
 											: '교환 / 반품 / 환불'}
 									</Button>
@@ -253,15 +240,13 @@ const OrderDetail = (props) => {
 				<AllCheckingBox>
 					<CheckImg
 						allCheck
-						alt='all check image'
+						alt="all check image"
 						src={allChecked ? check_img : uncheck_img}
 						onClick={ClickAllCheck}
 					/>
 					<AllCheckInfo>{`전체선택 ( ${checkedList.length} / ${detailProductList.length} )`}</AllCheckInfo>
 					<CancelBtn onClick={goCancelOrExchange}>취소하기</CancelBtn>
-					<CancelBtn onClick={goCancelOrExchange}>
-						교환 / 반품 / 환불
-					</CancelBtn>
+					<CancelBtn onClick={goCancelOrExchange}>교환 / 반품 / 환불</CancelBtn>
 				</AllCheckingBox>
 				<Title>받는 분</Title>
 				{detailPayment && (
@@ -320,8 +305,7 @@ const OrderDetail = (props) => {
 						<InfoList>
 							<InfoItem>{paymentInfo[3]}</InfoItem>
 							<InfoContents>
-								{detailPayment.amount &&
-									detailPayment.amount.toLocaleString()}
+								{detailPayment.amount && detailPayment.amount.toLocaleString()}
 							</InfoContents>
 						</InfoList>
 					</InfoWrap>

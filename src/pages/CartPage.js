@@ -45,6 +45,7 @@ const CartPage = () => {
 		return () => {
 			isSubscribed = false;
 		};
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -55,6 +56,7 @@ const CartPage = () => {
 		}
 		setCheckCount(checked.length);
 		settingOrderCalc();
+		// eslint-disable-next-line
 	}, [checked]);
 
 	// trans checked -> resetting calc
@@ -63,29 +65,24 @@ const CartPage = () => {
 			let calcArr = [];
 			let tempAmount = 0;
 			let tempDeliveryPrice = 0;
-			supplierList.map((supplier, id) => {
+			supplierList.forEach((supplier, id) => {
 				let tempCalc = {
 					supplier_name: supplierList[id] && supplierList[id][0],
 					total: 0,
 					delivery_price: 0,
 					checked_product_list: [],
 				};
-				checked.map((el, idx) => {
+				checked.forEach((el) => {
 					if (supplier[0] === el.supplier_name) {
 						tempCalc.total += el.total;
-
 						tempCalc.checked_product_list.push(el);
-
-						if (tempCalc.delivery_price === 0) {
-							tempCalc.delivery_price += 3000;
-						}
+						tempCalc.delivery_price === 0 && (tempCalc.delivery_price += 3000);
 					}
 				});
 				tempDeliveryPrice += tempCalc.delivery_price;
 				calcArr.push(tempCalc);
 				tempAmount += tempCalc.total;
 			});
-
 			setDelivery_price(tempDeliveryPrice);
 			setAmount(tempAmount);
 			setOrderCalc(calcArr);
@@ -114,13 +111,10 @@ const CartPage = () => {
 	// select and remove submit
 	const onSelectRemove = () => {
 		let basketIdArr = [];
-		checked.map((el, idx) => {
-			if (el) {
-				basketIdArr.push(cartList[idx].basket_id);
-			}
+		checked.forEach((el, idx) => {
+			el && basketIdArr.push(cartList[idx].basket_id);
 		});
-
-		basketIdArr.map((el, idx) => {
+		basketIdArr.forEach((el, idx) => {
 			_basket.remove_cart(el).then((res) => {
 				const { success, basket_list, count, calc } = res.data;
 				if (success && basketIdArr.length - 1 === idx) {
@@ -138,9 +132,9 @@ const CartPage = () => {
 	return isLoading ? (
 		<Spinner />
 	) : (
-		<div id='container'>
+		<div id="container">
 			<Container>
-				<LogoImg alt='logo' src={logo} />
+				<LogoImg alt="logo" src={logo} />
 				<Title>{user.name}님의 장바구니</Title>
 				{cartCount > 0 ? (
 					<CartContentWrap>
@@ -180,7 +174,7 @@ const CartPage = () => {
 				{cartCount > 0 && (
 					<AllCheckAndRemove>
 						<AllCheckImg
-							alt='all check img'
+							alt="all check img"
 							src={allChecked ? check_img : uncheck_img}
 							onClick={onAllCheck}
 						/>

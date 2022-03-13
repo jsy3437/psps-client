@@ -37,6 +37,7 @@ const PaymentPage = () => {
 				}
 			});
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -52,9 +53,9 @@ const PaymentPage = () => {
 			let count = 0;
 			let name;
 			let productList = [];
-			orderCalc.map((el) => {
+			orderCalc.forEach((el) => {
 				if (el.total !== 0) {
-					el.checked_product_list.map((list) => {
+					el.checked_product_list.forEach((list) => {
 						count++;
 						name = list.product_title;
 						productList = [
@@ -74,6 +75,7 @@ const PaymentPage = () => {
 			}
 			setPayment_product_list(productList);
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	const goBack = () => {
@@ -110,9 +112,9 @@ const PaymentPage = () => {
 	};
 
 	return (
-		<div id='container'>
+		<div id="container">
 			<Container>
-				<LogoImg alt='logo' src={logo} />
+				<LogoImg alt="logo" src={logo} />
 				<Title>주문하기</Title>
 				<UserData
 					user={user}

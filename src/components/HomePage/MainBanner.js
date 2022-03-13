@@ -9,10 +9,11 @@ import right_btn from '../../images/right_btn.svg';
 const MainBanner = () => {
 	const history = useHistory();
 	const bannerBox = useRef();
-	const bannerListEl = useRef();
+	const banner = useRef();
 	const [bannerList, setBannerList] = useState([]);
 	const [bnnNum, setBnnNum] = useState(0);
 	const [autoScrollSwitch, setAutoScrollSwitch] = useState(true);
+	let bannerWidth = banner.current && banner.current.offsetWidth;
 	let time;
 
 	useEffect(() => {
@@ -28,7 +29,7 @@ const MainBanner = () => {
 				bannerBox.current.scrollTo({ left: 0 });
 			}
 			bannerBox.current.scrollTo({
-				left: (bnnNum + 1) * 1920,
+				left: (bnnNum + 1) * bannerWidth,
 				behavior: 'smooth',
 			});
 			setAutoScrollSwitch(true);
@@ -37,13 +38,12 @@ const MainBanner = () => {
 		return () => {
 			clearTimeout(time);
 		};
+		// eslint-disable-next-line
 	}, [bnnNum]);
 
 	const autoScroll = () => {
 		time = setTimeout(() => {
-			bnnNum === bannerList.length - 1
-				? setBnnNum(0)
-				: setBnnNum(bnnNum + 1);
+			bnnNum === bannerList.length - 1 ? setBnnNum(0) : setBnnNum(bnnNum + 1);
 		}, 4000);
 	};
 
@@ -53,7 +53,9 @@ const MainBanner = () => {
 		if (bnnNum !== 0) {
 			setBnnNum(bnnNum - 1);
 		} else {
-			bannerBox.current.scrollTo({ left: (bannerList.length + 1) * 1920 });
+			bannerBox.current.scrollTo({
+				left: (bannerList.length + 1) * bannerWidth,
+			});
 			setBnnNum(bannerList.length - 1);
 		}
 	};
@@ -88,29 +90,29 @@ const MainBanner = () => {
 				return history.push('/register');
 			case '로그인':
 				return history.push('/login');
+			// no default
 		}
 	};
 
 	const firstLoad = () => {
-		bannerBox.current.scrollTo({ left: 1920 });
+		bannerBox.current.scrollTo({ left: banner.current.offsetWidth });
 	};
 
 	return (
 		<Container>
 			<MainBannerWrap ref={bannerBox} onLoad={firstLoad}>
-				<MainBannerList ref={bannerListEl}>
+				<MainBannerList>
 					{bannerList.length > 1 && (
 						<TempBannerImg
-							alt='banner image'
-							src={`${IMG_ADDRESS}/${
-								bannerList[bannerList.length - 1].image
-							}`}
+							ref={banner}
+							alt="banner image"
+							src={`${IMG_ADDRESS}/${bannerList[bannerList.length - 1].image}`}
 						/>
 					)}
 					{bannerList.map((el, idx) => (
 						<MainBannerImg
 							key={idx}
-							alt='banner image'
+							alt="banner image"
 							src={`${IMG_ADDRESS}/${el.image}`}
 							onClick={() => {
 								goUrl(el);
@@ -119,7 +121,7 @@ const MainBanner = () => {
 					))}
 					{bannerList.length > 1 && (
 						<TempBannerImg
-							alt='banner image'
+							alt="banner image"
 							src={`${IMG_ADDRESS}/${bannerList[0].image}`}
 						/>
 					)}
@@ -127,10 +129,10 @@ const MainBanner = () => {
 				{bannerList.length > 1 && (
 					<BnnBtnBox>
 						<BnnScrollBtn onClick={onSlideLeft}>
-							<BtnImg alt='banner button' src={left_btn} />
+							<BtnImg alt="banner button" src={left_btn} />
 						</BnnScrollBtn>
 						<BnnScrollBtn onClick={onSlideRight}>
-							<BtnImg alt='banner button' src={right_btn} />
+							<BtnImg alt="banner button" src={right_btn} />
 						</BnnScrollBtn>
 					</BnnBtnBox>
 				)}
@@ -166,13 +168,13 @@ const MainBannerList = styled.div`
 	height: 85rem;
 `;
 const MainBannerImg = styled.img`
+	min-width: 100%;
+	max-width: 100%;
 	width: 192rem;
 	height: 85rem;
+	object-fit: fill;
 `;
-
-const TempBannerImg = styled(MainBannerImg)`
-	${(props) => props.temp && `display:none;`};
-`;
+const TempBannerImg = styled(MainBannerImg)``;
 const BnnBtnBox = styled.div`
 	width: 124.4rem;
 	width: 100%;

@@ -2,9 +2,9 @@ import axios from 'axios';
 import { ADDRESS } from '../config';
 
 const instance = axios.create({
-	proxy: `${ADDRESS}`,
-	baseURL: '/payment',
-	// baseURL: `${ADDRESS}/payment`,
+	// proxy: `${ADDRESS}`,
+	// baseURL: '/payment',
+	baseURL: `${ADDRESS}/payment`,
 	withCredentials: true,
 });
 

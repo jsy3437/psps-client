@@ -27,6 +27,7 @@ const ProductPage = () => {
 			_state.part && setPart(_state.part);
 			_state.subPart && setSubPart(_state.subPart);
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -35,7 +36,6 @@ const ProductPage = () => {
 		_product.get_list(part, subPart, page).then((res) => {
 			const { success, product_list } = res.data;
 			if (isSubscribed && success) {
-				console.log(res.data);
 				setList(product_list);
 				setTotal(product_list.length);
 			}
@@ -63,7 +63,7 @@ const ProductPage = () => {
 	return isLoading ? (
 		<Spinner />
 	) : (
-		<div id='container'>
+		<div id="container">
 			<ProductBanner part={part} subPartArr={subPartArr} />
 			<ProductCategory
 				part={part}
