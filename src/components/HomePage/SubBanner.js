@@ -41,7 +41,9 @@ const SubBanner = () => {
 
 	const autoScroll = () => {
 		time = setTimeout(() => {
-			bnnNum === bannerList.length - 1 ? setBnnNum(0) : setBnnNum(bnnNum + 1);
+			bnnNum === bannerList.length - 1
+				? setBnnNum(0)
+				: setBnnNum(bnnNum + 1);
 		}, 4000);
 	};
 
@@ -56,21 +58,23 @@ const SubBanner = () => {
 					{bannerList.length > 1 && (
 						<TempSubBannerImg
 							ref={banner}
-							alt="sub banner image"
-							src={`${IMG_ADDRESS}/${bannerList[bannerList.length - 1].image}`}
+							alt='sub banner image'
+							src={`${IMG_ADDRESS}/${
+								bannerList[bannerList.length - 1].image
+							}`}
 						/>
 					)}
 					{bannerList.map((el, idx) => (
 						<SubBannerImg
 							key={idx}
 							ref={banner}
-							alt="sub_banner img"
+							alt='sub_banner img'
 							src={`${IMG_ADDRESS}/${el.image}`}
 						/>
 					))}
 					{bannerList.length > 1 && (
 						<TempSubBannerImg
-							alt="sub banner image"
+							alt='sub banner image'
 							src={`${IMG_ADDRESS}/${bannerList[0].image}`}
 						/>
 					)}
