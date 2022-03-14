@@ -43,7 +43,9 @@ const MainBanner = () => {
 
 	const autoScroll = () => {
 		time = setTimeout(() => {
-			bnnNum === bannerList.length - 1 ? setBnnNum(0) : setBnnNum(bnnNum + 1);
+			bnnNum === bannerList.length - 1
+				? setBnnNum(0)
+				: setBnnNum(bnnNum + 1);
 		}, 4000);
 	};
 
@@ -105,14 +107,16 @@ const MainBanner = () => {
 					{bannerList.length > 1 && (
 						<TempBannerImg
 							ref={banner}
-							alt="banner image"
-							src={`${IMG_ADDRESS}/${bannerList[bannerList.length - 1].image}`}
+							alt='banner image'
+							src={`${IMG_ADDRESS}/${
+								bannerList[bannerList.length - 1].image
+							}`}
 						/>
 					)}
 					{bannerList.map((el, idx) => (
 						<MainBannerImg
 							key={idx}
-							alt="banner image"
+							alt='banner image'
 							src={`${IMG_ADDRESS}/${el.image}`}
 							onClick={() => {
 								goUrl(el);
@@ -121,7 +125,7 @@ const MainBanner = () => {
 					))}
 					{bannerList.length > 1 && (
 						<TempBannerImg
-							alt="banner image"
+							alt='banner image'
 							src={`${IMG_ADDRESS}/${bannerList[0].image}`}
 						/>
 					)}
@@ -129,10 +133,10 @@ const MainBanner = () => {
 				{bannerList.length > 1 && (
 					<BnnBtnBox>
 						<BnnScrollBtn onClick={onSlideLeft}>
-							<BtnImg alt="banner button" src={left_btn} />
+							<BtnImg alt='banner button' src={left_btn} />
 						</BnnScrollBtn>
 						<BnnScrollBtn onClick={onSlideRight}>
-							<BtnImg alt="banner button" src={right_btn} />
+							<BtnImg alt='banner button' src={right_btn} />
 						</BnnScrollBtn>
 					</BnnBtnBox>
 				)}
