@@ -1,10 +1,13 @@
 import axios from 'axios';
-import { ADDRESS } from '../config';
+import { MODE, ADDRESS } from '../config';
+
+const url =
+	MODE === 'development'
+		? { proxy: `${ADDRESS}`, baseURL: '/basket' }
+		: { baseURL: `${ADDRESS}/basket` };
 
 const instance = axios.create({
-	// proxy: `${ADDRESS}`,
-	// baseURL: '/basket',
-	baseURL: `${ADDRESS}/basket`,
+	...url,
 	withCredentials: true,
 });
 
