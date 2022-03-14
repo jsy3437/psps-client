@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import * as _banner from '../../controller/banner';
 import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
 
 const SubBanner = () => {
+	const history = useHistory();
 	const bannerBox = useRef();
 	const banner = useRef();
 	const [bannerList, setBannerList] = useState([]);
@@ -41,15 +43,37 @@ const SubBanner = () => {
 
 	const autoScroll = () => {
 		time = setTimeout(() => {
-			bnnNum === bannerList.length - 1
-				? setBnnNum(0)
-				: setBnnNum(bnnNum + 1);
+			bnnNum === bannerList.length - 1 ? setBnnNum(0) : setBnnNum(bnnNum + 1);
 		}, 4000);
 	};
 
 	const firstLoad = () => {
 		bannerBox.current.scrollTo({ left: banner.current.offsetWidth });
 	};
+
+	const goUrl = (el) => {
+		switch (el.page) {
+			case '메인페이지':
+				return history.push('/');
+			case '품생품사란':
+				return history.push('/intro');
+			case '상품 카테고리':
+				return history.push({
+					pathname: '/product',
+					state: { part: el.part, subPart: el.subPart },
+				});
+			case '상품 상세보기':
+				return history.push({ pathname: `/detail/${el.product_id}` });
+			case '고객센터':
+				return history.push('/service');
+			case '회원가입':
+				return history.push('/register');
+			case '로그인':
+				return history.push('/login');
+			// no default
+		}
+	};
+	console.log(bannerList);
 
 	return (
 		<SubBannerContainer>
@@ -58,23 +82,24 @@ const SubBanner = () => {
 					{bannerList.length > 1 && (
 						<TempSubBannerImg
 							ref={banner}
-							alt='sub banner image'
-							src={`${IMG_ADDRESS}/${
-								bannerList[bannerList.length - 1].image
-							}`}
+							alt="sub banner image"
+							src={`${IMG_ADDRESS}/${bannerList[bannerList.length - 1].image}`}
 						/>
 					)}
 					{bannerList.map((el, idx) => (
 						<SubBannerImg
 							key={idx}
 							ref={banner}
-							alt='sub_banner img'
+							alt="sub_banner img"
 							src={`${IMG_ADDRESS}/${el.image}`}
+							onClick={() => {
+								goUrl(el);
+							}}
 						/>
 					))}
 					{bannerList.length > 1 && (
 						<TempSubBannerImg
-							alt='sub banner image'
+							alt="sub banner image"
 							src={`${IMG_ADDRESS}/${bannerList[0].image}`}
 						/>
 					)}
@@ -117,6 +142,7 @@ const SubBannerImg = styled.img`
 	width: 100%;
 	height: 35rem;
 	object-fit: fill;
+	cursor: pointer;
 `;
 const TempSubBannerImg = styled(SubBannerImg)``;
 const BnnInfoDotBox = styled.ul`
