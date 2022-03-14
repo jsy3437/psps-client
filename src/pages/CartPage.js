@@ -214,10 +214,12 @@ const Title = styled.h2`
 `;
 const CartContentWrap = styled.div`
 	display: flex;
+	/* border: 1px solid red; */
 `;
 const OrderBoxBox = styled.div`
-	border: 1px solid #000;
-	/* height: 100%; */
+	position: relative;
+	/* border: 1px solid #000; */
+	width: 45.5rem;
 	margin-left: 4.8rem;
 `;
 const AllCheckAndRemove = styled.div`

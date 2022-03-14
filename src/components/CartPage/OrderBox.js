@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const OrderBox = (props) => {
+	const orderWrap = useRef();
 	const history = useHistory();
+	const [fixState, setFixState] = useState(false);
+
 	const orderCalc = props.orderCalc;
+
+	// useEffect(() => {
+	// 	window.addEventListener('scroll', scrollListener);
+	// }, []);
+
+	// const scrollListener = () => {
+	// 	if (
+	// 		window.pageYOffset >
+	// 		orderWrap.current.offsetTop + orderWrap.current.offsetHeight
+	// 	) {
+	// 		return setFixState('end');
+	// 	} else if (window.pageYOffset > orderWrap.current.offsetTop) {
+	// 		return setFixState('fixed');
+	// 	} else {
+	// 		return setFixState(false);
+	// 	}
+	// 	// console.log(window.pageYOffset);
+	// };
 
 	const goShopping = () => {
 		history.push('/product');
@@ -23,12 +44,21 @@ const OrderBox = (props) => {
 			},
 		});
 	};
+	console.log(fixState);
+	console.log('aa', orderWrap.current && orderWrap);
 
 	return (
-		<OrderWrap>
+		<OrderWrap
+			ref={orderWrap}
+			fixed={fixState === 'fixed'}
+			ended={fixState === 'end'}
+		>
 			{props.supplierList &&
 				props.supplierList.map((el, idx) => (
-					<PriceBox key={idx}>
+					<PriceBox
+						key={idx}
+						displayNon={orderCalc[idx] && orderCalc[idx].total === 0}
+					>
 						<TitleAndPrice>
 							<PriceTitle>판매자</PriceTitle>
 							<Price color={'#A0A0A0'}>{el[0]}</Price>
@@ -36,13 +66,11 @@ const OrderBox = (props) => {
 						<TitleAndPrice>
 							<PriceTitle>총 상품 금액</PriceTitle>
 							<Price color={'#e50011'}>
-								{orderCalc[idx] &&
-									orderCalc[idx].total.toLocaleString()}
-								원
+								{orderCalc[idx] && orderCalc[idx].total.toLocaleString()}원
 							</Price>
 						</TitleAndPrice>
 						<TitleAndPrice>
-							<PriceTitle>배송비</PriceTitle>
+							<PriceTitle>배송비 {el.total}</PriceTitle>
 							<Price color={'#e50011'}>
 								{props.orderCalc[idx] &&
 									props.orderCalc[idx].delivery_price.toLocaleString()}
@@ -72,20 +100,19 @@ const OrderBox = (props) => {
 export default OrderBox;
 
 const OrderWrap = styled.div`
-	position: sticky;
 	width: 45.5rem;
-	/* height: 57.2rem; */
 	border: 1px solid #e0e0e0;
 	border-radius: 4px;
 	padding: 4rem 5.5rem;
-	top: 0%;
-	/* left: 58%; */
+	/* ${(props) => props.fixed && `position:fixed; top: 17rem;`}
+	${(props) => props.end && `position:absolute; bottom:0rem;`} */
 `;
 const PriceBox = styled.div`
 	width: 100%;
 	padding-bottom: 0.85rem;
 	border-bottom: 1px solid #e0e0e0;
 	margin-bottom: 2.45rem;
+	${(props) => props.displayNon && `display:none; border:1px solid red;`}
 `;
 const TitleAndPrice = styled.div`
 	display: flex;

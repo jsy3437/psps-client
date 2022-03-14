@@ -26,7 +26,6 @@ const RecommendList = () => {
 	const goDetail = (product_id) => {
 		history.push(`/detail/${product_id}`);
 	};
-	// console.log(list);
 
 	return (
 		<RecommendWrap>
