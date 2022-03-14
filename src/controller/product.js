@@ -1,13 +1,15 @@
 import axios from 'axios';
-import { ADDRESS } from '../config';
+import { MODE, ADDRESS } from '../config';
+
+const url =
+	MODE === 'development'
+		? { proxy: `${ADDRESS}`, baseURL: '/product' }
+		: { baseURL: `${ADDRESS}/product` };
 
 const instance = axios.create({
-	// proxy: `${ADDRESS}`,
-	// baseURL: '/product',
-	baseURL: `${ADDRESS}/product`,
+	...url,
 	withCredentials: true,
 });
-
 const errorMessage = () => {
 	window.alert('서버가 응답하지 않습니다. 잠시 후 다시 시도해주세요.');
 	return new Error('Server Error');
