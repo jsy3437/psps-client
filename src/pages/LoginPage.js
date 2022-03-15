@@ -48,10 +48,10 @@ const LoginPage = () => {
 	};
 
 	return (
-		<div id='container'>
+		<div id="container">
 			<Container>
 				<RegisterInside>
-					<LogoImg alt='logo' src={logo} />
+					<LogoImg alt="logo" src={logo} />
 					<Title>품생품사 로그인</Title>
 					<Items>
 						<ItemTitle>이메일</ItemTitle>
@@ -64,7 +64,7 @@ const LoginPage = () => {
 					<Items last>
 						<ItemTitle>비밀번호</ItemTitle>
 						<ItemInput
-							type='password'
+							type="password"
 							value={password ? password : ''}
 							onChange={onChangePassword}
 							placeholder={'비밀번호를 입력해주세요'}
@@ -149,7 +149,7 @@ const ItemInput = styled.input`
 	color: #221814;
 	padding-left: 1.2rem;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	background-color: #fff;
 	&::placeholder {
 		color: #c6c6c6;
@@ -186,7 +186,7 @@ const SubmitButton = styled.button`
 	color: #e50011;
 	background-color: #fff;
 	border: 1px solid #e50011;
-	border-radius: 4px;
+	border-radius: 14px;
 	transition: all 200ms ease;
 	&:hover {
 		background-color: #e50011;

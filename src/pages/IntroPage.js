@@ -44,9 +44,9 @@ const IntroPage = () => {
 		},
 	];
 	return (
-		<div id='container'>
+		<div id="container">
 			<Container>
-				<BackgroundImg alt='intro banner' src={bnn_top} />
+				<BackgroundImg alt="intro banner" src={bnn_top} />
 				<IntroTextBox top>
 					<IntroTextTitle>{intro[0].title}</IntroTextTitle>
 					<IntroText>{intro[0].text}</IntroText>
@@ -58,17 +58,17 @@ const IntroPage = () => {
 					<IntroTextPoint>{intro[1].point}</IntroTextPoint>
 				</IntroTextBox>
 				<IntroWorryBox top>
-					<WorryImg alt='worry image' src={intro[2].src} />
+					<WorryImg alt="worry image" src={intro[2].src} />
 					<IntroTextPoint>{intro[2].point}</IntroTextPoint>
 					<IntroText>{intro[2].text}</IntroText>
 				</IntroWorryBox>
 				<IntroWorryBox middle>
-					<WorryImg alt='worry image' src={intro[3].src} />
+					<WorryImg alt="worry image" src={intro[3].src} />
 					<IntroTextPoint>{intro[3].point}</IntroTextPoint>
 					<IntroText>{intro[3].text}</IntroText>
 				</IntroWorryBox>
 				<IntroWorryBox bottom>
-					<WorryImg alt='worry image' src={intro[4].src} />
+					<WorryImg alt="worry image" src={intro[4].src} />
 					<IntroTextPoint>{intro[4].point}</IntroTextPoint>
 					<IntroText>{intro[4].text}</IntroText>
 				</IntroWorryBox>
@@ -77,7 +77,7 @@ const IntroPage = () => {
 					<IntroText>{intro[5].text}</IntroText>
 					<IntroTextPoint>{intro[5].point}</IntroTextPoint>
 				</IntroTextBox>
-				<BackgroundImg alt='intro banner' src={bnn_bottom} />
+				<BackgroundImg alt="intro banner" src={bnn_bottom} />
 			</Container>
 			<Induce />
 			<Footer />
@@ -125,8 +125,9 @@ const IntroText = styled.p`
 	font-size: 2.1rem;
 	font-family: 'kr-r';
 	letter-spacing: -0.084rem;
-	color: #221814;
+	color: #6b6462;
 	margin-bottom: 3rem;
+	margin-top: 2.6rem;
 `;
 const IntroTextPoint = styled.p`
 	font-size: 5.2rem;

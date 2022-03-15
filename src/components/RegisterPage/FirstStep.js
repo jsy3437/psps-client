@@ -82,6 +82,7 @@ const FirstStep = (props) => {
 		} else if (email) {
 			_user.check_email({ email }).then((res) => {
 				const { success } = res.data;
+				console.log(res.data);
 				if (!success) {
 					return alert('이미 가입된 이메일입니다');
 				} else {
@@ -95,7 +96,7 @@ const FirstStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='logo' src={logo} />
+				<LogoImg alt="logo" src={logo} />
 				<Title>품생품사 회원가입</Title>
 				<Items>
 					<ItemTitle>이메일</ItemTitle>
@@ -114,7 +115,7 @@ const FirstStep = (props) => {
 					<ItemTitle>비밀번호</ItemTitle>
 					<ItemInput
 						ref={passwordInput}
-						type='password'
+						type="password"
 						value={password ? password : ''}
 						onChange={passwordController}
 						placeholder={'비밀번호를 입력해주세요'}
@@ -128,7 +129,7 @@ const FirstStep = (props) => {
 					<ItemTitle>비밀번호 확인</ItemTitle>
 					<ItemInput
 						ref={passwordConfirmInput}
-						type='password'
+						type="password"
 						value={passwordConfirm ? passwordConfirm : ''}
 						onChange={passwordConfirmController}
 						placeholder={'비밀번호를 확인해주세요'}
@@ -142,7 +143,7 @@ const FirstStep = (props) => {
 				<AgreeBox>
 					<AgreeLeft>
 						<AgreeCheck
-							alt=''
+							alt=""
 							src={agreeCheck ? check_box : uncheck_box}
 							onClick={agreeCheckController}
 						/>
@@ -166,10 +167,10 @@ const FirstStep = (props) => {
 					</EasyLeft>
 					<EasyRight>
 						<SocialLogoBox NLogo>
-							<SocialLogo alt='icon' src={N_logo} />
+							<SocialLogo alt="icon" src={N_logo} />
 						</SocialLogoBox>
 						<SocialLogoBox KLogo>
-							<SocialLogo alt='icon' src={K_logo} />
+							<SocialLogo alt="icon" src={K_logo} />
 						</SocialLogoBox>
 					</EasyRight>
 				</EasyBox>
@@ -228,7 +229,7 @@ const ItemInput = styled.input`
 	color: #221814;
 	padding-left: 1.2rem;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	background-color: #fff;
 	${(props) => props.error && `&:focus{border 1px solid #E50011}`}
 	&::placeholder {
@@ -251,6 +252,7 @@ const AgreeBox = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	padding: 0 0.4rem;
 `;
 const AgreeLeft = styled.div`
 	display: flex;
@@ -280,11 +282,10 @@ const AgreeRight = styled.div`
 const AgreeContents = styled.p`
 	width: 100%;
 	text-align: left;
-	margin-top: 0.8rem;
-	margin-bottom: 1.6rem;
 	font-size: 1rem;
 	font-family: 'kr-r';
 	color: #a0a0a0;
+	margin: 0.8rem 0 1.6rem 0.4rem;
 `;
 const SubmitButton = styled.button`
 	width: 34.6rem;
@@ -296,7 +297,7 @@ const SubmitButton = styled.button`
 	color: #e50011;
 	background-color: #fff;
 	border: 1px solid #e50011;
-	border-radius: 4px;
+	border-radius: 14px;
 	transition: all 200ms ease;
 	&:hover {
 		background-color: #e50011;

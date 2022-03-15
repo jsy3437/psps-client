@@ -59,7 +59,11 @@ const FindPwInput = (props) => {
 
 	const getConfirmNumber = () => {
 		if (props.checkLength.phone_number) {
-			_user.send_sms({ phone_number: props.phone_number }).then((res) => {
+			const data = {
+				phone_number: props.phone_number,
+				email: props.email,
+			};
+			_user.find_Pw_get_number(data).then((res) => {
 				const { success } = res.data;
 				if (success) {
 					alert('인증번호가 발송되었습니다.');
@@ -178,7 +182,7 @@ const ItemInput = styled.input`
 	color: #221814;
 	padding-left: 1.2rem;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	background-color: #fff;
 	&::placeholder {
 		color: #c6c6c6;

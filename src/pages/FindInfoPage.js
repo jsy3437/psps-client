@@ -71,27 +71,35 @@ const FindInfoPage = () => {
 	}, [checkLength, confirm, getConfirmNum, item]);
 
 	const goFindID = () => {
-		if (!findIdState) {
-			return;
+		if (findIdState) {
+			const data = {
+				name,
+				phone_number,
+			};
+
+			_user.find_email(data).then((res) => {
+				const { success, email } = res.data;
+				if (success) {
+					history.push({ pathname: '/find-result/id', state: { name, email } });
+				} else {
+					history.push('/find-result/id');
+				}
+			});
 		}
-		const data = {
-			name,
-			phone_number,
-		};
-
-		_user.find_email(data).then((res) => {
-			const { success, email } = res.data;
-			if (success) {
-				history.push({ pathname: '/find-result', state: { name, email } });
-			}
-		});
-
-		history.push('/find-result');
 	};
 	const goFindPW = () => {
 		if (findPwState) {
-			alert('비밀번호 찾기로 이동');
+			history.push({ pathname: '/find-result/pw', state: email });
 		}
+
+		// const data = {
+		// 	email,
+		// 	// password,
+		// };
+		// _user.find_Pw_change(data).then((res) => {
+		// 	const { success } = res.data;
+		// 	success && console.log(res.data);
+		// });
 	};
 
 	return (
@@ -181,7 +189,7 @@ const SubmitButton = styled.button`
 	color: #a0a0a0;
 	background-color: #fff;
 	border: 1px solid #a0a0a0;
-	border-radius: 4px;
+	border-radius: 14px;
 	${(props) => props.state && `border: 1px solid #e50011;color: #e50011;`}
 	&:hover {
 		background-color: #e50011;

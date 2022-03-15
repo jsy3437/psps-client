@@ -12,7 +12,7 @@ const Induce = () => {
 
 	return (
 		<InduceContainer>
-			<InduceImg alt='' src={img} onClick={goShopping} />
+			<InduceImg alt="" src={img} onClick={goShopping} />
 		</InduceContainer>
 	);
 };
@@ -29,5 +29,6 @@ const InduceImg = styled.img`
 	width: 120rem;
 	height: 25rem;
 	margin-top: 4rem;
+	border-radius: 32px;
 	cursor: pointer;
 `;

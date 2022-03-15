@@ -15,9 +15,7 @@ const FindIdResultPage = () => {
 			setName(location.name);
 			const splitEmail = location.email.split('@');
 			const sliceEmail = splitEmail[0].slice(0, 3);
-			const starEmail = new Array(splitEmail[0].length - 3)
-				.fill('*')
-				.join('');
+			const starEmail = new Array(splitEmail[0].length - 3).fill('*').join('');
 			setEmail(sliceEmail + starEmail + '@' + splitEmail[1]);
 		}
 	}, [location]);
@@ -33,10 +31,10 @@ const FindIdResultPage = () => {
 	};
 
 	return (
-		<div id='container'>
+		<div id="container">
 			<Container>
 				<FindIdInside>
-					<LogoImg alt='logo' src={logo} />
+					<LogoImg alt="logo" src={logo} />
 					<Title>품생품사 아이디 찾기</Title>
 					<FindResult>
 						{name && email
@@ -100,7 +98,7 @@ const SubmitButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;
 	line-height: 6.2rem;
-	border-radius: 4px;
+	border-radius: 14px;
 	font-size: 2.4rem;
 	font-family: 'kr-r';
 	border: none;

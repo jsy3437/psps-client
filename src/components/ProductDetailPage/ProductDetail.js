@@ -43,13 +43,12 @@ const ProductDetail = (props) => {
 
 			<ProductDetailBody>
 				<DetailImg
-					alt='detail img'
+					alt="detail img"
 					src={
 						props.detail.detail_image &&
 						`${IMG_ADDRESS}/${props.detail.detail_image}`
 					}
 				/>
-				<GrayBackground />
 			</ProductDetailBody>
 		</ProductDetailWrap>
 	);
@@ -60,7 +59,6 @@ export default ProductDetail;
 const ProductDetailWrap = styled.div`
 	position: relative;
 	width: 192rem;
-	/* z-index: -5; */
 `;
 const ProductDetailHead = styled.div`
 	width: 192rem;
@@ -73,8 +71,9 @@ const ProductDetailHead = styled.div`
 `;
 const ControllerBox = styled.div`
 	width: 100%;
-	position: absolute;
-	top: 22.7rem;
+	position: fixed;
+	bottom: 3rem;
+	left: 0;
 `;
 const Controller = styled.ul`
 	width: 36rem;
@@ -83,7 +82,7 @@ const Controller = styled.ul`
 	margin: auto;
 	background: #ffffff 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 10px #00000029;
-	border-radius: 4px;
+	border-radius: 14px;
 	z-index: 99;
 `;
 const Switch = styled.li`
@@ -95,12 +94,14 @@ const Switch = styled.li`
 	font-family: 'kr-r';
 	color: #221814;
 	background-color: #fff;
+	border-radius: 14px;
+
 	cursor: pointer;
 	${(props) =>
 		props.active &&
 		`border: 3px solid #E50011;
 		box-shadow: 0px 3px 6px #00000029;
-		border-radius: 4px; line-height:6.4rem;`}
+		line-height:6.4rem;`}
 `;
 const ProductDetailBody = styled.div`
 	width: 192rem;
@@ -111,15 +112,4 @@ const ProductDetailBody = styled.div`
 `;
 const DetailImg = styled.img`
 	width: 120rem;
-`;
-
-const GrayBackground = styled.div`
-	width: 192rem;
-	height: 32.7rem;
-	display: flex;
-	justify-content: center;
-	background-color: #e0e0e0;
-	position: absolute;
-	bottom: 0;
-	z-index: -5;
 `;

@@ -17,10 +17,7 @@ const ProductCategory = (props) => {
 		<ProductCategoryWrap>
 			<PartWrap>
 				{category.mainCategories.map((el, idx) => (
-					<PartList
-						key={idx}
-						active={props.part === el}
-						onClick={onChangePart}>
+					<PartList key={idx} active={props.part === el} onClick={onChangePart}>
 						{el}
 					</PartList>
 				))}
@@ -34,13 +31,13 @@ const ProductCategory = (props) => {
 									(idx === 0 && props.subPart === null) ||
 									(idx > 0 && props.subPart === el)
 								}
-								onClick={onChangeSubPart}>
+								onClick={onChangeSubPart}
+							>
 								{el}
 							</SubPartList>
 							<SubPartListLine
-								last={
-									idx === props.subPartArr.arr.length - 1
-								}></SubPartListLine>
+								last={idx === props.subPartArr.arr.length - 1}
+							></SubPartListLine>
 						</SubPartListBox>
 					))}
 			</SubPartWrap>
@@ -68,7 +65,7 @@ const PartWrap = styled.ul`
 	align-items: center;
 	background: #ffffff 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 18px #00000029;
-	border-radius: 4px;
+	border-radius: 14px;
 	cursor: pointer;
 `;
 const PartList = styled.li`
@@ -83,7 +80,7 @@ const PartList = styled.li`
 	letter-spacing: -0.72px;
 	${(props) =>
 		props.active &&
-		`font-family:'kr-b'; border:3px solid #E50011; border-radius:4px; padding:0`}
+		`font-family:'kr-b'; border:3px solid #E50011; border-radius:14px; padding:0`}
 `;
 const SubPartWrap = styled.ul`
 	height: 2.6rem;

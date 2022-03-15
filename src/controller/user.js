@@ -52,6 +52,10 @@ export const change_address = async (userData) => {
 export const find_email = async (userData) => {
 	return await instance.post('/email', userData).catch(errorMessage);
 };
-// export const find_Pw = async (userData) => {
-// 	return await instance.post('/email', userData).catch(errorMessage);
-// };
+export const find_Pw_get_number = async (userData) => {
+	return await instance.post('/find', userData).catch(errorMessage);
+};
+export const find_Pw_change = async (userData) => {
+	console.log(userData);
+	return await instance.patch('/password', userData).catch(errorMessage);
+};

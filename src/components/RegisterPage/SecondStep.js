@@ -37,7 +37,7 @@ const SecondStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='logo' src={logo} />
+				<LogoImg alt="logo" src={logo} />
 				<Title>품생품사 가입약관</Title>
 				{arr.map((el, idx) => (
 					<Items key={idx}>
@@ -103,19 +103,22 @@ const ItemTextBox = styled.div`
 	padding: 1.2rem;
 	overflow-y: scroll;
 	border: 1px solid #e0e0e0;
-	border-radius: 4px;
+	border-radius: 14px;
 	white-space: pre-line;
 	::-webkit-scrollbar {
 		width: 0.9rem;
 		height: 4rem;
-		background-color: #fff;
+		background-color: transparent;
 	}
 	::-webkit-scrollbar-thumb {
 		background-color: #707070;
 		border-radius: 10px;
 		background-clip: padding-box;
 		border: 3px solid transparent;
-		height: 4.4rem;
+		border-top: 7px solid transparent;
+		border-bottom: 5px solid transparent;
+
+		height: 4rem;
 	}
 `;
 const SubmitButton = styled.button`
@@ -123,7 +126,7 @@ const SubmitButton = styled.button`
 	height: 6.2rem;
 	line-height: 6.2rem;
 	border: none;
-	border-radius: 4px;
+	border-radius: 14px;
 	font-size: 2.4rem;
 	font-family: 'kr-r';
 	${(props) =>

@@ -22,14 +22,16 @@ const ProductList = (props) => {
 						}}
 						onMouseLeave={() => {
 							setHover('');
-						}}>
+						}}
+					>
 						<ProductImgBox
 							onClick={() => {
 								goDetail(el.product_id);
-							}}>
+							}}
+						>
 							{el.image && (
 								<ProductImg
-									alt='product img'
+									alt="product img"
 									src={`${IMG_ADDRESS}/${el.image}`}
 									hover={hover === idx}
 								/>
@@ -40,14 +42,13 @@ const ProductList = (props) => {
 							onClick={() => {
 								goDetail(el.product_id);
 							}}
-							hover={hover === idx}>
+							hover={hover === idx}
+						>
 							{el.title}
 						</ProductTitle>
 						<ProductDescTotalPrice>
 							{el.discount !== 0 && (
-								<ProductDesc>
-									{`${el.price.toLocaleString()}원`}
-								</ProductDesc>
+								<ProductDesc>{`${el.price.toLocaleString()}원`}</ProductDesc>
 							)}
 							{`${(el.price - el.discount).toLocaleString()}`}
 							<DescWon>원</DescWon>
@@ -86,7 +87,7 @@ const ProductImgBox = styled.div`
 	width: 38rem;
 	height: 35rem;
 	cursor: pointer;
-	border-radius: 4px;
+	border-radius: 24px;
 	overflow: hidden;
 `;
 const ProductImg = styled.img`

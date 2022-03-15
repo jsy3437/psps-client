@@ -97,7 +97,7 @@ const OrderBox = (props) => {
 			<Box>
 				<BoxLeft>
 					<BoxLeftImg
-						alt='product img'
+						alt="product img"
 						src={
 							props.detail.temp_image &&
 							`${IMG_ADDRESS}/${props.detail.temp_image}`
@@ -107,8 +107,7 @@ const OrderBox = (props) => {
 				<BoxRight>
 					<RightInside>
 						<PartInfo>
-							{props.detail &&
-								`${props.detail.part} > ${props.detail.subPart}`}
+							{props.detail && `${props.detail.part} > ${props.detail.subPart}`}
 						</PartInfo>
 						<RightTitle>{props.detail && props.detail.title}</RightTitle>
 						<RightPriceBox>
@@ -116,19 +115,13 @@ const OrderBox = (props) => {
 								<RightExisting>
 									기존가
 									<RightExistingSpan>
-										{`${
-											option &&
-											(option.price * count).toLocaleString()
-										}원`}
+										{`${option && (option.price * count).toLocaleString()}원`}
 									</RightExistingSpan>
 								</RightExisting>
 							) : null}
 							<RightPrice>
 								{option &&
-									(
-										(option.price - option.discount) *
-										count
-									).toLocaleString()}
+									((option.price - option.discount) * count).toLocaleString()}
 								<RightPriceWon>원</RightPriceWon>
 							</RightPrice>
 						</RightPriceBox>
@@ -144,8 +137,9 @@ const OrderBox = (props) => {
 									option
 									onClick={() => {
 										setOpenOption(!openOption);
-									}}>
-									<RightButtonImg alt='' src={angle_down} />
+									}}
+								>
+									<RightButtonImg alt="" src={angle_down} />
 								</RightButton>
 							</RightOptionBox>
 						) : (
@@ -155,7 +149,8 @@ const OrderBox = (props) => {
 										key={idx}
 										onClick={() => {
 											onChangeOption(el);
-										}}>
+										}}
+									>
 										{el.title}
 									</RightOptionList>
 								))}
@@ -163,12 +158,12 @@ const OrderBox = (props) => {
 						)}
 						<RightOptionBox count>
 							<RightButton minus onClick={decreaseCount}>
-								<RightButtonImg alt='button' src={decrease} />
+								<RightButtonImg alt="button" src={decrease} />
 							</RightButton>
 							{count}
 							<RightOptionTitle>수량</RightOptionTitle>
 							<RightButton plus onClick={increaseCount}>
-								<RightButtonImg alt='button' src={increase} />
+								<RightButtonImg alt="button" src={increase} />
 							</RightButton>
 						</RightOptionBox>
 						<SubmitButton orderBtn onClick={goPayment}>{`${
@@ -204,10 +199,12 @@ const Box = styled.div`
 	border-radius: 4px;
 	position: absolute;
 	bottom: -5.4rem;
+	border-radius: 24px;
 `;
 const BoxLeft = styled.div`
 	width: 59.28853754940711%;
 	height: 100%;
+	border-radius: 24px;
 `;
 const BoxLeftImg = styled.img`
 	width: 100%;
@@ -287,7 +284,7 @@ const RightOptionListBox = styled.ul`
 	background: #ffffff;
 	box-shadow: 2px 6px 10px #00000029;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	overflow-y: scroll;
 	z-index: 10;
 	transition: all 200ms ease;
@@ -318,8 +315,9 @@ const RightOptionBox = styled.div`
 	align-items: center;
 	position: relative;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	text-align: center;
+
 	${(props) => props.option && `position:absolute; top:19.3rem;  `}
 	${(props) => props.option && `margin-top:2rem;`} 
 	${(props) => props.count && `margin-top:9.4rem;`}
@@ -362,7 +360,7 @@ const SubmitButton = styled.button`
 	letter-spacing: -0.96px;
 	border: none;
 	background: #221814 0% 0% no-repeat padding-box;
-	border-radius: 4px;
+	border-radius: 14px;
 	transition: all 200ms ease;
 	${(props) =>
 		props.cartBtn &&

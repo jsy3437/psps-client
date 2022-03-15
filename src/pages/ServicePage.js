@@ -32,9 +32,9 @@ const ServicePage = () => {
 	}, [type]);
 
 	return (
-		<div id='container'>
+		<div id="container">
 			<Container>
-				<LogoImg alt='logo' src={logo} />
+				<LogoImg alt="logo" src={logo} />
 				<Title>자주 묻는 질문</Title>
 				<MenuBox>
 					{types.map((el, idx) => (
@@ -43,7 +43,8 @@ const ServicePage = () => {
 							select={type === idx + 1}
 							onClick={() => {
 								setType(idx + 1);
-							}}>
+							}}
+						>
 							{el}
 						</Menu>
 					))}
@@ -55,7 +56,8 @@ const ServicePage = () => {
 								<QuestionBox
 									onClick={() => {
 										setAnswerOpen(idx);
-									}}>
+									}}
+								>
 									<QnAText>{el.qu_title}</QnAText>
 								</QuestionBox>
 								{answerOpen === idx && (
@@ -102,7 +104,7 @@ const MenuBox = styled.ul`
 	align-items: center;
 	justify-content: space-around;
 	box-shadow: 0px 3px 18px #00000029;
-	border-radius: 4px;
+	border-radius: 14px;
 `;
 const Menu = styled.li`
 	height: 7rem;
@@ -112,7 +114,7 @@ const Menu = styled.li`
 	letter-spacing: -0.72px;
 	color: #221814;
 	text-align: center;
-	border-radius: 4px;
+	border-radius: 14px;
 	cursor: pointer;
 	${(props) =>
 		props.select &&
@@ -126,7 +128,7 @@ const QnAList = styled.li`
 	width: 100%;
 	margin-bottom: 1.2rem;
 	box-shadow: 2px 6px 18px #00000014;
-	border-radius: 4px;
+	border-radius: 14px;
 	padding: 0 2.8rem;
 `;
 const QuestionBox = styled.div`
@@ -145,6 +147,7 @@ const QuestionBox = styled.div`
 `;
 const AnswerBox = styled(QuestionBox)`
 	background-image: url(${background_A});
+	border-bottom: none;
 `;
 const QnAText = styled.p`
 	font-size: 1.8rem;
@@ -170,6 +173,6 @@ const Button = styled.button`
 	color: #fff;
 	letter-spacing: -0.84px;
 	border: none;
-	border-radius: 4px;
+	border-radius: 14px;
 	background-color: #221814;
 `;

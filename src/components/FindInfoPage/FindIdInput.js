@@ -37,7 +37,7 @@ const FindIdInput = (props) => {
 			<Items>
 				<ItemTitle>휴대폰번호</ItemTitle>
 				<ItemInput
-					type='text'
+					type="text"
 					maxLength={11}
 					value={props.phone_number ? props.phone_number : ''}
 					placeholder={`'-'을 제외한 휴대폰 번호를 입력해주세요.`}
@@ -79,7 +79,7 @@ const ItemInput = styled.input`
 	color: #221814;
 	padding-left: 1.2rem;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	background-color: #fff;
 	&::placeholder {
 		color: #c6c6c6;

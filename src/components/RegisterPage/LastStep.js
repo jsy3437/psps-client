@@ -18,7 +18,7 @@ const LastStep = () => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='logo' src={logo} />
+				<LogoImg alt="logo" src={logo} />
 				<Title>품생품사 회원가입 완료</Title>
 				<Text>{`감사합니다. ${user.name}님!\n더 좋은 품질로 보답하겠습니다.`}</Text>
 				<SubmitButton shopping onClick={goShopping}>
@@ -73,13 +73,12 @@ const SubmitButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;
 	line-height: 6.2rem;
-	border-radius: 4px;
+	border-radius: 14px;
 	font-size: 2.4rem;
 	font-family: 'kr-r';
 	border: none;
 	${(props) =>
-		props.shopping &&
-		`background-color:#E50011; color:#fff ; margin-top:2rem`}
+		props.shopping && `background-color:#E50011; color:#fff ; margin-top:2rem`}
 	${(props) =>
 		props.home &&
 		`background-color:#fff; color: #E50011; border: 1px solid #E50011; margin-top:1.2rem`};

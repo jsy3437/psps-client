@@ -142,6 +142,7 @@ const SubBannerImg = styled.img`
 	width: 100%;
 	height: 35rem;
 	object-fit: fill;
+	border-radius: 24px;
 	cursor: pointer;
 `;
 const TempSubBannerImg = styled(SubBannerImg)``;

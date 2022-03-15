@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const ProductBanner = (props) => {
 	return (
 		<ProductBannerWrap>
-			<ProductBannerImg alt='배너' src={props.subPartArr.bnnImg} />
+			<ProductBannerImg alt="배너" src={props.subPartArr.bnnImg} />
 			<ProductBannerTitle>{`품질 좋은 ${props.part}`}</ProductBannerTitle>
 		</ProductBannerWrap>
 	);

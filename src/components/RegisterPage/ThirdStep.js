@@ -158,14 +158,14 @@ const ThirdStep = (props) => {
 	return (
 		<Container>
 			<RegisterInside>
-				<LogoImg alt='logo' src={logo} />
+				<LogoImg alt="logo" src={logo} />
 				<Title>품생품사 회원가입 - 정보입력</Title>
 				<Items>
 					<ItemTitle>이름</ItemTitle>
 					<ItemInput
 						ref={nameInput}
 						onChange={changeName}
-						placeholder='이름을 입력해주세요'
+						placeholder="이름을 입력해주세요"
 					/>
 					{isSubmit && !checkLength.name && (
 						<InputError>{'이름을 확인해주세요'}</InputError>
@@ -174,9 +174,9 @@ const ThirdStep = (props) => {
 				<Items>
 					<ItemTitle>휴대폰번호</ItemTitle>
 					<ItemInput
-						type='text'
+						type="text"
 						ref={phoneNumberInput}
-						maxLength='11'
+						maxLength="11"
 						onChange={changePhoneNumber}
 						value={phone_number}
 						placeholder="'-'을 제외한 휴대폰 번호를 입력해주세요."
@@ -189,8 +189,8 @@ const ThirdStep = (props) => {
 					<ItemTitle>인증번호</ItemTitle>
 					<ItemInput
 						name={'confirmNum'}
-						type='text'
-						maxLength='6'
+						type="text"
+						maxLength="6"
 						ref={confirmNumberInput}
 						value={confirm_number}
 						onChange={changeConfirm}
@@ -208,13 +208,15 @@ const ThirdStep = (props) => {
 						}
 						onClick={() => {
 							checkConfirmNumber(confirm_number);
-						}}>
+						}}
+					>
 						인증확인
 					</CheckButton>
 					{!getConfirmNum && (
 						<CheckButton
 							active={phone_number.length === 11}
-							onClick={getConfirmNumber}>
+							onClick={getConfirmNumber}
+						>
 							인증번호 발송
 						</CheckButton>
 					)}
@@ -227,7 +229,8 @@ const ThirdStep = (props) => {
 						checkLength.confirm_number &&
 						confirm
 					}
-					onClick={onSubmit}>
+					onClick={onSubmit}
+				>
 					가입하기
 				</SubmitButton>
 				<BackButton back onClick={goBack}>
@@ -292,7 +295,7 @@ const ItemInput = styled.input`
 	color: #221814;
 	padding-left: 1.2rem;
 	background-color: #fff;
-	border-radius: 4px;
+	border-radius: 14px;
 	border: 1px solid #c6c6c6;
 	&::placeholder {
 		color: #c6c6c6;
@@ -317,7 +320,7 @@ const CheckButton = styled.button`
 	position: absolute;
 	top: 1.7rem;
 	right: 12px;
-	border-radius: 4px;
+	border-radius: 8px;
 	border: 1px solid #c6c6c6;
 	background-color: #fff;
 	cursor: pointer !important;
@@ -329,7 +332,7 @@ const BackButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;
 	line-height: 6.2rem;
-	border-radius: 4px;
+	border-radius: 14px;
 	font-size: 2.4rem;
 	font-family: 'kr-r';
 	background-color: #fff;
@@ -341,7 +344,7 @@ const SubmitButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;
 	line-height: 6.2rem;
-	border-radius: 4px;
+	border-radius: 14px;
 	font-size: 2.4rem;
 	font-family: 'kr-r';
 	border: none;

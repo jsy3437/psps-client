@@ -10,6 +10,7 @@ import MyPagePage from './pages/MyPagePage';
 import RegisterPage from './pages/RegisterPage';
 import FindInfoPage from './pages/FindInfoPage';
 import FindIdResultPage from './pages/FindIdResultPage';
+import FindPwResultPage from './pages/FindPwResultPage';
 import CartPage from './pages/CartPage';
 import IntroPage from './pages/IntroPage';
 import ProductPage from './pages/ProductPage';
@@ -40,8 +41,13 @@ const App = () => {
 					/>
 					<Route
 						exact
-						path="/find-result"
+						path="/find-result/id"
 						component={Auth(FindIdResultPage, false)}
+					/>
+					<Route
+						exact
+						path="/find-result/pw"
+						component={Auth(FindPwResultPage, false)}
 					/>
 					<Route exact path="/members" component={Auth(MyPagePage, true)} />
 					<Route exact path="/service" component={Auth(ServicePage, null)} />
