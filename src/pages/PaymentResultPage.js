@@ -19,9 +19,9 @@ const PaymentResultPage = () => {
 	};
 
 	return (
-		<div id='container'>
+		<div id="container">
 			<Container>
-				<LogoImg alt='logo' src={logo} />
+				<LogoImg alt="logo" src={logo} />
 				<Title>주문하기</Title>
 				<OrderResultInfo>{orderInfoMsg}</OrderResultInfo>
 				<SubmitButton orderDetail onClick={goOrderDetail}>
@@ -67,7 +67,7 @@ const OrderResultInfo = styled.p`
 const SubmitButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;
-	border-radius: 4px;
+	border-radius: 14px;
 	font-size: 2.1rem;
 	font-family: 'kr-r';
 	letter-spacing: -0.84px;

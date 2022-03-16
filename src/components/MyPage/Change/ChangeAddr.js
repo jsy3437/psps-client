@@ -58,9 +58,7 @@ const ChangeAddr = (props) => {
 					<PostcodeBtn onClick={onPostcode}>우편번호 찾기</PostcodeBtn>
 				</PostcodeBox>
 				<AddrInput
-					placeholder={
-						props.user.address && props.user.address.split('/')[0]
-					}
+					placeholder={props.user.address && props.user.address.split('/')[0]}
 					value={postAddr}
 					readOnly
 				/>
@@ -89,9 +87,7 @@ const ChangeAddr = (props) => {
 							setPostAddr={setPostAddr}
 							inputDetailAddr={inputDetailAddr}
 						/>
-						<PostcodeCloseBtn onClick={onPostcodeClose}>
-							닫기
-						</PostcodeCloseBtn>
+						<PostcodeCloseBtn onClick={onPostcodeClose}>닫기</PostcodeCloseBtn>
 					</PostcodeWrap>
 				</PostcodeModal>
 			)}
@@ -115,7 +111,7 @@ const ChangeAddrWrap = styled.div`
 	background-color: #fff;
 	margin: 20vh auto;
 	box-shadow: 0px 3px 6px #00000029;
-	border-radius: 4px;
+	border-radius: 24px;
 	padding: 3.6rem 6.7rem;
 `;
 const Title = styled.h2`
@@ -135,6 +131,7 @@ const AddrInput = styled.input`
 	width: 34.6rem;
 	padding: 1.2rem 2.8rem;
 	border: 1px solid #c6c6c6;
+	border-radius: 14px;
 	background-color: #fff;
 	font-size: 1.4rem;
 	letter-spacing: -0.28px;
@@ -151,7 +148,7 @@ const PostcodeBtn = styled.button`
 	padding: 1rem 1rem;
 	margin-bottom: 1rem;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	background-color: #f2f2f2;
 	font-size: 1.4rem;
 	font-family: 'kr-b';
@@ -164,7 +161,7 @@ const SubmitButton = styled.button`
 	font-family: 'kr-r';
 	letter-spacing: -0.96px;
 	color: #fff;
-	border-radius: 4px;
+	border-radius: 14px;
 	margin-top: 1.5rem;
 	${(props) =>
 		props.back &&
@@ -193,6 +190,6 @@ const PostcodeCloseBtn = styled.button`
 	height: 3rem;
 	margin: 1rem 0 0 85%;
 	padding: 0.2rem 0.4rem;
-	border-radius: 5px;
+	border-radius: 14px;
 	border: 1px solid #fff;
 `;

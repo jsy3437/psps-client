@@ -102,6 +102,13 @@ const PaymentPage = () => {
 				del_req,
 			};
 
+			console.log({
+				impData,
+				pasteAddrChecked,
+				delivery,
+				payment_product_list,
+			});
+
 			payment_request(
 				impData,
 				pasteAddrChecked,
@@ -184,7 +191,7 @@ const BtnBox = styled.div`
 const SubmitButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;
-	border-radius: 4px;
+	border-radius: 14px;
 	font-size: 2.1rem;
 	font-family: 'kr-r';
 	letter-spacing: -0.84px;
@@ -207,7 +214,7 @@ const SubmitButton = styled.button`
 const BackButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;
-	border-radius: 4px;
+	border-radius: 14px;
 	font-size: 2.1rem;
 	font-family: 'kr-r';
 	letter-spacing: -0.84px;

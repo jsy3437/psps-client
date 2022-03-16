@@ -74,6 +74,7 @@ const ControllerBox = styled.div`
 	position: fixed;
 	bottom: 3rem;
 	left: 0;
+	z-index: 99;
 `;
 const Controller = styled.ul`
 	width: 36rem;

@@ -90,7 +90,7 @@ const UserData = (props) => {
 				<ReceiveUserTitleBox>
 					<Title receive>받으시는 분</Title>
 					<CheckImg
-						alt='check button'
+						alt="check button"
 						src={props.checked ? check_img : uncheck_img}
 						onClick={onCheck}
 					/>
@@ -102,16 +102,18 @@ const UserData = (props) => {
 						<ReceiveUserInput
 							placeholder={receiveUserPlaceholder[0]}
 							value={props.del_name}
-							onChange={ChangeName}></ReceiveUserInput>
+							onChange={ChangeName}
+						></ReceiveUserInput>
 					</DataBox>
 					<DataBox>
 						<DataTitle>연락처</DataTitle>
 						<ReceiveUserInput
-							type='text'
-							maxLength='11'
+							type="text"
+							maxLength="11"
 							placeholder={receiveUserPlaceholder[1]}
 							onChange={ChangePhNumber}
-							value={props.del_tel}></ReceiveUserInput>
+							value={props.del_tel}
+						></ReceiveUserInput>
 					</DataBox>
 					<DataBox>
 						<DataTitle>배송지</DataTitle>
@@ -119,7 +121,8 @@ const UserData = (props) => {
 							<InputAndPostcode>
 								<ReceiveUserInput
 									value={props.postZoneCode && props.postZoneCode}
-									readOnly></ReceiveUserInput>
+									readOnly
+								></ReceiveUserInput>
 								<InputPostcodeBtn onClick={goDaumPostcode}>
 									우편번호 찾기
 								</InputPostcodeBtn>
@@ -128,22 +131,20 @@ const UserData = (props) => {
 								value={props.postAddr && props.postAddr}
 								long
 								destination
-								readOnly></ReceiveUserInput>
+								readOnly
+							></ReceiveUserInput>
 							<ReceiveUserInput
 								long
 								destination
 								ref={inputDetailAddr}
 								value={props.detailAddr}
-								placeholder={
-									props.postAddr && '상세주소를 입력해주세요'
-								}
-								onChange={changeDetailAddr}></ReceiveUserInput>
+								placeholder={props.postAddr && '상세주소를 입력해주세요'}
+								onChange={changeDetailAddr}
+							></ReceiveUserInput>
 							<PasteAddrCheckBox>
 								<CheckImg
-									alt='check button'
-									src={
-										props.pasteAddrChecked ? check_img : uncheck_img
-									}
+									alt="check button"
+									src={props.pasteAddrChecked ? check_img : uncheck_img}
 									onClick={onPasteAddrCheck}
 								/>
 								<CheckInfo addr>기본 배송지로 저장</CheckInfo>
@@ -155,10 +156,11 @@ const UserData = (props) => {
 						<DataTitle>배송요청사항</DataTitle>
 						<ReceiveUserInput
 							long
-							type='text'
-							maxLength='25'
+							type="text"
+							maxLength="25"
 							placeholder={receiveUserPlaceholder[2]}
-							onChange={ChangeRequest}></ReceiveUserInput>
+							onChange={ChangeRequest}
+						></ReceiveUserInput>
 					</DataBox>
 				</BorderBox>
 			</ReceiveUserWrap>
@@ -171,9 +173,7 @@ const UserData = (props) => {
 							setPostAddr={props.setPostAddr}
 							inputDetailAddr={inputDetailAddr}
 						/>
-						<PostcodeCloseBtn onClick={onPostcodeClose}>
-							닫기
-						</PostcodeCloseBtn>
+						<PostcodeCloseBtn onClick={onPostcodeClose}>닫기</PostcodeCloseBtn>
 					</PostcodeBox>
 				</PostcodeModal>
 			)}
@@ -201,8 +201,7 @@ const BorderBox = styled.ul`
 	width: 100%;
 	padding: 2rem 4rem 0;
 	border: 1px solid #e0e0e0;
-	border-radius: 4px;
-	box-shadow: 0px 0px 10px #00000014;
+	border-radius: 24px;
 `;
 const DataBox = styled.li`
 	display: flex;
@@ -251,10 +250,10 @@ const CheckInfo = styled.span`
 
 const ReceiveUserInput = styled.input`
 	width: 23.8rem;
-	padding: 1.2rem;
+	padding: 1.2rem 1.4rem;
 	display: block;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	background-color: #fff;
 	letter-spacing: -0.056rem;
 	text-align: left;
@@ -283,7 +282,7 @@ const InputPostcodeBtn = styled.div`
 	height: 4.3rem;
 	background-color: #f2f2f2;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	font-size: 1.4rem;
 	font-family: 'kr-b';
 	letter-spacing: -0.28px;

@@ -9,10 +9,7 @@ const MenuSelect = (props) => {
 	return (
 		<MenuWrap>
 			{['주문내역', '개인정보관리'].map((el, idx) => (
-				<MenuList
-					key={idx}
-					active={props.menu === el}
-					onClick={menuController}>
+				<MenuList key={idx} active={props.menu === el} onClick={menuController}>
 					{el}
 				</MenuList>
 			))}
@@ -29,7 +26,7 @@ const MenuWrap = styled.ul`
 	align-items: center;
 	background: #ffffff 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 18px #00000029;
-	border-radius: 4px;
+	border-radius: 14px;
 	margin-top: 0;
 	margin-bottom: 2.8rem;
 `;
@@ -45,6 +42,6 @@ const MenuList = styled.li`
 	cursor: pointer;
 	${(props) =>
 		props.active &&
-		`font-family:'kr-b'; border:3px solid #E50011;border-radius: 4px; line-height: 6.5rem;
+		`font-family:'kr-b'; border:3px solid #E50011;border-radius: 14px; line-height: 6.5rem;
 `}
 `;

@@ -334,10 +334,10 @@ const SubmitButton = styled.button`
 	width: 24.9rem;
 	height: 6.2rem;
 	line-height: 6.2rem;
-	margin-bottom: 4rem;
+	margin-bottom: 14rem;
 	font-size: 2.4rem;
 	font-family: 'kr-r';
-	border-radius: 4px;
+	border-radius: 14px;
 	transition: all 200ms ease;
 	background-color: #fff;
 	border: 1px solid #e50011;
@@ -362,7 +362,7 @@ const Button = styled.button`
 	margin-bottom: 4rem;
 	font-size: 2.4rem;
 	font-family: 'kr-r';
-	border-radius: 4px;
+	border-radius: 14px;
 	transition: all 200ms ease;
 
 	background-color: #221814;
@@ -398,7 +398,7 @@ const InputBox = styled.div`
 const ColumnResult = styled.div`
 	width: 100%;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	padding: 1.6rem 1.2rem;
 	font-size: 1.8rem;
 	font-family: 'kr-r';
@@ -408,7 +408,7 @@ const ColumnResult = styled.div`
 const Input = styled.input`
 	width: 100%;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	padding: 2.1rem 1.2rem;
 	background-color: #fff;
 	font-size: 1.4rem;
@@ -434,7 +434,7 @@ const TextArea = styled.textarea`
 	height: 16.3rem;
 	padding: 2.1rem 1.2rem;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 14px;
 	margin-top: 1.6rem;
 	font-size: 1.4rem;
 	letter-spacing: -0.56px;
@@ -465,7 +465,7 @@ const MenuBox = styled.div`
 	width: 100%;
 	max-height: 30rem;
 	overflow-y: auto;
-	border-radius: 4px;
+	border-radius: 14px;
 	border: 1px solid #c6c6c6;
 	top: 0;
 	left: 0;

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
 import OrderDetail from './OrderDetail';
 import PageSelector from '../PageSelector';
 
 const OrderHistory = (props) => {
+	const history = useHistory();
 	const [page, setPage] = useState(1);
 	const total = props.paymentList.length;
 	const onePage = 10;
@@ -12,6 +14,10 @@ const OrderHistory = (props) => {
 
 	const goDetail = (payment_id) => {
 		setViewDetail(payment_id);
+	};
+
+	const goShopping = () => {
+		history.push('/product');
 	};
 
 	useEffect(() => {
@@ -25,7 +31,7 @@ const OrderHistory = (props) => {
 			{props.paymentList.length === 0 && (
 				<OrderHistoryWrap>
 					<NothingText>현재 주문하신 내역이 없습니다.</NothingText>
-					<GoShoppingButton>쇼핑하기</GoShoppingButton>
+					<GoShoppingButton onClick={goShopping}>쇼핑하기</GoShoppingButton>
 				</OrderHistoryWrap>
 			)}
 			{props.paymentList.length > 0 && !viewDetail && (
@@ -46,14 +52,21 @@ const OrderHistory = (props) => {
 								<ListContents>
 									<ProductNameBox>
 										<ProductName>{el.name}</ProductName>
-										<ProductNameSpan>외 3건</ProductNameSpan>
+										{/* {el.name.split(' 외 ').length > 1 && (
+											<ProductNameSpan>
+												`외 ${el.name.split(' 외 ')[1]}`
+											</ProductNameSpan>
+										)} */}
 									</ProductNameBox>
 									<DeliveryAddr>
 										{`(${el.del_postcode}) ${el.del_addr.split('/')[0]} ${
 											el.del_addr.split('/')[1]
 										}`}
 									</DeliveryAddr>
-									<ProductTotalPrice>{`총 결제 금액 ${el.amount.toLocaleString()}원`}</ProductTotalPrice>
+									<PriceAndDetailBtnBox>
+										<ProductTotalPrice>{`총 결제 금액 ${el.amount.toLocaleString()}원`}</ProductTotalPrice>
+										<DetailBtn>상세내역보기</DetailBtn>
+									</PriceAndDetailBtnBox>
 								</ListContents>
 							</OrderHistoryList>
 						))}
@@ -106,6 +119,7 @@ const GoShoppingButton = styled.button`
 	color: #fff;
 	letter-spacing: -0.96px;
 	border: none;
+	border-radius: 14px;
 	background-color: #221814;
 `;
 const OrderHistoryList = styled.li`
@@ -116,7 +130,7 @@ const OrderHistoryList = styled.li`
 	height: 17.6rem;
 	background-color: #fff;
 	box-shadow: 2px 6px 18px #00000014;
-	border-radius: 4px;
+	border-radius: 24px;
 	display: flex;
 	&:nth-last-child(1) {
 		margin: 0;
@@ -138,6 +152,7 @@ const OrderId = styled.span`
 const ListImg = styled.img`
 	width: 27.5%;
 	height: 100%;
+	border-radius: 24px;
 `;
 const ListContents = styled.div`
 	width: 100%;
@@ -169,10 +184,26 @@ const DeliveryAddr = styled.p`
 	letter-spacing: -0.56px;
 	color: #6b6462;
 `;
+const PriceAndDetailBtnBox = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+`;
 const ProductTotalPrice = styled.p`
 	font-size: 1.6rem;
 	font-family: 'kr-b';
 	letter-spacing: -0.64px;
 	color: #221814;
 	margin-top: 5.9rem;
+`;
+const DetailBtn = styled.button`
+	width: 13.5rem;
+	padding: 1.2rem;
+	border-radius: 14px;
+	border: none;
+	background-color: #221814;
+	color: #fff;
+	font-size: 1.4rem;
+	font-family: 'kr-r';
+	letter-spacing: -0.56px;
 `;

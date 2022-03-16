@@ -190,9 +190,13 @@ const SubmitButton = styled.button`
 	background-color: #fff;
 	border: 1px solid #a0a0a0;
 	border-radius: 14px;
-	${(props) => props.state && `border: 1px solid #e50011;color: #e50011;`}
-	&:hover {
+	cursor: default !important;
+	${(props) =>
+		props.state &&
+		`border: 1px solid #e50011;color: #e50011; cursor:pointer !important;
+		 &:hover {
 		background-color: #e50011;
 		color: #fff;
-	}
+		
+	}`}
 `;

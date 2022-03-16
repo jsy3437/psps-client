@@ -37,7 +37,8 @@ const Privacy = () => {
 							<Button
 								onClick={() => {
 									setChangePWState(true);
-								}}>
+								}}
+							>
 								변경하기
 							</Button>
 						</PrivacyItem>
@@ -54,7 +55,8 @@ const Privacy = () => {
 								tel
 								onClick={() => {
 									setChangeTelState(true);
-								}}>
+								}}
+							>
 								변경하기
 							</Button>
 						</PrivacyItem>
@@ -71,7 +73,8 @@ const Privacy = () => {
 								addr={user.address}
 								onClick={() => {
 									setChangeAddrState(true);
-								}}>
+								}}
+							>
 								{user.address ? '수정하기' : '등록하기'}
 							</Button>
 						</PrivacyItem>
@@ -152,7 +155,7 @@ const Button = styled.button`
 	padding: 0.5rem 1.8rem;
 	background-color: #fff;
 	border: 1px solid #8e8e8e;
-	border-radius: 4px;
+	border-radius: 8px;
 	color: #8e8e8e;
 	${(props) => (props.addr || props.tel ? `margin-left:2rem;` : null)}
 `;

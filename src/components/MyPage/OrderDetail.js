@@ -47,7 +47,7 @@ const OrderDetail = (props) => {
 	}, [checkedList]);
 
 	const goReceipt = () => {
-		window.open(detailPayment.receipt_url, '_blank');
+		window.open(detailPayment.receipt_url, '_blank', 'width=420, height=520');
 	};
 
 	const goCheckedAndCancelOrExchange = async (el, e) => {
@@ -386,7 +386,7 @@ const OrderInfo = styled.div`
 	height: 17.6rem;
 	background-color: #fff;
 	box-shadow: 2px 6px 18px #00000014;
-	border-radius: 4px;
+	border-radius: 24px;
 	display: flex;
 	&:nth-last-child(1) {
 		margin: 0;
@@ -395,11 +395,12 @@ const OrderInfo = styled.div`
 const ProductImg = styled.img`
 	width: 27.5%;
 	height: 100%;
+	border-radius: 2rem;
 `;
 const OrderContents = styled.div`
 	width: 47.5%;
 	height: 100%;
-	padding: 2rem;
+	padding: 2.4rem 2rem;
 `;
 
 const OrderState = styled.p`
@@ -448,10 +449,11 @@ const ProductCount = styled.p`
 `;
 const Buttons = styled.div`
 	width: 25%;
-	height: 100%;
+	height: 57%;
+	margin: auto;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 `;
 const Button = styled.button`
@@ -462,7 +464,7 @@ const Button = styled.button`
 	font-family: 'kr-r';
 	letter-spacing: -0.56px;
 	margin-top: 0.6rem;
-	border-radius: 4px;
+	border-radius: 14px;
 	border: none;
 	background-color: #fff;
 	color: #fff;
@@ -479,7 +481,6 @@ const Button = styled.button`
 `;
 const InfoWrap = styled.ul`
 	width: 100%;
-	/* height: 13.7rem; */
 	margin: 0;
 	padding: 1.65rem 0;
 	border-top: 1px solid #e0e0e0;
@@ -524,7 +525,7 @@ const InfoReceiptButton = styled.button`
 	color: #8e8e8e;
 	background-color: unset;
 	border: 1px solid #8e8e8e;
-	border-radius: 4px;
+	border-radius: 8px;
 `;
 const CheckImg = styled.img`
 	position: absolute;
@@ -557,14 +558,14 @@ const CancelBtn = styled.button`
 	color: #8e8e8e;
 	background-color: unset;
 	border: 1px solid #8e8e8e;
-	border-radius: 4px;
+	border-radius: 8px;
 	padding: 0 1.2rem;
 	margin-right: 0.8rem;
 `;
 const RemoveButton = styled.button`
 	width: 14rem;
 	border: 1px solid #e50011;
-	border-radius: 4px;
+	border-radius: 14px;
 	background-color: #fff;
 	font-size: 1.4rem;
 	font-family: 'kr-r';

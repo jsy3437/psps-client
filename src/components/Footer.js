@@ -49,17 +49,15 @@ const Footer = () => {
 								effect={idx === 1}
 								onClick={() => {
 									onInfoModalOpen(idx);
-								}}>
+								}}
+							>
 								{el}
 							</HeadLeftText>
 						))}
 					</FooterHeadLeft>
 					<FooterHeadRight>
 						{headRight.map((el, idx) => (
-							<HeadRightButton
-								key={idx}
-								effect={idx === 1}
-								onClick={goService}>
+							<HeadRightButton key={idx} effect={idx === 1} onClick={goService}>
 								{el}
 							</HeadRightButton>
 						))}
@@ -69,7 +67,7 @@ const Footer = () => {
 			<FooterBody>
 				<FooterBodyInside>
 					<FooterBodyLeft>
-						<BodyLeftImg alt='logo' src={logo} />
+						<BodyLeftImg alt="logo" src={logo} />
 
 						<BodyLeftText>
 							{infoLeft1}
@@ -99,9 +97,7 @@ const Footer = () => {
 							{openHeadLeft === 0 ? terms[0].title : terms[1].title}
 						</InfoTitle>
 						<InfoText>
-							{openHeadLeft === 0
-								? terms[0].contents
-								: terms[1].contents}
+							{openHeadLeft === 0 ? terms[0].contents : terms[1].contents}
 						</InfoText>
 					</InfoBox>
 				</InfoModalWrap>
@@ -159,7 +155,7 @@ const HeadRightButton = styled.button`
 	color: #8e8e8e;
 	background: #ffffff 0% 0% no-repeat padding-box;
 	border: 1px solid #8e8e8e;
-	border-radius: 4px;
+	border-radius: 8px;
 	${(props) => props.effect && `margin-left:2rem;`}
 `;
 

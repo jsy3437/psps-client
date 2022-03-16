@@ -156,7 +156,7 @@ const ChangeTelWrap = styled.div`
 	background-color: #fff;
 	margin: 20vh auto;
 	box-shadow: 0px 3px 6px #00000029;
-	border-radius: 4px;
+	border-radius: 24px;
 	padding: 3.6rem 6.7rem;
 `;
 const Title = styled.h2`
@@ -190,6 +190,7 @@ const TelInput = styled.input`
 	width: 34.6rem;
 	padding: 2.1rem 1.2rem;
 	border: 1px solid #c6c6c6;
+	border-radius: 14px;
 	background-color: #fff;
 	font-size: 1.4rem;
 	letter-spacing: -0.28px;
@@ -204,7 +205,7 @@ const ConfirmButton = styled.button`
 	position: absolute;
 	padding: 0.4rem 0.8rem;
 	border: 1px solid #c6c6c6;
-	border-radius: 4px;
+	border-radius: 8px;
 	color: #c6c6c6;
 	font-size: 1.4rem;
 	font-family: 'kr-r';
@@ -226,7 +227,7 @@ const SubmitButton = styled.button`
 	font-family: 'kr-r';
 	letter-spacing: -0.96px;
 	color: #fff;
-	border-radius: 4px;
+	border-radius: 14px;
 	${(props) =>
 		props.back &&
 		`border:1px solid #e50011; background-color:#fff; color:#e50011;`}

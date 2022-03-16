@@ -24,6 +24,7 @@ const FirstStep = (props) => {
 		passwordConfirm: true,
 	});
 	const [isSubmit, setIsSubmit] = useState(false);
+	const [allState, setAllState] = useState(false);
 
 	useEffect(() => {
 		const state = history.location.state;
@@ -35,6 +36,14 @@ const FirstStep = (props) => {
 		}
 		// eslint-disable-next-line
 	}, []);
+
+	useEffect(() => {
+		if (check.email && check.password && check.passwordConfirm && agreeCheck) {
+			setAllState(true);
+		} else {
+			setAllState(false);
+		}
+	}, [check, agreeCheck]);
 
 	const agreeCheckController = () => {
 		setAgreeCheck(!agreeCheck);
@@ -67,29 +76,31 @@ const FirstStep = (props) => {
 	};
 
 	const goNext = () => {
-		setIsSubmit(true);
-		if (!regexp.email.test(email)) {
-			emailInput.current.focus();
-			return setCheck({ ...check, email: false });
-		} else if (!regexp.password.test(password)) {
-			passwordInput.current.focus();
-			return setCheck({ ...check, password: false });
-		} else if (password !== passwordConfirm) {
-			passwordConfirmInput.current.focus();
-			return setCheck({ ...check, passwordConfirm: false });
-		} else if (!agreeCheck) {
-			return;
-		} else if (email) {
-			_user.check_email({ email }).then((res) => {
-				const { success } = res.data;
-				console.log(res.data);
-				if (!success) {
-					return alert('이미 가입된 이메일입니다');
-				} else {
-					props.setStep(3);
-					history.push({ state: { email, password, passwordConfirm } });
-				}
-			});
+		if (allState) {
+			setIsSubmit(true);
+			if (!regexp.email.test(email)) {
+				emailInput.current.focus();
+				return setCheck({ ...check, email: false });
+			} else if (!regexp.password.test(password)) {
+				passwordInput.current.focus();
+				return setCheck({ ...check, password: false });
+			} else if (password !== passwordConfirm) {
+				passwordConfirmInput.current.focus();
+				return setCheck({ ...check, passwordConfirm: false });
+			} else if (!agreeCheck) {
+				return;
+			} else if (email) {
+				_user.check_email({ email }).then((res) => {
+					const { success } = res.data;
+					console.log(res.data);
+					if (!success) {
+						return alert('이미 가입된 이메일입니다');
+					} else {
+						props.setStep(3);
+						history.push({ state: { email, password, passwordConfirm } });
+					}
+				});
+			}
 		}
 	};
 
@@ -156,7 +167,9 @@ const FirstStep = (props) => {
 				<AgreeContents>
 					품생품사 이용약관(필수), 개인정보취급방침(필수)
 				</AgreeContents>
-				<SubmitButton onClick={goNext}>다음으로</SubmitButton>
+				<SubmitButton state={allState} onClick={goNext}>
+					다음으로
+				</SubmitButton>
 				<EasyBox>
 					<EasyLeft>
 						<EasyLeftText>SNS계정으로 간편하게 시작하기</EasyLeftText>
@@ -294,15 +307,19 @@ const SubmitButton = styled.button`
 	margin-bottom: 4rem;
 	font-size: 2.4rem;
 	font-family: 'kr-r';
-	color: #e50011;
+	color: #a0a0a0;
 	background-color: #fff;
-	border: 1px solid #e50011;
+	border: 1px solid #a0a0a0;
 	border-radius: 14px;
 	transition: all 200ms ease;
-	&:hover {
+	cursor: default !important;
+	${(props) =>
+		props.state &&
+		`border: 1px solid #e50011; color: #e50011;	cursor: pointer !important;
+		&:hover {
 		background-color: #e50011;
 		color: #fff;
-	}
+	}`}
 `;
 const EasyBox = styled.div`
 	width: 100%;

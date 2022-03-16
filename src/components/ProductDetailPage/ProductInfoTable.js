@@ -10,7 +10,7 @@ const ProductInfoTable = (props) => {
 	];
 
 	return (
-		// 홀수개가 들어있는 table은 ItemBox를 하나더 넣으면 border가 생김
+		// 홀수개가 들어있는 table은 ItemBox를 하나더 넣으면 border가 길게 생김
 		<InfoTableWrap ref={props.infoRef}>
 			<Item>
 				<Title>상품 정보</Title>
@@ -27,8 +27,11 @@ const ProductInfoTable = (props) => {
 					</InfoItemBox>
 					<InfoItemBox>
 						<InfoTitle>내용량 / 중량</InfoTitle>
-						{/* TODO */}
-						<InfoText>상세이미지 참조</InfoText>
+						<InfoText>
+							{props.optionList[0] && props.optionList[0].weight
+								? props.optionList[0].weight
+								: '상세이미지 참조'}
+						</InfoText>
 					</InfoItemBox>
 					<InfoItemBox>
 						<InfoTitle>보관방법</InfoTitle>

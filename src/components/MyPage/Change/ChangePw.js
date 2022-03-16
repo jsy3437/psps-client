@@ -67,16 +67,16 @@ const ChangePw = (props) => {
 			<Items>
 				<ItemTitle>현재 비밀번호</ItemTitle>
 				<ItemInput
-					type='password'
-					placeholder='현재 비밀번호를 입력해주세요'
+					type="password"
+					placeholder="현재 비밀번호를 입력해주세요"
 					onChange={changePassword}
 				/>
 			</Items>
 			<Items>
 				<ItemTitle>변경할 비밀번호</ItemTitle>
 				<ItemInput
-					type='password'
-					placeholder='비밀번호를 입력해주세요.'
+					type="password"
+					placeholder="비밀번호를 입력해주세요."
 					onChange={changeNewPassword}
 					ref={passwordInput}
 				/>
@@ -84,8 +84,8 @@ const ChangePw = (props) => {
 			<Items>
 				<ItemTitle>비밀번호 확인</ItemTitle>
 				<ItemInput
-					type='password'
-					placeholder='비밀번호를 확인해주세요.'
+					type="password"
+					placeholder="비밀번호를 확인해주세요."
 					onChange={changeConfirmPassword}
 					ref={passwordConfirmInput}
 				/>
@@ -135,7 +135,7 @@ const ItemInput = styled.input`
 	color: #221814;
 	padding-left: 1.2rem;
 	background-color: #fff;
-	border-radius: 4px;
+	border-radius: 14px;
 	border: 1px solid #c6c6c6;
 	&::placeholder {
 		color: #c6c6c6;
@@ -148,7 +148,7 @@ const SubmitButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;
 	line-height: 6.2rem;
-	border-radius: 4px;
+	border-radius: 14px;
 	font-size: 2.4rem;
 	font-family: 'kr-r';
 	border: none;

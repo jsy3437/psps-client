@@ -20,18 +20,16 @@ const ProductData = (props) => {
 
 						{supplierList.checked_product_list.map((el, idx) => (
 							<BorderBox key={idx}>
-								<ProductText title='true'>
+								<ProductText title="true">
 									{el.product_title}, {el.product_option_title}
 								</ProductText>
 								<ProductText quantity>수량 {el.quantity}개</ProductText>
-								<ProductText price>
-									{el.total.toLocaleString()}원
-								</ProductText>
+								<ProductText price>{el.total.toLocaleString()}원</ProductText>
 							</BorderBox>
 						))}
 						{supplierList.delivery_price !== 0 && (
 							<BorderBox>
-								<ProductText title='true'>배송비</ProductText>
+								<ProductText title="true">배송비</ProductText>
 								<ProductText price>
 									{supplierList.delivery_price.toLocaleString()}원
 								</ProductText>
@@ -41,16 +39,14 @@ const ProductData = (props) => {
 				))}
 			<TotalPriceBox>
 				<PriceTitle>총 상품 금액</PriceTitle>
-				<PriceText>
-					{props.amount && props.amount.toLocaleString()}원
-				</PriceText>
-				<PlusImg alt='plus sign' src={plus_img} />
+				<PriceText>{props.amount && props.amount.toLocaleString()}원</PriceText>
+				<PlusImg alt="plus sign" src={plus_img} />
 				<PriceTitle>배송비</PriceTitle>
 				{/* TODO 배송비 기준 정해서 구현하기 */}
 				<PriceText>
 					{props.delivery_price && props.delivery_price.toLocaleString()}원
 				</PriceText>
-				<PlusImg alt='equal sign' src={equal_img} />
+				<PlusImg alt="equal sign" src={equal_img} />
 				<PaymentPrice>
 					{props.amount && props.delivery_price
 						? (props.amount + props.delivery_price).toLocaleString()
@@ -115,7 +111,7 @@ const TotalPriceBox = styled.div`
 	font-family: 'kr-b';
 	color: #6b6462;
 	box-shadow: 0px 0px 10px #00000014;
-	border-radius: 4px;
+	border-radius: 24px;
 	margin: 0rem 0 8.6rem;
 `;
 const PriceTitle = styled.p`

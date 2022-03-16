@@ -29,6 +29,7 @@ const ThirdStep = (props) => {
 		confirm_number: false,
 	});
 	const [isSubmit, setIsSubmit] = useState(false);
+	const [allState, setAllState] = useState(true);
 
 	useEffect(() => {
 		if (history.location.state) {
@@ -38,6 +39,20 @@ const ThirdStep = (props) => {
 		}
 		// eslint-disable-next-line
 	}, []);
+
+	useEffect(() => {
+		if (
+			checkLength.name &&
+			checkLength.phone_number &&
+			checkLength.confirm_number &&
+			getConfirmNum &&
+			confirm
+		) {
+			setAllState(true);
+		} else {
+			setAllState(false);
+		}
+	}, [checkLength, confirm, getConfirmNum]);
 
 	useEffect(() => {
 		let interval;
@@ -124,34 +139,36 @@ const ThirdStep = (props) => {
 	};
 
 	const onSubmit = () => {
-		setIsSubmit(true);
-		if (!regexp.name.test(name)) {
-			setCheckLength({ ...checkLength, name: false });
-			alert('이름을 확인해주세요');
-			nameInput.current.focus();
-		} else if (!regexp.phone_number.test(phone_number)) {
-			setCheckLength({ ...checkLength, phone_number: false });
-			alert('휴대폰번호를 확인해주세요');
-			phoneNumberInput.current.focus();
-		} else if (!confirm || !getConfirmNum) {
-			alert('휴대폰번호 인증을 확인해주세요');
-			confirmNumberInput.current.focus();
-		} else {
-			const data = {
-				email,
-				password,
-				name,
-				phone_number,
-			};
-			_user.register(data).then((res) => {
-				if (res.data.success) {
-					props.setStep(4);
-					dispatch(user_login(res.data.name));
-					history.push({ state: name });
-				} else {
-					alert('이미 가입되어 있는 휴대폰번호입니다');
-				}
-			});
+		if (allState) {
+			setIsSubmit(true);
+			if (!regexp.name.test(name)) {
+				setCheckLength({ ...checkLength, name: false });
+				alert('이름을 확인해주세요');
+				nameInput.current.focus();
+			} else if (!regexp.phone_number.test(phone_number)) {
+				setCheckLength({ ...checkLength, phone_number: false });
+				alert('휴대폰번호를 확인해주세요');
+				phoneNumberInput.current.focus();
+			} else if (!confirm || !getConfirmNum) {
+				alert('휴대폰번호 인증을 확인해주세요');
+				confirmNumberInput.current.focus();
+			} else {
+				const data = {
+					email,
+					password,
+					name,
+					phone_number,
+				};
+				_user.register(data).then((res) => {
+					if (res.data.success) {
+						props.setStep(4);
+						dispatch(user_login(res.data.name));
+						history.push({ state: name });
+					} else {
+						alert('이미 가입되어 있는 휴대폰번호입니다');
+					}
+				});
+			}
 		}
 	};
 
@@ -195,7 +212,7 @@ const ThirdStep = (props) => {
 						value={confirm_number}
 						onChange={changeConfirm}
 						placeholder={
-							getConfirmNum && `0${min}:${sec < 10 ? '0' + sec : sec}`
+							getConfirmNum ? `0${min}:${sec < 10 ? '0' + sec : sec}` : null
 						}
 					/>
 
@@ -222,15 +239,7 @@ const ThirdStep = (props) => {
 					)}
 				</Items>
 
-				<SubmitButton
-					enter={
-						checkLength.name &&
-						checkLength.phone_number &&
-						checkLength.confirm_number &&
-						confirm
-					}
-					onClick={onSubmit}
-				>
+				<SubmitButton enter={allState} onClick={onSubmit}>
 					가입하기
 				</SubmitButton>
 				<BackButton back onClick={goBack}>
@@ -339,6 +348,11 @@ const BackButton = styled.button`
 	color: #e50011;
 	border: 1px solid #e50011;
 	margin-top: 1.2rem;
+	transition: all 200ms ease;
+	&:hover {
+		background-color: #e50011;
+		color: #fff;
+	}
 `;
 const SubmitButton = styled.button`
 	width: 34.6rem;
@@ -351,5 +365,10 @@ const SubmitButton = styled.button`
 	color: #fff;
 	background-color: #a0a0a0;
 	margin-top: 2rem;
-	${(props) => props.enter && `background-color:#E50011; `};
+	cursor: default !important;
+	${(props) =>
+		props.enter &&
+		`background-color:#221814; &:hover{
+		background-color:#e50011
+	} `};
 `;
