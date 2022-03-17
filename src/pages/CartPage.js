@@ -246,7 +246,7 @@ const RemoveBtn = styled.button`
 	height: 2.7rem;
 	background-color: #fff;
 	border: 1px solid #8e8e8e;
-	border-radius: 4px;
+	border-radius: 8px;
 	font-size: 1.2rem;
 	letter-spacing: -0.24px;
 	color: #8e8e8e;

@@ -167,7 +167,7 @@ const ShadowBox = styled.div`
 	width: 100%;
 	height: 17.6rem;
 	box-shadow: 2px 6px 18px #00000014;
-	border-radius: 4px;
+	border-radius: 24px;
 	display: flex;
 	position: relative;
 	margin-bottom: 5rem;
@@ -213,8 +213,8 @@ const CheckImg = styled.img`
 	position: absolute;
 	width: 1.4rem;
 	height: 1.4rem;
-	top: 0.8rem;
-	left: 0.8rem;
+	top: 1.4rem;
+	left: 1.4rem;
 	cursor: pointer;
 `;
 const InfoBox = styled.div`
@@ -223,6 +223,7 @@ const InfoBox = styled.div`
 const ProductImg = styled.img`
 	width: 19.2rem;
 	height: 100%;
+	border-radius: 24px;
 `;
 const ProductNameAndRemove = styled.div`
 	width: 46.5rem;
