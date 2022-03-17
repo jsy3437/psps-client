@@ -4,30 +4,46 @@ import styled from 'styled-components';
 
 const ChangeTel = (props) => {
 	const authNumberInput = useRef();
-	const [phNumberState, setPhNumberState] = useState(false);
-	const [authNumberState, setAuthNumberState] = useState(false);
-
-	const [phNumber, setPhNumber] = useState('');
-	const [authNumber, setAuthNumber] = useState('');
-	const [checked, setChecked] = useState({
-		authSend: false,
-		authConfirm: false,
+	const [time, setTime] = useState(180);
+	const [sec, setSec] = useState(59);
+	const [min, setMin] = useState(2);
+	const [getConfirmNumber, setGetConfirmNumber] = useState(false);
+	const [confirm, setConfirm] = useState(false);
+	const [phone_number, setPhone_number] = useState('');
+	const [confirm_number, setConfirm_number] = useState('');
+	const [check, setCheck] = useState({
+		phone_number: '',
+		confirm_number: '',
 	});
-	useEffect(() => {
-		if (phNumber.length === 11) {
-			setPhNumberState(true);
-		} else {
-			setPhNumberState(false);
-		}
-	}, [phNumber]);
+	const [allState, setAllState] = useState(false);
+	let timer;
 
 	useEffect(() => {
-		if (authNumber.length === 6) {
-			setAuthNumberState(true);
-		} else {
-			setAuthNumberState(false);
+		let timer;
+		if (getConfirmNumber && time !== -1) {
+			setMin(parseInt(time / 60));
+			setSec(time % 60);
+			timer = setTimeout(() => {
+				setTime(time - 1);
+			}, 1000);
 		}
-	}, [authNumber]);
+		return () => {
+			clearTimeout(timer);
+		};
+	}, [getConfirmNumber, time]);
+
+	useEffect(() => {
+		if (
+			confirm &&
+			getConfirmNumber &&
+			check.phone_number &&
+			check.confirm_number
+		) {
+			setAllState(true);
+		} else {
+			setAllState(false);
+		}
+	}, [check, confirm, getConfirmNumber]);
 
 	const goBack = () => {
 		props.setChangeTelState(false);
@@ -36,45 +52,58 @@ const ChangeTel = (props) => {
 	const ChangePhNumber = (e) => {
 		const { value } = e.target;
 		if (!isNaN(value)) {
-			setChecked({ ...checked, authSend: false });
-			setPhNumber(value);
+			console.log(value.length);
+			if (value.length === 11) {
+				setCheck({ ...check, phone_number: true });
+			} else {
+				setCheck({ ...check, phone_number: false });
+			}
+			setPhone_number(value);
+			setConfirm(false);
+			setGetConfirmNumber(false);
 		}
 	};
 
-	const ChangeAuthNumber = (e) => {
+	const ChangeConfirmNumber = (e) => {
 		const { value } = e.target;
 		if (!isNaN(value)) {
-			setChecked({ ...checked, authConfirm: false });
-			setAuthNumber(value);
+			if (value.length === 6) {
+				setCheck({ ...check, confirm_number: true });
+			} else {
+				setCheck({ ...check, confirm_number: false });
+			}
+			setConfirm_number(value);
 		}
 	};
 
 	const getAuthNumber = () => {
-		if (phNumberState) {
-			_user.send_sms({ phone_number: phNumber }).then((res) => {
-				const { success } = res.data;
+		if (check.phone_number) {
+			_user.send_sms({ phone_number }).then((res) => {
+				const { success, msg } = res.data;
 				if (success) {
 					alert('인증번호가 전송되었습니다');
-					setChecked({ ...checked, authSend: true });
-					window.focus(authNumberInput);
+					setGetConfirmNumber(true);
+					authNumberInput.current.focus();
+					setConfirm_number('');
 				} else {
-					alert('연락처를 확인해주세요');
+					alert(msg);
 				}
 			});
 		}
 	};
 
 	const checkAuthNumber = () => {
-		if (authNumberState && checked.authSend) {
+		if (check.confirm_number && getConfirmNumber) {
 			const data = {
-				phone_number: phNumber,
-				code: authNumber,
+				phone_number,
+				code: confirm_number,
 			};
 			_user.check_sms(data).then((res) => {
 				const { success } = res.data;
 				if (success) {
 					alert('인증이 확인되었습니다');
-					setChecked({ ...checked, authConfirm: true });
+					setConfirm(true);
+					clearTimeout(timer);
 				} else {
 					alert('인증번호를 확인해주세요');
 				}
@@ -82,18 +111,16 @@ const ChangeTel = (props) => {
 		}
 	};
 	const SubmitChangeTel = () => {
-		if (checked.authSend && checked.authConfirm) {
-			_user.change_tel({ phone_number: phNumber }).then((res) => {
+		if (allState) {
+			_user.change_tel({ phone_number }).then((res) => {
 				const { success } = res.data;
 				if (success) {
-					alert('비밀번호가 변경되었습니다');
-					props.setChangePWState(false);
+					alert('연락처가 변경되었습니다');
+					props.setChangeTelState(false);
 				} else {
 					console.error(res.data);
 				}
 			});
-		} else {
-			alert('연락처 인증을 확인해주세요');
 		}
 	};
 
@@ -102,14 +129,18 @@ const ChangeTel = (props) => {
 			<ChangeTelWrap>
 				<Title>연락처 변경</Title>
 				<InputItemBox>
-					<InputTitle>연락처</InputTitle>
+					<InputTitle>휴대폰번호</InputTitle>
 					<TelInput
 						type="text"
 						maxLength="11"
 						onChange={ChangePhNumber}
-						value={phNumber}
+						value={phone_number}
+						placeholder="‘ - ‘ 을 제외한 번호를 입력해주세요."
 					/>
-					<ConfirmButton phNumberState={phNumberState} onClick={getAuthNumber}>
+					<ConfirmButton
+						phNumberState={check.phone_number}
+						onClick={getAuthNumber}
+					>
 						인증하기
 					</ConfirmButton>
 				</InputItemBox>
@@ -118,23 +149,26 @@ const ChangeTel = (props) => {
 					<TelInput
 						type="text"
 						maxLength="6"
-						onChange={ChangeAuthNumber}
-						value={authNumber}
+						onChange={ChangeConfirmNumber}
+						value={confirm_number}
 						ref={authNumberInput}
+						placeholder={
+							getConfirmNumber ? `0${min}:${sec < 10 ? '0' + sec : sec}` : null
+						}
 					/>
 					<ConfirmButton
-						authNumberState={authNumberState && checked.authSend}
+						authNumberState={getConfirmNumber && check.confirm_number}
 						onClick={checkAuthNumber}
 					>
 						인증확인
 					</ConfirmButton>
 				</InputItemBox>
-				<SubmitButton back onClick={goBack}>
-					취소
-				</SubmitButton>
-				<SubmitButton enter onClick={SubmitChangeTel}>
-					확인
-				</SubmitButton>
+				<ButtonBox>
+					<BackButton onClick={goBack}>취소</BackButton>
+					<SubmitButton state={allState} onClick={SubmitChangeTel}>
+						확인
+					</SubmitButton>
+				</ButtonBox>
 			</ChangeTelWrap>
 		</Container>
 	);
@@ -201,6 +235,10 @@ const TelInput = styled.input`
 		color: #8e8e8e;
 	}
 `;
+const ButtonBox = styled.div`
+	display: flex;
+	justify-content: space-between;
+`;
 const ConfirmButton = styled.button`
 	position: absolute;
 	padding: 0.4rem 0.8rem;
@@ -228,10 +266,23 @@ const SubmitButton = styled.button`
 	letter-spacing: -0.96px;
 	color: #fff;
 	border-radius: 14px;
+	background-color: #a0a0a0;
+	border: none;
+	cursor: default !important;
+	transition: all 200ms ease;
 	${(props) =>
-		props.back &&
-		`border:1px solid #e50011; background-color:#fff; color:#e50011;`}
-	${(props) =>
-		props.enter &&
-		`border:1px solid #000; background-color:#000; margin-left:0.9rem;`}
+		props.state &&
+		`background-color:#221814; cursor: pointer !important; &:hover{
+		background-color:#e50011;
+	}`}
+`;
+const BackButton = styled(SubmitButton)`
+	border: 1px solid #e50011;
+	background-color: #fff;
+	color: #e50011;
+	&:hover {
+		background-color: #e50011;
+		color: #fff;
+	}
+	cursor: pointer !important;
 `;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { IMG_ADDRESS } from '../../config';
@@ -10,6 +10,7 @@ import increase from '../../images/count-plus.svg';
 import decrease from '../../images/count-minus.svg';
 
 const OrderBox = (props) => {
+	const optionEl = useRef();
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [openOption, setOpenOption] = useState(false);
@@ -92,8 +93,15 @@ const OrderBox = (props) => {
 		});
 	};
 
+	const closeOption = (e) => {
+		if (openOption) {
+			(optionEl.current || !optionEl.current.contains(e.target)) &&
+				setOpenOption(false);
+		}
+	};
+
 	return (
-		<BoxContainer ref={props.selectRef}>
+		<BoxContainer ref={props.selectRef} onClick={closeOption}>
 			<Box>
 				<BoxLeft>
 					<BoxLeftImg
@@ -143,7 +151,7 @@ const OrderBox = (props) => {
 								</RightButton>
 							</RightOptionBox>
 						) : (
-							<RightOptionListBox>
+							<RightOptionListBox ref={optionEl}>
 								{props.optionList.map((el, idx) => (
 									<RightOptionList
 										key={idx}
@@ -209,6 +217,7 @@ const BoxLeft = styled.div`
 const BoxLeftImg = styled.img`
 	width: 100%;
 	height: 100%;
+	border-radius: 24px;
 `;
 const BoxRight = styled.div`
 	width: 40.71146245059289%;

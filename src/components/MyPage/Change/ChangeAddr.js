@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as _user from '../../../controller/user';
 import styled from 'styled-components';
 import Postcode from '../../DaumPostCode';
@@ -9,6 +9,15 @@ const ChangeAddr = (props) => {
 	const [postZoneCode, setPostZoneCode] = useState('');
 	const [postAddr, setPostAddr] = useState('');
 	const [postDetailAddr, setPostDetailAddr] = useState('');
+	const [allState, setAllState] = useState(false);
+
+	useEffect(() => {
+		if (postAddr && postDetailAddr && postZoneCode) {
+			setAllState(true);
+		} else {
+			setAllState(false);
+		}
+	}, [postZoneCode, postAddr, postDetailAddr]);
 
 	const onPostcode = () => {
 		setPostcodeOpen(true);
@@ -71,12 +80,12 @@ const ChangeAddr = (props) => {
 					}
 					onChange={changeDetailAddr}
 				/>
-				<SubmitButton back onClick={offChangeAddr}>
-					취소
-				</SubmitButton>
-				<SubmitButton enter onClick={onSubmit}>
-					확인
-				</SubmitButton>
+				<ButtonBox>
+					<BackButton onClick={offChangeAddr}>취소</BackButton>
+					<SubmitButton state={allState} onClick={onSubmit}>
+						확인
+					</SubmitButton>
+				</ButtonBox>
 			</ChangeAddrWrap>
 			{postcodeOpen && (
 				<PostcodeModal>
@@ -142,6 +151,9 @@ const AddrInput = styled.input`
 	}
 	&:focus {
 		margin: 0 0 1rem;
+		&::placeholder {
+			color: #8e8e8e;
+		}
 	}
 `;
 const PostcodeBtn = styled.button`
@@ -155,6 +167,10 @@ const PostcodeBtn = styled.button`
 	letter-spacing: -0.28px;
 	color: #8e8e8e;
 `;
+const ButtonBox = styled.div`
+	display: flex;
+	justify-content: space-between;
+`;
 const SubmitButton = styled.button`
 	padding: 1.4rem 6.2rem;
 	font-size: 2.4rem;
@@ -162,13 +178,25 @@ const SubmitButton = styled.button`
 	letter-spacing: -0.96px;
 	color: #fff;
 	border-radius: 14px;
-	margin-top: 1.5rem;
+	background-color: #a0a0a0;
+	border: none;
+	cursor: default !important;
+	transition: all 200ms ease;
 	${(props) =>
-		props.back &&
-		`border:1px solid #e50011; background-color:#fff; color:#e50011;`}
-	${(props) =>
-		props.enter &&
-		`border:1px solid #000; background-color:#000; margin-left:0.9rem;`}
+		props.state &&
+		`background-color:#221814; cursor: pointer !important; &:hover{
+		background-color:#e50011;
+	}`}
+`;
+const BackButton = styled(SubmitButton)`
+	border: 1px solid #e50011;
+	background-color: #fff;
+	color: #e50011;
+	&:hover {
+		background-color: #e50011;
+		color: #fff;
+	}
+	cursor: pointer !important;
 `;
 const PostcodeModal = styled.div`
 	width: 100vw;

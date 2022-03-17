@@ -60,14 +60,12 @@ const OrderDetail = (props) => {
 			type = 'exchange';
 		}
 
-		if (!submitStateTest(el.process, innerText)) {
-			return alert('취소, 반품, 교환 불가');
+		if (submitStateTest(el.process, innerText)) {
+			history.push({
+				pathname: '/claim',
+				state: { type, checkProductList: [el], detailPayment },
+			});
 		}
-
-		history.push({
-			pathname: '/claim',
-			state: { type, checkProductList: [el], detailPayment },
-		});
 	};
 
 	const submitStateTest = (state, text) => {

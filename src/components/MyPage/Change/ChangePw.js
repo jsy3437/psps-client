@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { regexp } from '../../../data/regexp';
 import * as _user from '../../../controller/user';
 import styled from 'styled-components';
@@ -10,10 +10,19 @@ const ChangePw = (props) => {
 	const [newPassword, setNewPassword] = useState('');
 	const [confirmNewPassword, setConfirmNewPassword] = useState('');
 	const [check, setCheck] = useState({
-		password: false,
-		passwordConfirm: false,
+		password: '',
+		passwordConfirm: '',
 	});
+	const [allState, setAllState] = useState(false);
 
+	useEffect(() => {
+		if (password && check.password && check.passwordConfirm) {
+			setAllState(true);
+		} else {
+			setAllState(false);
+		}
+	}, [check, password]);
+	console.log(check);
 	const changePassword = (e) => {
 		setPassword(e.target.value);
 	};
@@ -37,29 +46,31 @@ const ChangePw = (props) => {
 	};
 
 	const submitChangePassword = () => {
-		if (!regexp.password.test(password)) {
-			alert('비밀번호를 확인해주세요');
-			passwordInput.current.focus();
-			return setCheck({ ...check, password: false });
-		} else if (newPassword !== confirmNewPassword) {
-			alert('비밀번호가 일치하지 않습니다');
-			passwordConfirmInput.current.focus();
-			return setCheck({ ...check, passwordConfirm: false });
-		}
-		const data = {
-			password,
-			new_password: newPassword,
-		};
-
-		_user.change_password(data).then((res) => {
-			const { success } = res.data;
-			if (success) {
-				alert('비밀번호 변경완료');
-				props.setChangePWState(false);
-			} else {
-				alert('기존 비밀번호가 일치하지 않습니다');
+		if (allState) {
+			if (!regexp.password.test(password)) {
+				alert('비밀번호를 확인해주세요');
+				passwordInput.current.focus();
+				return setCheck({ ...check, password: false });
+			} else if (newPassword !== confirmNewPassword) {
+				alert('비밀번호가 일치하지 않습니다');
+				passwordConfirmInput.current.focus();
+				return setCheck({ ...check, passwordConfirm: false });
 			}
-		});
+			const data = {
+				password,
+				new_password: newPassword,
+			};
+
+			_user.change_password(data).then((res) => {
+				const { success } = res.data;
+				if (success) {
+					alert('비밀번호 변경완료');
+					props.setChangePWState(false);
+				} else {
+					alert('기존 비밀번호가 일치하지 않습니다');
+				}
+			});
+		}
 	};
 
 	return (
@@ -76,10 +87,13 @@ const ChangePw = (props) => {
 				<ItemTitle>변경할 비밀번호</ItemTitle>
 				<ItemInput
 					type="password"
-					placeholder="비밀번호를 입력해주세요."
+					placeholder="새 비밀번호를 입력해주세요."
 					onChange={changeNewPassword}
 					ref={passwordInput}
 				/>
+				{check.password === false && (
+					<ErrorMessage>{`비밀번호는 8자리 이상으로 숫자, 알파벳, 특수문자를 포함해야 합니다`}</ErrorMessage>
+				)}
 			</Items>
 			<Items>
 				<ItemTitle>비밀번호 확인</ItemTitle>
@@ -89,13 +103,14 @@ const ChangePw = (props) => {
 					onChange={changeConfirmPassword}
 					ref={passwordConfirmInput}
 				/>
+				{check.passwordConfirm === false && (
+					<ErrorMessage>{`비밀번호가 일치하지 않습니다.`}</ErrorMessage>
+				)}
 			</Items>
-			<SubmitButton enter onClick={submitChangePassword}>
+			<SubmitButton state={allState} onClick={submitChangePassword}>
 				변경하기
 			</SubmitButton>
-			<SubmitButton back onClick={goBack}>
-				뒤로가기
-			</SubmitButton>
+			<BackButton onClick={goBack}>뒤로가기</BackButton>
 		</Container>
 	);
 };
@@ -113,7 +128,7 @@ const Items = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin-bottom: 2rem;
+	margin-bottom: 3rem;
 `;
 const ItemTitle = styled.p`
 	height: 2rem;
@@ -144,6 +159,14 @@ const ItemInput = styled.input`
 		box-shadow: 2px 6px 15px #00000029;
 	}
 `;
+const ErrorMessage = styled.p`
+	position: absolute;
+	bottom: -1.8rem;
+	font-size: 1.2rem;
+	font-family: 'kr-r';
+	letter-spacing: -0.4px;
+	color: #e50011;
+`;
 const SubmitButton = styled.button`
 	width: 34.6rem;
 	height: 6.2rem;
@@ -153,11 +176,23 @@ const SubmitButton = styled.button`
 	font-family: 'kr-r';
 	border: none;
 	transition: all 200ms ease;
+	color: #fff;
+	background-color: #a0a0a0;
+	cursor: default !important;
 	${(props) =>
-		props.enter && `background-color:#221814; color:#fff ; margin-top:2rem`}
-	${(props) =>
-		props.back &&
-		`background-color:#fff; color: #E50011; border: 1px solid #E50011; margin-top:1.2rem`};
+		props.state &&
+		`background-color:#221814; cursor:pointer !important;
+		&:hover {
+		background-color: #e50011;
+		color: #fff;
+	}`}
+`;
+const BackButton = styled(SubmitButton)`
+	background-color: #fff;
+	color: #e50011;
+	border: 1px solid #e50011;
+	margin-top: 1.2rem;
+	cursor: pointer !important;
 	&:hover {
 		background-color: #e50011;
 		color: #fff;

@@ -4,13 +4,14 @@ import styled from 'styled-components';
 import ChangePw from './Change/ChangePw';
 import ChangeTel from './Change/ChangeTel';
 import ChangeAddr from './Change/ChangeAddr';
+import RemoveUser from './RemoveUser';
 
 const Privacy = () => {
 	const [user, setUser] = useState('');
-
 	const [changePWState, setChangePWState] = useState(false);
 	const [changeTelState, setChangeTelState] = useState(false);
 	const [changeAddrState, setChangeAddrState] = useState(false);
+	const [openRemoveUser, setOpenRemoveUser] = useState(true);
 
 	useEffect(() => {
 		_user.get_me().then((res) => {
@@ -19,7 +20,11 @@ const Privacy = () => {
 				setUser(user);
 			}
 		});
-	}, [changeAddrState]);
+	}, [changeAddrState, changeTelState]);
+
+	const clickRemoveUser = () => {
+		// 회원탈퇴
+	};
 
 	return (
 		<Container>
@@ -96,7 +101,7 @@ const Privacy = () => {
 							</Button>
 						</PrivacyItem> */}
 					</PrivacyBox>
-					<SecessionBtn>회원탈퇴</SecessionBtn>
+					<SecessionBtn onClick={clickRemoveUser}>회원탈퇴</SecessionBtn>
 				</PrivacyWrap>
 			)}
 			{changePWState && <ChangePw setChangePWState={setChangePWState} />}
@@ -108,6 +113,7 @@ const Privacy = () => {
 				/>
 			)}
 			{changeTelState && <ChangeTel setChangeTelState={setChangeTelState} />}
+			{openRemoveUser && <RemoveUser />}
 		</Container>
 	);
 };
@@ -160,10 +166,13 @@ const Button = styled.button`
 	${(props) => (props.addr || props.tel ? `margin-left:2rem;` : null)}
 `;
 const SecessionBtn = styled.p`
+	width: fit-content;
 	font-size: 1.4rem;
 	font-family: 'kr-r';
 	letter-spacing: -0.56px;
 	color: #6b6462;
 	text-decoration: underline;
 	text-align: end;
+	margin-left: auto;
+	cursor: pointer;
 `;

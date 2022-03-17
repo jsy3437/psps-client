@@ -132,6 +132,7 @@ const OrderHistoryList = styled.li`
 	box-shadow: 2px 6px 18px #00000014;
 	border-radius: 24px;
 	display: flex;
+	cursor: pointer;
 	&:nth-last-child(1) {
 		margin: 0;
 	}

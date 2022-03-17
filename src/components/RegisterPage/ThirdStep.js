@@ -6,6 +6,7 @@ import { regexp } from '../../data/regexp';
 import * as _user from '../../controller/user';
 import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
+import { timers } from 'jquery';
 
 const ThirdStep = (props) => {
 	const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const ThirdStep = (props) => {
 	});
 	const [isSubmit, setIsSubmit] = useState(false);
 	const [allState, setAllState] = useState(true);
-
+	let timer;
 	useEffect(() => {
 		if (history.location.state) {
 			const input = history.location.state;
@@ -55,16 +56,15 @@ const ThirdStep = (props) => {
 	}, [checkLength, confirm, getConfirmNum]);
 
 	useEffect(() => {
-		let interval;
 		if (getConfirmNum && time !== -1) {
 			setMin(parseInt(time / 60));
 			setSec(time % 60);
-			interval = setTimeout(() => {
+			timer = setTimeout(() => {
 				setTime(time - 1);
 			}, 1000);
 		}
 		return () => {
-			clearTimeout(interval);
+			clearTimeout(timer);
 		};
 	}, [getConfirmNum, time]);
 
@@ -129,6 +129,7 @@ const ThirdStep = (props) => {
 				_user.check_sms(data).then((res) => {
 					if (res.data.success) {
 						setConfirm(true);
+						clearTimeout(timer);
 						return alert('인증 확인되었습니다.');
 					} else {
 						return alert('인증번호를 확인해주세요.');
