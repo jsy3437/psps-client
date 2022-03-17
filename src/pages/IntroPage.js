@@ -43,6 +43,7 @@ const IntroPage = () => {
 			point: `(주)엔투디 권영성 대표`,
 		},
 	];
+
 	return (
 		<div id='container'>
 			<Container>

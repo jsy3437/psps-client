@@ -61,11 +61,9 @@ input {
 }
 input:focus,
 textarea:focus {
-
 	outline: none;	
 	background: #fff 0% 0% no-repeat padding-box;
 	box-shadow: 2px 6px 15px #00000029;
-
 }
 input:focus::placeholder {
 	color: #111a31;
