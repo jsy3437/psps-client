@@ -19,6 +19,7 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentResultPage from './pages/PaymentResultPage';
 import OrderChangePage from './pages/OrderChangePage';
+import WithdrawalPage from './pages/WithdrawalPage';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -66,6 +67,11 @@ const App = () => {
 						component={Auth(PaymentResultPage, null)}
 					/>
 					<Route exact path="/claim" component={Auth(OrderChangePage, true)} />
+					<Route
+						exact
+						path="/withdrawal"
+						component={Auth(WithdrawalPage, true)}
+					/>
 				</Switch>
 			</div>
 		</Router>

@@ -12,6 +12,7 @@ const MyPagePage = () => {
 	const location = useLocation();
 	const [menu, setMenu] = useState('주문내역');
 	const [paymentList, setPaymentList] = useState('');
+	const [payment_id, setPayment_id] = useState('');
 
 	useEffect(() => {
 		_payment.get_list().then((res) => {
@@ -22,15 +23,26 @@ const MyPagePage = () => {
 		});
 	}, []);
 
+	useEffect(() => {
+		console.log(location);
+		if (location.state) {
+			if (location.state.type === '개인정보관리') {
+				setMenu(location.state.type);
+			} else {
+				setPayment_id(location.state.payment_id);
+			}
+		}
+	}, [location]);
+
 	return (
-		<div id='container'>
+		<div id="container">
 			<Container>
 				<MyPageInside>
-					<LogoImg alt='logo' src={logo} />
+					<LogoImg alt="logo" src={logo} />
 					<Title>마이페이지</Title>
 					<MenuSelect menu={menu} setMenu={setMenu} />
 					{menu === '주문내역' && (
-						<OrderHistory paymentList={paymentList} location={location} />
+						<OrderHistory paymentList={paymentList} payment_id={payment_id} />
 					)}
 					{menu === '개인정보관리' && <Privacy />}
 				</MyPageInside>

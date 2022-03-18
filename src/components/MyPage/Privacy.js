@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import * as _user from '../../controller/user';
 import styled from 'styled-components';
 import ChangePw from './Change/ChangePw';
 import ChangeTel from './Change/ChangeTel';
 import ChangeAddr from './Change/ChangeAddr';
-import RemoveUser from './RemoveUser';
 
 const Privacy = () => {
+	const history = useHistory();
 	const [user, setUser] = useState('');
 	const [changePWState, setChangePWState] = useState(false);
 	const [changeTelState, setChangeTelState] = useState(false);
 	const [changeAddrState, setChangeAddrState] = useState(false);
-	const [openRemoveUser, setOpenRemoveUser] = useState(true);
 
 	useEffect(() => {
 		_user.get_me().then((res) => {
@@ -22,7 +22,8 @@ const Privacy = () => {
 		});
 	}, [changeAddrState, changeTelState]);
 
-	const clickRemoveUser = () => {
+	const goWithdrawal = () => {
+		history.push('/withdrawal');
 		// 회원탈퇴
 	};
 
@@ -101,7 +102,7 @@ const Privacy = () => {
 							</Button>
 						</PrivacyItem> */}
 					</PrivacyBox>
-					<SecessionBtn onClick={clickRemoveUser}>회원탈퇴</SecessionBtn>
+					<SecessionBtn onClick={goWithdrawal}>회원탈퇴</SecessionBtn>
 				</PrivacyWrap>
 			)}
 			{changePWState && <ChangePw setChangePWState={setChangePWState} />}
@@ -113,7 +114,6 @@ const Privacy = () => {
 				/>
 			)}
 			{changeTelState && <ChangeTel setChangeTelState={setChangeTelState} />}
-			{openRemoveUser && <RemoveUser />}
 		</Container>
 	);
 };

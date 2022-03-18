@@ -21,10 +21,11 @@ const OrderHistory = (props) => {
 	};
 
 	useEffect(() => {
-		if (props.location.state) {
-			setViewDetail(props.location.state);
+		if (props.payment_id) {
+			console.log(props.payment_id);
+			setViewDetail(props.payment_id);
 		}
-	}, [props.location.state]);
+	}, [props.payment_id]);
 
 	return (
 		<MyPageInside>

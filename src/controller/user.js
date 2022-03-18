@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { error } from 'jquery';
 import { MODE, ADDRESS } from '../config';
 
 const url =
@@ -56,6 +57,8 @@ export const find_Pw_get_number = async (userData) => {
 	return await instance.post('/find', userData).catch(errorMessage);
 };
 export const find_Pw_change = async (userData) => {
-	console.log(userData);
 	return await instance.patch('/password', userData).catch(errorMessage);
+};
+export const withdrawal = async (userData) => {
+	return await instance.post('/remove', userData).catch(errorMessage);
 };

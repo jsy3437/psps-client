@@ -15,7 +15,7 @@ const PaymentResultPage = () => {
 	};
 
 	const goOrderDetail = () => {
-		history.push({ pathname: '/members', state: payment_id });
+		history.push({ pathname: '/members', state: { payment_id } });
 	};
 
 	return (
