@@ -75,7 +75,9 @@ const OrderChangePage = () => {
 		}
 		setButtonState(state);
 		// eslint-disable-next-line
-	}, [check]);
+	}, [check, claimType]);
+
+	console.log(claimType);
 
 	// input onChange
 	const changeClaimReasonText = (e) => {
@@ -161,9 +163,11 @@ const OrderChangePage = () => {
 			claim_reason: claimReasonText,
 			// 횐불계좌
 		};
+		console.log(data);
 
 		_payment.claim_cancel(data, claimType).then((res) => {
 			const { success } = res.data;
+			console.log(res.data);
 			if (success) {
 				alert('신청이 완료되었습니다');
 				history.push({

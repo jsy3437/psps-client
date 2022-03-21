@@ -3,6 +3,12 @@ import styled from 'styled-components';
 
 const MenuSelect = (props) => {
 	const menuController = (e) => {
+		const { innerText } = e.target;
+		if (props.menu === innerText) {
+			return innerText === '주문내역'
+				? props.setViewDetail(false)
+				: props.setChangePWState(false);
+		}
 		props.setMenu(e.target.innerText);
 	};
 

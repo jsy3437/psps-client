@@ -13,11 +13,14 @@ const MyPagePage = () => {
 	const [menu, setMenu] = useState('주문내역');
 	const [paymentList, setPaymentList] = useState('');
 	const [payment_id, setPayment_id] = useState('');
+	const [viewDetail, setViewDetail] = useState(false);
+	const [changePWState, setChangePWState] = useState(false);
 
 	useEffect(() => {
 		_payment.get_list().then((res) => {
 			const { success, payment_list } = res.data;
 			if (success) {
+				console.log(res.data);
 				setPaymentList(payment_list);
 			}
 		});
@@ -40,11 +43,26 @@ const MyPagePage = () => {
 				<MyPageInside>
 					<LogoImg alt="logo" src={logo} />
 					<Title>마이페이지</Title>
-					<MenuSelect menu={menu} setMenu={setMenu} />
+					<MenuSelect
+						menu={menu}
+						setMenu={setMenu}
+						setViewDetail={setViewDetail}
+						setChangePWState={setChangePWState}
+					/>
 					{menu === '주문내역' && (
-						<OrderHistory paymentList={paymentList} payment_id={payment_id} />
+						<OrderHistory
+							paymentList={paymentList}
+							payment_id={payment_id}
+							viewDetail={viewDetail}
+							setViewDetail={setViewDetail}
+						/>
 					)}
-					{menu === '개인정보관리' && <Privacy />}
+					{menu === '개인정보관리' && (
+						<Privacy
+							changePWState={changePWState}
+							setChangePWState={setChangePWState}
+						/>
+					)}
 				</MyPageInside>
 				<Footer />
 			</Container>

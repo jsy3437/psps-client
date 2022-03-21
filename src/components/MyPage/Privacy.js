@@ -6,10 +6,9 @@ import ChangePw from './Change/ChangePw';
 import ChangeTel from './Change/ChangeTel';
 import ChangeAddr from './Change/ChangeAddr';
 
-const Privacy = () => {
+const Privacy = (props) => {
 	const history = useHistory();
 	const [user, setUser] = useState('');
-	const [changePWState, setChangePWState] = useState(false);
 	const [changeTelState, setChangeTelState] = useState(false);
 	const [changeAddrState, setChangeAddrState] = useState(false);
 
@@ -29,7 +28,7 @@ const Privacy = () => {
 
 	return (
 		<Container>
-			{!changePWState && (
+			{!props.changePWState && (
 				<PrivacyWrap>
 					<Title>회원정보</Title>
 					<PrivacyBox>
@@ -42,7 +41,7 @@ const Privacy = () => {
 							<PrivacyTitle>비밀번호</PrivacyTitle>
 							<Button
 								onClick={() => {
-									setChangePWState(true);
+									props.setChangePWState(true);
 								}}
 							>
 								변경하기
@@ -71,9 +70,7 @@ const Privacy = () => {
 							<PrivacyTitle>배송지</PrivacyTitle>
 							<PrivacyText>
 								{user.address &&
-									`(${user.postcode}) ${user.address.split('/')[0]} ${
-										user.address.split('/')[1]
-									}`}
+									`(${user.postcode}) ${user.address.replace('/', ' ')}`}
 							</PrivacyText>
 							<Button
 								addr={user.address}
@@ -105,7 +102,9 @@ const Privacy = () => {
 					<SecessionBtn onClick={goWithdrawal}>회원탈퇴</SecessionBtn>
 				</PrivacyWrap>
 			)}
-			{changePWState && <ChangePw setChangePWState={setChangePWState} />}
+			{props.changePWState && (
+				<ChangePw setChangePWState={props.setChangePWState} />
+			)}
 			{changeAddrState && (
 				<ChangeAddr
 					user={user}
