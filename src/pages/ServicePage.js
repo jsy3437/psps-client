@@ -25,10 +25,16 @@ const ServicePage = () => {
 	};
 
 	useEffect(() => {
+		let isSubscribed = true;
 		setAnswerOpen(false);
 		_question.get_list(type).then((res) => {
-			setList(res.data.question_list);
+			if (isSubscribed && res.data.success) {
+				setList(res.data.question_list);
+			}
 		});
+		return () => {
+			isSubscribed = false;
+		};
 	}, [type]);
 
 	return (
