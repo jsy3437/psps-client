@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as _user from '../controller/user';
@@ -12,10 +12,17 @@ const WithdrawalPage = () => {
 	const [password, setPassword] = useState('');
 	const [check, setCheck] = useState(false);
 	const arr = [
-		'탈퇴 즉시 개인정보가 삭제되면 복원할 수 없습니다.',
-		'취소/교환/반품 및 사후처리 등을 위해 전자상거래 등에서의 소비자보호에 관한 법률에 의거 일정 기간동안 보관 후 파기됩니다.',
-		'진행 중인 주문/취소/교환/반품이 남아있는 경우 해당 사유가 해소된 이후 탈퇴가 가능합니다.',
+		'개인정보삭제는 취소/교환/반품 및 사후처리 등을 위해 전자상거래 등에서의 소비자보호에 관한 법률에 의거 일정 기간동안 보관 후 파기됩니다.',
+		'탈퇴 시 개인정보가 삭제되면 복원할 수 없습니다.',
+		'진행 중인 주문/취소/교환/반품이 남아있는 경우 해당 사유 처리가 완료된 이후 탈퇴가 가능합니다.',
 	];
+
+	function ScrollToTop() {
+		useEffect(() => {
+			window.scrollTo(0, 0);
+		}, []);
+		return null;
+	}
 
 	const goBack = () => {
 		history.push({ pathname: '/members', state: { type: '개인정보관리' } });
@@ -48,6 +55,7 @@ const WithdrawalPage = () => {
 
 	return (
 		<div id="container">
+			<ScrollToTop />
 			<Container>
 				<LogoImg alt="logo image" src={logoImg} />
 				<Title>회원탈퇴</Title>
@@ -105,6 +113,7 @@ const InfoTitle = styled.p`
 	font-family: 'kr-b';
 	margin-bottom: 2.4rem;
 	letter-spacing: -0.8px;
+	text-align: center;
 `;
 const InfoMessageBox = styled.div`
 	width: 50rem;

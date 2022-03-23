@@ -261,7 +261,9 @@ const OrderDetail = (props) => {
 
 						<InfoList>
 							<InfoItem>{receiverInfo[2]}</InfoItem>
-							<InfoContents>{detailPayment.del_addr}</InfoContents>
+							<InfoContents>
+								{detailPayment.del_addr.replace('/', ' ')}
+							</InfoContents>
 						</InfoList>
 
 						<InfoList>

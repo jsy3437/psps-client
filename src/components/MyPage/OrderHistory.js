@@ -10,10 +10,10 @@ const OrderHistory = (props) => {
 	const [page, setPage] = useState(1);
 	const total = props.paymentList.length;
 	const onePage = 10;
-	const [viewDetail, setViewDetail] = useState(false);
+	// const [viewDetail, setViewDetail] = useState(false);
 
 	const goDetail = (payment_id) => {
-		setViewDetail(payment_id);
+		props.setViewDetail(payment_id);
 	};
 
 	const goShopping = () => {
@@ -22,10 +22,11 @@ const OrderHistory = (props) => {
 
 	useEffect(() => {
 		if (props.payment_id) {
-			console.log(props.payment_id);
-			setViewDetail(props.payment_id);
+			props.setViewDetail(props.payment_id);
 		}
 	}, [props.payment_id]);
+
+	console.log(props.paymentList);
 
 	return (
 		<MyPageInside>
@@ -35,7 +36,7 @@ const OrderHistory = (props) => {
 					<GoShoppingButton onClick={goShopping}>쇼핑하기</GoShoppingButton>
 				</OrderHistoryWrap>
 			)}
-			{props.paymentList.length > 0 && !viewDetail && (
+			{props.paymentList.length > 0 && !props.viewDetail && (
 				<OrderHistoryWrap>
 					{props.paymentList &&
 						props.paymentList.map((el, idx) => (
@@ -49,7 +50,9 @@ const OrderHistory = (props) => {
 									{el.create_at.split('T')[0]}
 									<OrderId>・{el.payment_uid}</OrderId>
 								</OrderTopDate>
-								<ListImg alt="product img" src={ex1} />
+								<ListImgBox>
+									<ListImg alt="product img" src={ex1} />
+								</ListImgBox>
 								<ListContents>
 									<ProductNameBox>
 										<ProductName>{el.name}</ProductName>
@@ -60,9 +63,7 @@ const OrderHistory = (props) => {
 										)} */}
 									</ProductNameBox>
 									<DeliveryAddr>
-										{`(${el.del_postcode}) ${el.del_addr.split('/')[0]} ${
-											el.del_addr.split('/')[1]
-										}`}
+										{`(${el.del_postcode}) ${el.del_addr.replace('/', ' ')}`}
 									</DeliveryAddr>
 									<PriceAndDetailBtnBox>
 										<ProductTotalPrice>{`총 결제 금액 ${el.amount.toLocaleString()}원`}</ProductTotalPrice>
@@ -80,8 +81,11 @@ const OrderHistory = (props) => {
 					/>
 				</OrderHistoryWrap>
 			)}
-			{props.paymentList.length > 0 && viewDetail && (
-				<OrderDetail viewDetail={viewDetail} setViewDetail={setViewDetail} />
+			{props.paymentList.length > 0 && props.viewDetail && (
+				<OrderDetail
+					viewDetail={props.viewDetail}
+					setViewDetail={props.setViewDetail}
+				/>
 			)}
 		</MyPageInside>
 	);
@@ -151,8 +155,13 @@ const OrderId = styled.span`
 	color: #8e8e8e;
 	margin-left: 0.2rem;
 `;
+const ListImgBox = styled.div`
+	width: 19.2rem;
+	height: 100%;
+	border-radius: 24px;
+`;
 const ListImg = styled.img`
-	width: 27.5%;
+	width: 100%;
 	height: 100%;
 	border-radius: 24px;
 `;
@@ -162,7 +171,7 @@ const ListContents = styled.div`
 	padding: 2rem;
 `;
 const ProductNameBox = styled.div`
-	width: 31rem;
+	width: 100%;
 	display: flex;
 	margin-bottom: 0.4rem;
 	align-items: flex-end;
