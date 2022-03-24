@@ -31,8 +31,10 @@ const Footer = () => {
 	};
 
 	const onInfoModalOpen = (idx) => {
-		setOpenHeadLeft(idx);
+		setOpenHeadLeft(idx + 1);
 	};
+	console.log(openHeadLeft);
+	console.log(typeof 0);
 
 	const onInfoModalClose = () => {
 		setOpenHeadLeft(false);
@@ -49,17 +51,15 @@ const Footer = () => {
 								effect={idx === 1}
 								onClick={() => {
 									onInfoModalOpen(idx);
-								}}>
+								}}
+							>
 								{el}
 							</HeadLeftText>
 						))}
 					</FooterHeadLeft>
 					<FooterHeadRight>
 						{headRight.map((el, idx) => (
-							<HeadRightButton
-								key={idx}
-								effect={idx === 1}
-								onClick={goService}>
+							<HeadRightButton key={idx} effect={idx === 1} onClick={goService}>
 								{el}
 							</HeadRightButton>
 						))}
@@ -69,7 +69,7 @@ const Footer = () => {
 			<FooterBody>
 				<FooterBodyInside>
 					<FooterBodyLeft>
-						<BodyLeftImg alt='logo' src={logo} />
+						<BodyLeftImg alt="logo" src={logo} />
 
 						<BodyLeftText>
 							{infoLeft1}
@@ -96,12 +96,10 @@ const Footer = () => {
 				<InfoModalWrap onClick={onInfoModalClose}>
 					<InfoBox>
 						<InfoTitle>
-							{openHeadLeft === 0 ? terms[0].title : terms[1].title}
+							{openHeadLeft === 1 ? terms[0].title : terms[1].title}
 						</InfoTitle>
 						<InfoText>
-							{openHeadLeft === 0
-								? terms[0].contents
-								: terms[1].contents}
+							{openHeadLeft === 1 ? terms[0].contents : terms[1].contents}
 						</InfoText>
 					</InfoBox>
 				</InfoModalWrap>

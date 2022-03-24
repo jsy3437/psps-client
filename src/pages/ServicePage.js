@@ -25,6 +25,10 @@ const ServicePage = () => {
 	};
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
+	useEffect(() => {
 		let isSubscribed = true;
 		setAnswerOpen(false);
 		_question.get_list(type).then((res) => {

@@ -41,6 +41,10 @@ const PaymentPage = () => {
 	}, []);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
+	useEffect(() => {
 		if (del_name && del_tel && postAddr && detailAddr && postZoneCode) {
 			setOrderState(true);
 		} else {

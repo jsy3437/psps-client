@@ -31,6 +31,10 @@ const ProductPage = () => {
 	}, []);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
+	useEffect(() => {
 		setIsLoading(true);
 		let isSubscribed = true;
 		_product.get_list(part, subPart, page).then((res) => {
