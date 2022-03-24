@@ -39,8 +39,9 @@ const ProductDetailPage = () => {
 			};
 		}
 	}, [product_id]);
+
 	return (
-		<div id="container">
+		<div id='container'>
 			<ScrollToTop />
 			<OrderBox
 				detail={detail}

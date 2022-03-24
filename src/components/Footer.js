@@ -15,7 +15,7 @@ const Footer = () => {
 		['M', info.OWNER_CONTACT],
 	];
 	const infoLeft1 = `${info.COMPANY_NAME} 대표이사 : ${info.COMPANY_OWNER} | 주소 : ${info.COMPANY_PLACE}\n사업자등록번호 : `;
-	const infoLeft2 = ` | 통신판매신고번호 : ${info.REPORT_NUMBER}\n개인정보관리책임자 : ${info.PRIVACY_PERSON} (${info.PRIVACY_EMAIL})\n${info.COMPANY_NAME}는 모든 거래에 대한 책임과 배송, 교환, 환불, 민원 등의 처리는 ${info.COMPANY_NAME}에서 진행합니다.\n민원 담당자 ${info.COMPANY_OWNER} / 연락처 ${info.COMPANY_CONTACT}\n\n©2021 CetusStudio Inc.All rights reserved.`;
+	const infoLeft2 = ` | 통신판매신고번호 : ${info.REPORT_NUMBER}\n개인정보관리책임자 : ${info.PRIVACY_PERSON} (${info.PRIVACY_EMAIL})\n모든 거래에 대한 책임과 배송, 교환, 환불, 민원 등의 처리는 ${info.COMPANY_NAME}에서 진행합니다.\n민원 담당자 ${info.COMPANY_OWNER} / 연락처 ${info.COMPANY_CONTACT}\n\n©2021 CetusStudio Inc.All rights reserved.`;
 
 	const infoRight = `평일:08:30~17:30\n점심:12:00~13:30\n(토,일 및 공휴일 휴일)`;
 
@@ -49,15 +49,17 @@ const Footer = () => {
 								effect={idx === 1}
 								onClick={() => {
 									onInfoModalOpen(idx);
-								}}
-							>
+								}}>
 								{el}
 							</HeadLeftText>
 						))}
 					</FooterHeadLeft>
 					<FooterHeadRight>
 						{headRight.map((el, idx) => (
-							<HeadRightButton key={idx} effect={idx === 1} onClick={goService}>
+							<HeadRightButton
+								key={idx}
+								effect={idx === 1}
+								onClick={goService}>
 								{el}
 							</HeadRightButton>
 						))}
@@ -67,7 +69,7 @@ const Footer = () => {
 			<FooterBody>
 				<FooterBodyInside>
 					<FooterBodyLeft>
-						<BodyLeftImg alt="logo" src={logo} />
+						<BodyLeftImg alt='logo' src={logo} />
 
 						<BodyLeftText>
 							{infoLeft1}
@@ -97,7 +99,9 @@ const Footer = () => {
 							{openHeadLeft === 0 ? terms[0].title : terms[1].title}
 						</InfoTitle>
 						<InfoText>
-							{openHeadLeft === 0 ? terms[0].contents : terms[1].contents}
+							{openHeadLeft === 0
+								? terms[0].contents
+								: terms[1].contents}
 						</InfoText>
 					</InfoBox>
 				</InfoModalWrap>
