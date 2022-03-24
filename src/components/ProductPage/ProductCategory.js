@@ -5,6 +5,7 @@ import * as category from '../../data/category';
 const ProductCategory = (props) => {
 	const onChangePart = (e) => {
 		props.setPart(e.target.innerText);
+		props.setSubPart(null);
 	};
 	const onChangeSubPart = (e) => {
 		const innerText = e.target.innerText;
@@ -23,7 +24,7 @@ const ProductCategory = (props) => {
 				))}
 			</PartWrap>
 			<SubPartWrap>
-				{props.subPartArr &&
+				{props.subPartArr.arr &&
 					props.subPartArr.arr.map((el, idx) => (
 						<SubPartListBox key={idx}>
 							<SubPartList

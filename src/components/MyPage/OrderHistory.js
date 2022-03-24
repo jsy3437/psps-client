@@ -2,15 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
+import shadowImg from '../../images/shadow-box.svg';
 import OrderDetail from './OrderDetail';
 import PageSelector from '../PageSelector';
 
 const OrderHistory = (props) => {
 	const history = useHistory();
 	const [page, setPage] = useState(1);
+
 	const total = props.paymentList.length;
 	const onePage = 10;
 	// const [viewDetail, setViewDetail] = useState(false);
+
+	useEffect(() => {
+		if (props.payment_id) {
+			props.setViewDetail(props.payment_id);
+		}
+	}, [props.payment_id]);
 
 	const goDetail = (payment_id) => {
 		props.setViewDetail(payment_id);
@@ -19,12 +27,6 @@ const OrderHistory = (props) => {
 	const goShopping = () => {
 		history.push('/product');
 	};
-
-	useEffect(() => {
-		if (props.payment_id) {
-			props.setViewDetail(props.payment_id);
-		}
-	}, [props.payment_id]);
 
 	console.log(props.paymentList);
 
@@ -51,17 +53,19 @@ const OrderHistory = (props) => {
 									<OrderId>・{el.payment_uid}</OrderId>
 								</OrderTopDate>
 								<ListImgBox>
-									<ListImg alt="product img" src={ex1} />
+									<ListImg alt="product image" src={ex1} />
+									{el.name.includes(' 외 ') && (
+										<ListShadowImg alt="shadow image" src={shadowImg} />
+									)}
 								</ListImgBox>
 								<ListContents>
-									<ProductNameBox>
-										<ProductName>{el.name}</ProductName>
-										{/* {el.name.split(' 외 ').length > 1 && (
+									<ProductName>{el.name}</ProductName>
+									{/* {el.name.split(' 외 ').length > 1 && (
 											<ProductNameSpan>
 												`외 ${el.name.split(' 외 ')[1]}`
 											</ProductNameSpan>
 										)} */}
-									</ProductNameBox>
+
 									<DeliveryAddr>
 										{`(${el.del_postcode}) ${el.del_addr.replace('/', ' ')}`}
 									</DeliveryAddr>
@@ -156,26 +160,30 @@ const OrderId = styled.span`
 	margin-left: 0.2rem;
 `;
 const ListImgBox = styled.div`
+	position: relative;
 	width: 19.2rem;
+	width: 39%;
 	height: 100%;
 	border-radius: 24px;
+	z-index: 1;
 `;
 const ListImg = styled.img`
 	width: 100%;
 	height: 100%;
 	border-radius: 24px;
 `;
+const ListShadowImg = styled.img`
+	position: absolute;
+	top: -0.6rem;
+	left: -0.2rem;
+	z-index: -1;
+`;
 const ListContents = styled.div`
 	width: 100%;
 	height: 100%;
 	padding: 2rem;
 `;
-const ProductNameBox = styled.div`
-	width: 100%;
-	display: flex;
-	margin-bottom: 0.4rem;
-	align-items: flex-end;
-`;
+
 const ProductName = styled.p`
 	max-width: 25rem;
 	font-size: 2rem;
@@ -183,6 +191,7 @@ const ProductName = styled.p`
 	color: #221814;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	margin-bottom: 0.4rem;
 `;
 const ProductNameSpan = styled.span`
 	font-size: 1.8rem;

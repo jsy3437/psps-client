@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="212" height="194" viewBox="0 0 212 194">
+  <defs>
+    <filter id="세번째_그림자" x="107" y="26" width="105" height="142" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.078"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="두번쩨_그림자" x="116" y="10" width="92" height="174" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.122"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="첫번째_그림자" x="0" y="0" width="203" height="194" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="그룹_263" data-name="그룹 263" transform="translate(-292 -196)">
+    <g transform="matrix(1, 0, 0, 1, 292, 196)" filter="url(#세번째_그림자)">
+      <rect id="세번째_그림자-2" data-name="세번째 그림자" width="87" height="124" rx="8" transform="translate(116 32)" fill="#fff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 292, 196)" filter="url(#두번쩨_그림자)">
+      <rect id="두번쩨_그림자-2" data-name="두번쩨 그림자" width="74" height="156" rx="14" transform="translate(125 16)" fill="#fff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 292, 196)" filter="url(#첫번째_그림자)">
+      <rect id="첫번째_그림자-2" data-name="첫번째 그림자" width="185" height="176" rx="24" transform="translate(9 6)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

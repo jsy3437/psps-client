@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="258" height="106" viewBox="0 0 258 106">
+  <defs>
+    <filter id="사각형_256" x="0" y="8" width="258" height="98" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.078"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="그룹_264" data-name="그룹 264" transform="translate(-1311 -88)">
+    <g transform="matrix(1, 0, 0, 1, 1311, 88)" filter="url(#사각형_256)">
+      <g id="사각형_256-2" data-name="사각형 256" transform="translate(9 14)" fill="#fff" stroke="#e0e0e0" stroke-width="1">
+        <rect width="240" height="80" rx="24" stroke="none"/>
+        <rect x="0.5" y="0.5" width="239" height="79" rx="23.5" fill="none"/>
+      </g>
+    </g>
+    <g id="다각형_1" data-name="다각형 1" transform="translate(1516 88)" fill="#fff">
+      <path d="M 15.1384105682373 13.5 L 0.8615881204605103 13.5 L 7.999999523162842 1.007779955863953 L 15.1384105682373 13.5 Z" stroke="none"/>
+      <path d="M 7.999999523162842 2.015560150146484 L 1.723176956176758 13 L 14.27682209014893 13 L 7.999999523162842 2.015560150146484 M 7.999999523162842 0 L 16 14 L -9.5367431640625e-07 14 L 7.999999523162842 0 Z" stroke="none" fill="#e0e0e0"/>
+    </g>
+    <path id="다각형_2" data-name="다각형 2" d="M8,0l8,14H0Z" transform="translate(1516 90)" fill="#fff"/>
+  </g>
+</svg>

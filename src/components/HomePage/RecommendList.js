@@ -7,7 +7,6 @@ import logo from '../../images/red-logo.svg';
 
 const RecommendList = () => {
 	const history = useHistory();
-	const titles = ['품생품사', '추천', '상품'];
 	const [list, setList] = useState([]);
 	const [hover, setHover] = useState('');
 
@@ -30,16 +29,8 @@ const RecommendList = () => {
 	return (
 		<RecommendWrap>
 			<Logo alt="logo" src={logo} />
-			<BrownBackground />
-			<Titles>
-				{titles.map((el, idx) => (
-					<Title key={idx} highLight={idx === 1}>
-						{el}
-					</Title>
-				))}
-			</Titles>
+			<Title>{`품생품사 추천 상품`}</Title>
 			<Desc>{`품생품사에서 선별한\n특별한 상품들을 지금 바로 만나보세요!`}</Desc>
-			<Boundary />
 			<ListWrap>
 				{list &&
 					list.map((el, idx) => (
@@ -65,11 +56,13 @@ const RecommendList = () => {
 							<ListTitle hover={hover === idx}>{el.title}</ListTitle>
 							{/* 상품설명 */}
 							<ListDescTotalPrice>
-								{el.discount !== 0 && (
-									<ListDesc>{el.price && el.price.toLocaleString()}원</ListDesc>
-								)}
-								{el.total_price && el.total_price.toLocaleString()}
+								{el.total_price && `${el.total_price.toLocaleString()}`}
 								<DescWon>원</DescWon>
+								{el.discount !== 0 && (
+									<ListDesc>
+										{el.price && `${el.price.toLocaleString()} `}
+									</ListDesc>
+								)}
 							</ListDescTotalPrice>
 						</List>
 					))}
@@ -90,43 +83,21 @@ const RecommendWrap = styled.div`
 const Logo = styled.img`
 	width: 6rem;
 	height: 6rem;
-	position: absolute;
-	top: -7.2rem;
-`;
-const BrownBackground = styled.div`
-	width: 100%;
-	height: 37.3rem;
-	background: #221814 0% 0% no-repeat padding-box;
-	opacity: 1;
-	position: absolute;
-	top: 0;
-	z-index: -3;
-`;
-const Titles = styled.div`
-	height: 5.8rem;
-	margin-top: 0.2rem;
-	display: flex;
+	margin-bottom: 1rem;
 `;
 const Title = styled.h2`
 	height: 5.8rem;
 	line-height: 5.8rem;
 	font-size: 4rem;
 	font-family: 'kr-b';
-	color: #fff;
 	${(props) => props.highLight && `color:red`}
 `;
 const Desc = styled.p`
 	height: 5.1rem;
 	font-size: 1.8rem;
-	color: #fff;
+	color: #8e8e8e;
 	text-align: center;
-`;
-const Boundary = styled.div`
-	width: 5.2rem;
-	height: 0.2rem;
-	margin-top: 2.4rem;
-	margin-bottom: 3rem;
-	background-color: #fff;
+	margin-bottom: 5rem;
 `;
 const ListWrap = styled.ul`
 	width: 120rem;
@@ -138,6 +109,8 @@ const List = styled.li`
 	height: 40rem;
 	margin-bottom: 5.9rem;
 	cursor: pointer;
+	background-color: #fff;
+	border-radius: 24px;
 `;
 const ListImgBox = styled.div`
 	width: 38rem;
@@ -155,7 +128,7 @@ const ListTitle = styled.h3`
 	height: 2.6rem;
 	line-height: 2.6rem;
 	font-size: 1.8rem;
-	font-family: 'kr-b';
+	font-family: 'kr-r';
 	letter-spacing: -0.72px;
 	color: #221814;
 	${(props) => props.hover && `text-decoration: underline;`}
@@ -164,19 +137,19 @@ const ListDesc = styled.span`
 	font-size: 1.4rem;
 	font-family: 'ro-r';
 	letter-spacing: -0.28px;
-	color: #8e8e8e;
-	margin-right: 0.4rem;
+	color: #a0a0a0;
+	margin-left: 0.4rem;
 	text-decoration: line-through;
 `;
 const ListDescTotalPrice = styled.p`
-	font-size: 2rem;
+	font-size: 2.4rem;
 	font-family: 'ro-b';
 	letter-spacing: -0.4px;
-	color: #e50011;
 	margin-top: 0.2rem;
 `;
 const DescWon = styled.span`
-	font-family: 'kr-b';
-	font-size: 1.6rem;
+	font-family: 'kr-r';
+	font-size: 1.4rem;
+	color: #a0a0a0;
 	margin-left: 0.2rem;
 `;

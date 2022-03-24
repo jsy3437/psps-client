@@ -17,12 +17,9 @@ const WithdrawalPage = () => {
 		'진행 중인 주문/취소/교환/반품이 남아있는 경우 해당 사유 처리가 완료된 이후 탈퇴가 가능합니다.',
 	];
 
-	function ScrollToTop() {
-		useEffect(() => {
-			window.scrollTo(0, 0);
-		}, []);
-		return null;
-	}
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
 	const goBack = () => {
 		history.push({ pathname: '/members', state: { type: '개인정보관리' } });
@@ -55,7 +52,6 @@ const WithdrawalPage = () => {
 
 	return (
 		<div id="container">
-			<ScrollToTop />
 			<Container>
 				<LogoImg alt="logo image" src={logoImg} />
 				<Title>회원탈퇴</Title>

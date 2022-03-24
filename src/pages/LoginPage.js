@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { user_login } from '../modules/user';
@@ -15,6 +15,10 @@ const LoginPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
 	const onChangeEmail = (e) => {
 		setEmail(e.target.value);
 	};
@@ -23,6 +27,10 @@ const LoginPage = () => {
 	};
 	const goFindInfo = () => {
 		history.push('/find-info');
+	};
+
+	const onKeyPress = (e) => {
+		e.key === 'Enter' && onSubmit();
 	};
 	// const goRegister = () => {
 	// 	history.push('/register');
@@ -68,6 +76,7 @@ const LoginPage = () => {
 							value={password ? password : ''}
 							onChange={onChangePassword}
 							placeholder={'비밀번호를 입력해주세요'}
+							onKeyPress={onKeyPress}
 						/>
 					</Items>
 					<FindBox>

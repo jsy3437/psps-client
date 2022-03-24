@@ -8,7 +8,10 @@ const ProductList = (props) => {
 	const [hover, setHover] = useState('');
 
 	const goDetail = (product_id) => {
-		history.push(`/detail/${product_id}`);
+		history.push({
+			pathname: `/detail/${product_id}`,
+			state: { part: props.part, subPart: props.subPart },
+		});
 	};
 
 	return (
@@ -47,11 +50,11 @@ const ProductList = (props) => {
 							{el.title}
 						</ProductTitle>
 						<ProductDescTotalPrice>
-							{el.discount !== 0 && (
-								<ProductDesc>{`${el.price.toLocaleString()}원`}</ProductDesc>
-							)}
 							{`${(el.price - el.discount).toLocaleString()}`}
 							<DescWon>원</DescWon>
+							{el.discount !== 0 && (
+								<ProductDesc>{`${el.price.toLocaleString()} `}</ProductDesc>
+							)}
 						</ProductDescTotalPrice>
 					</Product>
 				))}
@@ -101,7 +104,7 @@ const ProductTitle = styled.h3`
 	height: 2.6rem;
 	line-height: 2.6rem;
 	font-size: 1.8rem;
-	font-family: 'kr-b';
+	font-family: 'kr-r';
 	color: #221814;
 	cursor: pointer;
 	${(props) => props.hover && `text-decoration: underline;`}
@@ -119,19 +122,19 @@ const ProductDesc = styled.span`
 	font-size: 1.4rem;
 	font-family: 'ro-r';
 	letter-spacing: -0.28px;
-	color: #8e8e8e;
-	margin-right: 0.4rem;
+	color: #a0a0a0;
+	margin-left: 0.6rem;
 	text-decoration: line-through;
 `;
 const ProductDescTotalPrice = styled.p`
-	font-size: 2rem;
+	font-size: 2.4rem;
 	font-family: 'ro-b';
 	letter-spacing: -0.4px;
-	color: #e50011;
 	margin-top: 0.2rem;
 `;
 const DescWon = styled.span`
-	font-family: 'kr-b';
-	font-size: 1.6rem;
+	font-family: 'kr-r';
+	font-size: 1.4rem;
 	margin-left: 0.2rem;
+	color: #a0a0a0;
 `;

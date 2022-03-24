@@ -42,6 +42,7 @@ const OrderBox = (props) => {
 		} else if (!props.user.login) {
 			return alert('로그인 후 이용가능합니다');
 		}
+		props.setAlertState({ successTrue: false, successFalse: false });
 		const data = {
 			product_option_id: option.product_option_id,
 			quantity: count,
@@ -49,18 +50,24 @@ const OrderBox = (props) => {
 		_basket.add_cart(data).then((res) => {
 			const { success, count } = res.data;
 			if (success) {
-				alert(
-					`제품명: ${props.detail.title}\n옵션: ${option.title}\n장바구니에 담겼습니다.`
-				);
+				alertMessage(success);
 				setOption(props.optionList[0]);
 				dispatch(cart_newData(count));
 			} else {
-				alert(
-					`장바구니에 이미 존재하는 상품입니다.\n추가를 원하시면 갯수를 조정해주세요`
-				);
+				alertMessage(success);
 			}
 		});
 	};
+	function alertMessage(success) {
+		success
+			? props.setAlertState({ ...props.alertState, successTrue: true })
+			: props.setAlertState({ ...props.alertState, successFalse: true });
+		setTimeout(() => {
+			if (props.alertState.successTrue || props.alertState.successFalse) {
+				props.setAlertState({ successTrue: false, successFalse: false });
+			}
+		}, 5000);
+	}
 
 	const goPayment = () => {
 		if (!props.user.login) {
@@ -287,7 +294,7 @@ const RightOptionListBox = styled.ul`
 	position: absolute;
 	top: 20.3rem;
 	width: 34.6rem;
-	max-height: 18.6rem;
+	max-height: 31rem;
 	display: flex;
 	flex-direction: column;
 	background: #ffffff;
@@ -297,6 +304,16 @@ const RightOptionListBox = styled.ul`
 	overflow-y: scroll;
 	z-index: 10;
 	transition: all 200ms ease;
+	&::-webkit-scrollbar {
+		width: 15px;
+		background-color: transparent;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: #707070;
+		border: 5px solid transparent;
+		border-radius: 10px;
+		background-clip: padding-box;
+	}
 `;
 const RightOptionList = styled.li`
 	width: 100%;
@@ -307,7 +324,6 @@ const RightOptionList = styled.li`
 	font-family: 'kr-r';
 	color: #221814;
 	cursor: pointer;
-	/* border: 1px solid blue; */
 	&:hover {
 		font-family: 'kr-b';
 	}

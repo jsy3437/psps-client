@@ -32,6 +32,11 @@ body {
 	align-items: center;
 	overflow-x:hidden;
 	position:relative;
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 h1,
 h2,

@@ -6,7 +6,6 @@ import { regexp } from '../../data/regexp';
 import * as _user from '../../controller/user';
 import styled from 'styled-components';
 import logo from '../../images/red-logo.svg';
-import { timers } from 'jquery';
 
 const ThirdStep = (props) => {
 	const dispatch = useDispatch();

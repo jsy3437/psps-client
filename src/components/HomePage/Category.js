@@ -8,7 +8,7 @@ const Category = () => {
 	const onCategory = (title) => {
 		history.push({
 			pathname: '/product',
-			state: { part: title },
+			state: { part: title, subPart: null },
 		});
 	};
 
@@ -23,7 +23,8 @@ const Category = () => {
 							key={idx}
 							onClick={() => {
 								onCategory(el.title);
-							}}>
+							}}
+						>
 							<IconImg alt={`${el.title} image`} src={el.src} />
 							<IconTitle>{el.title}</IconTitle>
 						</IconBox>

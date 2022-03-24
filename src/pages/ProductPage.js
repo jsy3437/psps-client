@@ -20,15 +20,16 @@ const ProductPage = () => {
 	const onePage = 12;
 	const [list, setList] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [subPartArr, setSubPartArr] = useState(['']);
 
 	useEffect(() => {
 		const _state = location.state;
-		if (_state) {
-			_state.part && setPart(_state.part);
-			_state.subPart && setSubPart(_state.subPart);
+		if (_state && _state.part) {
+			setPart(_state.part);
+			setSubPart(_state.subPart);
 		}
 		// eslint-disable-next-line
-	}, []);
+	}, [location]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -54,12 +55,11 @@ const ProductPage = () => {
 		setPage(1);
 	}, [part, subPart]);
 
-	const subPartArr = useMemo(() => {
+	useEffect(() => {
 		const _part = _category.part;
 		for (let i = 0; i < _part.length; i++) {
 			if (_part[i].title === part) {
-				setSubPart(null);
-				return _part[i];
+				setSubPartArr(_part[i]);
 			}
 		}
 	}, [part]);
