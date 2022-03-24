@@ -16,13 +16,19 @@ const ChangePw = (props) => {
 	const [allState, setAllState] = useState(false);
 
 	useEffect(() => {
-		if (password && check.password && check.passwordConfirm) {
+		if (password.length >= 8 && check.password && check.passwordConfirm) {
 			setAllState(true);
 		} else {
 			setAllState(false);
 		}
 	}, [check, password]);
-	console.log(check);
+
+	useEffect(() => {
+		newPassword === confirmNewPassword
+			? setCheck({ ...check, passwordConfirm: true })
+			: setCheck({ ...check, passwordConfirm: false });
+	}, [confirmNewPassword, newPassword]);
+
 	const changePassword = (e) => {
 		setPassword(e.target.value);
 	};
@@ -35,10 +41,7 @@ const ChangePw = (props) => {
 	};
 
 	const changeConfirmPassword = (e) => {
-		password === e.target.value
-			? setCheck({ ...check, passwordConfirm: true })
-			: setCheck({ ...check, passwordConfirm: false });
-		return setConfirmNewPassword(e.target.value);
+		setConfirmNewPassword(e.target.value);
 	};
 
 	const goBack = () => {
