@@ -165,6 +165,17 @@ const OrderDetail = (props) => {
 		}
 	};
 
+	const clickDeliveryTracking = (el, e) => {
+		const color = e.target.attributes.color.value;
+		if (color === 'black') {
+			window.open(
+				`https://tracker.delivery/#/${el.cou_id}/${el.cou_num}`,
+				'_blank',
+				'width=420, height=520'
+			);
+		}
+	};
+
 	return (
 		<OrderDetailWrap>
 			<TitleBox>
@@ -209,6 +220,9 @@ const OrderDetail = (props) => {
 												? 'black'
 												: 'grey'
 										}
+										onClick={(e) => {
+											clickDeliveryTracking(el, e);
+										}}
 									>
 										배송조회
 									</Button>
