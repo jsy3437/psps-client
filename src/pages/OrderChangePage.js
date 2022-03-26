@@ -4,12 +4,12 @@ import * as _payment from '../controller/payment';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import down from '../images/angle-down.svg';
+import Footer from '../components/Footer';
 
 const OrderChangePage = () => {
 	const history = useHistory();
 	const location = useLocation().state;
 	const [claimType, setClaimType] = useState('');
-	const [claimReason, setClaimReason] = useState('직접 입력');
 	const [claimReasonText, setClaimReasonText] = useState('');
 	const [bank, setBank] = useState('은행 선택');
 	const [account, setAccount] = useState('');
@@ -20,22 +20,14 @@ const OrderChangePage = () => {
 		account: '',
 		accountHolder: '',
 	});
-
-	const [claimReasonMenu, setClaimReasonMenu] = useState(false);
 	const [bankMenu, setBankMenu] = useState(false);
 	const [applyMenu, setApplyMenu] = useState(false);
 	const [buttonState, setButtonState] = useState(false);
-
 	const applyList = [
 		{ en: 'exChange', kr: '교환 신청' },
 		{ en: 'refund', kr: '반품 신청' },
 	];
 	const [applySelect, setApplySelect] = useState(applyList[0].kr);
-	const ReasonItem = [
-		'직접 입력',
-		'다른 상품이랑 함께 주문 할 예정입니다.',
-		'주문을 잘못했어요.',
-	];
 	const bankItem = [
 		'농협',
 		'우리은행',
@@ -77,8 +69,6 @@ const OrderChangePage = () => {
 		// eslint-disable-next-line
 	}, [check, claimType]);
 
-	console.log(claimType);
-
 	// input onChange
 	const changeClaimReasonText = (e) => {
 		const { value } = e.target;
@@ -112,22 +102,6 @@ const OrderChangePage = () => {
 		}
 	};
 
-	// menu open
-	const openClaimReasonMenu = () => {
-		setClaimReasonMenu(true);
-	};
-	const onReasonMenu = (e) => {
-		const { innerText } = e.target;
-		setClaimReason(innerText);
-		setClaimReasonMenu(false);
-		if (innerText === '직접 입력') {
-			setClaimReasonText('');
-			setCheck({ ...check, reasonText: false });
-		} else {
-			setClaimReasonText(innerText);
-			setCheck({ ...check, reasonText: true });
-		}
-	};
 	const openBankMenu = () => {
 		setBankMenu(true);
 	};
@@ -215,24 +189,8 @@ const OrderChangePage = () => {
 					)}
 					<Item>
 						<ItemTitle>신청 사유</ItemTitle>
-						<InputAndMenuBox>
-							<InputBox onClick={openClaimReasonMenu}>
-								<ColumnResult>{claimReason}</ColumnResult>
-								<ColumnBtn alt="down button" src={down} />
-							</InputBox>
-							{claimReasonMenu ? (
-								<MenuBox>
-									{ReasonItem.map((el, idx) => (
-										<MenuItem key={idx} onClick={onReasonMenu}>
-											{el}
-										</MenuItem>
-									))}
-								</MenuBox>
-							) : null}
-						</InputAndMenuBox>
 						<TextArea
 							placeholder="내용을 입력해주세요."
-							readOnly={claimReason !== '직접 입력'}
 							onChange={changeClaimReasonText}
 							value={claimReasonText}
 						></TextArea>
@@ -278,7 +236,6 @@ const OrderChangePage = () => {
 									<AlertText>계좌번호를 입력해주세요.</AlertText>
 								)}
 							</AlertTextBox>
-
 							<AccountHolder>예금주</AccountHolder>
 							<Input
 								type="text"
@@ -305,6 +262,7 @@ const OrderChangePage = () => {
 					</BtnBox>
 				</Container>
 			)}
+			<Footer />
 		</div>
 	);
 };
@@ -326,7 +284,7 @@ const Title = styled.h2`
 	font-size: 3rem;
 	font-family: 'kr-b';
 	letter-spacing: -1.2px;
-	margin-bottom: 10rem;
+	margin-bottom: 8rem;
 `;
 const BtnBox = styled.div`
 	width: 100%;
@@ -439,7 +397,7 @@ const TextArea = styled.textarea`
 	padding: 2.1rem 1.2rem;
 	border: 1px solid #c6c6c6;
 	border-radius: 14px;
-	margin-top: 1.6rem;
+	/* margin-top: 1.6rem; */
 	font-size: 1.4rem;
 	letter-spacing: -0.56px;
 	${(props) =>
@@ -462,7 +420,7 @@ const AccountHolder = styled.p`
 	font-size: 1.4rem;
 	font-family: 'kr-r';
 	letter-spacing: -0.56px;
-	margin: 3.2rem auto 0.6rem;
+	margin: 0rem auto 0.6rem;
 `;
 const MenuBox = styled.div`
 	position: absolute;

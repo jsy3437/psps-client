@@ -56,7 +56,7 @@ const OrderDetail = (props) => {
 
 		if (innerText === '취소하기') {
 			type = 'cancel';
-		} else if (innerText === '교환 / 반품 / 환불') {
+		} else if (innerText === '교환 / 환불') {
 			type = 'exchange';
 		}
 
@@ -74,9 +74,9 @@ const OrderDetail = (props) => {
 			testResult = true;
 		} else if (state === '결제완료' && text === '취소하기') {
 			testResult = true;
-		} else if (state === '배송중' && text === '교환 / 반품 / 환불') {
+		} else if (state === '배송중' && text === '교환 / 환불') {
 			testResult = true;
-		} else if (state === '배송완료' && text === '교환 / 반품 / 환불') {
+		} else if (state === '배송완료' && text === '교환 / 환불') {
 			testResult = true;
 		}
 		return testResult;
@@ -94,7 +94,7 @@ const OrderDetail = (props) => {
 			let type;
 			if (innerText && innerText === '취소하기') {
 				type = 'cancel';
-			} else if (innerText && innerText === '교환 / 반품 / 환불') {
+			} else if (innerText && innerText === '교환 / 환불') {
 				type = 'exchange';
 			}
 
@@ -176,6 +176,14 @@ const OrderDetail = (props) => {
 		}
 	};
 
+	const clickRemove = () => {
+		console.log(detailPayment.payment_id);
+		_payment.remove(detailPayment.payment_id).then((res) => {
+			const { success } = res.data;
+			success && console.log(res.data);
+		});
+	};
+
 	return (
 		<OrderDetailWrap>
 			<TitleBox>
@@ -241,7 +249,7 @@ const OrderDetail = (props) => {
 									>
 										{el.process === '입금 전' || el.process === '결제완료'
 											? '취소하기'
-											: '교환 / 반품 / 환불'}
+											: '교환 / 환불'}
 									</Button>
 								</Buttons>
 							</OrderInfo>
@@ -258,7 +266,7 @@ const OrderDetail = (props) => {
 					/>
 					<AllCheckInfo>{`전체선택 ( ${checkedList.length} / ${detailProductList.length} )`}</AllCheckInfo>
 					<CancelBtn onClick={goCancelOrExchange}>취소하기</CancelBtn>
-					<CancelBtn onClick={goCancelOrExchange}>교환 / 반품 / 환불</CancelBtn>
+					<CancelBtn onClick={goCancelOrExchange}>교환 / 환불</CancelBtn>
 				</AllCheckingBox>
 				<Title>받는 분</Title>
 				{detailPayment && (
@@ -338,7 +346,7 @@ const OrderDetail = (props) => {
 					</InfoReceiptList>
 				</InfoWrap>
 			</Item>
-			<RemoveButton>주문내역 삭제</RemoveButton>
+			<RemoveButton onClick={clickRemove}>주문내역 삭제</RemoveButton>
 		</OrderDetailWrap>
 	);
 };

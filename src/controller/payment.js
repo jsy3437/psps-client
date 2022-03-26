@@ -33,3 +33,7 @@ export const claim_cancel = async (paymentData, claimType) => {
 		.patch(`/claim/?type=${claimType}`, paymentData)
 		.catch(errorMessage);
 };
+
+export const remove = async (payment_id) => {
+	return await instance.delete(`/${payment_id}`).catch(errorMessage);
+};
