@@ -24,7 +24,7 @@ const OrderChangePage = () => {
 	const [applyMenu, setApplyMenu] = useState(false);
 	const [buttonState, setButtonState] = useState(false);
 	const applyList = [
-		{ en: 'exChange', kr: '교환 신청' },
+		{ en: 'exchange', kr: '교환 신청' },
 		{ en: 'refund', kr: '환불 신청' },
 	];
 	const [applySelect, setApplySelect] = useState(applyList[0].kr);
@@ -49,8 +49,6 @@ const OrderChangePage = () => {
 		// eslint-disable-next-line
 	}, []);
 
-	console.log(claimType);
-
 	useEffect(() => {
 		let state = false;
 		if (claimType === 'refund') {
@@ -68,9 +66,7 @@ const OrderChangePage = () => {
 			}
 		}
 		setButtonState(state);
-		// eslint-disable-next-line
 	}, [check, claimType]);
-	console.log(buttonState);
 
 	// input onChange
 	const changeClaimReasonText = (e) => {
@@ -140,7 +136,6 @@ const OrderChangePage = () => {
 			claim_reason: claimReasonText,
 			// 횐불계좌
 		};
-		console.log(data);
 
 		_payment.claim_cancel(data, claimType).then((res) => {
 			const { success } = res.data;
