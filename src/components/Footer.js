@@ -22,7 +22,8 @@ const Footer = () => {
 	const onBusinessNumber = () => {
 		window.open(
 			'http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1348675676',
-			'_blank'
+			'_blank',
+			'width=420, height=520'
 		);
 	};
 
@@ -33,8 +34,6 @@ const Footer = () => {
 	const onInfoModalOpen = (idx) => {
 		setOpenHeadLeft(idx + 1);
 	};
-	console.log(openHeadLeft);
-	console.log(typeof 0);
 
 	const onInfoModalClose = () => {
 		setOpenHeadLeft(false);

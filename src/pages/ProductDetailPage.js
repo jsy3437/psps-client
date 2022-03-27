@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import * as _product from '../controller/product';
+import styled, { keyframes, css } from 'styled-components';
+import alert_img from '../images/alert-box.svg';
 import OrderBox from '../components/ProductDetailPage/OrderBox';
 import ProductDetail from '../components/ProductDetailPage/ProductDetail';
 import ProductInfoTable from '../components/ProductDetailPage/ProductInfoTable';
 import Induce from '../components/Induce';
 import Footer from '../components/Footer';
-import alertImg from '../images/alert-box.svg';
-import styled, { keyframes, css } from 'styled-components';
 
 const ProductDetailPage = () => {
 	const location = useLocation().state;
@@ -55,7 +55,7 @@ const ProductDetailPage = () => {
 					<AlertImgBox
 						state={alertState.successTrue || alertState.successFalse}
 					>
-						<AlertImg alt="alert image" src={alertImg} />
+						<AlertImg alt="alert image" src={alert_img} />
 						<AlertText>
 							{alertState.successTrue
 								? '상품이 장바구니에 담겼어요!'

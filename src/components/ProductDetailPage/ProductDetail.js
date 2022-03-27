@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
 
@@ -6,10 +6,26 @@ const ProductDetail = (props) => {
 	const arr = ['상품선택', '상세설명', '상품정보'];
 	const [view, setView] = useState('상품선택');
 
+	const onScroll = () => {
+		if (window.scrollY > props.infoRef.current.offsetTop) {
+			return setView('상품정보');
+		} else if (window.scrollY > props.detailRef.current.offsetTop) {
+			return setView('상세설명');
+		} else if (window.scrollY > props.selectRef.current.offsetTop) {
+			return setView('상품선택');
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener('scroll', onScroll);
+		return () => {
+			window.removeEventListener('scroll', onScroll);
+		};
+	}, []);
+
 	const onChangeView = (e) => {
 		const { innerText } = e.target;
 		let refEl;
-		setView(innerText);
 		switch (innerText) {
 			case arr[0]:
 				refEl = props.selectRef.current;
@@ -22,7 +38,7 @@ const ProductDetail = (props) => {
 				break;
 			default:
 		}
-		return refEl.scrollIntoView({
+		refEl.scrollIntoView({
 			behavior: 'smooth',
 			block: 'start',
 		});
