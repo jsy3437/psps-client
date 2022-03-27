@@ -51,13 +51,13 @@ const OrderBox = (props) => {
 			const { success, count } = res.data;
 			if (success) {
 				alertMessage(success);
-				setOption(props.optionList[0]);
 				dispatch(cart_newData(count));
 			} else {
 				alertMessage(success);
 			}
 		});
 	};
+
 	function alertMessage(success) {
 		success
 			? props.setAlertState({ ...props.alertState, successTrue: true })
