@@ -39,6 +39,8 @@ const OrderChangePage = () => {
 		'카카오뱅크',
 	];
 
+	console.log(claimReasonText.length);
+
 	useEffect(() => {
 		if (!!!location) {
 			alert('잘못된 접근입니다');
@@ -191,6 +193,7 @@ const OrderChangePage = () => {
 							placeholder="내용을 입력해주세요."
 							onChange={changeClaimReasonText}
 							value={claimReasonText}
+							maxLength={60}
 						></TextArea>
 						<AlertTextBox>
 							{check.reasonText === false && (
