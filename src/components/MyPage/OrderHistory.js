@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
 import shadowImg from '../../images/shadow-box.svg';
@@ -53,7 +54,10 @@ const OrderHistory = (props) => {
 									<OrderId>・{el.payment_uid}</OrderId>
 								</OrderTopDate>
 								<ListImgBox>
-									<ListImg alt="product image" src={ex1} />
+									<ListImg
+										alt="product image"
+										src={`${IMG_ADDRESS}/${el.thumb}`}
+									/>
 									{el.name.includes(' 외 ') && (
 										<ListShadowImg alt="shadow image" src={shadowImg} />
 									)}

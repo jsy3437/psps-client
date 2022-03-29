@@ -396,7 +396,6 @@ const TextArea = styled.textarea`
 	padding: 2.1rem 1.2rem;
 	border: 1px solid #c6c6c6;
 	border-radius: 14px;
-	/* margin-top: 1.6rem; */
 	font-size: 1.4rem;
 	letter-spacing: -0.56px;
 	${(props) =>
