@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
-import Footer from '../components/Footer';
 
 const FindIdResultPage = () => {
 	const location = useLocation().state;
@@ -54,7 +53,6 @@ const FindIdResultPage = () => {
 						비밀번호 찾기
 					</SubmitButton>
 				</FindIdInside>
-				<Footer />
 			</Container>
 		</div>
 	);

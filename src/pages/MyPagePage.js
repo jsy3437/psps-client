@@ -6,7 +6,6 @@ import logo from '../images/red-logo.svg';
 import MenuSelect from '../components/MyPage/MenuSelect';
 import OrderHistory from '../components/MyPage/OrderHistory';
 import Privacy from '../components/MyPage/Privacy';
-import Footer from '../components/Footer';
 
 const MyPagePage = () => {
 	const location = useLocation();
@@ -27,7 +26,7 @@ const MyPagePage = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log(location);
+		// console.log(location);
 		if (location.state) {
 			if (location.state.type === '개인정보관리') {
 				setMenu(location.state.type);
@@ -64,7 +63,6 @@ const MyPagePage = () => {
 						/>
 					)}
 				</MyPageInside>
-				<Footer />
 			</Container>
 		</div>
 	);

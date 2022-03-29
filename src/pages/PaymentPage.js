@@ -4,7 +4,7 @@ import { payment_request } from '../payments';
 import * as _user from '../controller/user';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
-import Footer from '../components/Footer';
+
 import UserData from '../components/PaymentPage/UserData';
 import ProductData from '../components/PaymentPage/ProductData';
 
@@ -159,7 +159,6 @@ const PaymentPage = () => {
 					<BackButton onClick={goBack}>이전으로</BackButton>
 				</BtnBox>
 			</Container>
-			<Footer />
 		</div>
 	);
 };

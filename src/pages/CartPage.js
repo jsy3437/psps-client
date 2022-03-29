@@ -10,7 +10,6 @@ import uncheck_img from '../images/uncheck_btn.svg';
 import CartList from '../components/CartPage/CartList';
 import OrderBox from '../components/CartPage/OrderBox';
 import Spinner from '../components/Spinner';
-import Footer from '../components/Footer';
 
 const CartPage = () => {
 	const history = useHistory();
@@ -185,7 +184,6 @@ const CartPage = () => {
 					</AllCheckAndRemove>
 				)}
 			</Container>
-			<Footer />
 		</div>
 	);
 };

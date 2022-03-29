@@ -8,7 +8,7 @@ import ProductCategory from '../components/ProductPage/ProductCategory';
 import ProductList from '../components/ProductPage/ProductList';
 import PageSelector from '../components/PageSelector';
 import Induce from '../components/Induce';
-import Footer from '../components/Footer';
+
 import Spinner from '../components/Spinner';
 
 const ProductPage = () => {
@@ -95,7 +95,6 @@ const ProductPage = () => {
 				<ListInfoText>상품이 없습니다.</ListInfoText>
 			)}
 			<Induce />
-			<Footer />
 		</div>
 	);
 };

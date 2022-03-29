@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as _user from '../controller/user';
 import styled from 'styled-components';
-import Footer from '../components/Footer';
+
 import logoImg from '../images/red-logo.svg';
 
 const WithdrawalPage = () => {
@@ -76,7 +76,6 @@ const WithdrawalPage = () => {
 				</SubmitButton>
 				<BackButton onClick={goBack}>이전으로</BackButton>
 			</Container>
-			<Footer />
 		</div>
 	);
 };

@@ -4,7 +4,6 @@ import * as _payment from '../controller/payment';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import down from '../images/angle-down.svg';
-import Footer from '../components/Footer';
 
 const OrderChangePage = () => {
 	const history = useHistory();
@@ -263,7 +262,6 @@ const OrderChangePage = () => {
 					</BtnBox>
 				</Container>
 			)}
-			<Footer />
 		</div>
 	);
 };

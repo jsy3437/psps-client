@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import background_A from '../images/background-A.svg';
 import background_Q from '../images/background-Q.svg';
-import Footer from '../components/Footer';
 
 const ServicePage = () => {
 	const [answerOpen, setAnswerOpen] = useState('');
@@ -83,7 +82,6 @@ const ServicePage = () => {
 				)}
 				<Button onClick={callQuestion}>문의하기</Button>
 			</Container>
-			<Footer />
 		</div>
 	);
 };

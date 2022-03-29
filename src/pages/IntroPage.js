@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import bnn_top from '../images/intro_bnn_top.png';
 import bnn_bottom from '../images/intro_bnn_bottom.png';
 import Induce from '../components/Induce';
-import Footer from '../components/Footer';
 
 const IntroPage = () => {
 	useEffect(() => {
@@ -48,7 +47,6 @@ const IntroPage = () => {
 				<BackgroundImg alt="intro banner" src={bnn_bottom} />
 			</Container>
 			<Induce />
-			<Footer />
 		</div>
 	);
 };

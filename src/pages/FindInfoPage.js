@@ -6,7 +6,6 @@ import logo from '../images/red-logo.svg';
 import FindItemSelect from '../components/FindInfoPage/FindItemSelect';
 import FindId from '../components/FindInfoPage/FindIdInput';
 import FindPw from '../components/FindInfoPage/FindPwInput';
-import Footer from '../components/Footer';
 
 const FindInfoPage = () => {
 	const history = useHistory();
@@ -146,7 +145,6 @@ const FindInfoPage = () => {
 						</SubmitButton>
 					)}
 				</FindInfoInside>
-				<Footer />
 			</Container>
 		</div>
 	);

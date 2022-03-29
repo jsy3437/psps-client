@@ -20,6 +20,7 @@ import PaymentPage from './pages/PaymentPage';
 import PaymentResultPage from './pages/PaymentResultPage';
 import OrderChangePage from './pages/OrderChangePage';
 import WithdrawalPage from './pages/WithdrawalPage';
+import Footer from './components/Footer';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -73,6 +74,7 @@ const App = () => {
 						component={Auth(WithdrawalPage, true)}
 					/>
 				</Switch>
+				<Footer />
 			</div>
 		</Router>
 	);

@@ -117,6 +117,7 @@ const ListImgBox = styled.div`
 	height: 35rem;
 	overflow: hidden;
 	border-radius: 24px;
+	background-color: #fff;
 `;
 const ListImg = styled.img`
 	width: 38rem;

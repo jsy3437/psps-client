@@ -2,7 +2,6 @@ import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
-import Footer from '../components/Footer';
 
 const PaymentResultPage = () => {
 	const history = useHistory();
@@ -31,7 +30,6 @@ const PaymentResultPage = () => {
 					계속 쇼핑하기
 				</SubmitButton>
 			</Container>
-			<Footer />
 		</div>
 	);
 };

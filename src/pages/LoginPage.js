@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 // import N_logo from '../images/n-logo.svg';
 // import K_logo from '../images/k-logo.svg';
-import Footer from '../components/Footer';
 
 const LoginPage = () => {
 	const dispatch = useDispatch();
@@ -102,7 +101,6 @@ const LoginPage = () => {
 					</EasyBox> */}
 				</RegisterInside>
 			</Container>
-			<Footer />
 		</div>
 	);
 };
