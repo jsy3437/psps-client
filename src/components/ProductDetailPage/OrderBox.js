@@ -107,6 +107,8 @@ const OrderBox = (props) => {
 		}
 	};
 
+	console.log(option);
+
 	return (
 		<BoxContainer ref={props.selectRef} onClick={closeOption}>
 			<Box>
@@ -165,8 +167,12 @@ const OrderBox = (props) => {
 										onClick={() => {
 											onChangeOption(el);
 										}}
+										select={option === el}
 									>
-										{el.title}
+										<OptionListName>{el.title}</OptionListName>
+										<OptionListPrice>
+											{(el.price - el.discount).toLocaleString()}
+										</OptionListPrice>
 									</RightOptionList>
 								))}
 							</RightOptionListBox>
@@ -294,7 +300,7 @@ const RightOptionListBox = styled.ul`
 	position: absolute;
 	top: 20.3rem;
 	width: 34.6rem;
-	max-height: 31rem;
+	max-height: 19.6rem;
 	display: flex;
 	flex-direction: column;
 	background: #ffffff;
@@ -307,6 +313,7 @@ const RightOptionListBox = styled.ul`
 	&::-webkit-scrollbar {
 		width: 15px;
 		background-color: transparent;
+		display: none;
 	}
 	&::-webkit-scrollbar-thumb {
 		background-color: #707070;
@@ -320,14 +327,22 @@ const RightOptionList = styled.li`
 	height: 6.2rem;
 	line-height: 6.2rem;
 	text-align: center;
-	font-size: 1.8rem;
+	display: flex;
+	justify-content: space-between;
 	font-family: 'kr-r';
-	color: #221814;
+	border-radius: 14px;
 	cursor: pointer;
+	${(props) => props.select && `font-family: 'kr-b';`}
 	&:hover {
-		font-family: 'kr-b';
+		background-color: #f2f2f2;
 	}
 `;
+const OptionListName = styled.p`
+	font-size: 1.8rem;
+	color: #221814;
+	padding: 0 2rem;
+`;
+const OptionListPrice = styled(OptionListName)``;
 const RightOptionBox = styled.div`
 	width: 34.6rem;
 	height: 6.2rem;
