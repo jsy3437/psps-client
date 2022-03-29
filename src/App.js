@@ -27,7 +27,6 @@ const App = () => {
 	window.addEventListener('unload', () => {
 		dispatch(user_logout());
 	});
-
 	return (
 		<Router>
 			<div id="App">

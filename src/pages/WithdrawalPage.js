@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import * as _user from '../controller/user';
 import styled from 'styled-components';
 
@@ -8,13 +7,12 @@ import logoImg from '../images/red-logo.svg';
 
 const WithdrawalPage = () => {
 	const history = useHistory();
-	const dispatch = useDispatch();
 	const [password, setPassword] = useState('');
 	const [check, setCheck] = useState(false);
 	const arr = [
-		'개인정보삭제는 취소/교환/반품 및 사후처리 등을 위해 전자상거래 등에서의 소비자보호에 관한 법률에 의거 일정 기간동안 보관 후 파기됩니다.',
+		`개인정보 삭제는 취소/교환/환불 및 사후처리 등을 위해 전자상거래 등 소비자 보호에 관한 법률에 의거 일정 기간동안 보관 후 파기됩니다.`,
 		'탈퇴 시 개인정보가 삭제되면 복원할 수 없습니다.',
-		'진행 중인 주문/취소/교환/반품이 남아있는 경우 해당 사유 처리가 완료된 이후 탈퇴가 가능합니다.',
+		'탈퇴 시 개인정보가 삭제된 후에는 주문내역 확인 및 취소/교환/환불에 어려움이 있을 수 있습니다.',
 	];
 
 	useEffect(() => {
@@ -112,7 +110,7 @@ const InfoTitle = styled.p`
 `;
 const InfoMessageBox = styled.div`
 	width: 50rem;
-	border: 1px solid #e6e6e6;
+	/* border: 1px solid #e6e6e6; */
 	border-radius: 24px;
 	padding: 2rem 3rem;
 `;
@@ -120,7 +118,7 @@ const InfoMessage = styled.p`
 	font-size: 1.4rem;
 	font-family: 'kr-r';
 	margin-bottom: 1rem;
-	word-break: break-all;
+	word-break: keep-all;
 `;
 const InputItemBox = styled.div`
 	position: relative;
