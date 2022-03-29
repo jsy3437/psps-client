@@ -14,3 +14,4 @@ export const PRIVACY_PERSON = process.env.REACT_APP_PRIVACY_PERSON;
 export const PRIVACY_EMAIL = process.env.REACT_APP_PRIVACY_EMAIL;
 export const PRIVACY_CONTACT = process.env.REACT_APP_PRIVACY_CONTACT;
 export const IMP_ID = process.env.REACT_APP_IMP_ID;
+export const PAYMENT_RESULT_URL = process.env.REACT_APP_PAYMENT_RESULT_URL;

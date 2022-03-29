@@ -1,5 +1,5 @@
 import * as _payment from './controller/payment';
-import { IMP_ID } from './config';
+import { IMP_ID, PAYMENT_RESULT_URL } from './config';
 export const payment_request = (
 	impData,
 	pasteAddrChecked,
@@ -27,8 +27,7 @@ export const payment_request = (
 					.then((res) => {
 						const { success } = res.data;
 						if (success) {
-							window.location.href = `http://localhost:3000/payment/result/${res.data.payment_id}`;
-							// window.location.href = `http://makinet.kr/payment/result/${res.data.payment_id}`;
+							window.location.href = `${PAYMENT_RESULT_URL}/payment/result/${res.data.payment_id}`;
 						} else {
 							alert(`${res.data.msg}`);
 						}
