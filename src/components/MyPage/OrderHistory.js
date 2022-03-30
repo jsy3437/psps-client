@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { IMG_ADDRESS } from '../../config';
 import styled from 'styled-components';
-import ex1 from '../../images/ex1.png';
 import shadowImg from '../../images/shadow-box.svg';
 import OrderDetail from './OrderDetail';
 import PageSelector from '../PageSelector';
