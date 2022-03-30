@@ -24,7 +24,7 @@ const OrderBox = (props) => {
 	// 	} else {
 	// 		return setFixState(false);
 	// 	}
-	// 	// console.log(window.pageYOffset);
+
 	// };
 
 	const goShopping = () => {
@@ -44,8 +44,6 @@ const OrderBox = (props) => {
 			},
 		});
 	};
-	console.log(fixState);
-	console.log('aa', orderWrap.current && orderWrap);
 
 	return (
 		<OrderWrap

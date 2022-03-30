@@ -73,7 +73,6 @@ const SubBanner = () => {
 			// no default
 		}
 	};
-	console.log(bannerList);
 
 	return (
 		<SubBannerContainer>

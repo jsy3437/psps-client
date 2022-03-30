@@ -1,5 +1,9 @@
 ## Progress & Update
 
+> 2022.03.30
+
+- console.log 삭제
+
 > 2022.03.29
 
 - index.html : 파비콘, 검색키워드, 타이틀, 설명 및 검색엔진허용 완료

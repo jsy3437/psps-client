@@ -38,8 +38,6 @@ const OrderChangePage = () => {
 		'카카오뱅크',
 	];
 
-	console.log(claimReasonText.length);
-
 	useEffect(() => {
 		if (!!!location) {
 			alert('잘못된 접근입니다');
@@ -140,7 +138,6 @@ const OrderChangePage = () => {
 
 		_payment.claim_cancel(data, claimType).then((res) => {
 			const { success } = res.data;
-			console.log(res.data);
 			if (success) {
 				alert('신청이 완료되었습니다');
 				history.push({

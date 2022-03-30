@@ -106,13 +106,6 @@ const PaymentPage = () => {
 				del_req,
 			};
 
-			console.log({
-				impData,
-				pasteAddrChecked,
-				delivery,
-				payment_product_list,
-			});
-
 			payment_request(
 				impData,
 				pasteAddrChecked,

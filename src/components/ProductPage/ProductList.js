@@ -13,51 +13,55 @@ const ProductList = (props) => {
 			state: { part: props.part, subPart: props.subPart },
 		});
 	};
+	console.log(props.list);
 
 	return (
 		<ProductContainer>
 			<ProductWrap>
-				{props.list.map((el, idx) => (
-					<Product
-						key={idx}
-						onMouseEnter={() => {
-							setHover(idx);
-						}}
-						onMouseLeave={() => {
-							setHover('');
-						}}
-					>
-						<ProductImgBox
-							onClick={() => {
-								goDetail(el.product_id);
+				{props.list &&
+					props.list.map((el, idx) => (
+						<Product
+							key={idx}
+							onMouseEnter={() => {
+								setHover(idx);
+							}}
+							onMouseLeave={() => {
+								setHover('');
 							}}
 						>
 							{el.image && (
-								<ProductImg
-									alt="product img"
-									src={`${IMG_ADDRESS}/${el.image}`}
-									hover={hover === idx}
-								/>
+								<ProductImgBox
+									onClick={() => {
+										goDetail(el.product_id);
+									}}
+								>
+									(
+									<ProductImg
+										alt="product img"
+										src={`${IMG_ADDRESS}/${el.image}`}
+										hover={hover === idx}
+									/>
+									)
+								</ProductImgBox>
 							)}
-						</ProductImgBox>
 
-						<ProductTitle
-							onClick={() => {
-								goDetail(el.product_id);
-							}}
-							hover={hover === idx}
-						>
-							{el.title}
-						</ProductTitle>
-						<ProductDescTotalPrice>
-							{`${(el.price - el.discount).toLocaleString()}`}
-							<DescWon>원</DescWon>
-							{el.discount !== 0 && (
-								<ProductDesc>{`${el.price.toLocaleString()} `}</ProductDesc>
-							)}
-						</ProductDescTotalPrice>
-					</Product>
-				))}
+							<ProductTitle
+								onClick={() => {
+									goDetail(el.product_id);
+								}}
+								hover={hover === idx}
+							>
+								{el.title}
+							</ProductTitle>
+							<ProductDescTotalPrice>
+								{`${(el.price - el.discount).toLocaleString()}`}
+								<DescWon>원</DescWon>
+								{el.discount !== 0 && (
+									<ProductDesc>{`${el.price.toLocaleString()} `}</ProductDesc>
+								)}
+							</ProductDescTotalPrice>
+						</Product>
+					))}
 			</ProductWrap>
 			<GrayBackground />
 		</ProductContainer>

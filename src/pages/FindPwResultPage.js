@@ -23,8 +23,6 @@ const FindPwResultPage = () => {
 		}
 	}, [email]);
 
-	console.log(email);
-
 	useEffect(() => {
 		if (lengthCheck.password && lengthCheck.confirmPassword) {
 			setAllState(true);
@@ -48,7 +46,6 @@ const FindPwResultPage = () => {
 			: setLengthCheck({ ...lengthCheck, confirmPassword: false });
 		return setConfirmPassword(e.target.value);
 	};
-	console.log(allState);
 
 	const clickSubmit = () => {
 		if (allState) {

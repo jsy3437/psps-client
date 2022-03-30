@@ -28,8 +28,6 @@ const OrderHistory = (props) => {
 		history.push('/product');
 	};
 
-	console.log(props.paymentList);
-
 	return (
 		<MyPageInside>
 			{props.paymentList.length === 0 && (

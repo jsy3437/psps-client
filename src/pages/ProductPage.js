@@ -76,13 +76,15 @@ const ProductPage = () => {
 				setSubPart={setSubPart}
 				subPartArr={subPartArr}
 			/>
-			<ProductList
-				part={part}
-				subPart={subPart}
-				setPart={setPart}
-				setSubPart={setSubPart}
-				list={list}
-			/>
+			{list && (
+				<ProductList
+					part={part}
+					subPart={subPart}
+					setPart={setPart}
+					setSubPart={setSubPart}
+					list={list}
+				/>
+			)}
 			{list.length > 0 ? (
 				<PageSelector
 					style={{ marginBottom: '6rem' }}

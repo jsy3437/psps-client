@@ -28,7 +28,6 @@ const WithdrawalPage = () => {
 			_user.withdrawal({ password }).then((res) => {
 				const { success } = res.data;
 				if (success) {
-					console.log(res.data);
 					alert('회원탈퇴가 완료되었습니다.');
 
 					history.push('/');

@@ -19,14 +19,12 @@ const MyPagePage = () => {
 		_payment.get_list().then((res) => {
 			const { success, payment_list } = res.data;
 			if (success) {
-				console.log(res.data);
 				setPaymentList(payment_list);
 			}
 		});
 	}, []);
 
 	useEffect(() => {
-		// console.log(location);
 		if (location.state) {
 			if (location.state.type === '개인정보관리') {
 				setMenu(location.state.type);

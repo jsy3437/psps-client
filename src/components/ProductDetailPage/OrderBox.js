@@ -69,7 +69,7 @@ const OrderBox = (props) => {
 		}, 5000);
 	}
 
-	const goPayment = () => {
+	const goPayment = async () => {
 		if (!props.user.login) {
 			return alert('로그인 후 이용가능합니다');
 		}
@@ -106,8 +106,6 @@ const OrderBox = (props) => {
 				setOpenOption(false);
 		}
 	};
-
-	console.log(option);
 
 	return (
 		<BoxContainer ref={props.selectRef} onClick={closeOption}>

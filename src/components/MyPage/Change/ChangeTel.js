@@ -52,7 +52,6 @@ const ChangeTel = (props) => {
 	const ChangePhNumber = (e) => {
 		const { value } = e.target;
 		if (!isNaN(value)) {
-			console.log(value.length);
 			if (value.length === 11) {
 				setCheck({ ...check, phone_number: true });
 			} else {

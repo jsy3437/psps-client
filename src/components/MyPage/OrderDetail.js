@@ -177,7 +177,6 @@ const OrderDetail = (props) => {
 	};
 
 	const clickRemove = () => {
-		console.log(detailPayment.payment_id);
 		_payment.remove(detailPayment.payment_id).then((res) => {
 			const { success } = res.data;
 			success && console.log(res.data);
