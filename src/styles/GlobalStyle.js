@@ -13,7 +13,7 @@ body {
 
 }
 #root {
-	width: 100vw;
+	/* width: 100vw; */
 }
 #App {
 	width:100%;
