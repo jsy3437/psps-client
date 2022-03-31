@@ -27,7 +27,7 @@ const ProductDetailPage = () => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		return () => {
-			// history.replace({ state: location });
+			history.action === 'POP' && history.replace({ state: location });
 		};
 	}, []);
 

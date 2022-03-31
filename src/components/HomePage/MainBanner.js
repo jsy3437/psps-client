@@ -151,33 +151,31 @@ const MainBanner = () => {
 export default MainBanner;
 
 const Container = styled.div`
-	width: 192rem;
+	max-width: 192rem;
 	margin-top: -2rem;
 	position: relative;
 `;
 
 const MainBannerWrap = styled.div`
 	display: flex;
-	width: 192rem;
-	height: 85rem;
+	width: 100%;
+	height: 44.27vw;
 	overflow: hidden;
 `;
 const MainBannerList = styled.div`
 	display: flex;
-	width: 192rem;
-	height: 85rem;
+	width: 100%;
+	height: 100%;
 `;
 const MainBannerImg = styled.img`
-	min-width: 100%;
-	max-width: 100%;
-	width: 192rem;
-	height: 85rem;
+	width: 100%;
+	height: 100%;
 	object-fit: fill;
 	cursor: pointer;
 `;
 const TempBannerImg = styled(MainBannerImg)``;
 const BnnBtnBox = styled.div`
-	width: 124.4rem;
+	max-width: 192rem;
 	width: 100%;
 	position: absolute;
 	display: flex;

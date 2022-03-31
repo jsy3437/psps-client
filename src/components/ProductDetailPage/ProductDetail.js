@@ -7,12 +7,14 @@ const ProductDetail = (props) => {
 	const [view, setView] = useState('상품선택');
 
 	const onScroll = () => {
-		if (window.scrollY > props.infoRef.current.offsetTop) {
-			return setView('상품정보');
-		} else if (window.scrollY > props.detailRef.current.offsetTop) {
-			return setView('상세설명');
-		} else if (window.scrollY > props.selectRef.current.offsetTop) {
-			return setView('상품선택');
+		if (props.infoRef.current) {
+			if (window.scrollY > props.infoRef.current.offsetTop) {
+				return setView('상품정보');
+			} else if (window.scrollY > props.detailRef.current.offsetTop) {
+				return setView('상세설명');
+			} else if (window.scrollY > props.selectRef.current.offsetTop) {
+				return setView('상품선택');
+			}
 		}
 	};
 

@@ -63,7 +63,7 @@ const Navbar = () => {
 		<NavbarWrap>
 			<NavbarInside>
 				<NavbarLeft>
-					<NavbarLogo alt='logo' src={logo} onClick={goHome} />
+					<NavbarLogo alt="logo" src={logo} onClick={goHome} />
 				</NavbarLeft>
 				<NavbarRight>
 					<RightFirst>
@@ -75,8 +75,7 @@ const Navbar = () => {
 						<RightSecondList onClick={!user.login ? goLogin : goLogout}>
 							{!user.login ? '로그인' : '로그아웃'}
 						</RightSecondList>
-						<RightSecondList
-							onClick={!user.login ? goRegister : goMyPage}>
+						<RightSecondList onClick={!user.login ? goRegister : goMyPage}>
 							{!user.login ? '회원가입' : '마이페이지'}
 						</RightSecondList>
 						<RightSecondList onClick={goCart}>
@@ -95,7 +94,7 @@ const Navbar = () => {
 export default Navbar;
 
 const NavbarWrap = styled.div`
-	width: 100%;
+	width: 100vw;
 	height: 8rem;
 	display: flex;
 	justify-content: center;
