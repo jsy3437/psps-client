@@ -152,6 +152,7 @@ export default MainBanner;
 
 const Container = styled.div`
 	max-width: 192rem;
+	max-height: 85rem;
 	margin-top: -2rem;
 	position: relative;
 `;
@@ -159,6 +160,7 @@ const Container = styled.div`
 const MainBannerWrap = styled.div`
 	display: flex;
 	width: 100%;
+	max-height: 85rem;
 	height: 44.27vw;
 	overflow: hidden;
 `;
