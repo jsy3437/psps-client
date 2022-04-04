@@ -184,12 +184,16 @@ const OrderChangePage = () => {
 						</Item>
 					)}
 					<Item>
-						<ItemTitle>신청 사유</ItemTitle>
+						<ItemTitleBox>
+							<ItemTitle>신청 사유</ItemTitle>
+							<ReasonLength>{`${claimReasonText.length}/60`}</ReasonLength>
+						</ItemTitleBox>
+
 						<TextArea
 							placeholder="내용을 입력해주세요."
 							onChange={changeClaimReasonText}
 							value={claimReasonText}
-							maxLength={60}
+							maxLength={59}
 						></TextArea>
 						<AlertTextBox>
 							{check.reasonText === false && (
@@ -336,11 +340,21 @@ const Item = styled.div`
 	width: 100%;
 	margin-bottom: 2rem;
 `;
+const ItemTitleBox = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+`;
 const ItemTitle = styled.p`
 	font-size: 1.8rem;
 	font-family: 'kr-b';
 	letter-spacing: -0.72px;
 	margin-bottom: 1.2rem;
+`;
+const ReasonLength = styled.p`
+	font-size: 1.2rem;
+	font-family: 'kr-r';
+	margin: 0.5rem 1rem;
 `;
 const InputAndMenuBox = styled.div`
 	position: relative;
