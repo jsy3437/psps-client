@@ -249,6 +249,7 @@ const OrderChangePage = () => {
 								{check.accountHolder === false && (
 									<AlertText>예금주를 입력해주세요.</AlertText>
 								)}
+								<ItemInfo>{`* 만약 주문자명과 입금자명 그리고 환불 받으실 계좌의 예금주명이 다른 경우 환불이 지연될 수 있습니다.`}</ItemInfo>
 							</AlertTextBox>
 						</Item>
 					)}
@@ -354,7 +355,12 @@ const ItemTitle = styled.p`
 const ReasonLength = styled.p`
 	font-size: 1.2rem;
 	font-family: 'kr-r';
+	letter-spacing: -0.72px;
 	margin: 0.5rem 1rem;
+`;
+const ItemInfo = styled(ReasonLength)`
+	margin: 0.3rem;
+	color: red;
 `;
 const InputAndMenuBox = styled.div`
 	position: relative;
