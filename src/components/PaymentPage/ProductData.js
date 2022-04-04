@@ -11,32 +11,39 @@ const ProductData = (props) => {
 		<ProductDataWrap>
 			<Title>주문 상품</Title>
 			{props.orderCalc &&
-				props.orderCalc.map((supplierList, id) => (
-					<MapBox key={id}>
-						<SupplierTitleBox>
-							판매자
-							<SupplierName>{supplierList.supplier_name}</SupplierName>
-						</SupplierTitleBox>
+				props.orderCalc.map((supplierList, id) => {
+					console.log(supplierList.total);
+					if (supplierList.total !== 0) {
+						return (
+							<MapBox key={id}>
+								<SupplierTitleBox>
+									판매자
+									<SupplierName>{supplierList.supplier_name}</SupplierName>
+								</SupplierTitleBox>
 
-						{supplierList.checked_product_list.map((el, idx) => (
-							<BorderBox key={idx}>
-								<ProductText title="true">
-									{el.product_title}, {el.product_option_title}
-								</ProductText>
-								<ProductText quantity>수량 {el.quantity}개</ProductText>
-								<ProductText price>{el.total.toLocaleString()}원</ProductText>
-							</BorderBox>
-						))}
-						{supplierList.delivery_price !== 0 && (
-							<BorderBox>
-								<ProductText title="true">배송비</ProductText>
-								<ProductText price>
-									{supplierList.delivery_price.toLocaleString()}원
-								</ProductText>
-							</BorderBox>
-						)}
-					</MapBox>
-				))}
+								{supplierList.checked_product_list.map((el, idx) => (
+									<BorderBox key={idx}>
+										<ProductText title="true">
+											{el.product_title}, {el.product_option_title}
+										</ProductText>
+										<ProductText quantity>수량 {el.quantity}개</ProductText>
+										<ProductText price>
+											{el.total.toLocaleString()}원
+										</ProductText>
+									</BorderBox>
+								))}
+								{supplierList.delivery_price !== 0 && (
+									<BorderBox>
+										<ProductText title="true">배송비</ProductText>
+										<ProductText price>
+											{supplierList.delivery_price.toLocaleString()}원
+										</ProductText>
+									</BorderBox>
+								)}
+							</MapBox>
+						);
+					}
+				})}
 			<TotalPriceBox>
 				<PriceTitle>총 상품 금액</PriceTitle>
 				<PriceText>{props.amount && props.amount.toLocaleString()}원</PriceText>
