@@ -18,7 +18,6 @@ const CartPage = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [supplierList, setSupplierList] = useState([]);
 	const [allChecked, setAllChecked] = useState(true);
-	const [cartList, setCartList] = useState([]);
 	const [checked, setChecked] = useState([]);
 	const [orderCalc, setOrderCalc] = useState([]);
 	const [amount, setAmount] = useState(0);
@@ -110,16 +109,17 @@ const CartPage = () => {
 	// select and remove submit
 	const onSelectRemove = () => {
 		let basketIdArr = [];
-		checked.forEach((el, idx) => {
-			el && basketIdArr.push(cartList[idx].basket_id);
+		checked.forEach((el) => {
+			el && basketIdArr.push(el.basket_id);
 		});
 		basketIdArr.forEach((el, idx) => {
 			_basket.remove_cart(el).then((res) => {
-				const { success, basket_list, count, calc } = res.data;
+				const { success, count, calc, supplier_list } = res.data;
+				console.log(supplier_list);
 				if (success && basketIdArr.length - 1 === idx) {
-					setCartList(basket_list);
 					setCartCount(count);
 					setOrderCalc(calc);
+					setSupplierList(supplier_list);
 					dispatch(cart_remove(count));
 				} else {
 					console.error(idx);
@@ -140,8 +140,6 @@ const CartPage = () => {
 						<CartList
 							checked={checked}
 							setChecked={setChecked}
-							cartList={cartList}
-							setCartList={setCartList}
 							cartCount={cartCount}
 							setCartCount={setCartCount}
 							setOrderCalc={setOrderCalc}
@@ -155,7 +153,6 @@ const CartPage = () => {
 							<OrderBox
 								orderCalc={orderCalc}
 								user={user}
-								cartList={cartList}
 								checked={checked}
 								supplierList={supplierList}
 								amount={amount}
