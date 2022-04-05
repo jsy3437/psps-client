@@ -27,6 +27,7 @@ const ChangePw = (props) => {
 		newPassword === confirmNewPassword
 			? setCheck({ ...check, passwordConfirm: true })
 			: setCheck({ ...check, passwordConfirm: false });
+		// eslint-disable-next-line
 	}, [confirmNewPassword, newPassword]);
 
 	const changePassword = (e) => {

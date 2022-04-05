@@ -21,6 +21,7 @@ const FindPwResultPage = () => {
 			alert('잘못된 접근입니다.');
 			history.push('/');
 		}
+		// eslint-disable-next-line
 	}, [email]);
 
 	useEffect(() => {

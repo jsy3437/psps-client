@@ -23,6 +23,7 @@ const ProductDetail = (props) => {
 		return () => {
 			window.removeEventListener('scroll', onScroll);
 		};
+		// eslint-disable-next-line
 	}, []);
 
 	const onChangeView = (e) => {

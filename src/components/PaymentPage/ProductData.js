@@ -12,9 +12,8 @@ const ProductData = (props) => {
 			<Title>주문 상품</Title>
 			{props.orderCalc &&
 				props.orderCalc.map((supplierList, id) => {
-					console.log(supplierList.total);
-					if (supplierList.total !== 0) {
-						return (
+					return (
+						supplierList.total !== 0 && (
 							<MapBox key={id}>
 								<SupplierTitleBox>
 									판매자
@@ -41,8 +40,8 @@ const ProductData = (props) => {
 									</BorderBox>
 								)}
 							</MapBox>
-						);
-					}
+						)
+					);
 				})}
 			<TotalPriceBox>
 				<PriceTitle>총 상품 금액</PriceTitle>

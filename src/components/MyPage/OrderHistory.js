@@ -18,6 +18,7 @@ const OrderHistory = (props) => {
 		if (props.payment_id) {
 			props.setViewDetail(props.payment_id);
 		}
+		// eslint-disable-next-line
 	}, [props.payment_id]);
 
 	const goDetail = (payment_id) => {
@@ -61,11 +62,6 @@ const OrderHistory = (props) => {
 								</ListImgBox>
 								<ListContents>
 									<ProductName>{el.name}</ProductName>
-									{/* {el.name.split(' 외 ').length > 1 && (
-											<ProductNameSpan>
-												`외 ${el.name.split(' 외 ')[1]}`
-											</ProductNameSpan>
-										)} */}
 
 									<DeliveryAddr>
 										{`(${el.del_postcode}) ${el.del_addr.replace('/', ' ')}`}
@@ -194,11 +190,7 @@ const ProductName = styled.p`
 	overflow: hidden;
 	margin-bottom: 0.4rem;
 `;
-const ProductNameSpan = styled.span`
-	font-size: 1.8rem;
-	font-family: 'kr-r';
-	margin-left: 0.2rem;
-`;
+
 const DeliveryAddr = styled.p`
 	font-size: 1.4rem;
 	font-family: 'kr-r';
