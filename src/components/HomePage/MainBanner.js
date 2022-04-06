@@ -95,7 +95,8 @@ const MainBanner = () => {
 	};
 
 	const firstLoad = () => {
-		bannerBox.current.scrollTo({ left: banner.current.offsetWidth });
+		banner.current &&
+			bannerBox.current.scrollTo({ left: banner.current.offsetWidth });
 	};
 
 	return (
