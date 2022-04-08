@@ -5,6 +5,7 @@ import { user_login } from '../modules/user';
 import * as _user from '../controller/user';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
+import Alert from '../components/Modal/Alert';
 // import N_logo from '../images/n-logo.svg';
 // import K_logo from '../images/k-logo.svg';
 
@@ -13,6 +14,8 @@ const LoginPage = () => {
 	const history = useHistory();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [alertState, setAlertState] = useState(false);
+	const [alertMsg, setAlertMsg] = useState('');
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -37,18 +40,20 @@ const LoginPage = () => {
 
 	const onSubmit = () => {
 		if (email.length === 0) {
-			return alert('아이디를 입력해주세요.');
+			setAlertMsg('아이디를 입력해주세요.');
+			return setAlertState(true);
 		} else if (password.length === 0) {
-			return alert('비밀번호를 입력해주세요.');
+			setAlertMsg('비밀번호를 입력해주세요.');
+			return setAlertState(true);
 		} else {
 			const data = { email, password };
 			_user.login(data).then((res) => {
 				if (res.data.success) {
 					dispatch(user_login(true));
-					alert('로그인 되었습니다.');
 					history.push('/');
 				} else {
-					alert('아이디 또는 비밀번호를 확인해주세요.');
+					setAlertMsg('아이디 또는 비밀번호를 확인해주세요.');
+					return setAlertState(true);
 				}
 			});
 		}
@@ -101,6 +106,13 @@ const LoginPage = () => {
 					</EasyBox> */}
 				</RegisterInside>
 			</Container>
+			{alertState && (
+				<Alert
+					title={'로그인 안내'}
+					msg={alertMsg}
+					setAlertState={setAlertState}
+				/>
+			)}
 		</div>
 	);
 };
