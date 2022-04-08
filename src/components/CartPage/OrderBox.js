@@ -32,7 +32,7 @@ const OrderBox = (props) => {
 	};
 	const goPayment = () => {
 		if (props.checked.length === 0) {
-			return alert('상품을 선택해주세요');
+			return props.setAlertState(true);
 		}
 
 		history.push({

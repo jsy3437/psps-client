@@ -10,6 +10,7 @@ import uncheck_img from '../images/uncheck_btn.svg';
 import CartList from '../components/CartPage/CartList';
 import OrderBox from '../components/CartPage/OrderBox';
 import Spinner from '../components/Spinner';
+import Alert from '../components/Modal/Alert';
 
 const CartPage = () => {
 	const history = useHistory();
@@ -25,6 +26,7 @@ const CartPage = () => {
 	const [tempChecked, setTempChecked] = useState([]); // 공급원 리스트 각각의 모든상품들이 들어있는 임시배열
 	const [cartCount, setCartCount] = useState(0);
 	const [checkCount, setCheckCount] = useState(0);
+	const [alertState, setAlertState] = useState(false);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -157,6 +159,7 @@ const CartPage = () => {
 								supplierList={supplierList}
 								amount={amount}
 								delivery_price={delivery_price}
+								setAlertState={setAlertState}
 							/>
 						</OrderBoxBox>
 					</CartContentWrap>
@@ -181,6 +184,13 @@ const CartPage = () => {
 					</AllCheckAndRemove>
 				)}
 			</Container>
+			{alertState && (
+				<Alert
+					title={'주문 안내'}
+					msg={'상품을 선택해주세요.'}
+					setAlertState={setAlertState}
+				/>
+			)}
 		</div>
 	);
 };
@@ -209,11 +219,9 @@ const Title = styled.h2`
 `;
 const CartContentWrap = styled.div`
 	display: flex;
-	/* border: 1px solid red; */
 `;
 const OrderBoxBox = styled.div`
 	position: relative;
-	/* border: 1px solid #000; */
 	width: 45.5rem;
 	margin-left: 4.8rem;
 `;
