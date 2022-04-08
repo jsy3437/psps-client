@@ -44,7 +44,6 @@ const Navbar = () => {
 		logout().then((res) => {
 			if (res.data.success) {
 				dispatch(user_logout());
-				alert('로그아웃 되었습니다.');
 				history.push('/');
 			}
 		});
