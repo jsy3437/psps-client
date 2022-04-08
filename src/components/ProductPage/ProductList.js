@@ -7,13 +7,13 @@ const ProductList = (props) => {
 	const history = useHistory();
 	const [hover, setHover] = useState('');
 
-	const goDetail = (product_id) => {
-		history.push({
-			pathname: `/detail/${product_id}`,
-			state: { part: props.part, subPart: props.subPart },
-		});
+	const goDetail = (product) => {
+		product.price !== null &&
+			history.push({
+				pathname: `/detail/${product.product_id}`,
+				state: { part: props.part, subPart: props.subPart },
+			});
 	};
-	console.log(props.list);
 
 	return (
 		<ProductContainer>
@@ -28,13 +28,12 @@ const ProductList = (props) => {
 							onMouseLeave={() => {
 								setHover('');
 							}}
+							onClick={() => {
+								goDetail(el);
+							}}
 						>
 							{el.image && (
-								<ProductImgBox
-									onClick={() => {
-										goDetail(el.product_id);
-									}}
-								>
+								<ProductImgBox>
 									(
 									<ProductImg
 										alt="product img"
@@ -45,21 +44,20 @@ const ProductList = (props) => {
 								</ProductImgBox>
 							)}
 
-							<ProductTitle
-								onClick={() => {
-									goDetail(el.product_id);
-								}}
-								hover={hover === idx}
-							>
-								{el.title}
-							</ProductTitle>
-							<ProductDescTotalPrice>
-								{`${(el.price - el.discount).toLocaleString()}`}
-								<DescWon>원</DescWon>
-								{el.discount !== 0 && (
-									<ProductDesc>{`${el.price.toLocaleString()} `}</ProductDesc>
-								)}
-							</ProductDescTotalPrice>
+							<ProductTitle hover={hover === idx}>{el.title}</ProductTitle>
+							{el.price !== null ? (
+								<ProductDescTotalPrice>
+									{`${(el.price - el.discount).toLocaleString()}`}
+									<DescWon>원</DescWon>
+									{el.discount !== 0 && (
+										<ProductDesc>{`${
+											el.price && el.price.toLocaleString()
+										} `}</ProductDesc>
+									)}
+								</ProductDescTotalPrice>
+							) : (
+								<SoldOut>{`품절`}</SoldOut>
+							)}
 						</Product>
 					))}
 			</ProductWrap>
@@ -141,4 +139,9 @@ const DescWon = styled.span`
 	font-size: 1.4rem;
 	margin-left: 0.2rem;
 	color: #a0a0a0;
+`;
+const SoldOut = styled(ProductDescTotalPrice)`
+	width: 100%;
+	color: #6b6462;
+	font-size: 2rem;
 `;

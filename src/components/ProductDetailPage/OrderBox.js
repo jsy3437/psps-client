@@ -18,13 +18,16 @@ const OrderBox = (props) => {
 	const [count, setCount] = useState(1);
 
 	useEffect(() => {
-		setOption(props.optionList[0]);
+		const filterOption = props.optionList.filter((el) => el.stock !== 0);
+		filterOption.lenth !== 0 && setOption(filterOption[0]);
 	}, [props.optionList]);
 
 	const onChangeOption = (option) => {
-		setOption(option);
-		setOpenOption(false);
-		setCount(1);
+		if (option.stock !== 0) {
+			setOption(option);
+			setOpenOption(false);
+			setCount(1);
+		}
 	};
 
 	const decreaseCount = () => {
@@ -102,7 +105,7 @@ const OrderBox = (props) => {
 
 	const closeOption = (e) => {
 		if (openOption) {
-			(optionEl.current || !optionEl.current.contains(e.target)) &&
+			(!optionEl.current || !optionEl.current.contains(e.target)) &&
 				setOpenOption(false);
 		}
 	};
@@ -163,14 +166,18 @@ const OrderBox = (props) => {
 									<RightOptionList
 										key={idx}
 										onClick={() => {
-											onChangeOption(el);
+											el.stock !== 0 && onChangeOption(el);
 										}}
 										select={option === el}
 									>
 										<OptionListName>{el.title}</OptionListName>
-										<OptionListPrice>
-											{(el.price - el.discount).toLocaleString()}
-										</OptionListPrice>
+										{el.stock === 0 ? (
+											<OptionSoldOut>{`품절`}</OptionSoldOut>
+										) : (
+											<OptionListPrice>
+												{(el.price - el.discount).toLocaleString()}
+											</OptionListPrice>
+										)}
 									</RightOptionList>
 								))}
 							</RightOptionListBox>
@@ -341,6 +348,10 @@ const OptionListName = styled.p`
 	padding: 0 2rem;
 `;
 const OptionListPrice = styled(OptionListName)``;
+const OptionSoldOut = styled(OptionListPrice)`
+	color: #a0a0a0;
+	font-family: 'kr-r';
+`;
 const RightOptionBox = styled.div`
 	width: 34.6rem;
 	height: 6.2rem;
