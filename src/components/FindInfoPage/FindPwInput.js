@@ -66,13 +66,15 @@ const FindPwInput = (props) => {
 			_user.find_Pw_get_number(data).then((res) => {
 				const { success } = res.data;
 				if (success) {
-					alert('인증번호가 발송되었습니다.');
+					props.setAlertMsg('인증번호가 발송되었습니다.');
+					props.setAlertState(true);
 					confirmEl.current.focus();
 					setTime(180);
 					props.setGetConfirmNum(true);
 					props.setConfirmNum('');
 				} else {
-					alert(res.data.msg);
+					props.setAlertState(true);
+					props.setAlertMsg(res.data.msg);
 				}
 			});
 		}
@@ -91,9 +93,11 @@ const FindPwInput = (props) => {
 				_user.check_sms(data).then((res) => {
 					if (res.data.success) {
 						props.setConfirm(true);
-						return alert('인증 확인되었습니다.');
+						props.setAlertMsg('인증 확인되었습니다.');
+						props.setAlertState(true);
 					} else {
-						return alert(res.data.msg);
+						props.setAlertMsg(res.data.msg);
+						props.setAlertState(true);
 					}
 				});
 			}

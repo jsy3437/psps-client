@@ -6,6 +6,7 @@ import logo from '../images/red-logo.svg';
 import FindItemSelect from '../components/FindInfoPage/FindItemSelect';
 import FindId from '../components/FindInfoPage/FindIdInput';
 import FindPw from '../components/FindInfoPage/FindPwInput';
+import Alert from '../components/Modal/Alert';
 
 const FindInfoPage = () => {
 	const history = useHistory();
@@ -19,6 +20,8 @@ const FindInfoPage = () => {
 	const [confirm, setConfirm] = useState(false);
 	const [findIdState, setFindIdState] = useState(false);
 	const [findPwState, setFindPwState] = useState(false);
+	const [alertState, setAlertState] = useState(false);
+	const [alertMsg, setAlertMsg] = useState('');
 	const [checkLength, setCheckLength] = useState({
 		name: false,
 		phone_number: false,
@@ -133,6 +136,8 @@ const FindInfoPage = () => {
 							setGetConfirmNum={setGetConfirmNum}
 							confirm={confirm}
 							setConfirm={setConfirm}
+							setAlertMsg={setAlertMsg}
+							setAlertState={setAlertState}
 						/>
 					)}
 					{item === '아이디' ? (
@@ -146,6 +151,13 @@ const FindInfoPage = () => {
 					)}
 				</FindInfoInside>
 			</Container>
+			{alertState && (
+				<Alert
+					title={'인증 안내'}
+					msg={alertMsg}
+					setAlertState={setAlertState}
+				/>
+			)}
 		</div>
 	);
 };

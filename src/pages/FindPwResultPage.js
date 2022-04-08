@@ -4,12 +4,15 @@ import { regexp } from '../data/regexp';
 import * as _user from '../controller/user';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
+import Alert from '../components/Modal/Alert';
 
 const FindPwResultPage = () => {
 	const email = useLocation().state;
 	const history = useHistory();
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
+	const [alertState, setAlertState] = useState(false);
+	const [alertMsg, setAlertMsg] = useState('');
 	const [lengthCheck, setLengthCheck] = useState({
 		password: '',
 		confirmPassword: '',
@@ -58,10 +61,12 @@ const FindPwResultPage = () => {
 			_user.find_Pw_change(data).then((res) => {
 				const { success } = res.data;
 				if (success) {
-					alert('비밀번호가 변경되었습니다.');
+					setAlertMsg('비밀번호가 변경되었습니다.');
+					setAlertState(true);
 					history.push('/login');
 				} else {
-					console.log(res.data);
+					setAlertMsg(res.data.msg);
+					setAlertState(true);
 				}
 			});
 		}
@@ -107,6 +112,13 @@ const FindPwResultPage = () => {
 					<BackButton>뒤로가기</BackButton>
 				</BtnBox>
 			</Container>
+			{alertState && (
+				<Alert
+					title={'비밀번호 변경 안내'}
+					msg={alertMsg}
+					setAlertState={setAlertState}
+				/>
+			)}
 		</div>
 	);
 };
