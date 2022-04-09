@@ -8,6 +8,7 @@ import OrderBox from '../components/ProductDetailPage/OrderBox';
 import ProductDetail from '../components/ProductDetailPage/ProductDetail';
 import ProductInfoTable from '../components/ProductDetailPage/ProductInfoTable';
 import Induce from '../components/Induce';
+import Alert from '../components/Modal/Alert';
 
 const ProductDetailPage = () => {
 	const location = useLocation().state;
@@ -19,6 +20,8 @@ const ProductDetailPage = () => {
 	const detailRef = useRef();
 	const [detail, setDetail] = useState({});
 	const [optionList, setOptionList] = useState([]);
+	const [alertState, setAlertState] = useState(false);
+	const [alertMsg, setAlertMsg] = useState('');
 	const [cartAlertState, setCartAlertState] = useState({
 		successTrue: false,
 		successFalse: false,
@@ -70,6 +73,8 @@ const ProductDetailPage = () => {
 				user={user}
 				cartAlertState={cartAlertState}
 				setCartAlertState={setCartAlertState}
+				setAlertMsg={setAlertMsg}
+				setAlertState={setAlertState}
 			/>
 			<ProductDetail
 				detail={detail}
@@ -83,6 +88,13 @@ const ProductDetailPage = () => {
 				infoRef={infoRef}
 			/>
 			<Induce />
+			{alertState && (
+				<Alert
+					title={'상품 주문 안내'}
+					msg={alertMsg}
+					setAlertState={setAlertState}
+				/>
+			)}
 		</div>
 	);
 };

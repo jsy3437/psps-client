@@ -41,9 +41,11 @@ const OrderBox = (props) => {
 
 	const onAddCart = () => {
 		if (!!!option) {
-			return alert('옵션을 선택해주세요');
+			props.setAlertMsg('옵션을 선택해주세요');
+			return props.setAlertState(true);
 		} else if (!props.user.login) {
-			return alert('로그인 후 이용가능합니다');
+			props.setAlertMsg('로그인 후 이용가능합니다');
+			return props.setAlertState(true);
 		}
 		props.setCartAlertState({ successTrue: false, successFalse: false });
 		const data = {
@@ -80,7 +82,8 @@ const OrderBox = (props) => {
 
 	const goPayment = async () => {
 		if (!props.user.login) {
-			return alert('로그인 후 이용가능합니다');
+			props.setAlertMsg('로그인 후 이용가능합니다');
+			return props.setAlertState(true);
 		}
 
 		history.push({
