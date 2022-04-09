@@ -4,11 +4,14 @@ import * as _user from '../controller/user';
 import styled from 'styled-components';
 
 import logoImg from '../images/red-logo.svg';
+import Alert from '../components/Modal/Alert';
 
 const WithdrawalPage = () => {
 	const history = useHistory();
 	const [password, setPassword] = useState('');
 	const [check, setCheck] = useState(false);
+	const [alertState, setAlertState] = useState(false);
+	const [alertMsg, setAlertMsg] = useState('');
 	const arr = [
 		`개인정보 삭제는 취소/교환/환불 및 사후처리 등을 위해 전자상거래 등 소비자 보호에 관한 법률에 의거 일정 기간동안 보관 후 파기됩니다.`,
 		'탈퇴 시 개인정보가 삭제되면 복원할 수 없습니다.',
@@ -28,12 +31,12 @@ const WithdrawalPage = () => {
 			_user.withdrawal({ password }).then((res) => {
 				const { success } = res.data;
 				if (success) {
-					alert('회원탈퇴가 완료되었습니다.');
-
+					setAlertMsg('회원탈퇴가 완료되었습니다.');
 					history.push('/');
 				} else {
-					alert('비밀번호가 맞지 않습니다.');
+					setAlertMsg('비밀번호가 맞지 않습니다.');
 				}
+				setAlertState(true);
 			});
 		}
 	};
@@ -73,6 +76,13 @@ const WithdrawalPage = () => {
 				</SubmitButton>
 				<BackButton onClick={goBack}>이전으로</BackButton>
 			</Container>
+			{alertState && (
+				<Alert
+					title={'회원탈퇴 안내'}
+					msg={alertMsg}
+					setAlertState={setAlertState}
+				/>
+			)}
 		</div>
 	);
 };

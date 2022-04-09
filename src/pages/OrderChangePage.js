@@ -4,6 +4,7 @@ import * as _payment from '../controller/payment';
 import styled from 'styled-components';
 import logo from '../images/red-logo.svg';
 import down from '../images/angle-down.svg';
+import Alert from '../components/Modal/Alert';
 
 const OrderChangePage = () => {
 	const history = useHistory();
@@ -27,6 +28,8 @@ const OrderChangePage = () => {
 		{ en: 'refund', kr: '환불 신청' },
 	];
 	const [applySelect, setApplySelect] = useState(applyList[0].kr);
+	const [alertState, setAlertState] = useState(false);
+	const [alertMsg, setAlertMsg] = useState('');
 	const bankItem = [
 		'농협',
 		'우리은행',
@@ -40,7 +43,7 @@ const OrderChangePage = () => {
 
 	useEffect(() => {
 		if (!!!location) {
-			alert('잘못된 접근입니다');
+			setAlertMsg('잘못된 접근입니다');
 			history.goBack();
 		} else {
 			setClaimType(location.type);
@@ -139,13 +142,15 @@ const OrderChangePage = () => {
 		_payment.claim_cancel(data, claimType).then((res) => {
 			const { success } = res.data;
 			if (success) {
-				alert('신청이 완료되었습니다');
+				setAlertMsg('신청이 완료되었습니다');
+				setAlertState(true);
 				history.push({
 					pathname: '/members',
 					state: location.detailPayment.payment_id,
 				});
 			} else {
-				alert('신청이 불가한 상품');
+				setAlertMsg('신청불가 상태의 상품입니다.');
+				setAlertState(true);
 			}
 		});
 	};
@@ -263,6 +268,13 @@ const OrderChangePage = () => {
 						</SubmitButton>
 					</BtnBox>
 				</Container>
+			)}
+			{alertState && (
+				<Alert
+					title={'회원가입 안내'}
+					msg={alertMsg}
+					setAlertState={setAlertState}
+				/>
 			)}
 		</div>
 	);
