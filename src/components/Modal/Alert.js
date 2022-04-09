@@ -1,9 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Alert = (props) => {
+	const history = useHistory();
 	const clickClose = () => {
 		props.setAlertState(false);
+		props.goPage && history.goBack();
 	};
 
 	return (
