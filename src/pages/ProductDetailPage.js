@@ -19,7 +19,7 @@ const ProductDetailPage = () => {
 	const detailRef = useRef();
 	const [detail, setDetail] = useState({});
 	const [optionList, setOptionList] = useState([]);
-	const [alertState, setAlertState] = useState({
+	const [cartAlertState, setCartAlertState] = useState({
 		successTrue: false,
 		successFalse: false,
 	});
@@ -49,14 +49,14 @@ const ProductDetailPage = () => {
 
 	return (
 		<div id="container">
-			{(alertState.successTrue || alertState.successFalse) && (
+			{(cartAlertState.successTrue || cartAlertState.successFalse) && (
 				<AlertBox>
 					<AlertImgBox
-						state={alertState.successTrue || alertState.successFalse}
+						state={cartAlertState.successTrue || cartAlertState.successFalse}
 					>
 						<AlertImg alt="alert image" src={alert_img} />
 						<AlertText>
-							{alertState.successTrue
+							{cartAlertState.successTrue
 								? '상품이 장바구니에 담겼어요!'
 								: `이미 장바구니에\n존재하는 상품입니다.`}
 						</AlertText>
@@ -68,8 +68,8 @@ const ProductDetailPage = () => {
 				optionList={optionList}
 				selectRef={selectRef}
 				user={user}
-				alertState={alertState}
-				setAlertState={setAlertState}
+				cartAlertState={cartAlertState}
+				setCartAlertState={setCartAlertState}
 			/>
 			<ProductDetail
 				detail={detail}

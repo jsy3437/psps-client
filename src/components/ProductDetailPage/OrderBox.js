@@ -45,7 +45,7 @@ const OrderBox = (props) => {
 		} else if (!props.user.login) {
 			return alert('로그인 후 이용가능합니다');
 		}
-		props.setAlertState({ successTrue: false, successFalse: false });
+		props.setCartAlertState({ successTrue: false, successFalse: false });
 		const data = {
 			product_option_id: option.product_option_id,
 			quantity: count,
@@ -63,11 +63,17 @@ const OrderBox = (props) => {
 
 	function alertMessage(success) {
 		success
-			? props.setAlertState({ ...props.alertState, successTrue: true })
-			: props.setAlertState({ ...props.alertState, successFalse: true });
+			? props.setCartAlertState({ ...props.cartAlertState, successTrue: true })
+			: props.setCartAlertState({
+					...props.cartAlertState,
+					successFalse: true,
+			  });
 		setTimeout(() => {
-			if (props.alertState.successTrue || props.alertState.successFalse) {
-				props.setAlertState({ successTrue: false, successFalse: false });
+			if (
+				props.cartAlertState.successTrue ||
+				props.cartAlertState.successFalse
+			) {
+				props.setCartAlertState({ successTrue: false, successFalse: false });
 			}
 		}, 5000);
 	}
