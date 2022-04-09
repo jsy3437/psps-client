@@ -144,12 +144,8 @@ const OrderChangePage = () => {
 			if (success) {
 				setAlertMsg('신청이 완료되었습니다');
 				setAlertState(true);
-				history.push({
-					pathname: '/members',
-					state: location.detailPayment.payment_id,
-				});
 			} else {
-				setAlertMsg('신청불가 상태의 상품입니다.');
+				setAlertMsg(res.data.msg);
 				setAlertState(true);
 			}
 		});
@@ -271,8 +267,9 @@ const OrderChangePage = () => {
 			)}
 			{alertState && (
 				<Alert
-					title={'회원가입 안내'}
+					title={'취소, 교환, 환불 안내'}
 					msg={alertMsg}
+					goPage={true}
 					setAlertState={setAlertState}
 				/>
 			)}
