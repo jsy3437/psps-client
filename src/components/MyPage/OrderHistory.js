@@ -169,6 +169,7 @@ const ListImg = styled.img`
 	width: 100%;
 	height: 100%;
 	border-radius: 24px;
+	background-color: #fff;
 `;
 const ListShadowImg = styled.img`
 	position: absolute;
