@@ -93,7 +93,8 @@ const FirstStep = (props) => {
 				_user.check_email({ email }).then((res) => {
 					const { success } = res.data;
 					if (!success) {
-						return alert('이미 가입된 이메일입니다');
+						props.setAlertMsg('이미 가입된 이메일입니다');
+						return props.setAlertState(true);
 					} else {
 						props.setStep(3);
 						history.push({ state: { email, password, passwordConfirm } });

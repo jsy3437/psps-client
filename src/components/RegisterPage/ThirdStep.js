@@ -106,14 +106,16 @@ const ThirdStep = (props) => {
 		if (phone_number.length === 11) {
 			_user.send_sms({ phone_number }).then((res) => {
 				if (res.data.success) {
-					alert('인증번호가 발송되었습니다.');
+					props.setAlertMsg('인증번호가 발송되었습니다.');
 					confirmNumberInput.current.focus();
 					setGetConfirmNum(true);
 					setConfirm(false);
 					setConfirm_number('');
 					setTime(180);
+					props.setAlertState(true);
 				} else {
-					alert(res.data.msg);
+					props.setAlertMsg(res.data.msg);
+					props.setAlertState(true);
 				}
 			});
 		}
@@ -129,9 +131,11 @@ const ThirdStep = (props) => {
 					if (res.data.success) {
 						setConfirm(true);
 						clearTimeout(timer);
-						return alert('인증 확인되었습니다.');
+						props.setAlertMsg('인증 확인되었습니다.');
+						props.setAlertState(true);
 					} else {
-						return alert('인증번호를 확인해주세요.');
+						props.setAlertMsg('인증번호를 확인해주세요.');
+						props.setAlertState(true);
 					}
 				});
 			}
@@ -141,34 +145,22 @@ const ThirdStep = (props) => {
 	const onSubmit = () => {
 		if (allState) {
 			setIsSubmit(true);
-			if (!regexp.name.test(name)) {
-				setCheckLength({ ...checkLength, name: false });
-				alert('이름을 확인해주세요');
-				nameInput.current.focus();
-			} else if (!regexp.phone_number.test(phone_number)) {
-				setCheckLength({ ...checkLength, phone_number: false });
-				alert('휴대폰번호를 확인해주세요');
-				phoneNumberInput.current.focus();
-			} else if (!confirm || !getConfirmNum) {
-				alert('휴대폰번호 인증을 확인해주세요');
-				confirmNumberInput.current.focus();
-			} else {
-				const data = {
-					email,
-					password,
-					name,
-					phone_number,
-				};
-				_user.register(data).then((res) => {
-					if (res.data.success) {
-						props.setStep(4);
-						dispatch(user_login(res.data.name));
-						history.push({ state: name });
-					} else {
-						alert('이미 가입되어 있는 휴대폰번호입니다');
-					}
-				});
-			}
+			const data = {
+				email,
+				password,
+				name,
+				phone_number,
+			};
+			_user.register(data).then((res) => {
+				if (res.data.success) {
+					props.setStep(4);
+					dispatch(user_login(res.data.name));
+					history.push({ state: name });
+				} else {
+					props.setAlertMsg('이미 가입되어 있는 휴대폰번호입니다');
+					props.setAlertState(true);
+				}
+			});
 		}
 	};
 
