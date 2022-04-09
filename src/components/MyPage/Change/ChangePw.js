@@ -51,15 +51,6 @@ const ChangePw = (props) => {
 
 	const submitChangePassword = () => {
 		if (allState) {
-			if (!regexp.password.test(password)) {
-				alert('비밀번호를 확인해주세요');
-				passwordInput.current.focus();
-				return setCheck({ ...check, password: false });
-			} else if (newPassword !== confirmNewPassword) {
-				alert('비밀번호가 일치하지 않습니다');
-				passwordConfirmInput.current.focus();
-				return setCheck({ ...check, passwordConfirm: false });
-			}
 			const data = {
 				password,
 				new_password: newPassword,
@@ -68,11 +59,13 @@ const ChangePw = (props) => {
 			_user.change_password(data).then((res) => {
 				const { success } = res.data;
 				if (success) {
-					alert('비밀번호 변경완료');
+					props.setAlertMsg('비밀번호가 변경되었습니다.');
 					props.setChangePWState(false);
 				} else {
-					alert('기존 비밀번호가 일치하지 않습니다');
+					console.log(res.data);
+					props.setAlertMsg('기존 비밀번호가 일치하지 않습니다');
 				}
+				props.setAlertState(true);
 			});
 		}
 	};

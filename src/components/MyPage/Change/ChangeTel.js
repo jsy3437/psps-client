@@ -80,12 +80,13 @@ const ChangeTel = (props) => {
 			_user.send_sms({ phone_number }).then((res) => {
 				const { success, msg } = res.data;
 				if (success) {
-					alert('인증번호가 전송되었습니다');
+					props.setAlertMsg('인증번호가 전송되었습니다');
 					setGetConfirmNumber(true);
 					authNumberInput.current.focus();
 					setConfirm_number('');
+					props.setAlertState(true);
 				} else {
-					alert(msg);
+					props.setAlertMsg(msg);
 				}
 			});
 		}
@@ -100,11 +101,13 @@ const ChangeTel = (props) => {
 			_user.check_sms(data).then((res) => {
 				const { success } = res.data;
 				if (success) {
-					alert('인증이 확인되었습니다');
+					props.setAlertMsg('인증이 확인되었습니다');
 					setConfirm(true);
 					clearTimeout(timer);
+					props.setAlertState(true);
 				} else {
-					alert('인증번호를 확인해주세요');
+					props.setAlertMsg('인증번호를 확인해주세요');
+					props.setAlertState(true);
 				}
 			});
 		}
@@ -114,8 +117,9 @@ const ChangeTel = (props) => {
 			_user.change_tel({ phone_number }).then((res) => {
 				const { success } = res.data;
 				if (success) {
-					alert('연락처가 변경되었습니다');
+					props.setAlertMsg('연락처가 변경되었습니다');
 					props.setChangeTelState(false);
+					props.setAlertState(true);
 				} else {
 					console.error(res.data);
 				}

@@ -36,7 +36,7 @@ const ChangeAddr = (props) => {
 
 	const onSubmit = () => {
 		if (!postAddr || !postDetailAddr || !postZoneCode) {
-			return alert('변경할 주소를 확인해주세요');
+			return;
 		}
 		const data = {
 			address: postAddr + '/' + postDetailAddr,
@@ -46,8 +46,9 @@ const ChangeAddr = (props) => {
 		_user.change_address(data).then((res) => {
 			const { success } = res.data;
 			if (success) {
-				alert('주소가 변경되었습니다.');
+				props.setAlertMsg('주소가 변경되었습니다.');
 				props.setChangeAddrState(false);
+				props.setAlertState(true);
 			} else {
 			}
 		});

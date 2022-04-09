@@ -103,16 +103,28 @@ const Privacy = (props) => {
 				</PrivacyWrap>
 			)}
 			{props.changePWState && (
-				<ChangePw setChangePWState={props.setChangePWState} />
+				<ChangePw
+					setChangePWState={props.setChangePWState}
+					setAlertState={props.setAlertState}
+					setAlertMsg={props.setAlertMsg}
+				/>
 			)}
 			{changeAddrState && (
 				<ChangeAddr
 					user={user}
 					setUser={setUser}
 					setChangeAddrState={setChangeAddrState}
+					setAlertState={props.setAlertState}
+					setAlertMsg={props.setAlertMsg}
 				/>
 			)}
-			{changeTelState && <ChangeTel setChangeTelState={setChangeTelState} />}
+			{changeTelState && (
+				<ChangeTel
+					setChangeTelState={setChangeTelState}
+					setAlertState={props.setAlertState}
+					setAlertMsg={props.setAlertMsg}
+				/>
+			)}
 		</Container>
 	);
 };

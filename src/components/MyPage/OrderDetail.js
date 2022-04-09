@@ -5,12 +5,12 @@ import styled from 'styled-components';
 import ex1 from '../../images/ex1.png';
 import check_img from '../../images/check_btn.svg';
 import uncheck_img from '../../images/uncheck_btn.svg';
+import Alert from '../Modal/Alert';
 
 const OrderDetail = (props) => {
 	const history = useHistory();
 	const receiverInfo = ['받는분', '연락처', '받는주소', '배송요청사항'];
 	const paymentInfo = ['결제수단', '총 상품가격', '배송비', '총 결제금액'];
-
 	const [detailPayment, setDetailPayment] = useState('');
 	const [detailProductList, setDetailProductList] = useState('');
 	const [supplierList, setSupplierList] = useState([]);
@@ -85,7 +85,8 @@ const OrderDetail = (props) => {
 	const goCancelOrExchange = (e) => {
 		const { innerText } = e.target;
 		if (checkedList.length === 0) {
-			return alert('제품을 선택해주세요');
+			props.setAlertMsg('제품을 선택해주세요');
+			return props.setAlertState(true);
 		}
 		let count = checkedList.length;
 		checkedList.map((el) => !submitStateTest(el.process, innerText) && count--);
@@ -103,7 +104,8 @@ const OrderDetail = (props) => {
 				state: { type, checkProductList: checkedList, detailPayment },
 			});
 		} else {
-			return alert('취소, 교환, 환불 불가인 상품이 있습니다');
+			props.setAlertMsg('취소, 교환, 환불 불가인 상품이 있습니다');
+			return props.setAlertState(true);
 		}
 
 		// const data = {

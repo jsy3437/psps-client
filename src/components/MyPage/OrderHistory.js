@@ -9,7 +9,6 @@ import PageSelector from '../PageSelector';
 const OrderHistory = (props) => {
 	const history = useHistory();
 	const [page, setPage] = useState(1);
-
 	const total = props.paymentList.length;
 	const onePage = 10;
 	// const [viewDetail, setViewDetail] = useState(false);
@@ -86,6 +85,8 @@ const OrderHistory = (props) => {
 				<OrderDetail
 					viewDetail={props.viewDetail}
 					setViewDetail={props.setViewDetail}
+					setAlertState={props.setAlertState}
+					setAlertMsg={props.setAlertMsg}
 				/>
 			)}
 		</MyPageInside>

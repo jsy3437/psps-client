@@ -6,6 +6,7 @@ import logo from '../images/red-logo.svg';
 import MenuSelect from '../components/MyPage/MenuSelect';
 import OrderHistory from '../components/MyPage/OrderHistory';
 import Privacy from '../components/MyPage/Privacy';
+import Alert from '../components/Modal/Alert';
 
 const MyPagePage = () => {
 	const location = useLocation();
@@ -14,6 +15,9 @@ const MyPagePage = () => {
 	const [payment_id, setPayment_id] = useState('');
 	const [viewDetail, setViewDetail] = useState(false);
 	const [changePWState, setChangePWState] = useState(false);
+	const [alertState, setAlertState] = useState(false);
+	const [alertMsg, setAlertMsg] = useState('');
+	const [alertTitle, setAlertTitle] = useState('');
 
 	useEffect(() => {
 		_payment.get_list().then((res) => {
@@ -34,6 +38,14 @@ const MyPagePage = () => {
 		}
 	}, [location]);
 
+	useEffect(() => {
+		if (menu === '개인정보관리') {
+			setAlertTitle('개인정보관리 안내');
+		} else {
+			setAlertTitle('교환, 환불 신청 안내');
+		}
+	}, [menu]);
+
 	return (
 		<div id="container">
 			<Container>
@@ -52,16 +64,27 @@ const MyPagePage = () => {
 							payment_id={payment_id}
 							viewDetail={viewDetail}
 							setViewDetail={setViewDetail}
+							setAlertState={setAlertState}
+							setAlertMsg={setAlertMsg}
 						/>
 					)}
 					{menu === '개인정보관리' && (
 						<Privacy
 							changePWState={changePWState}
 							setChangePWState={setChangePWState}
+							setAlertState={setAlertState}
+							setAlertMsg={setAlertMsg}
 						/>
 					)}
 				</MyPageInside>
 			</Container>
+			{alertState && (
+				<Alert
+					title={alertTitle}
+					msg={alertMsg}
+					setAlertState={setAlertState}
+				/>
+			)}
 		</div>
 	);
 };
