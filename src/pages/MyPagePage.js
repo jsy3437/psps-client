@@ -66,14 +66,13 @@ const MyPagePage = () => {
 							setViewDetail={setViewDetail}
 							setAlertState={setAlertState}
 							setAlertMsg={setAlertMsg}
+							setAlertTitle={setAlertTitle}
 						/>
 					)}
 					{menu === '개인정보관리' && (
 						<Privacy
 							changePWState={changePWState}
 							setChangePWState={setChangePWState}
-							setAlertState={setAlertState}
-							setAlertMsg={setAlertMsg}
 						/>
 					)}
 				</MyPageInside>
