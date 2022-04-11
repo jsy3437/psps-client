@@ -35,6 +35,10 @@ const FindPwResultPage = () => {
 		}
 	}, [lengthCheck]);
 
+	const goBack = () => {
+		history.goBack();
+	};
+
 	const changePassword = (e) => {
 		let state = false;
 		if (regexp.password.test(e.target.value)) {
@@ -63,7 +67,6 @@ const FindPwResultPage = () => {
 				if (success) {
 					setAlertMsg('비밀번호가 변경되었습니다.');
 					setAlertState(true);
-					history.push('/login');
 				} else {
 					setAlertMsg(res.data.msg);
 					setAlertState(true);
@@ -109,7 +112,7 @@ const FindPwResultPage = () => {
 					<SubmitButton state={allState} onClick={clickSubmit}>
 						변경하기
 					</SubmitButton>
-					<BackButton>뒤로가기</BackButton>
+					<BackButton onClick={goBack}>뒤로가기</BackButton>
 				</BtnBox>
 			</Container>
 			{alertState && (
@@ -117,6 +120,7 @@ const FindPwResultPage = () => {
 					title={'비밀번호 변경 안내'}
 					msg={alertMsg}
 					setAlertState={setAlertState}
+					goPage={true}
 				/>
 			)}
 		</div>

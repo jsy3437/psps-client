@@ -68,10 +68,10 @@ const FindPwInput = (props) => {
 				if (success) {
 					props.setAlertMsg('인증번호가 발송되었습니다.');
 					props.setAlertState(true);
-					confirmEl.current.focus();
 					setTime(180);
 					props.setGetConfirmNum(true);
 					props.setConfirmNum('');
+					confirmEl.current.focus();
 				} else {
 					props.setAlertState(true);
 					props.setAlertMsg(res.data.msg);
