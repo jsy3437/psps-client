@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
 }
 html {
 	font-size: 62.5%;
+	
 }
 body {
 	margin: 0;
@@ -30,7 +31,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	overflow-x:hidden;
+	/* overflow-x:hidden; */
 	position:relative;
 	-ms-user-select: none;
 	-moz-user-select: -moz-none;

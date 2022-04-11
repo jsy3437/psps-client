@@ -151,7 +151,7 @@ const CartPage = () => {
 							setSupplierList={setSupplierList}
 							setTempChecked={setTempChecked}
 						/>
-						<OrderBoxBox>
+						<OrderBoxWrap>
 							<OrderBox
 								orderCalc={orderCalc}
 								user={user}
@@ -161,7 +161,7 @@ const CartPage = () => {
 								delivery_price={delivery_price}
 								setAlertState={setAlertState}
 							/>
-						</OrderBoxBox>
+						</OrderBoxWrap>
 					</CartContentWrap>
 				) : (
 					<CartEmptyBox>
@@ -220,8 +220,8 @@ const Title = styled.h2`
 const CartContentWrap = styled.div`
 	display: flex;
 `;
-const OrderBoxBox = styled.div`
-	position: relative;
+const OrderBoxWrap = styled.div`
+	/* position: relative; */
 	width: 45.5rem;
 	margin-left: 4.8rem;
 `;

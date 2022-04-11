@@ -1,31 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const OrderBox = (props) => {
-	const orderWrap = useRef();
 	const history = useHistory();
-	const [fixState, setFixState] = useState(false);
-
 	const orderCalc = props.orderCalc;
-
-	// useEffect(() => {
-	// 	window.addEventListener('scroll', scrollListener);
-	// }, []);
-
-	// const scrollListener = () => {
-	// 	if (
-	// 		window.pageYOffset >
-	// 		orderWrap.current.offsetTop + orderWrap.current.offsetHeight
-	// 	) {
-	// 		return setFixState('end');
-	// 	} else if (window.pageYOffset > orderWrap.current.offsetTop) {
-	// 		return setFixState('fixed');
-	// 	} else {
-	// 		return setFixState(false);
-	// 	}
-
-	// };
 
 	const goShopping = () => {
 		history.push('/product');
@@ -46,11 +25,7 @@ const OrderBox = (props) => {
 	};
 
 	return (
-		<OrderWrap
-			ref={orderWrap}
-			fixed={fixState === 'fixed'}
-			ended={fixState === 'end'}
-		>
+		<OrderWrap>
 			{props.supplierList &&
 				props.supplierList.map((el, idx) => (
 					<PriceBox
@@ -99,11 +74,26 @@ export default OrderBox;
 
 const OrderWrap = styled.div`
 	width: 45.5rem;
+	max-height: 71.5rem;
 	border: 1px solid #e0e0e0;
 	border-radius: 24px;
 	padding: 4rem 5.5rem;
-	/* ${(props) => props.fixed && `position:fixed; top: 17rem;`}
-	${(props) => props.end && `position:absolute; bottom:0rem;`} */
+	position: sticky;
+	top: 100px;
+	overflow: auto;
+	::-webkit-scrollbar {
+		width: 1.5rem;
+		background-color: transparent;
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: #e0e0e0;
+		border-radius: 10px;
+		background-clip: padding-box;
+		border: 7px solid transparent;
+		border-right: 5px solid transparent;
+		border-top: 7px solid transparent;
+		border-bottom: 5px solid transparent;
+	}
 `;
 const PriceBox = styled.div`
 	width: 100%;
@@ -167,7 +157,7 @@ const SubmitButton = styled.button`
 		`background-color:#221814; color:#fff ; margin-top:2rem `}
 	${(props) =>
 		props.shopping &&
-		`background-color:#fff; color: #E50011; border: 1px solid #E50011; margin-top:1.2rem ; margin-bottom:4rem;`};
+		`background-color:#fff; color: #E50011; border: 1px solid #E50011; margin-top:1.2rem ;`};
 	&:hover {
 		background-color: #e50011;
 		color: #fff;
