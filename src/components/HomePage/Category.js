@@ -25,7 +25,9 @@ const Category = () => {
 								onCategory(el.title);
 							}}
 						>
-							<IconImg alt={`${el.title} image`} src={el.src} />
+							<IconImgBox>
+								<IconImg alt={`${el.title} image`} src={el.src} />
+							</IconImgBox>
 							<IconTitle>{el.title}</IconTitle>
 						</IconBox>
 					))}
@@ -65,11 +67,13 @@ const CategoryBox = styled.div`
 	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
+	gap: 5.5rem;
+	margin: 5.9rem 0;
 `;
 const IconBox = styled.div`
 	width: 14.5rem;
 	height: 18.5rem;
-	margin: 2.05rem 5.5rem;
+	margin: auto;
 	cursor: pointer;
 `;
 const IconImgBox = styled.div`
