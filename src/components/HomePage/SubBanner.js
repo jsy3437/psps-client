@@ -119,7 +119,7 @@ export default SubBanner;
 
 const SubBannerContainer = styled.div`
 	position: relative;
-	width: 192rem;
+	width: 100%;
 	margin-top: 1.8rem;
 	margin-bottom: 13.2rem;
 `;

@@ -22,7 +22,7 @@ const Induce = () => {
 export default Induce;
 
 const InduceContainer = styled.div`
-	width: 192rem;
+	width: 100%;
 	height: fit-content;
 	display: flex;
 	justify-content: center;

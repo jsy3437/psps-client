@@ -74,7 +74,7 @@ const RecommendList = () => {
 export default RecommendList;
 
 const RecommendWrap = styled.div`
-	width: 192rem;
+	width: 100%;
 	position: relative;
 	display: flex;
 	flex-direction: column;
