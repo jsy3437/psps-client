@@ -120,14 +120,14 @@ export default SubBanner;
 const SubBannerContainer = styled.div`
 	position: relative;
 	width: 100%;
-	margin-top: 1.8rem;
-	margin-bottom: 13.2rem;
+	margin: 1.8rem 0 13.2rem;
 `;
 const SubBannerWrap = styled.div`
-	width: 120rem;
+	width: 100%;
 	height: 35rem;
 	margin: 0 auto;
 	display: flex;
+	justify-content: center;
 	overflow: hidden;
 `;
 const SubBannerList = styled.div`
@@ -140,7 +140,7 @@ const SubBannerImg = styled.img`
 	max-width: 100%;
 	width: 100%;
 	height: 35rem;
-	object-fit: fill;
+	object-fit: contain;
 	border-radius: 24px;
 	cursor: pointer;
 `;
