@@ -9,7 +9,6 @@ const Footer = () => {
 	const history = useHistory();
 	const [openHeadLeft, setOpenHeadLeft] = useState(false);
 	const headLeft = ['이용약관', '개인정보처리방침'];
-	const headRight = ['자주묻는질문'];
 	const bodyRight = [
 		['T', info.COMPANY_CONTACT],
 		['M', info.OWNER_CONTACT],
@@ -57,11 +56,9 @@ const Footer = () => {
 						))}
 					</FooterHeadLeft>
 					<FooterHeadRight>
-						{headRight.map((el, idx) => (
-							<HeadRightButton key={idx} effect={idx === 1} onClick={goService}>
-								{el}
-							</HeadRightButton>
-						))}
+						<HeadRightButton onClick={goService}>
+							{`자주묻는질문`}
+						</HeadRightButton>
 					</FooterHeadRight>
 				</FooterHeadInside>
 			</FooterHead>
@@ -149,7 +146,7 @@ const FooterHeadRight = styled.div`
 	align-items: center;
 `;
 const HeadRightButton = styled.button`
-	width: 10rem;
+	width: fit-content;
 	height: 3.2rem;
 	font-size: 1.4rem;
 	font-family: 'kr-b';
@@ -157,7 +154,7 @@ const HeadRightButton = styled.button`
 	background: #ffffff 0% 0% no-repeat padding-box;
 	border: 1px solid #8e8e8e;
 	border-radius: 8px;
-	${(props) => props.effect && `margin-left:2rem;`}
+	margin-left: 2rem;
 `;
 
 const FooterBody = styled.div`
@@ -170,7 +167,7 @@ const FooterBodyInside = styled.div`
 	width: 120rem;
 	margin-top: 1.9rem;
 	display: flex;
-	justify-content: space-space-between;
+	justify-content: space-between;
 `;
 const FooterBodyLeft = styled.div`
 	width: 70%;
