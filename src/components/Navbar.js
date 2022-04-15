@@ -107,6 +107,7 @@ const NavbarInside = styled.div`
 	width: 120rem;
 	display: flex;
 	justify-content: space-between;
+	padding: 0 0.5rem;
 `;
 const NavbarLeft = styled.div`
 	height: 100%;
