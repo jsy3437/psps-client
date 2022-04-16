@@ -75,7 +75,6 @@ const ProductContainer = styled.div`
 	position: relative;
 `;
 const ProductWrap = styled.ul`
-	margin-top: 15rem;
 	margin-bottom: 0;
 	width: 120rem;
 	display: grid;
