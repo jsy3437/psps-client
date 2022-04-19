@@ -103,7 +103,9 @@ const ListWrap = styled.ul`
 	width: 120rem;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 3.2rem 1.6rem;
+	@media ${(props) => props.theme.device.mobile} {
+		grid-template-columns: repeat(2, 1fr);
+	}
 `;
 const List = styled.li`
 	width: 38rem;
