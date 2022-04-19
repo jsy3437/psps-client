@@ -3,19 +3,19 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
 * {
 	box-sizing: border-box;
+	
 }
 html {
-	font-size: 62.5%;
+	font-size: 10px;
+	
 	
 }
 body {
 	margin: 0;
 	overflow-x:hidden;
+	overflow-y: hidden;
+}
 
-}
-#root {
-	/* width: 100vw; */
-}
 #App {
 	width:100%;
 	height:100%;
@@ -23,7 +23,7 @@ body {
 	flex-direction:column;
 	align-items:center;
 	position:relative;
-	padding-top:8rem;
+	padding-top:8rem;	
 }
 #container {
 	width: 100%;
@@ -31,13 +31,12 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* overflow-x:hidden; */
 	position:relative;
 	-ms-user-select: none;
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
-	user-select: none;
+	user-select: none;	
 }
 h1,
 h2,
@@ -85,6 +84,32 @@ button:hover {
 	cursor: pointer;
 }
 
+/* @media screen and (max-width: 1280px){
+	html {
+		font-size: 7px;
+	}
+} */
+@media ${(props) => props.theme.device.desktop} {
+	html {
+		font-size: 8px;
+	}
+}
+@media ${(props) => props.theme.device.laptop} {
+	html {
+		font-size: 7px;
+	}
+}
+@media ${(props) => props.theme.device.tablet} {
+	html {
+		font-size: 6px;
+	}
+}
+@media ${(props) => props.theme.device.mobile} {
+	html {
+		font-size: 5px;
+		
+	}
+}
 `;
 
 export default GlobalStyle;
