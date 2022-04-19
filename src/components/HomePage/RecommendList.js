@@ -103,11 +103,11 @@ const ListWrap = styled.ul`
 	width: 120rem;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
+	gap: 3.2rem 1.6rem;
 `;
 const List = styled.li`
 	width: 38rem;
 	height: 40rem;
-	margin-bottom: 5.9rem;
 	cursor: pointer;
 	background-color: #fff;
 	border-radius: 24px;
