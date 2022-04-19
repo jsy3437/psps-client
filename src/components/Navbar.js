@@ -102,6 +102,9 @@ const NavbarWrap = styled.div`
 	z-index: 100;
 	position: fixed;
 	top: 0rem;
+	@media ${(props) => props.theme.device.mobile} {
+		display: none;
+	}
 `;
 const NavbarInside = styled.div`
 	width: 120rem;
