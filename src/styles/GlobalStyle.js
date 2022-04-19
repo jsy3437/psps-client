@@ -13,7 +13,6 @@ html {
 body {
 	margin: 0;
 	overflow-x:hidden;
-	overflow-y: hidden;
 }
 
 #App {
