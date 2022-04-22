@@ -102,11 +102,15 @@ const NavbarWrap = styled.div`
 	z-index: 100;
 	position: fixed;
 	top: 0rem;
+	@media ${(props) => props.theme.device.mobile} {
+		display: none;
+	}
 `;
 const NavbarInside = styled.div`
 	width: 120rem;
 	display: flex;
 	justify-content: space-between;
+	padding: 0 0.5rem;
 `;
 const NavbarLeft = styled.div`
 	height: 100%;

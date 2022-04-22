@@ -169,6 +169,7 @@ const PrivacyText = styled.p`
 	width: fit-content;
 `;
 const Button = styled.button`
+	font-size: 1.2rem;
 	padding: 0.5rem 1.8rem;
 	background-color: #fff;
 	border: 1px solid #8e8e8e;

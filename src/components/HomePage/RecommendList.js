@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { IMG_ADDRESS } from '../../config';
 import * as _product from '../../controller/product';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import logo from '../../images/red-logo.svg';
 
 const RecommendList = () => {
 	const history = useHistory();
+	const theme = useTheme();
 	const [list, setList] = useState([]);
 	const [hover, setHover] = useState('');
 
@@ -31,7 +32,7 @@ const RecommendList = () => {
 			<Logo alt="logo" src={logo} />
 			<Title>{`품생품사 추천 상품`}</Title>
 			<Desc>{`품생품사에서 선별한\n특별한 상품들을 지금 바로 만나보세요!`}</Desc>
-			<ListWrap>
+			<ListWrap theme={theme}>
 				{list &&
 					list.map((el, idx) => (
 						<List
@@ -46,7 +47,7 @@ const RecommendList = () => {
 								setHover('');
 							}}
 						>
-							<ListImgBox>
+							<ListImgBox theme={theme}>
 								<ListImg
 									alt="product img"
 									src={`${IMG_ADDRESS}/${el.image}`}
@@ -74,7 +75,7 @@ const RecommendList = () => {
 export default RecommendList;
 
 const RecommendWrap = styled.div`
-	width: 192rem;
+	width: 100%;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -100,29 +101,40 @@ const Desc = styled.p`
 	margin-bottom: 5rem;
 `;
 const ListWrap = styled.ul`
-	width: 120rem;
+	max-width: 120rem;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
+	gap: 3.2rem 1.6rem;
+	padding: 0 2rem;
+	@media ${(props) => props.theme.device.mobile} {
+		grid-template-columns: repeat(2, 1fr);
+	}
 `;
 const List = styled.li`
-	width: 38rem;
-	height: 40rem;
-	margin-bottom: 5.9rem;
+	max-width: 38rem;
+	max-height: 40rem;
 	cursor: pointer;
 	background-color: #fff;
 	border-radius: 24px;
+	@media ${(props) => props.theme.device.tablet} {
+		max-width: 31.2rem;
+	}
 `;
 const ListImgBox = styled.div`
-	width: 38rem;
+	width: 100%;
 	height: 35rem;
 	overflow: hidden;
 	border-radius: 24px;
 	background-color: #fff;
+	@media ${(props) => props.theme.device.tablet} {
+		height: 28.8rem;
+	}
 `;
 const ListImg = styled.img`
-	width: 38rem;
-	height: 35rem;
+	width: 100%;
+	height: 100%;
 	transition: all 300ms ease;
+	object-fit: cover;
 	${(props) => props.hover && `transform:scale(1.1)`}
 `;
 const ListTitle = styled.h3`

@@ -43,7 +43,6 @@ const ProductList = (props) => {
 									)
 								</ProductImgBox>
 							)}
-
 							<ProductTitle hover={hover === idx}>{el.title}</ProductTitle>
 							{el.price !== null ? (
 								<ProductDescTotalPrice>
@@ -69,14 +68,13 @@ const ProductList = (props) => {
 export default ProductList;
 
 const ProductContainer = styled.div`
-	width: 192rem;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	position: relative;
 `;
 const ProductWrap = styled.ul`
-	margin-top: 15rem;
 	margin-bottom: 0;
 	width: 120rem;
 	display: grid;
@@ -111,7 +109,6 @@ const ProductTitle = styled.h3`
 	cursor: pointer;
 	${(props) => props.hover && `text-decoration: underline;`}
 `;
-
 const GrayBackground = styled.div`
 	width: 100%;
 	height: 37.3rem;

@@ -13,8 +13,9 @@ const ProductBanner = (props) => {
 export default ProductBanner;
 
 const ProductBannerWrap = styled.div`
-	width: 192rem;
-	height: 55rem;
+	width: 100%;
+	max-width: 192rem;
+	max-height: 55rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -23,6 +24,7 @@ const ProductBannerWrap = styled.div`
 const ProductBannerImg = styled.img`
 	width: 100%;
 	height: 100%;
+	object-fit: contain;
 `;
 const ProductBannerTitle = styled.h1`
 	font-size: 7rem;

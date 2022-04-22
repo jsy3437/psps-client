@@ -15,39 +15,48 @@ const ProductCategory = (props) => {
 	};
 
 	return (
-		<ProductCategoryWrap>
-			<PartWrap>
-				{category.mainCategories.map((el, idx) => (
-					<PartList key={idx} active={props.part === el} onClick={onChangePart}>
-						{el}
-					</PartList>
-				))}
-			</PartWrap>
-			<SubPartWrap>
-				{props.subPartArr.arr &&
-					props.subPartArr.arr.map((el, idx) => (
-						<SubPartListBox key={idx}>
-							<SubPartList
-								active={
-									(idx === 0 && props.subPart === null) ||
-									(idx > 0 && props.subPart === el)
-								}
-								onClick={onChangeSubPart}
-							>
-								{el}
-							</SubPartList>
-							<SubPartListLine
-								last={idx === props.subPartArr.arr.length - 1}
-							></SubPartListLine>
-						</SubPartListBox>
+		<Container>
+			<ProductCategoryWrap>
+				<PartWrap>
+					{category.mainCategories.map((el, idx) => (
+						<PartList
+							key={idx}
+							active={props.part === el}
+							onClick={onChangePart}
+						>
+							{el}
+						</PartList>
 					))}
-			</SubPartWrap>
-		</ProductCategoryWrap>
+				</PartWrap>
+				<SubPartWrap>
+					{props.subPartArr.arr &&
+						props.subPartArr.arr.map((el, idx) => (
+							<SubPartListBox key={idx}>
+								<SubPartList
+									active={
+										(idx === 0 && props.subPart === null) ||
+										(idx > 0 && props.subPart === el)
+									}
+									onClick={onChangeSubPart}
+								>
+									{el}
+								</SubPartList>
+								<SubPartListLine
+									last={idx === props.subPartArr.arr.length - 1}
+								></SubPartListLine>
+							</SubPartListBox>
+						))}
+				</SubPartWrap>
+			</ProductCategoryWrap>
+		</Container>
 	);
 };
 
 export default ProductCategory;
 
+const Container = styled.div`
+	position: relative;
+`;
 const ProductCategoryWrap = styled.div`
 	width: 95.3rem;
 	height: 13.2rem;
@@ -55,8 +64,7 @@ const ProductCategoryWrap = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	position: absolute;
-	top: 50.5rem;
+	transform: translateY(-30%);
 	z-index: 3;
 `;
 const PartWrap = styled.ul`

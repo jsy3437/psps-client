@@ -21,6 +21,7 @@ import PaymentResultPage from './pages/PaymentResultPage';
 import OrderChangePage from './pages/OrderChangePage';
 import WithdrawalPage from './pages/WithdrawalPage';
 import Footer from './components/Footer';
+import MobileNavbar from './components/Mobile/MobileNavbar';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const App = () => {
 		<Router>
 			<div id="App">
 				<Navbar />
+				<MobileNavbar />
 				<Switch>
 					<Route exact path="/" component={Auth(HomePage, null)} />
 					<Route exact path="/login" component={Auth(LoginPage, false)} />

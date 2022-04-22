@@ -12,7 +12,9 @@ const Induce = () => {
 
 	return (
 		<InduceContainer>
-			<InduceImg alt="" src={img} onClick={goShopping} />
+			<InduceImgBox>
+				<InduceImg alt="" src={img} onClick={goShopping} />
+			</InduceImgBox>
 		</InduceContainer>
 	);
 };
@@ -20,15 +22,21 @@ const Induce = () => {
 export default Induce;
 
 const InduceContainer = styled.div`
-	width: 192rem;
-	height: 39rem;
+	width: 100%;
+	height: fit-content;
 	display: flex;
 	justify-content: center;
+	margin: 4rem 0 10rem;
+`;
+const InduceImgBox = styled.div`
+	width: 100vw;
+	max-width: 120rem;
+	max-height: 25rem;
 `;
 const InduceImg = styled.img`
-	width: 120rem;
-	height: 25rem;
-	margin-top: 4rem;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
 	border-radius: 32px;
 	cursor: pointer;
 `;

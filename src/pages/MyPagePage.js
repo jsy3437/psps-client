@@ -30,7 +30,7 @@ const MyPagePage = () => {
 
 	useEffect(() => {
 		if (location.state) {
-			if (location.state.type === '개인정보관리') {
+			if (location.state.type) {
 				setMenu(location.state.type);
 			} else {
 				setPayment_id(location.state.payment_id);
