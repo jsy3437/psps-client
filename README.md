@@ -1,7 +1,6 @@
 # 품생품사 <img src="https://user-images.githubusercontent.com/83055563/161244392-acdf589d-4fd4-4641-955d-68a82e8d938c.svg" width="26" height="26" />    
 식품 판매형 쇼핑몰
 
-#### url (https://www.makinet.kr)
 
 - React.js 기반의 프론트엔드 웹사이트.
 ##### 포트폴리오 사용을 위한 허가를 받은 프로젝트입니다.
