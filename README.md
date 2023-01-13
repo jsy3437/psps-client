@@ -1,8 +1,5 @@
 # 품생품사 <img src="https://user-images.githubusercontent.com/83055563/161244392-acdf589d-4fd4-4641-955d-68a82e8d938c.svg" width="26" height="26" />    
 식품 판매형 쇼핑몰
-###### 코드 공개 허가를 받은 프로젝트입니다.
-
-
 
 ---
 
@@ -22,6 +19,10 @@
 - notion
 - xd
 - slack
+
+---
+## 미리보기
+<img src="https://i.ibb.co/pxF0ryL/psps-mainpage.png" alt="psps-mainpage" border="0" width='400' />
 
 ---
 
