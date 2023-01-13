@@ -1,18 +1,17 @@
 # 품생품사 <img src="https://user-images.githubusercontent.com/83055563/161244392-acdf589d-4fd4-4641-955d-68a82e8d938c.svg" width="26" height="26" />    
 식품 판매형 쇼핑몰
+###### 코드 공개 허가를 받은 프로젝트입니다.
 
 
-- React.js 기반의 프론트엔드 웹사이트.
-##### 포트폴리오 사용을 위한 허가를 받은 프로젝트입니다.
 
 ---
 
-
 ## 기술 스택
 <div>
-  <img src="https://img.shields.io/badge/React-00ADD8?style=plastic&logo=React&logoColor=fff"/>
-  <img src="https://img.shields.io/badge/JavaScript-%23F7DF1E?style=plastic&logo=javascript&logoColor=fff"/>
-  <img src="https://img.shields.io/badge/styledComponents-DB7093?style=plastic&logo=styled-components&logoColor=fff"/>
+  <img src="https://img.shields.io/badge/React-00ADD8?style=flat-square&logo=React&logoColor=white"/>  
+  <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-%23F7DF1E?style=flat-square&logo=javascript&logoColor=fff"/>
+  <img src="https://img.shields.io/badge/styled components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/>
 </div>
 
 ---
@@ -23,12 +22,6 @@
 - notion
 - xd
 - slack
-
----
-
-## 성능 테스팅 도구
-- Lighthouse
-- PageSpeed Insights
 
 ---
 
@@ -59,3 +52,5 @@
 #### 회원탈퇴페이지
 
 ---
+
+
